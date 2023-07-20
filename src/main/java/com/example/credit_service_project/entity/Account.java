@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -54,6 +55,10 @@ public class Account {
             orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     private Operation operation;
     //указывает, что связь между таблицами будет установлена через поле account
+
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY,
+            orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+    private List<PaymentSchedule> paymentSchedules;
 
     @Override
     public boolean equals(Object o) {
