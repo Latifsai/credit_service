@@ -2,20 +2,26 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 import static jakarta.persistence.CascadeType.*;
 
-@Data
+@Getter
+@Setter
+@Table(name = "accounts")
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private UUID id;
     @Column(name = "account_number")
     private String accountNumber;
@@ -37,7 +43,28 @@ public class Account {
     @Column(name = "currency")
     private String currency;
 
+    @OneToOne(cascade = {MERGE, PERSIST, REFRESH})
+    @JoinColumn(name = "credit_id", referencedColumnName = "id")
+    private Credit credit;
+    //будет создан раздел credit_id основанный на id из класса Credit,
+    // по этому полу будет JOIN
+    //-> владеющая сторона
+
     @OneToOne(mappedBy = "account", fetch = FetchType.LAZY,
             orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-    private Credit credit;
+    private Operation operation;
+    //указывает, что связь между таблицами будет установлена через поле account
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Objects.equals(accountNumber, account.accountNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountNumber);
+    }
 }

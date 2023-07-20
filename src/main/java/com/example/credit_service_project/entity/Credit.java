@@ -3,7 +3,7 @@ package com.example.credit_service_project.entity;
 import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.entity.enums.CreditType;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -11,10 +11,15 @@ import java.util.UUID;
 import static jakarta.persistence.CascadeType.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Table(name = "credits")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private UUID id;
     @Column(name = "credit_type")
     @Enumerated(EnumType.STRING)
@@ -36,4 +41,6 @@ public class Credit {
     @OneToOne(mappedBy = "credit", fetch = FetchType.LAZY,
     orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     private Account account;
+    // связь между таблицами будет установлена через поле credit в классе Account
+    //<- обратная сторона
 }
