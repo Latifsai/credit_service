@@ -19,32 +19,42 @@ import static jakarta.persistence.CascadeType.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
+
     @Column(name = "account_number")
     private String accountNumber;
+
     @Column(name = "loan_debt")
     private BigDecimal loanDebt;
+
     @Column(name = "percentage_debt")
     private BigDecimal percentageDebt;
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
+
     @Column(name = "opening_date")
     private LocalDateTime openingDate;
+
     @Column(name = "closing_date")
     private LocalDateTime closingDate;
+
     @Column(name = "unpaid_load_debt")
     private BigDecimal unpaidLoanDebt;
+
     @Column(name = "unpaid_percentage_load_debt")
     private BigDecimal unpaidPercentageLoanDebt;
+
     @Column(name = "currency")
     private String currency;
 
-    @OneToOne(cascade = {MERGE, PERSIST, REFRESH})
+    @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "credit_id", referencedColumnName = "id")
     private Credit credit;
     //будет создан раздел credit_id основанный на id из класса Credit,
@@ -59,6 +69,10 @@ public class Account {
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY,
             orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     private List<PaymentSchedule> paymentSchedules;
+
+    @OneToOne(mappedBy = "account", orphanRemoval = true,
+            cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    private Card card;
 
     @Override
     public boolean equals(Object o) {
