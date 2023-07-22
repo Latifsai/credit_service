@@ -31,17 +31,20 @@ public class Card {
     @Column(name = "holder_name")
     private String holderName;
 
+    @Column(name = "opening_date")
+    private LocalDate openingDate;
+
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
 
     @Column(name = "balance")
-    private BigDecimal balance;
+    private BigDecimal balance; // ✅
 
     @Column(name = "transaction_limit")
     private Integer transactionLimit;
 
     @Column(name = "delivery_address")
-    private String deliveryAddress;
+    private String deliveryAddress; // ✅
 
     @Column(name = "is_digital_valet")
     private boolean isDigitalValet;
@@ -55,7 +58,7 @@ public class Card {
 
     @Column(name = "card_status")
     @Enumerated(EnumType.STRING)
-    private CardStatus cardStatus;
+    private CardStatus cardStatus;  // ✅
 
     @OneToOne(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id")

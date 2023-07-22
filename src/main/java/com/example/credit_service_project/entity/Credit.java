@@ -24,7 +24,6 @@ public class Credit {
     private UUID id;
 
     @Column(name = "credit_type")
-    @Enumerated(EnumType.STRING)
     private String creditType; //
 
     @Column(name = "credit_Limit")
@@ -48,7 +47,7 @@ public class Credit {
     private String currency;
 
     @OneToOne(mappedBy = "credit", fetch = FetchType.LAZY,
-    orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+            orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     private Account account;
     // связь между таблицами будет установлена через поле credit в классе Account
     //<- обратная сторона
