@@ -6,6 +6,6 @@ import java.util.UUID;
 
 @Value
 public class DeleteCardDTORequest {
-    private UUID id;
-    private String cardNumber;
+     UUID id;
+     String cardNumber;
 }

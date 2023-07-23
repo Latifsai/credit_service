@@ -1,7 +1,6 @@
 package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
-import com.example.credit_service_project.entity.enums.Product;
 import jakarta.persistence.*;
 import lombok.*;
 

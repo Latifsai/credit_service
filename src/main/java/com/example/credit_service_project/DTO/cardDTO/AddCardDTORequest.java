@@ -5,8 +5,8 @@ import java.time.LocalDate;
 
 @Value
 public class AddCardDTORequest {
-    private String holderName;
-    private LocalDate openingDate;
-    private String deliveryAddress;
+     String holderName;
+     LocalDate openingDate;
+     String deliveryAddress;
 
 }

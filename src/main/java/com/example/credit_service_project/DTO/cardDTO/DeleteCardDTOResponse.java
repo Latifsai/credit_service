@@ -6,8 +6,8 @@ import java.util.UUID;
 
 @Value
 public class DeleteCardDTOResponse {
-    private UUID id;
-    private String cardNumber;
-    private String accountNumber;
+     UUID id;
+     String cardNumber;
+     String accountNumber;
 
 }

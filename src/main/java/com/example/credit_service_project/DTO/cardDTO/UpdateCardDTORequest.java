@@ -8,8 +8,8 @@ import java.util.UUID;
 
 @Value
 public class UpdateCardDTORequest {
-    private UUID id;
-    private BigDecimal balance;
-    private String deliveryAddress;
-    private CardStatus cardStatus;
+     UUID id;
+     BigDecimal balance;
+     String deliveryAddress;
+     CardStatus cardStatus;
 }

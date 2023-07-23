@@ -1,5 +1,6 @@
-package com.example.credit_service_project.entity.enums;
+package com.example.credit_service_project.entity;
 
+import com.example.credit_service_project.entity.enums.CalculationType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,17 +24,8 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "min_sum")
-    private BigDecimal minSum;
-
-    @Column(name = "max_sum")
-    private BigDecimal maxSum;
-
-    @Column(name = "min_interest_rate")
-    private BigDecimal minInterestRate;
-
-    @Column(name = "max_interest_rate")
-    private BigDecimal maxInterestRate;
+    @Column(name = "sum")
+    private BigDecimal sum;
 
     @Column(name = "need_guaranty")
     private boolean needGuaranty;
@@ -44,20 +36,11 @@ public class Product {
     @Column(name = "need_income_details")
     private boolean needIncomeDetails;
 
-    @Column(name = "min_period_month")
-    private Integer minPeriodMonth;
-
-    @Column(name = "max_period_month")
-    private Integer maxPeriodMonth;
-
     @Column(name = "details")
     private String details;
 
-    @Column(name = "grace_period_months")
-    private Integer gracePeriodMonths;
-
-    @Column(name = "rate_base")
-    private String rateBase;
+    @Column(name = "currency_code")
+    private String currencyCode;
 
     @Column(name = "calculation_type")
     @Enumerated(EnumType.STRING)

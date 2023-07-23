@@ -8,10 +8,10 @@ import java.util.UUID;
 
 @Value
 public class UpdateCardDTOResponse {
-    private UUID id;
-    private String cardNumber;
-    private String holderName;
-    private BigDecimal balance;
-    private String deliveryAddress;
-    private CardStatus cardStatus;
+     UUID id;
+     String cardNumber;
+     String holderName;
+     BigDecimal balance;
+     String deliveryAddress;
+     CardStatus cardStatus;
 }

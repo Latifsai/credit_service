@@ -15,7 +15,7 @@ import static jakarta.persistence.CascadeType.PERSIST;
 @Getter
 @Setter
 @Entity
-@Table(name = "payment_schedule")
+@Table(name = "payment_schedules")
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

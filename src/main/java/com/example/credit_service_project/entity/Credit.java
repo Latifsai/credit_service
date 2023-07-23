@@ -27,7 +27,7 @@ public class Credit {
     private String creditType; //
 
     @Column(name = "credit_Limit")
-    private BigDecimal creditLimit;
+    private BigDecimal creditSum;
 
     //сумма взятая в долг?
     @Column(name = "interest_rate")
@@ -38,6 +38,12 @@ public class Credit {
 
     @Column(name = "need_deposit")
     private boolean needDeposit;
+
+    @Column(name = "rate_base")
+    private String rateBase;
+
+    @Column(name = "period_month")
+    private Integer periodMonth;
 
     @Column(name = "credit_status")
     @Enumerated(EnumType.STRING)

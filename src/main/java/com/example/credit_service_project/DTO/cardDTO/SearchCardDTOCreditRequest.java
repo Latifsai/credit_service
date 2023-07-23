@@ -4,6 +4,6 @@ import lombok.Value;
 
 @Value
 public class SearchCardDTOCreditRequest {
-    private String cardNumber;
-    private String holderName;
+     String cardNumber;
+     String holderName;
 }
