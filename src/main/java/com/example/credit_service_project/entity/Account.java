@@ -39,6 +39,9 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
+    @Column(name = "balance")
+    private BigDecimal balance;
+
     @Column(name = "opening_date")
     private LocalDateTime openingDate;
 

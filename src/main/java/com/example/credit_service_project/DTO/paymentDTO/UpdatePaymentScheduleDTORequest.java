@@ -11,7 +11,7 @@ import java.util.UUID;
 public class UpdatePaymentScheduleDTORequest {
     UUID uuid;
     //data to change
-    LocalDate paymentDate;
+    LocalDate actualPaymentDate;
     BigDecimal mainPayment;
     BigDecimal ratePayment;
 }

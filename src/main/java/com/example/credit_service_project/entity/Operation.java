@@ -1,5 +1,6 @@
 package com.example.credit_service_project.entity;
 
+import com.example.credit_service_project.entity.enums.OperationType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,11 +27,18 @@ public class Operation {
     @Column(name = "sum")
     private BigDecimal sum;
 
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private OperationType type;
+
     @Column(name = "operation_end_mark")
     private Timestamp operationEndMark;
 
     @Column(name = "operation_details")
     private StringBuilder operationDetails;
+
+    @Column(name = "is_debit")
+    private boolean isDebit;
 
     @Column(name = "currency")
     private String currency;
@@ -40,20 +48,16 @@ public class Operation {
     private Account account;
     //в таблице будет создано поле account_id на основе id в классе Account
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {MERGE, PERSIST, REFRESH})
-    @JoinColumn(name = "operationType_id", referencedColumnName = "id")
-    private OperationType operationType;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Operation operation = (Operation) o;
-        return Objects.equals(account, operation.account) && Objects.equals(operationType, operation.operationType);
+        return Objects.equals(account, operation.account);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(account, operationType);
+        return Objects.hash(account);
     }
 }

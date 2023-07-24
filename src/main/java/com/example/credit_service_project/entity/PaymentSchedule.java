@@ -28,6 +28,12 @@ public class PaymentSchedule {
     @Column(name = "payment_date")
     private LocalDate paymentDate;
 
+    @Column(name = "actual_payment_date")
+    private LocalDate actualPaymentDate;
+
+    @Column(name = "surcharge")
+    private BigDecimal surcharge; // пеня(посчитаная)
+
     @Column(name = "main_payment")
     private BigDecimal mainPayment;
 

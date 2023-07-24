@@ -29,12 +29,11 @@ public class Credit {
     @Column(name = "credit_Limit")
     private BigDecimal creditSum;
 
-    //сумма взятая в долг?
     @Column(name = "interest_rate")
-    private BigDecimal interestRate; // процентная сумма
+    private BigDecimal interestRate; // процентная сумма, основывается на rateBase
 
-    @Column(name = "surcharge")
-    private BigDecimal surcharge; // пеня(в процентах)
+    @Column(name = "fine")
+    private BigDecimal fine; // пеня в процентах, основывается на rateBase
 
     @Column(name = "need_deposit")
     private boolean needDeposit;

@@ -12,6 +12,7 @@ public class UpdatePaymentScheduleDTOResponse {
     String accountNumber;
     //data to change
     LocalDate paymentDate;
+    BigDecimal surcharge;
     BigDecimal mainPayment;
     BigDecimal ratePayment;
 }
