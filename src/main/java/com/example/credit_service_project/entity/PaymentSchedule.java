@@ -40,6 +40,9 @@ public class PaymentSchedule {
     @Column(name = "rate_payment")
     private BigDecimal ratePayment;
 
+    @Column(name = "is_paid")
+    private boolean isPaid;
+
     @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;

@@ -36,6 +36,9 @@ public class CreditOrder {
     @Column(name = "client_income")
     private BigDecimal clientIncome;
 
+    @Column(name = "period_months")
+    private Integer periodMonths;
+
     @Column(name = "client_monthly_expenditure")
     private BigDecimal clientMonthlyExpenditure;
 

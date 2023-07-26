@@ -30,7 +30,10 @@ public class Credit {
     private BigDecimal creditSum;
 
     @Column(name = "interest_rate")
-    private BigDecimal interestRate; // процентная сумма, основывается на rateBase
+    private BigDecimal interestRate; // процентная сумма, счтается
+
+    @Column(name = "annual_Percentage")
+    private BigDecimal annualPercentage; // проценты,основывается на rateBase
 
     @Column(name = "fine")
     private BigDecimal fine; // пеня в процентах, основывается на rateBase
