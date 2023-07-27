@@ -1,7 +1,6 @@
 package com.example.credit_service_project.service.utils;
 
-import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
-import com.example.credit_service_project.DTO.accountDTO.AddAccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.*;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import com.example.credit_service_project.generator.AccountGenerator;
@@ -34,6 +33,45 @@ public class AccountUtil {
                 account.getLoanDebt(), account.getPercentageDebt(), account.getStatus(),
                 account.getBalance(),account.getOpeningDate(),account.getClosingDate(),
                 account.getUnpaidLoanDebt(), account.getUnpaidPercentageLoanDebt(), account.getCurrency());
+    }
+
+    public SearchAccountResponse convertAccountToSearchResponse(Account account) {
+        SearchAccountResponse response = new SearchAccountResponse();
+        response.setId(account.getId());
+        response.setAccountNumber(account.getAccountNumber());
+        response.setStatus(account.getStatus());
+        response.setBalance(account.getBalance());
+        response.setLoanDebt(account.getLoanDebt());
+        response.setUnpaidLoanDebt(account.getUnpaidLoanDebt());
+        response.setUnpaidPercentageLoanDebt(account.getUnpaidPercentageLoanDebt());
+        response.setCurrency(account.getCurrency());
+        return response;
+    }
+
+    public Account updateAccount (Account account, UpdateAccountRequest request) {
+           account.setLoanDebt(request.getLoanDebt());
+           account.setPercentageDebt(request.getPercentageDebt());
+           account.setStatus(request.getStatus());
+           account.setBalance(request.getBalance());
+           account.setClosingDate(request.getClosingDate());
+           account.setUnpaidLoanDebt(request.getUnpaidLoanDebt());
+           account.setUnpaidPercentageLoanDebt(request.getUnpaidPercentageLoanDebt());
+           return account;
+    }
+
+    public UpdateAccountResponse convertTotUpdateResponse(Account account) {
+        var response = new UpdateAccountResponse();
+        response.setId(account.getId());
+        response.setAccountNumber(account.getAccountNumber());
+        
+        response.setLoanDebt(account.getLoanDebt());
+        response.setPercentageDebt(account.getPercentageDebt());
+        response.setStatus(account.getStatus());
+        response.setBalance(account.getBalance());
+        response.setClosingDate(account.getClosingDate());
+        response.setUnpaidLoanDebt(account.getUnpaidLoanDebt());
+        response.setUnpaidPercentageLoanDebt(account.getUnpaidPercentageLoanDebt());
+        return response;
     }
 
 

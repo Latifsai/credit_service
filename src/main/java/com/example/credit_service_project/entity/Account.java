@@ -2,6 +2,7 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 
@@ -26,34 +27,47 @@ public class Account {
     @Column(name = "id")
     private UUID id;
 
+    @NotNull(message = "accountNumber must not be null!")
+    @NotEmpty(message = "accountNumber must not be empty!")
     @Column(name = "account_number")
     private String accountNumber;
 
+    @NotNull(message = "loanDebt must not be null!")
     @Column(name = "loan_debt")
     private BigDecimal loanDebt;
 
+    @NotNull(message = "percentageDebt must not be null!")
     @Column(name = "percentage_debt")
     private BigDecimal percentageDebt;
 
+    @NotNull(message = "status must not be null!")
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
+    @NotNull(message = "balance must not be null!")
+    @PositiveOrZero(message = "Balance must be greater than 0")
     @Column(name = "balance")
     private BigDecimal balance;
 
+    @FutureOrPresent
     @Column(name = "opening_date")
     private LocalDateTime openingDate;
 
+    @FutureOrPresent
     @Column(name = "closing_date")
     private LocalDateTime closingDate;
 
+    @PositiveOrZero(message = "unpaidPercentageLoanDebt must be greater than 0")
     @Column(name = "unpaid_load_debt")
     private BigDecimal unpaidLoanDebt;
 
+    @PositiveOrZero(message = "unpaidPercentageLoanDebt must be greater than 0")
     @Column(name = "unpaid_percentage_load_debt")
     private BigDecimal unpaidPercentageLoanDebt;
 
+    @NotNull
+    @Pattern(regexp = "[$€£¥₽₪₴]",message = "Format is not allowed in service!")
     @Column(name = "currency")
     private String currency;
 
