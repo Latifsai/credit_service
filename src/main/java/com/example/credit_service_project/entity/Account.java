@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,11 +31,11 @@ public class Account {
     @Column(name = "account_number")
     private String accountNumber;
 
-    @NotNull(message = "loanDebt must not be null!")
+    @PositiveOrZero(message = "loanDebt must be more as 0!")
     @Column(name = "loan_debt")
     private BigDecimal loanDebt;
 
-    @NotNull(message = "percentageDebt must not be null!")
+    @PositiveOrZero(message = "percentageDebt must be more as 0!")
     @Column(name = "percentage_debt")
     private BigDecimal percentageDebt;
 
@@ -50,7 +49,6 @@ public class Account {
     @Column(name = "balance")
     private BigDecimal balance;
 
-    @FutureOrPresent
     @Column(name = "opening_date")
     private LocalDateTime openingDate;
 
@@ -66,7 +64,7 @@ public class Account {
     @Column(name = "unpaid_percentage_load_debt")
     private BigDecimal unpaidPercentageLoanDebt;
 
-    @NotNull
+    @NotNull(message = "Currency must not be null!")
     @Pattern(regexp = "[$€£¥₽₪₴]",message = "Format is not allowed in service!")
     @Column(name = "currency")
     private String currency;

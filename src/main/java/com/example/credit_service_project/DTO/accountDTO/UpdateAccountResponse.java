@@ -16,7 +16,6 @@ import java.util.UUID;
 public class UpdateAccountResponse {
     UUID id;
     String accountNumber;
-
     //to change
     BigDecimal loanDebt;
     BigDecimal percentageDebt;

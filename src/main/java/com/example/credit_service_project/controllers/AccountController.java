@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("auth/account")
 public class AccountController {
-    private final AccountService<AddAccountDTOResponse,AddAccountDTORequest> createService;
+    private final AccountService<AddAccountDTOResponse, AddAccountDTORequest> createService;
     private final AccountService<GetAccountsListResponse, GetAccountsListRequest> getService;
     private final AccountService<SearchAccountResponse, SearchAndDeleteAccountRequest> searchService;
     private final AccountService<DeleteAccountResponse, SearchAndDeleteAccountRequest> deleteService;
