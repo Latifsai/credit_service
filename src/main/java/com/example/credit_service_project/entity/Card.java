@@ -49,9 +49,6 @@ public class Card {
     @Column(name = "is_digital_valet")
     private boolean isDigitalValet;
 
-    @Column(name = "card_brand")
-    private String cardBrand;
-
     @Column(name = "payment_system")
     @Enumerated(EnumType.STRING)
     private PaymentSystem paymentSystem;
