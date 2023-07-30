@@ -29,6 +29,6 @@ public class CreateCardServiceImp implements CardService<AddedAndSearchCardDTORe
             repository.save(card);
             return util.convertCardToAddResponse(card);
         }
-        throw new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE);
+        throw new NotFoundException(ErrorsMessage.UNABLE_TO_ADD_CARD_MESSAGE);
     }
 }

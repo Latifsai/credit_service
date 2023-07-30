@@ -2,6 +2,8 @@ package com.example.credit_service_project.service.utils;
 
 import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
 import com.example.credit_service_project.DTO.cardDTO.AddedAndSearchCardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
+import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTOResponse;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.enums.CardStatus;
@@ -38,5 +40,17 @@ public class CardUtils {
                 card.getAccount().getAccountNumber(),
                 card.getAccount().getCard().getExpirationDate(),
                 card.getAccount().getCurrency());
+    }
+
+    public Card updateCard(Card card, UpdateCardDTORequest request) {
+        if (request.getBalance() != null) card.setBalance(request.getBalance());
+        if (request.getDeliveryAddress() != null && !request.getDeliveryAddress().trim().isEmpty()) card.setDeliveryAddress(request.getDeliveryAddress());
+        if (request.getCardStatus() != null) card.setCardStatus(request.getCardStatus());
+        return card;
+    }
+
+    public UpdateCardDTOResponse convertCardToUpdateResponse(Card card) {
+        return new UpdateCardDTOResponse(card.getId(), card.getCardNumber(), card.getHolderName(),
+                card.getBalance(), card.getDeliveryAddress(), card.getCardStatus());
     }
 }

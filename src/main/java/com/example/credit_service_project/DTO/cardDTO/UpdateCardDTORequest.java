@@ -9,6 +9,7 @@ import java.util.UUID;
 @Value
 public class UpdateCardDTORequest {
      UUID id;
+
      BigDecimal balance;
      String deliveryAddress;
      CardStatus cardStatus;
