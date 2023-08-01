@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Random;
 
 @Component
@@ -23,11 +23,11 @@ public class AccountGenerator {
         return stringBuilder.toString();
     }
 
-    public LocalDateTime createOpeningDay() {
-        return LocalDateTime.now();
+    public LocalDate createOpeningDay() {
+        return LocalDate.now();
     }
 
-    public LocalDateTime createClosingDate(Long yearsAmount) {
+    public LocalDate LocalDateCreateClosingDate(Long yearsAmount) {
         return createOpeningDay().plusYears(yearsAmount);
     }
 

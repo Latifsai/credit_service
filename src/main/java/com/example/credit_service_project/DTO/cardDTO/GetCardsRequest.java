@@ -1,8 +1,12 @@
 package com.example.credit_service_project.DTO.cardDTO;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class GetCardsRequest {
-    String accountNumber;
+    private String accountNumber;
 }

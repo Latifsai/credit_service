@@ -3,7 +3,8 @@ package com.example.credit_service_project.serviceTest.accountTest;
 import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.AddAccountDTOResponse;
 import com.example.credit_service_project.service.AccountService;
-import com.example.credit_service_project.serviceTest.generators.DTOCreator;
+import com.example.credit_service_project.serviceTest.generators.DTOAccountCreator;
+import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.DisplayName;
@@ -27,19 +28,19 @@ public class CreateAccountImpTest {
     @Test
     @DisplayName("Test when input is correct")
     public void testCreateAccountImp() {
-         when(service.execute(DTOCreator.createRequest())).thenReturn(DTOCreator.createAddResponse());
+         when(service.execute(DTOAccountCreator.createRequest())).thenReturn(DTOAccountCreator.createAddResponse());
 
-        var actual = service.execute(DTOCreator.createRequest());
-        var expected = DTOCreator.createAddResponse();
+        var actual = service.execute(DTOAccountCreator.createRequest());
+        var expected = DTOAccountCreator.createAddResponse();
         assertEquals(expected, actual);
     }
 
     @Test
     @DisplayName("Test when input contains null")
     public void testCreateAccountImpWithException() {
-        var request = DTOCreator.createRequestWithExceptions();
-        var violations = validator.validate(request);
+        var account = EntityCreator.getAccountWithErrors();
+        var violations = validator.validate(account);
 
-        assertEquals(5, violations.size());
+        assertEquals(2, violations.size());
     }
 }

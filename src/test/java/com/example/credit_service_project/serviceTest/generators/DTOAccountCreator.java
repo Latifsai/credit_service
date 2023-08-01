@@ -4,12 +4,12 @@ import com.example.credit_service_project.DTO.accountDTO.*;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import static java.time.Month.APRIL;
 
-public class DTOCreator {
+public class DTOAccountCreator {
 
     public static AddAccountDTOResponse createAddResponse() {
         AddAccountDTOResponse response = new AddAccountDTOResponse();
@@ -19,8 +19,8 @@ public class DTOCreator {
         response.setPercentageDebt(new BigDecimal("250"));
         response.setStatus(AccountStatus.ACTIVE);
         response.setBalance(new BigDecimal("3000"));
-        response.setOpeningDate(LocalDateTime.of(2020, APRIL, 21, 13,31,54));
-        response.setClosingDate(LocalDateTime.of(2027, APRIL, 30, 13,31,54));
+        response.setOpeningDate(LocalDate.of(2020, APRIL, 21));
+        response.setClosingDate(LocalDate.of(2027, APRIL, 30));
         response.setUnpaidLoanDebt(new BigDecimal("1300"));
         response.setUnpaidPercentageLoanDebt(new BigDecimal("157"));
         response.setCurrency("$");

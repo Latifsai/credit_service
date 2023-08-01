@@ -1,4 +1,4 @@
-package com.example.credit_service_project.service.exeption;
+package com.example.credit_service_project.service.errors;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

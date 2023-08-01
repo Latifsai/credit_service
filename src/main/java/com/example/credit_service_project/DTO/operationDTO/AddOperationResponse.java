@@ -5,6 +5,7 @@ import lombok.Value;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Value
 public class AddOperationResponse {
@@ -12,7 +13,7 @@ public class AddOperationResponse {
     BigDecimal balance;
     BigDecimal sum;
     OperationType type;
-    Timestamp operationEndMark;
-    StringBuilder operationDetails;
+    LocalDate operationEndMark;
+    String operationDetails;
     String currency;
 }

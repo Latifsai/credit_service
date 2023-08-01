@@ -5,6 +5,7 @@ import lombok.Value;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Value
@@ -13,8 +14,8 @@ public class SearchOperationResponse {
     String accountNumber;
     BigDecimal sum;
     OperationType type;
-    Timestamp operationEndMark;
+    LocalDate operationEndMark;
     boolean isDebit;
-    StringBuilder operationDetails;
+    String operationDetails;
     String currency;
 }

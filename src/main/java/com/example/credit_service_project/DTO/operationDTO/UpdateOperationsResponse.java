@@ -5,16 +5,17 @@ import lombok.Value;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Value
 public class UpdateOperationsResponse {
     UUID id;
-    Timestamp operationEndMark;
+    LocalDate operationEndMark;
     boolean isDebit;
     BigDecimal sum;
     OperationType type;
     String currency;
-    StringBuilder operationDetails;
+    String operationDetails;
 
 }

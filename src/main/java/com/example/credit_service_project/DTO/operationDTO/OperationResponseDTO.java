@@ -4,15 +4,15 @@ import com.example.credit_service_project.entity.enums.OperationType;
 import lombok.Value;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Value
-public class DeleteResponse {
+public class OperationResponseDTO {
     UUID id;
     BigDecimal sum;
     OperationType type;
-    Timestamp operationEndMark;
-    StringBuilder operationDetails;
+    LocalDate operationEndMark;
+    String operationDetails;
     String currency;
 }

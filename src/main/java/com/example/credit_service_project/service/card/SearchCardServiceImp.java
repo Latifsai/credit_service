@@ -4,8 +4,8 @@ import com.example.credit_service_project.DTO.cardDTO.AddedAndSearchCardDTORespo
 import com.example.credit_service_project.DTO.cardDTO.SearchCardDTOCreditRequest;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.CardService;
-import com.example.credit_service_project.service.exeption.ErrorsMessage;
-import com.example.credit_service_project.service.exeption.NotFoundException;
+import com.example.credit_service_project.service.errors.ErrorsMessage;
+import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.utils.CardUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

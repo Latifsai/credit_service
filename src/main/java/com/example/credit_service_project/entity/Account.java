@@ -1,11 +1,13 @@
 package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.AccountStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -50,11 +52,11 @@ public class Account {
     private BigDecimal balance;
 
     @Column(name = "opening_date")
-    private LocalDateTime openingDate;
+    private LocalDate openingDate;
 
     @FutureOrPresent
     @Column(name = "closing_date")
-    private LocalDateTime closingDate;
+    private LocalDate closingDate;
 
     @PositiveOrZero(message = "unpaidPercentageLoanDebt must be greater than 0")
     @Column(name = "unpaid_load_debt")
@@ -87,6 +89,7 @@ public class Account {
 
     @OneToOne(mappedBy = "account", orphanRemoval = true,
             cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @JsonIgnore // to ent a cirle
     private Card card;
 
     @Override

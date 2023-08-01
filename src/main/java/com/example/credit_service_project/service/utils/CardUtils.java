@@ -1,9 +1,6 @@
 package com.example.credit_service_project.service.utils;
 
-import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
-import com.example.credit_service_project.DTO.cardDTO.AddedAndSearchCardDTOResponse;
-import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
-import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.*;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.enums.CardStatus;
@@ -26,6 +23,8 @@ public class CardUtils {
         card.setDigitalValet(request.isDigitalValet());
         card.setPaymentSystem(request.getPaymentSystem());
         card.setCardStatus(CardStatus.ACTIVE);
+
+//        account.setCard(card);
         return card;
     }
 
@@ -38,19 +37,39 @@ public class CardUtils {
                 card.getPaymentSystem(),
                 card.getCardStatus(),
                 card.getAccount().getAccountNumber(),
-                card.getAccount().getCard().getExpirationDate(),
+                card.getExpirationDate(),
                 card.getAccount().getCurrency());
     }
 
     public Card updateCard(Card card, UpdateCardDTORequest request) {
         if (request.getBalance() != null) card.setBalance(request.getBalance());
-        if (request.getDeliveryAddress() != null && !request.getDeliveryAddress().trim().isEmpty()) card.setDeliveryAddress(request.getDeliveryAddress());
+        if (request.getDeliveryAddress() != null && !request.getDeliveryAddress().trim().isEmpty())
+            card.setDeliveryAddress(request.getDeliveryAddress());
         if (request.getCardStatus() != null) card.setCardStatus(request.getCardStatus());
         return card;
     }
 
     public UpdateCardDTOResponse convertCardToUpdateResponse(Card card) {
-        return new UpdateCardDTOResponse(card.getId(), card.getCardNumber(), card.getHolderName(),
-                card.getBalance(), card.getDeliveryAddress(), card.getCardStatus());
+        return new UpdateCardDTOResponse(
+                card.getId(),
+                card.getCardNumber(),
+                card.getHolderName(),
+                card.getBalance(),
+                card.getDeliveryAddress(),
+                card.getCardStatus());
+    }
+
+    public GetCardsResponse convertCardToGetCardResponse(Card card) {
+        var response = new GetCardsResponse();
+        response.setId(card.getId());
+        response.setCardNumber(card.getCardNumber());
+        response.setHolderName(card.getHolderName());
+        response.setExpirationDate(card.getExpirationDate());
+        response.setBalance(card.getBalance());
+        response.setDeliveryAddress(card.getDeliveryAddress());
+        response.setDigitalValet(card.isDigitalValet());
+        response.setPaymentSystem(card.getPaymentSystem());
+        response.setCardStatus(card.getCardStatus());
+        return response;
     }
 }

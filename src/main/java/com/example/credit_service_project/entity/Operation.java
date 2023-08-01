@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -32,13 +33,13 @@ public class Operation {
     private OperationType type;
 
     @Column(name = "operation_end_mark")
-    private Timestamp operationEndMark;
+    private LocalDate operationEndMark;
 
     @Column(name = "operation_details")
-    private StringBuilder operationDetails;
+    private String operationDetails;
 
-    @Column(name = "is_debit")
-    private boolean isDebit;
+    @Column(name = "debit")
+    private boolean debit;
 
     @Column(name = "currency")
     private String currency;

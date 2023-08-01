@@ -3,9 +3,9 @@ package com.example.credit_service_project.serviceTest.accountTest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountResponse;
 import com.example.credit_service_project.service.AccountService;
-import com.example.credit_service_project.service.exeption.ErrorsMessage;
-import com.example.credit_service_project.service.exeption.NotFoundException;
-import com.example.credit_service_project.serviceTest.generators.DTOCreator;
+import com.example.credit_service_project.service.errors.ErrorsMessage;
+import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
+import com.example.credit_service_project.serviceTest.generators.DTOAccountCreator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -23,17 +23,17 @@ public class UpdateServiceImpTest {
 
     @Test
     public void upgradeTestIfExist() {
-        var request = DTOCreator.getUpdateRequest();
-        when(service.execute(request)).thenReturn(DTOCreator.getUpdateResponse());
+        var request = DTOAccountCreator.getUpdateRequest();
+        when(service.execute(request)).thenReturn(DTOAccountCreator.getUpdateResponse());
 
-        var expected = DTOCreator.getUpdateResponse();
+        var expected = DTOAccountCreator.getUpdateResponse();
         var actual = service.execute(request);
         assertEquals(expected, actual);
     }
 
     @Test
     public void upgradeTestNotFound() {
-        var request = DTOCreator.getUpdateRequest();
+        var request = DTOAccountCreator.getUpdateRequest();
         when(service.execute(request)).thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
         assertThrows(NotFoundException.class, () -> {

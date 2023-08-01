@@ -7,5 +7,5 @@ import java.util.List;
 
 @Value
 public class GetOperationsListResponse {
-    List<Operation> list;
+    List<OperationResponseDTO> list;
 }

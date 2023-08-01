@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -20,8 +21,8 @@ public class AddAccountDTOResponse {
     BigDecimal percentageDebt;
     AccountStatus status;
     BigDecimal balance;
-    LocalDateTime openingDate;
-    LocalDateTime closingDate;
+    LocalDate openingDate;
+    LocalDate closingDate;
     BigDecimal unpaidLoanDebt;
     BigDecimal unpaidPercentageLoanDebt;
     String currency;

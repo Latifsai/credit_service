@@ -22,7 +22,7 @@ public class AccountUtil {
         account.setStatus(AccountStatus.ACTIVE);
         account.setBalance(request.getBalance());
         account.setOpeningDate(accountGenerator.createOpeningDay());
-        account.setClosingDate(accountGenerator.createClosingDate(request.getYearsAmountForClosingDate()));
+        account.setClosingDate(accountGenerator.LocalDateCreateClosingDate(request.getYearsAmountForClosingDate()));
         account.setUnpaidLoanDebt(accountGenerator.getUnpaidLoanDebt(request));
         account.setUnpaidPercentageLoanDebt(accountGenerator.getUnpaidPercentageLoanDebt(request));
         account.setCurrency(request.getCurrency());
