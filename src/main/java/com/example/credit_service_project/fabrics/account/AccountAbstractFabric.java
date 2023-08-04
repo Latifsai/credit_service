@@ -2,15 +2,15 @@ package com.example.credit_service_project.fabrics.account;
 
 import com.example.credit_service_project.DTO.accountDTO.*;
 import com.example.credit_service_project.service.AccountService;
+import com.example.credit_service_project.service.account.GetAccountsListServiceImp;
 
 public interface AccountAbstractFabric {
     AccountService<AddAccountDTOResponse, AddAccountDTORequest> activeCreateService();
 
-    AccountService<GetAccountsListResponse, GetAccountsListRequest> activeGetService();
+    GetAccountsListServiceImp activeGetService();
 
-    AccountService<SearchAccountResponse, SearchAndDeleteAccountRequest> activeSearchService();
+    AccountService<AccountResponseDTO, SearchAccountRequest> activeSearchService();
 
-    AccountService<DeleteAccountResponse, SearchAndDeleteAccountRequest> activeDeleteService();
 
     AccountService<UpdateAccountResponse, UpdateAccountRequest> activeUpdateService();
 }

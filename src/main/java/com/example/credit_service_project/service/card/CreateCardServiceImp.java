@@ -1,33 +1,37 @@
 package com.example.credit_service_project.service.card;
 
 import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
-import com.example.credit_service_project.DTO.cardDTO.AddedAndSearchCardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
+import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
-import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.CardService;
+import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
-import com.example.credit_service_project.service.utils.CardUtils;
+import com.example.credit_service_project.service.utils.CardUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class CreateCardServiceImp implements CardService<AddedAndSearchCardDTOResponse, AddCardDTORequest> {
+public class CreateCardServiceImp implements CardService<CardDTOResponse, AddCardDTORequest> {
 
     private final CardRepository repository;
-    private final AccountRepository accountRepository;
-    private final CardUtils util;
+    private final SearchAccountsServiceImp searchAccountsService;
+    private final CardUtil util;
+
     @Override
-    public AddedAndSearchCardDTOResponse execute(AddCardDTORequest request) {
-        var account = accountRepository.findByIdOrAccountNumber(request.getAccountId(), request.getAccountNumber());
+    public CardDTOResponse execute(AddCardDTORequest request) {
+        Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountId(), request.getAccountNumber());
         if (account.isPresent()) {
             Card card = util.convertAddRequestToEntity(request, account.get());
             repository.save(card);
-            return util.convertCardToAddResponse(card);
+            return util.convertCardToAddDTOResponse(card);
         }
         throw new NotFoundException(ErrorsMessage.UNABLE_TO_ADD_CARD_MESSAGE);
     }

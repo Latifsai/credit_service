@@ -22,12 +22,6 @@ public class OperationController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> delete(@RequestBody SearchAndDeleteOperationRequest request) {
-        var response = fabric.deleteOperation().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
     @GetMapping
     public ResponseEntity<?> get(@RequestBody GetOperationsListRequest request) {
         var response = fabric.activateGetOperation().execute(request);

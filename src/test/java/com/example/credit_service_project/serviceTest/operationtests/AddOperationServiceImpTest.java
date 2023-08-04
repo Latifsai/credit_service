@@ -45,7 +45,7 @@ class AddOperationServiceImpTest {
 
         when(repository.save(operation)).thenReturn(operation);
 
-        when(util.changeBalance(account, operation))
+        when(util.changeAccountBalance(account, operation))
                 .thenReturn(changedAccount);
 
         when(accountRepository.save(changedAccount)).thenReturn(changedAccount);

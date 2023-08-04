@@ -4,7 +4,7 @@ import com.example.credit_service_project.DTO.cardDTO.SearchCardDTOCreditRequest
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
-import com.example.credit_service_project.service.utils.CardUtils;
+import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOCardCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ class SearchCardServiceImpTest {
     @Mock
     CardRepository repository;
     @Mock
-    CardUtils utils;
+    CardUtil utils;
 
     @InjectMocks
     SearchCardServiceImp service;
@@ -34,7 +34,7 @@ class SearchCardServiceImpTest {
         var card = EntityCreator.getCard();
         when(repository.findByCardNumberAndHolderName(request.getCardNumber(), request.getHolderName()))
                 .thenReturn(Optional.of(card));
-        when(utils.convertCardToAddResponse(card)).thenReturn(DTOCardCreator.getAddResponse());
+        when(utils.convertCardToAddDTOResponse(card)).thenReturn(DTOCardCreator.getAddResponse());
 
         var response = service.execute(request);
 

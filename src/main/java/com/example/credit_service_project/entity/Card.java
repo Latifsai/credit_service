@@ -40,9 +40,6 @@ public class Card {
     @Column(name = "balance")
     private BigDecimal balance; // ✅
 
-    @Column(name = "transaction_limit")
-    private Integer transactionLimit;
-
     @Column(name = "delivery_address")
     private String deliveryAddress; // ✅
 

@@ -4,26 +4,24 @@ import com.example.credit_service_project.entity.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateAccountResponse {
-    UUID id;
-    String accountNumber;
+    private UUID id;
+    private String accountNumber;
     //to change
-    BigDecimal loanDebt;
-    BigDecimal percentageDebt;
-    AccountStatus status;
-    BigDecimal balance;
-    LocalDate closingDate;
-    BigDecimal unpaidLoanDebt;
-    BigDecimal unpaidPercentageLoanDebt;
-    String currency;
+    private BigDecimal loanDebt;
+    private BigDecimal percentageDebt;
+    private AccountStatus status;
+    private BigDecimal balance;
+    private LocalDate closingDate;
+    private BigDecimal unpaidLoanDebt;
+    private BigDecimal unpaidPercentageLoanDebt;
+    private String currency;
 }

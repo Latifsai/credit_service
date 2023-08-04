@@ -25,11 +25,6 @@ public class OperationFabricImp implements OperationFabric {
     }
 
     @Override
-    public OperationService<OperationResponseDTO, SearchAndDeleteOperationRequest> deleteOperation() {
-        return new DeleteOperationServiceImp(repository, util);
-    }
-
-    @Override
     public OperationService<List<OperationResponseDTO>, GetOperationsListRequest> activateGetOperation() {
         return new GetOperationsServiceImp(repository, util);
     }

@@ -14,8 +14,6 @@ public class AddCardDTORequest {
      private UUID accountId;
      private String accountNumber;
 
-     private String holderName;
-     private LocalDate openingDate;
      private String deliveryAddress;
      private Integer yearAccessibility;
      private boolean isDigitalValet;

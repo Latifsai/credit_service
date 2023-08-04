@@ -51,8 +51,8 @@ public class DTOAccountCreator {
         return request;
     }
     
-    public static SearchAccountResponse getSearchResponse() {
-        var response = new SearchAccountResponse();
+    public static AccountResponseDTO getSearchResponse() {
+        var response = new AccountResponseDTO();
         response.setId(UUID.fromString("00009999-2222-1111-a456-426655440000"));
         response.setAccountNumber("A10B3U3OI9");
         response.setStatus(AccountStatus.ACTIVE);

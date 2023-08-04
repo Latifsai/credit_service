@@ -8,12 +8,16 @@ import lombok.Value;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddOperationRequestSpendingOrReplenishment {
+    private UUID accountID;
+    private UUID cardID;
     private String accountNumber;
+    private String cardNumber;
     private BigDecimal sum;
     private OperationType type;
     private LocalDate actualPaymentDate;

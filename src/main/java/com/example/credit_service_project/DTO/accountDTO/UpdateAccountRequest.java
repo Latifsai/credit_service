@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateAccountRequest {
-    String accountNumber;
+    private String accountNumber;
     //to change
-    BigDecimal loanDebt;
-    BigDecimal percentageDebt;
-    AccountStatus status;
-    BigDecimal balance;
-    BigDecimal unpaidLoanDebt;
-    BigDecimal unpaidPercentageLoanDebt;
+    private BigDecimal loanDebt;
+    private BigDecimal percentageDebt;
+    private AccountStatus status;
+    private BigDecimal balance;
+    private BigDecimal unpaidLoanDebt;
+    private BigDecimal unpaidPercentageLoanDebt;
 }

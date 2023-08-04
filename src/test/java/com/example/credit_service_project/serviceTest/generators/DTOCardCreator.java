@@ -1,11 +1,8 @@
 package com.example.credit_service_project.serviceTest.generators;
 
 
-import com.example.credit_service_project.DTO.accountDTO.GetAccountsListResponse;
 import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
-import com.example.credit_service_project.DTO.cardDTO.AddedAndSearchCardDTOResponse;
-import com.example.credit_service_project.DTO.cardDTO.GetCardsResponse;
-import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
 import com.example.credit_service_project.entity.enums.CardStatus;
 import com.example.credit_service_project.entity.enums.PaymentSystem;
 
@@ -13,7 +10,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static java.time.Month.APRIL;
@@ -32,8 +28,8 @@ public class DTOCardCreator {
         );
     }
 
-    public static AddedAndSearchCardDTOResponse getAddResponse() {
-        return new AddedAndSearchCardDTOResponse(
+    public static CardDTOResponse getAddResponse() {
+        return new CardDTOResponse(
                 UUID.fromString("00009999-2222-1111-a456-426655440000"),
                 "A10B3U3OI9",
                 "Oleg Kirilov",

@@ -92,6 +92,10 @@ public class Account {
     @JsonIgnore // to ent a cirle
     private Card card;
 
+    @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, orphanRemoval = true)
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    private Client client;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

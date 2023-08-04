@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CardRepository extends JpaRepository<Card, UUID> {
-    Optional<Card> findByCardNumberAndHolderName(String number, String name);
     Optional<Card> findByIdAndCardNumber(UUID id, String number);
     List<Card> findAllByAccount_AccountNumber(String accountNumber);
 }

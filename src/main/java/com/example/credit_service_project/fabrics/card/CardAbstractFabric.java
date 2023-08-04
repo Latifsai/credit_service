@@ -2,13 +2,14 @@ package com.example.credit_service_project.fabrics.card;
 
 import com.example.credit_service_project.DTO.cardDTO.*;
 import com.example.credit_service_project.service.CardService;
-
-import java.util.List;
+import com.example.credit_service_project.service.card.GetCardsServiceImp;
 
 public interface CardAbstractFabric {
-    CardService<AddedAndSearchCardDTOResponse, AddCardDTORequest> activateCreateCard();
-    CardService<DeleteCardDTOResponse, DeleteCardDTORequest> activateDeleteCard();
-    CardService<List<GetCardsResponse>, GetCardsRequest> activateGetCard();
-    CardService<UpdateCardDTOResponse, UpdateCardDTORequest> activateUpdateCard();
-    CardService<AddedAndSearchCardDTOResponse, SearchCardDTOCreditRequest> activateSearchCard();
+    CardService<CardDTOResponse, AddCardDTORequest> activateCreateCard();
+
+    GetCardsServiceImp getCardsService();
+
+    CardService<CardDTOResponse, UpdateCardDTORequest> activateUpdateCard();
+
+    CardService<CardDTOResponse, SearchCardDTOCreditRequest> activateSearchCard();
 }

@@ -1,7 +1,7 @@
 package com.example.credit_service_project.service.operation;
 
 import com.example.credit_service_project.DTO.operationDTO.SearchAndDeleteOperationRequest;
-import com.example.credit_service_project.DTO.operationDTO.SearchOperationResponse;
+import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.OperationService;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
@@ -10,6 +10,8 @@ import com.example.credit_service_project.service.utils.OperationUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,7 +22,7 @@ public class SearchOperationServiceImp implements OperationService<SearchOperati
     private final OperationUtils util;
     @Override
     public SearchOperationResponse execute(SearchAndDeleteOperationRequest request) {
-        var operation = repository.findByIdAndDebit(request.getId(), request.isDebit());
+        Optional<Operation> operation = repository.findByIdAndDebit(request.getId(), request.isDebit());
         return operation.map(o -> util.convertOperationToSearchResponse(o))
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_OPERATION_MESSAGE));
     }

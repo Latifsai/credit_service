@@ -1,7 +1,6 @@
 package com.example.credit_service_project.service.operation;
 
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
-import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsResponse;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.OperationService;
 import com.example.credit_service_project.service.errors.ErrorsMessage;

@@ -5,14 +5,18 @@ import lombok.Value;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Value
 public class OperationResponseDTO {
+    String accountNumber;
+    BigDecimal balance;
     UUID id;
     BigDecimal sum;
+    boolean isDebit;
     OperationType type;
-    LocalDate operationEndMark;
+    LocalDateTime operationEndMark;
     String operationDetails;
     String currency;
 }

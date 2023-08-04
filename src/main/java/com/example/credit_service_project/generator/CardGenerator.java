@@ -7,6 +7,7 @@ import java.util.Random;
 public class CardGenerator {
     private static final String material = "0123456789";
     private static final Integer numberLength = 12;
+
     public static String generateCardNumber() {
         StringBuilder stringBuilder = new StringBuilder(numberLength);
         Random random = new SecureRandom();
@@ -20,4 +21,6 @@ public class CardGenerator {
     public static LocalDate setExpirationDate(LocalDate localDate, int years) {
         return localDate.plusYears(years);
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.example.credit_service_project.service.utils;
 
 import com.example.credit_service_project.DTO.accountDTO.*;
 import com.example.credit_service_project.entity.Account;
+import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import com.example.credit_service_project.generator.AccountGenerator;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,9 @@ public class AccountUtil {
 
     private final AccountGenerator accountGenerator;
 
-    public Account convertAddRequestToAccount(AddAccountDTORequest request) {
+    public Account convertAddRequestToAccount(AddAccountDTORequest request, Client client) {
         Account account = new Account();
+        account.setClient(client);
         account.setAccountNumber(accountGenerator.createRandomAccountNumber(request.getAccountNumberLength()));
         account.setLoanDebt(request.getLoanDebt());
         account.setPercentageDebt(request.getPercentageDebt());
@@ -30,14 +32,22 @@ public class AccountUtil {
     }
 
     public AddAccountDTOResponse convertAccountToAddResponse(Account account) {
-        return new AddAccountDTOResponse(account.getId(), account.getAccountNumber(),
-                account.getLoanDebt(), account.getPercentageDebt(), account.getStatus(),
-                account.getBalance(), account.getOpeningDate(), account.getClosingDate(),
-                account.getUnpaidLoanDebt(), account.getUnpaidPercentageLoanDebt(), account.getCurrency());
+        return new AddAccountDTOResponse(
+                account.getId(),
+                account.getAccountNumber(),
+                account.getLoanDebt(),
+                account.getPercentageDebt(),
+                account.getStatus(),
+                account.getBalance(),
+                account.getOpeningDate(),
+                account.getClosingDate(),
+                account.getUnpaidLoanDebt(),
+                account.getUnpaidPercentageLoanDebt(),
+                account.getCurrency());
     }
 
-    public SearchAccountResponse convertAccountToSearchResponse(Account account) {
-        SearchAccountResponse response = new SearchAccountResponse();
+    public AccountResponseDTO convertAccountDTOResponse(Account account) {
+        AccountResponseDTO response = new AccountResponseDTO();
         response.setId(account.getId());
         response.setAccountNumber(account.getAccountNumber());
         response.setStatus(account.getStatus());

@@ -1,7 +1,5 @@
 package com.example.credit_service_project.serviceTest.accountTest;
 
-import com.example.credit_service_project.DTO.accountDTO.GetAccountsListRequest;
-import com.example.credit_service_project.DTO.accountDTO.GetAccountsListResponse;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import com.example.credit_service_project.service.AccountService;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;

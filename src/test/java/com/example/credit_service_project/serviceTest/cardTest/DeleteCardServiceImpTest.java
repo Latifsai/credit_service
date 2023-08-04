@@ -1,9 +1,6 @@
 package com.example.credit_service_project.serviceTest.cardTest;
 
-import com.example.credit_service_project.DTO.cardDTO.DeleteCardDTORequest;
-import com.example.credit_service_project.DTO.cardDTO.DeleteCardDTOResponse;
 import com.example.credit_service_project.repository.CardRepository;
-import com.example.credit_service_project.service.card.DeleteCardServiceImp;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import org.junit.jupiter.api.Test;

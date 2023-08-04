@@ -1,6 +1,8 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.cardDTO.*;
+import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
+import com.example.credit_service_project.DTO.cardDTO.SearchCardDTOCreditRequest;
+import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.fabrics.card.CardFabric;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("auth/card")
+@RequestMapping("/card")
 @RequiredArgsConstructor
 public class CardController {
     private final CardFabric fabric;
@@ -19,15 +21,9 @@ public class CardController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteCard(@RequestBody DeleteCardDTORequest request) {
-        var response = fabric.activateDeleteCard().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
     @GetMapping
-    public ResponseEntity<?> getCard(@RequestBody GetCardsRequest request) {
-        var response = fabric.activateGetCard().execute(request);
+    public ResponseEntity<?> getCard() {
+        var response = fabric.getCardsService().execute();
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }
 

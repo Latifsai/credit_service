@@ -4,7 +4,7 @@ import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.card.UpdateCardServiceImp;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
-import com.example.credit_service_project.service.utils.CardUtils;
+import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOCardCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class UpdateServiceExceptionImpTest {
     CardRepository repository;
 
     @Mock
-    CardUtils utils;
+    CardUtil utils;
 
     @InjectMocks
     UpdateCardServiceImp updateService;

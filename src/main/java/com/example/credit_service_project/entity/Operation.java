@@ -7,6 +7,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public class Operation {
     private OperationType type;
 
     @Column(name = "operation_end_mark")
-    private LocalDate operationEndMark;
+    private LocalDateTime operationEndMark;
 
     @Column(name = "operation_details")
     private String operationDetails;

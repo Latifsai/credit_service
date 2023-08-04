@@ -1,8 +1,6 @@
 package com.example.credit_service_project.serviceTest.generators;
 
-import com.example.credit_service_project.entity.Account;
-import com.example.credit_service_project.entity.Card;
-import com.example.credit_service_project.entity.Operation;
+import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import com.example.credit_service_project.entity.enums.CardStatus;
 import com.example.credit_service_project.entity.enums.OperationType;
@@ -110,5 +108,58 @@ public class EntityCreator {
         operation.setCurrency("$");
         operation.setAccount(getAccount());
         return operation;
+    }
+
+    public static Operation getUpdatedOperation() {
+        Operation operation = new Operation();
+        operation.setId(UUID.fromString("11117777-9999-1111-b491-426655440000"));
+        operation.setSum(new BigDecimal("100"));
+        operation.setType(OperationType.MONTHLY_PAYMENT);
+        operation.setOperationEndMark(LocalDate.of(2023,8,1));
+        operation.setOperationDetails("Mortgage payment");
+        operation.setDebit(true);
+        operation.setCurrency("$");
+        operation.setAccount(getAccount());
+        return operation;
+    }
+
+    public static Manager getManager() {
+        var manager = new Manager();
+        manager.setId(UUID.fromString("55553333-0000-4444-b491-426655440000"));
+        manager.setName("Ivan");
+        manager.setSurname("Semyonov");
+        manager.setSurname("ivan_manager@loewen.de");
+        return manager;
+    }
+
+    public static Manager getUpdatedManager() {
+        var manager = new Manager();
+        manager.setId(UUID.fromString("55553333-0000-4444-b491-426655440000"));
+        manager.setName("Ivan");
+        manager.setSurname("Simonov");
+        manager.setSurname("main_manager@loewen.de");
+        return manager;
+    }
+
+    public static Client getClient() {
+        Client client = new Client();
+        client.setId(UUID.fromString("88882222-6666-4444-b491-426655440000"));
+        client.setName("Lew");
+        client.setSurname("Kim");
+        client.setIncome(new BigDecimal("2500"));
+        client.setExpenses(new BigDecimal("1500"));
+        client.setManager(getManager());
+        return client;
+    }
+
+    public static Client getUpdatedClient() {
+        Client client = new Client();
+        client.setId(UUID.fromString("88882222-6666-4444-b491-426655440000"));
+        client.setName("Lew");
+        client.setSurname("Kim");
+        client.setIncome(new BigDecimal("3500"));
+        client.setExpenses(new BigDecimal("2000"));
+        client.setManager(getManager());
+        return client;
     }
 }

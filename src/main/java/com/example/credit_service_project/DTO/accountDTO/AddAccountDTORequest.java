@@ -9,23 +9,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddAccountDTORequest {
+    private UUID clientId;
     @PositiveOrZero
-    BigDecimal loanDebt;
+    private BigDecimal loanDebt;
     @PositiveOrZero
-    BigDecimal percentageDebt;
+    private BigDecimal percentageDebt;
     @PositiveOrZero
-    BigDecimal balance;
+    private BigDecimal balance;
     @NotNull
     @NotEmpty
-    String currency;
+    private String currency;
     @NotEmpty
-    AccountStatus status;
+    private AccountStatus status;
 
-    Integer accountNumberLength;
-    Long yearsAmountForClosingDate;
+    private Integer accountNumberLength;
+    private Long yearsAmountForClosingDate;
 }
