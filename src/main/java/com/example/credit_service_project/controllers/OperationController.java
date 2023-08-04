@@ -1,7 +1,6 @@
 package com.example.credit_service_project.controllers;
 
 import com.example.credit_service_project.DTO.operationDTO.AddOperationRequestSpendingOrReplenishment;
-import com.example.credit_service_project.DTO.operationDTO.GetOperationsListRequest;
 import com.example.credit_service_project.DTO.operationDTO.SearchAndDeleteOperationRequest;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.fabrics.operation.OperationFabricImp;
@@ -11,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("auth/operation")
+@RequestMapping("/operation")
 @RequiredArgsConstructor
 public class OperationController {
     private final OperationFabricImp fabric;
@@ -23,8 +22,8 @@ public class OperationController {
     }
 
     @GetMapping
-    public ResponseEntity<?> get(@RequestBody GetOperationsListRequest request) {
-        var response = fabric.activateGetOperation().execute(request);
+    public ResponseEntity<?> get() {
+        var response = fabric.activateGetOperation().execute();
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }
 

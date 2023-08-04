@@ -4,6 +4,10 @@ import com.example.credit_service_project.DTO.operationDTO.*;
 import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.OperationService;
+import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
+import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
+import com.example.credit_service_project.service.card.SearchCardServiceImp;
+import com.example.credit_service_project.service.card.UpdateCardServiceImp;
 import com.example.credit_service_project.service.operation.*;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import lombok.RequiredArgsConstructor;
@@ -15,27 +19,30 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OperationFabricImp implements OperationFabric {
     private final OperationRepository repository;
-    private final AccountRepository accountRepository;
     private final OperationUtils util;
 
+    private final UpdateAccountServiceImp updateAccountService;
+    private final SearchAccountsServiceImp searchAccountsService;
+    private final SearchCardServiceImp searchCardService;
+    private final UpdateCardServiceImp updateCardService;
 
     @Override
-    public OperationService<AddOperationResponse, AddOperationRequestSpendingOrReplenishment> addOperation() {
-        return new AddOperationServiceImp(repository, accountRepository, util);
+    public OperationService<OperationResponseDTO, AddOperationRequestSpendingOrReplenishment> addOperation() {
+        return new AddOperationServiceImp(repository, util, updateAccountService, searchAccountsService,searchCardService, updateCardService);
     }
 
     @Override
-    public OperationService<List<OperationResponseDTO>, GetOperationsListRequest> activateGetOperation() {
+    public GetOperationsServiceImp activateGetOperation() {
         return new GetOperationsServiceImp(repository, util);
     }
 
     @Override
-    public OperationService<SearchOperationResponse, SearchAndDeleteOperationRequest> searchOperation() {
+    public OperationService<OperationResponseDTO, SearchAndDeleteOperationRequest> searchOperation() {
         return new SearchOperationServiceImp(repository, util);
     }
 
     @Override
-    public OperationService<UpdateOperationsResponse, UpdateOperationsRequest> updateOperation() {
+    public OperationService<OperationResponseDTO, UpdateOperationsRequest> updateOperation() {
         return new UpdateOperationServiceImp(repository, util);
     }
 }

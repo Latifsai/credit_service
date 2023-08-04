@@ -2,6 +2,10 @@ package com.example.credit_service_project.serviceTest.operationtests;
 
 import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.repository.OperationRepository;
+import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
+import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
+import com.example.credit_service_project.service.card.SearchCardServiceImp;
+import com.example.credit_service_project.service.card.UpdateCardServiceImp;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.operation.AddOperationServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
@@ -23,12 +27,20 @@ class AddOperationServiceImpTest {
 
     @Mock
     private OperationRepository repository;
-    @Mock
-    private AccountRepository accountRepository;
+
     @Mock
     private OperationUtils util;
+
+    @Mock
+    private UpdateAccountServiceImp updateAccountService;
+    @Mock
+    private SearchAccountsServiceImp searchAccountsService;
+    @Mock
+    private SearchCardServiceImp searchCardService;
+    @Mock
+    private UpdateCardServiceImp updateCardService;
     @InjectMocks
-    AddOperationServiceImp addOperationService;
+    private AddOperationServiceImp addOperationService;
 
     @Test
     public void testAddOperationSuccess() {
@@ -37,7 +49,7 @@ class AddOperationServiceImpTest {
         var operation = EntityCreator.getOperation();
         var changedAccount = EntityCreator.getAccountAfterOperation();
 
-        when(accountRepository.findByAccountNumber(request.getAccountNumber()))
+        when(searchAccountsService.findAccountByIdOrNumber(request.getAccountID(),request.getAccountNumber()))
                 .thenReturn(Optional.of(account));
 
         when(util.convertAddRequestFunctionalToOperation(request, account))

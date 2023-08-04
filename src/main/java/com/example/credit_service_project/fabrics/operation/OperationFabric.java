@@ -2,15 +2,16 @@ package com.example.credit_service_project.fabrics.operation;
 
 import com.example.credit_service_project.DTO.operationDTO.*;
 import com.example.credit_service_project.service.OperationService;
+import com.example.credit_service_project.service.operation.GetOperationsServiceImp;
 
 import java.util.List;
 
 public interface OperationFabric {
-    OperationService<AddOperationResponse, AddOperationRequestSpendingOrReplenishment> addOperation();
+    OperationService<OperationResponseDTO, AddOperationRequestSpendingOrReplenishment> addOperation();
 
-    OperationService<List<OperationResponseDTO>, GetOperationsListRequest> activateGetOperation();
+    GetOperationsServiceImp activateGetOperation();
 
-    OperationService<SearchOperationResponse, SearchAndDeleteOperationRequest> searchOperation();
+    OperationService<OperationResponseDTO, SearchAndDeleteOperationRequest> searchOperation();
 
-    OperationService<UpdateOperationsResponse, UpdateOperationsRequest> updateOperation();
+    OperationService<OperationResponseDTO, UpdateOperationsRequest> updateOperation();
 }

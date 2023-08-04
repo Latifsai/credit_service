@@ -1,6 +1,5 @@
 package com.example.credit_service_project.serviceTest.operationtests;
 
-import com.example.credit_service_project.DTO.operationDTO.GetOperationsListRequest;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.operation.GetOperationsServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
