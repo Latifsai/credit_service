@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -22,7 +24,7 @@ public class UpdateCardServiceImp implements CardService<CardDTOResponse, Update
 
     @Override
     public CardDTOResponse execute(UpdateCardDTORequest request) {
-        var card = repository.findById(request.getId());
+        Optional<Card> card = repository.findById(request.getId());
 
         if (card.isEmpty()) throw new NotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE);
 

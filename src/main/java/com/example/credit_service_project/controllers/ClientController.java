@@ -4,6 +4,7 @@ import com.example.credit_service_project.DTO.client.AddClientRequest;
 import com.example.credit_service_project.DTO.client.ClientResponseDTO;
 import com.example.credit_service_project.DTO.client.UpdateClientRequest;
 import com.example.credit_service_project.fabrics.client.ClientFabricImp;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class ClientController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public ClientResponseDTO searchManager(@PathVariable UUID id) {
+    public ClientResponseDTO searchManager(@PathVariable @NotNull UUID id) {
         return fabric.searchClient().execute(id);
     }
 

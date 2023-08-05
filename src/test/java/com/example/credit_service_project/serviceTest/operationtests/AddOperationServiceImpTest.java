@@ -1,5 +1,6 @@
 package com.example.credit_service_project.serviceTest.operationtests;
 
+import com.example.credit_service_project.DTO.operationDTO.SearchAndDeleteOperationRequest;
 import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
@@ -11,6 +12,7 @@ import com.example.credit_service_project.service.operation.AddOperationServiceI
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,8 +50,10 @@ class AddOperationServiceImpTest {
         var account = EntityCreator.getAccount();
         var operation = EntityCreator.getOperation();
         var changedAccount = EntityCreator.getAccountAfterOperation();
+        var card = EntityCreator.getCard();
 
-        when(searchAccountsService.findAccountByIdOrNumber(request.getAccountID(),request.getAccountNumber()))
+
+        when(searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
                 .thenReturn(Optional.of(account));
 
         when(util.convertAddRequestFunctionalToOperation(request, account))
@@ -57,14 +61,16 @@ class AddOperationServiceImpTest {
 
         when(repository.save(operation)).thenReturn(operation);
 
-        when(util.changeAccountBalance(account, operation))
-                .thenReturn(changedAccount);
+        when(util.changeAccountBalance(account, operation)).thenReturn(changedAccount);
 
-        when(accountRepository.save(changedAccount)).thenReturn(changedAccount);
+        when(searchCardService.findCardByIdAndNumber(request.getCardID(), request.getCardNumber()))
+                .thenReturn(Optional.of(card));
 
-        when(util.convertOperationToAddResponse(operation)). thenReturn(DTOOperationCreator.getAddResponse());
+        when(util.changerCardBalance(account, card)).thenReturn(EntityCreator.getCardAfterOperation());
 
-        var expected = DTOOperationCreator.getAddResponse();
+        when(util.convertOperationToResponseDTO(operation)).thenReturn(DTOOperationCreator.getOperationResponseDTO());
+
+        var expected = DTOOperationCreator.getOperationResponseDTO();
         var actual = addOperationService.execute(request);
 
         assertEquals(expected, actual);
@@ -75,10 +81,18 @@ class AddOperationServiceImpTest {
         var request = DTOOperationCreator.getRequestSpendingOrReplenishment();
 
 
-        when(accountRepository.findByAccountNumber(request.getAccountNumber()))
+        when(searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
                 .thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> addOperationService.execute(request));
+    }
+
+    @Test
+    public void testAddServiceValidation() {
+        var request = DTOOperationCreator.getRequestSpendingOrReplenishmentWithValidationErrors();
+        var validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(request);
+        assertEquals(5, set.size());
     }
 
 }

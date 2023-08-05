@@ -1,15 +1,21 @@
 package com.example.credit_service_project.serviceTest.accountTest;
 
-import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
-import com.example.credit_service_project.DTO.accountDTO.UpdateAccountResponse;
-import com.example.credit_service_project.service.AccountService;
+import com.example.credit_service_project.repository.AccountRepository;
+import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
+import com.example.credit_service_project.service.utils.AccountUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOAccountCreator;
+import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,27 +23,43 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UpdateServiceImpTest {
+    @Mock
+    private AccountRepository repository;
 
     @Mock
-    private AccountService<UpdateAccountResponse, UpdateAccountRequest> service;
+    private AccountUtil util;
+
+    @InjectMocks
+    private UpdateAccountServiceImp service;
 
     @Test
-    public void upgradeTestIfExist() {
+    public void upgradeTestSuccess() {
         var request = DTOAccountCreator.getUpdateRequest();
-        when(service.execute(request)).thenReturn(DTOAccountCreator.getUpdateResponse());
+        var account = EntityCreator.getAccount();
+        var updatedAccount = EntityCreator.getUpgratedAccount();
+        when(repository.findByIdOrAccountNumber(request.getAccountID(), request.getAccountNumber()))
+                .thenReturn(Optional.of(account));
 
-        var expected = DTOAccountCreator.getUpdateResponse();
-        var actual = service.execute(request);
-        assertEquals(expected, actual);
+        when(util.updateAccount(account, request)).thenReturn(EntityCreator.getUpgratedAccount());
+        when(util.convertAccountToAddResponse(updatedAccount)).thenReturn(DTOAccountCreator.getUpdatedDTOResponse());
+        assertEquals(DTOAccountCreator.getUpdatedDTOResponse(), service.execute(request));
     }
 
     @Test
     public void upgradeTestNotFound() {
         var request = DTOAccountCreator.getUpdateRequest();
-        when(service.execute(request)).thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
+        when(repository.findByIdOrAccountNumber(request.getAccountID(), request.getAccountNumber()))
+                .thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
-        assertThrows(NotFoundException.class, () -> {
-            service.execute(request);
-        });
+        assertThrows(NotFoundException.class, () -> service.execute(request));
+    }
+
+    @Test
+    public void TestUpdateValidation() {
+        var request = DTOAccountCreator.getUpdateRequestWithErrors();
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(request);
+        assertEquals(2, set.size());
     }
 }

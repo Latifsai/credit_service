@@ -31,25 +31,24 @@ class GetOperationsServiceImpTest {
 
     @Test
     public void testGetServiceSuccess() {
-        var request = new GetOperationsListRequest(true);
         var operationList = List.of(EntityCreator.getOperation());
         var response = List.of(DTOOperationCreator.getOperationResponseDTO());
 
-        when(repository.findAllByDebit(request.isDebit())).thenReturn(operationList);
+        when(repository.findAll()).thenReturn(operationList);
+
         when(util.convertOperationToResponseDTO(operationList.get(0))).thenReturn(response.get(0));
 
-        var actual = service.execute(request);
+        var actual = service.execute();
 
         assertEquals(response, actual);
     }
 
     @Test
     public void testGetServiceEmptyList() {
-        var request = new GetOperationsListRequest(true);
 
-        when(repository.findAllByDebit(request.isDebit())).thenReturn(Collections.emptyList());
+        when(repository.findAll()).thenReturn(Collections.emptyList());
 
-        assertEquals(Collections.emptyList(), service.execute(request));
+        assertEquals(Collections.emptyList(), service.execute());
     }
 
 }

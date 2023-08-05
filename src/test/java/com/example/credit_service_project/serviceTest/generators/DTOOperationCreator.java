@@ -1,70 +1,63 @@
 package com.example.credit_service_project.serviceTest.generators;
 
-import com.example.credit_service_project.DTO.operationDTO.*;
+import com.example.credit_service_project.DTO.operationDTO.AddOperationRequestSpendingOrReplenishment;
+import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.entity.enums.OperationType;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class DTOOperationCreator {
 
     public static AddOperationRequestSpendingOrReplenishment getRequestSpendingOrReplenishment() {
         return new AddOperationRequestSpendingOrReplenishment(
+                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                "A10B3U3OI9",
                 "A10B3U3OI9",
                 new BigDecimal("100"),
                 OperationType.SPENDING,
-                LocalDate.of(2023,8,1),
                 "Bought a products in shop."
                 );
     }
 
-    public static AddOperationResponse getAddResponse() {
-        return new AddOperationResponse(
+    public static AddOperationRequestSpendingOrReplenishment getRequestSpendingOrReplenishmentWithValidationErrors() {
+        return new AddOperationRequestSpendingOrReplenishment(
+                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                "",
                 "A10B3U3OI9",
-                new BigDecimal("2900"),
-                new BigDecimal("100"),
-                OperationType.SPENDING,
-                LocalDate.of(2023,8,1),
-                "Bought a products in shop.",
-                "$"
+                BigDecimal.valueOf(0),
+                null,
+                null
         );
     }
-
     public static OperationResponseDTO getOperationResponseDTO() {
         return new OperationResponseDTO(
-                UUID.fromString("11117777-9999-1111-b491-426655440000"),
-                new BigDecimal("100"),
-                OperationType.SPENDING,
-                LocalDate.of(2023,8,1),
-                "Bought a products in shop.",
-                "$"
-        );
-    }
-
-    public static SearchOperationResponse getSearchResponse() {
-        return new SearchOperationResponse(
-                UUID.fromString("11117777-9999-1111-b491-426655440000"),
                 "A10B3U3OI9",
+                new BigDecimal("3000"),
+                UUID.fromString("11117777-9999-1111-b491-426655440000"),
                 new BigDecimal("100"),
-                OperationType.SPENDING,
-                LocalDate.of(2023,8,1),
                 true,
+                OperationType.SPENDING,
+                LocalDateTime.of(2023,8,1,17,23,43),
                 "Bought a products in shop.",
                 "$"
         );
     }
-    public static UpdateOperationsResponse getUpdateResponse() {
-        return new UpdateOperationsResponse(
+
+    public static OperationResponseDTO getUpdateOperationResponseDTO() {
+        return new OperationResponseDTO(
+                "A10B3U3OI9",
+                new BigDecimal("3000"),
                 UUID.fromString("11117777-9999-1111-b491-426655440000"),
-                LocalDate.of(2023,8,1),
-                true,
                 new BigDecimal("100"),
+                true,
                 OperationType.MONTHLY_PAYMENT,
-                "$",
-                "Bought a products in shop."
+                LocalDateTime.of(2023,8,1,17,23,43),
+                "Mortgage payment",
+                "$"
         );
     }
-
-
 }

@@ -1,7 +1,7 @@
 package com.example.credit_service_project.service.account;
 
 import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
-import com.example.credit_service_project.DTO.accountDTO.AddAccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
 import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.service.AccountService;
@@ -18,12 +18,12 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Validated
-public class CreateAccountServiceImp implements AccountService<AddAccountDTOResponse, AddAccountDTORequest> {
+public class CreateAccountServiceImp implements AccountService<AccountDTOResponse, AddAccountDTORequest> {
     private final AccountRepository repository;
     private final SearchClientServiceImp searchClientService;
     private final AccountUtil util;
     @Override
-    public AddAccountDTOResponse execute(AddAccountDTORequest request) {
+    public AccountDTOResponse execute(AddAccountDTORequest request) {
         Optional<Client> clientOptional = searchClientService.findClientById(request.getClientId());
         if (clientOptional.isPresent()) {
             var account = util.convertAddRequestToAccount(request, clientOptional.get());

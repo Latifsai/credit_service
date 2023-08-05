@@ -7,6 +7,7 @@ import com.example.credit_service_project.service.errors.exceptions.NotFoundExce
 import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOCardCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,13 +25,13 @@ import static org.mockito.Mockito.when;
 class UpdateServiceExceptionImpTest {
 
     @Mock
-    CardRepository repository;
+    private CardRepository repository;
 
     @Mock
-    CardUtil utils;
+    private CardUtil utils;
 
     @InjectMocks
-    UpdateCardServiceImp updateService;
+    private UpdateCardServiceImp updateService;
 
     @Test
     public void testUpdateSuccess() {
@@ -39,12 +40,15 @@ class UpdateServiceExceptionImpTest {
                 new BigDecimal("5000"), "", null);
 
         when(repository.findById(request.getId())).thenReturn(Optional.of(card));
+
         when(utils.updateCard(card, request)).thenReturn(EntityCreator.getUpdatedCard());
-        when(utils.convertCardToUpdateResponse(EntityCreator.getUpdatedCard())).thenReturn(DTOCardCreator.getUpdateResponse());
+
+        when(utils.convertCardToAddDTOResponse(EntityCreator.getUpdatedCard()))
+                .thenReturn(DTOCardCreator.getUpdatedCardResponse());
 
         var actual = updateService.execute(request);
         assertNotNull(actual);
-        assertEquals(DTOCardCreator.getUpdateResponse(), actual);
+        assertEquals(DTOCardCreator.getUpdatedCardResponse(), actual);
     }
 
     @Test
@@ -55,6 +59,17 @@ class UpdateServiceExceptionImpTest {
 
         when(repository.findById(request.getId())).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> updateService.execute(request));
+    }
 
+    @Test
+    public void testUpdateValidation() {
+        var request = new UpdateCardDTORequest(
+                null, new BigDecimal("5000"), "", null);
+
+        var validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(request);
+        var message = set.iterator().next();
+        assertEquals("ID must not be null!", message.getMessage());
+        assertEquals(1, set.size());
     }
 }

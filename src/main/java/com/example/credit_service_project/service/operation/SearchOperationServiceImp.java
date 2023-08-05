@@ -21,6 +21,7 @@ public class SearchOperationServiceImp implements OperationService<OperationResp
 
     private final OperationRepository repository;
     private final OperationUtils util;
+
     @Override
     public OperationResponseDTO execute(SearchAndDeleteOperationRequest request) {
         Optional<Operation> operation = repository.findByIdAndDebit(request.getId(), request.isDebit());

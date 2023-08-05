@@ -13,6 +13,6 @@ public class AddManagerRequest {
     @NotNull(message = "Surname must not be null!")
     @NotEmpty(message = "Surname must not be empty!")
     String surname;
-    @Email
+    @Email(message = "Format must match email!")
     String email;
 }

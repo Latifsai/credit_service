@@ -18,7 +18,7 @@ public class AccountFabric implements AccountAbstractFabric {
     private final AccountUtil util;
 
     @Override
-    public AccountService<AddAccountDTOResponse, AddAccountDTORequest> activeCreateService() {
+    public AccountService<AccountDTOResponse, AddAccountDTORequest> activeCreateService() {
         return new CreateAccountServiceImp(repository, searchClientService, util);
     }
 
@@ -29,14 +29,14 @@ public class AccountFabric implements AccountAbstractFabric {
 
 
     @Override
-    public AccountService<AccountResponseDTO, SearchAccountRequest> activeSearchService() {
+    public AccountService<AccountDTOResponse, SearchAccountRequest> activeSearchService() {
         return new SearchAccountsServiceImp(repository, util);
     }
 
 
 
     @Override
-    public AccountService<UpdateAccountResponse, UpdateAccountRequest> activeUpdateService() {
+    public AccountService<AccountDTOResponse, UpdateAccountRequest> activeUpdateService() {
         return new UpdateAccountServiceImp(repository, util);
     }
 }

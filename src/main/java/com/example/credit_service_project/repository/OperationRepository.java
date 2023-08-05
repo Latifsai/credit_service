@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface OperationRepository extends JpaRepository<Operation, UUID> {
     Optional<Operation> findByIdAndDebit(UUID id, boolean debit);
-    List<Operation> findAllByDebit(boolean debit);
+
 }

@@ -8,6 +8,7 @@ import com.example.credit_service_project.service.errors.ErrorsMessage;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.utils.ClientUtil;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

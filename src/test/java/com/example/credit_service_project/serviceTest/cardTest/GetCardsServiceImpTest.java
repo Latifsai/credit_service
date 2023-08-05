@@ -2,7 +2,6 @@ package com.example.credit_service_project.serviceTest.cardTest;
 
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.card.GetCardsServiceImp;
-import com.example.credit_service_project.service.errors.exceptions.EmptyListException;
 import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOCardCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
@@ -23,20 +22,22 @@ import static org.mockito.Mockito.when;
 class GetCardsServiceImpTest {
 
     @Spy
-    CardRepository repository;
+    private CardRepository repository;
 
     @Mock
     private CardUtil utils;
+
     @InjectMocks
-    GetCardsServiceImp serviceImp;
+    private GetCardsServiceImp serviceImp;
+
     @Test
     public void testGetCardsSuccess() {
         var cards = List.of(EntityCreator.getCard());
-        var expected = DTOCardCreator.getResponse();
+        var expected = DTOCardCreator.getListResponse();
 
         when(repository.findAll()).thenReturn(cards);
-        when(utils.convertCardToGetCardResponse(cards.get(0))).thenReturn(expected.get(0));
 
+        when(utils.convertCardToAddDTOResponse(cards.get(0))).thenReturn(expected.get(0));
 
         var response = serviceImp.execute();
 
@@ -46,8 +47,7 @@ class GetCardsServiceImpTest {
     @Test
     public void testGetCardsEmptyListException() {
         when(repository.findAll()).thenReturn(Collections.emptyList());
-        assertThrows(EmptyListException.class, () -> serviceImp.execute());
-
+        assertEquals(Collections.emptyList(),serviceImp.execute());
     }
 
 }

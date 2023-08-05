@@ -6,6 +6,7 @@ import com.example.credit_service_project.service.errors.exceptions.NotFoundExce
 import com.example.credit_service_project.service.utils.ClientUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOClientCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -45,4 +46,6 @@ class SearchClientServiceImpTest {
         when(repository.findById(id)).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> service.execute(id));
     }
+
+
 }

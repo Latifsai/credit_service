@@ -31,33 +31,21 @@ public class AccountUtil {
         return account;
     }
 
-    public AddAccountDTOResponse convertAccountToAddResponse(Account account) {
-        return new AddAccountDTOResponse(
+    public AccountDTOResponse convertAccountToAddResponse(Account account) {
+        return new AccountDTOResponse(
                 account.getId(),
                 account.getAccountNumber(),
+                account.getClient().getName() + " " + account.getClient().getSurname(),
                 account.getLoanDebt(),
                 account.getPercentageDebt(),
                 account.getStatus(),
                 account.getBalance(),
-                account.getOpeningDate(),
                 account.getClosingDate(),
                 account.getUnpaidLoanDebt(),
                 account.getUnpaidPercentageLoanDebt(),
                 account.getCurrency());
     }
 
-    public AccountResponseDTO convertAccountDTOResponse(Account account) {
-        AccountResponseDTO response = new AccountResponseDTO();
-        response.setId(account.getId());
-        response.setAccountNumber(account.getAccountNumber());
-        response.setStatus(account.getStatus());
-        response.setBalance(account.getBalance());
-        response.setLoanDebt(account.getLoanDebt());
-        response.setUnpaidLoanDebt(account.getUnpaidLoanDebt());
-        response.setUnpaidPercentageLoanDebt(account.getUnpaidPercentageLoanDebt());
-        response.setCurrency(account.getCurrency());
-        return response;
-    }
 
     public Account updateAccount(Account account, UpdateAccountRequest request) {
         if (request.getLoanDebt() != null) account.setLoanDebt(request.getLoanDebt());
@@ -68,23 +56,5 @@ public class AccountUtil {
         if (request.getUnpaidPercentageLoanDebt() != null) account.setUnpaidPercentageLoanDebt(request.getUnpaidPercentageLoanDebt());
         return account;
     }
-
-
-    public UpdateAccountResponse convertTotUpdateResponse(Account account) {
-        var response = new UpdateAccountResponse();
-        response.setId(account.getId());
-        response.setAccountNumber(account.getAccountNumber());
-
-        response.setLoanDebt(account.getLoanDebt());
-        response.setPercentageDebt(account.getPercentageDebt());
-        response.setStatus(account.getStatus());
-        response.setBalance(account.getBalance());
-        response.setClosingDate(account.getClosingDate());
-        response.setUnpaidLoanDebt(account.getUnpaidLoanDebt());
-        response.setUnpaidPercentageLoanDebt(account.getUnpaidPercentageLoanDebt());
-        response.setCurrency(account.getCurrency());
-        return response;
-    }
-
 
 }

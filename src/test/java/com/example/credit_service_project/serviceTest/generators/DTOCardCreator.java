@@ -8,7 +8,6 @@ import com.example.credit_service_project.entity.enums.PaymentSystem;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,8 +18,6 @@ public class DTOCardCreator {
         return new AddCardDTORequest(
                 UUID.fromString("00009999-2222-1111-a456-426655440000"),
                 "A10B3U3OI9",
-                "Oleg Kirilov",
-                LocalDate.of(2020, APRIL, 21),
                 "Wertach Strasse 34",
                 3,
                 true,
@@ -28,7 +25,18 @@ public class DTOCardCreator {
         );
     }
 
-    public static CardDTOResponse getAddResponse() {
+    public static AddCardDTORequest getAddAccountDTORequestWithValidationErrors() {
+        return new AddCardDTORequest(
+                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                "",
+                null,
+                14,
+                true,
+                PaymentSystem.VISA
+        );
+    }
+
+    public static CardDTOResponse getCardResponse() {
         return new CardDTOResponse(
                 UUID.fromString("00009999-2222-1111-a456-426655440000"),
                 "A10B3U3OI9",
@@ -42,30 +50,21 @@ public class DTOCardCreator {
         );
     }
 
-    public static UpdateCardDTOResponse getUpdateResponse() {
-        return new UpdateCardDTOResponse(
+    public static CardDTOResponse getUpdatedCardResponse() {
+        return new CardDTOResponse(
                 UUID.fromString("00009999-2222-1111-a456-426655440000"),
                 "A10B3U3OI9",
                 "Oleg Kirilov",
-                new BigDecimal("5000"),
-                "Wertach Strasse 34",
-                CardStatus.ACTIVE
+                BigDecimal.valueOf(5000),
+                PaymentSystem.VISA,
+                CardStatus.ACTIVE,
+                "A10B3U3OI9",
+                LocalDate.of(2023, APRIL, 21),
+                "$"
         );
     }
 
-    public static List<GetCardsResponse> getResponse() {
-        List<GetCardsResponse> list = new ArrayList<>();
-        list.add(new GetCardsResponse(
-                UUID.fromString("00009999-2222-1111-a456-426655440000"),
-                "A10B3U3OI9",
-                "Oleg Kirilov",
-                LocalDate.of(2023, APRIL, 21),
-                new BigDecimal("5000"),
-                "Wertach Strasse 34",
-                true,
-                PaymentSystem.VISA,
-                CardStatus.ACTIVE
-        ));
-        return list;
+    public static List<CardDTOResponse> getListResponse() {
+      return List.of(getCardResponse());
     }
 }

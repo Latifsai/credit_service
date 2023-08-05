@@ -7,6 +7,7 @@ import com.example.credit_service_project.service.operation.SearchOperationServi
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,7 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,7 +30,7 @@ class SearchOperationServiceImpTest {
     private OperationUtils util;
 
     @InjectMocks
-    SearchOperationServiceImp service;
+    private SearchOperationServiceImp service;
 
     @Test
     public void testSearchServiceSuccess() {
@@ -37,12 +39,12 @@ class SearchOperationServiceImpTest {
                 true);
 
         var operation = EntityCreator.getOperation();
-        var response = DTOOperationCreator.getSearchResponse();
+        var response = DTOOperationCreator.getOperationResponseDTO();
 
         when(repository.findByIdAndDebit(request.getId(), request.isDebit()))
                 .thenReturn(Optional.of(operation));
 
-        when(util.convertOperationToSearchResponse(operation)).thenReturn(response);
+        when(util.convertOperationToResponseDTO(operation)).thenReturn(response);
 
         assertEquals(response, service.execute(request));
 
@@ -58,6 +60,13 @@ class SearchOperationServiceImpTest {
                 .thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> service.execute(request));
+    }
 
+    @Test
+    public void testSearchServiceValidation() {
+        var request = new SearchAndDeleteOperationRequest(null, true);
+        var validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(request);
+        assertEquals(1, set.size());
     }
 }

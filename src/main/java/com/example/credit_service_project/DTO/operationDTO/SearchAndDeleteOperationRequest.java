@@ -1,13 +1,13 @@
 package com.example.credit_service_project.DTO.operationDTO;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Value
 public class SearchAndDeleteOperationRequest {
+    @NotNull(message = "ID must not be not null!")
     UUID id;
     boolean isDebit;
 }

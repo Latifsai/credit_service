@@ -1,22 +1,25 @@
 package com.example.credit_service_project.DTO.accountDTO;
 
 import com.example.credit_service_project.entity.enums.AccountStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.Value;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
 public class UpdateAccountRequest {
-    private String accountNumber;
+    @NotNull(message = "AccountID must be not null!")
+    UUID accountID;
+    @NotNull(message = "accountNumber must be not null!")
+    @NotEmpty(message = "accountNumber must be not empty!")
+    String accountNumber;
     //to change
-    private BigDecimal loanDebt;
-    private BigDecimal percentageDebt;
-    private AccountStatus status;
-    private BigDecimal balance;
-    private BigDecimal unpaidLoanDebt;
-    private BigDecimal unpaidPercentageLoanDebt;
+    BigDecimal loanDebt;
+    BigDecimal percentageDebt;
+    AccountStatus status;
+    BigDecimal balance;
+    BigDecimal unpaidLoanDebt;
+    BigDecimal unpaidPercentageLoanDebt;
 }

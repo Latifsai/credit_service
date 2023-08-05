@@ -1,18 +1,19 @@
 package com.example.credit_service_project.serviceTest.cardTest;
 
-import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.repository.CardRepository;
+import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOCardCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,35 +26,43 @@ class CreateCardServiceImpTest {
     @Mock
     private CardRepository repository;
     @Mock
-    private AccountRepository accRepository;
-    @Spy
+    private SearchAccountsServiceImp searchAccountsService;
+    @Mock
     private CardUtil util;
 
     @InjectMocks
-    CreateCardServiceImp createCardService;
+    private CreateCardServiceImp createCardService;
+
     @Test
     public void testCreateCardSuccess() {
         var request = DTOCardCreator.getAddAccountDTORequest();
         var account = EntityCreator.getAccount();
         var card = EntityCreator.getCard();
 
-        when(accRepository.findByIdOrAccountNumber(account.getId(), account.getAccountNumber()))
+        when(searchAccountsService.findAccountByIdOrNumber(account.getId(), account.getAccountNumber()))
                 .thenReturn(Optional.of(account));
         when(util.convertAddRequestToEntity(request, account)).thenReturn(card);
-        when(repository.save(card)).thenReturn(card);
-
+        when(repository.save(card)).thenReturn(card).thenReturn(card);
+        when(util.convertCardToAddDTOResponse(card)).thenReturn(DTOCardCreator.getCardResponse());
         var actual = createCardService.execute(request);
-        assertNotNull(actual);
-        assertEquals(DTOCardCreator.getAddResponse(), actual);
+        assertEquals(DTOCardCreator.getCardResponse(), actual);
     }
 
     @Test
     public void testCreditCardNotFoundException() {
         var request = DTOCardCreator.getAddAccountDTORequest();
         var account = EntityCreator.getAccount();
-        when(accRepository.findByIdOrAccountNumber(eq(account.getId()), anyString())).thenReturn(Optional.empty());
+        when(searchAccountsService.findAccountByIdOrNumber(eq(account.getId()), anyString()))
+                .thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> createCardService.execute(request));
     }
 
+    @Test
+    public void testCreditCardValidation() {
+        var request = DTOCardCreator.getAddAccountDTORequestWithValidationErrors();
 
+        var validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(request);
+        assertEquals(4, set.size());
+    }
 }

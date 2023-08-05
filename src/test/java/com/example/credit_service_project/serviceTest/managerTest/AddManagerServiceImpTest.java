@@ -1,6 +1,7 @@
 package com.example.credit_service_project.serviceTest.managerTest;
 
 import com.example.credit_service_project.DTO.manager.AddManagerRequest;
+import com.example.credit_service_project.repository.ManagerRepository;
 import com.example.credit_service_project.service.manager.AddManagerServiceImp;
 import com.example.credit_service_project.service.utils.ManagerUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOManagerCreator;
@@ -18,7 +19,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class AddManagerServiceImpTest {
 
-
+    @Mock
+    private ManagerRepository repository;
     @Mock
     private ManagerUtil util;
     @InjectMocks
@@ -30,6 +32,7 @@ class AddManagerServiceImpTest {
         var manager = EntityCreator.getManager();
 
         when(util.convertAddRequestToManager(request)).thenReturn(manager);
+        when(repository.save(manager)).thenReturn(manager);
         when(util.convertManagerToResponse(manager)).thenReturn(DTOManagerCreator.getResponseDTO());
 
         assertEquals(DTOManagerCreator.getResponseDTO(), service.execute(request));

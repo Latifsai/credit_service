@@ -7,6 +7,7 @@ import com.example.credit_service_project.service.errors.exceptions.NotFoundExce
 import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOCardCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -22,34 +24,45 @@ import static org.mockito.Mockito.when;
 class SearchCardServiceImpTest {
 
     @Mock
-    CardRepository repository;
+    private CardRepository repository;
+
     @Mock
-    CardUtil utils;
+    private CardUtil utils;
 
     @InjectMocks
-    SearchCardServiceImp service;
+    private SearchCardServiceImp service;
+
     @Test
     public void testSearchSuccess() {
-        var request = new SearchCardDTOCreditRequest("A10B3U3OI9", "Oleg Kirilov");
+        var request = new SearchCardDTOCreditRequest(UUID.randomUUID(), "A10B3U3OI9");
         var card = EntityCreator.getCard();
-        when(repository.findByCardNumberAndHolderName(request.getCardNumber(), request.getHolderName()))
+
+        when(repository.findByIdAndCardNumber(request.getId(), request.getCardNumber()))
                 .thenReturn(Optional.of(card));
-        when(utils.convertCardToAddDTOResponse(card)).thenReturn(DTOCardCreator.getAddResponse());
+
+        when(utils.convertCardToAddDTOResponse(card)).thenReturn(DTOCardCreator.getCardResponse());
 
         var response = service.execute(request);
 
         assertNotNull(response);
-        assertEquals(DTOCardCreator.getAddResponse(), response);
+        assertEquals(DTOCardCreator.getCardResponse(), response);
     }
 
     @Test
     public void testSearchNotFoundException() {
-        var request = new SearchCardDTOCreditRequest("A10B3U3OI9", "Oleg Kirilov");
-        when(repository.findByCardNumberAndHolderName(request.getCardNumber(), request.getHolderName()))
+        var request = new SearchCardDTOCreditRequest(UUID.randomUUID(), "A10B3U3OI9");
+        when(repository.findByIdAndCardNumber(request.getId(), request.getCardNumber()))
                 .thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> service.execute(request));
-
     }
 
+    @Test
+    public void testSearchValidation() {
+        var request = new SearchCardDTOCreditRequest(null, "");
+
+        var validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(request);
+        assertEquals(2, set.size());
+    }
 }

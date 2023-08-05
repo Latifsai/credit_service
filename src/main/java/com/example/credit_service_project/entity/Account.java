@@ -54,7 +54,6 @@ public class Account {
     @Column(name = "opening_date")
     private LocalDate openingDate;
 
-    @FutureOrPresent
     @Column(name = "closing_date")
     private LocalDate closingDate;
 

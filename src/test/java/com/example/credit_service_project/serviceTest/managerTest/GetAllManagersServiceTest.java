@@ -28,7 +28,6 @@ class GetAllManagersServiceTest {
 
     @Test
     public void testDeleteManagerServiceSuccess() {
-
         var manager = EntityCreator.getManager();
 
         when(repository.findAll()).thenReturn(java.util.List.of(manager));
@@ -39,8 +38,6 @@ class GetAllManagersServiceTest {
 
     @Test
     public void testDeleteManagerServiceNotFoundException() {
-
-
         when(repository.findAll()).thenReturn(Collections.emptyList());
 
         assertEquals(Collections.emptyList(), service.execute());

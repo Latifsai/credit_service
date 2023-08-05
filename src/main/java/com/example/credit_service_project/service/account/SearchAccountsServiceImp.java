@@ -1,6 +1,6 @@
 package com.example.credit_service_project.service.account;
 
-import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
+import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
 import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repository.AccountRepository;
@@ -18,15 +18,15 @@ import java.util.UUID;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class SearchAccountsServiceImp implements AccountService<AccountResponseDTO, SearchAccountRequest> {
+public class SearchAccountsServiceImp implements AccountService<AccountDTOResponse, SearchAccountRequest> {
 
     private final AccountRepository repository;
     private final AccountUtil util;
 
     @Override
-    public AccountResponseDTO execute(SearchAccountRequest request) {
+    public AccountDTOResponse execute(SearchAccountRequest request) {
         Optional<Account> account = findAccountByIdOrNumber(request.getId(), request.getAccountNumber());
-        return account.map(util::convertAccountDTOResponse)
+        return account.map(util::convertAccountToAddResponse)
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
     }
 

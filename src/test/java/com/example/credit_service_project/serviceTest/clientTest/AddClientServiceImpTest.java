@@ -8,6 +8,7 @@ import com.example.credit_service_project.service.manager.SearchManagerServiceIm
 import com.example.credit_service_project.service.utils.ClientUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOClientCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +25,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class AddClientServiceImpTest {
-
+    @Mock
+    private ClientRepository repository;
     @Mock
     private SearchManagerServiceImp searchManagerService;
     @Mock
@@ -50,6 +52,15 @@ class AddClientServiceImpTest {
         var request = new AddClientRequest(UUID.randomUUID(), "Aziz", "Snow", new BigDecimal("2500"), new BigDecimal("1500"));
         when(searchManagerService.findManagerById(request.getManagerID())).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> service.execute(request));
+    }
+
+    @Test
+    public void testAddClientValidation() {
+        var request = new AddClientRequest(UUID.randomUUID(), "", null,
+                new BigDecimal("0"), new BigDecimal("-13"));
+        var validation = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validation.validate(request);
+        assertEquals(5, set.size());
     }
 
 }

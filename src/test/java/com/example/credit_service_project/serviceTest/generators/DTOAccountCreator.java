@@ -1,6 +1,8 @@
 package com.example.credit_service_project.serviceTest.generators;
 
-import com.example.credit_service_project.DTO.accountDTO.*;
+import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
+import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 
 import java.math.BigDecimal;
@@ -11,35 +13,36 @@ import static java.time.Month.APRIL;
 
 public class DTOAccountCreator {
 
-    public static AddAccountDTOResponse createAddResponse() {
-        AddAccountDTOResponse response = new AddAccountDTOResponse();
-        response.setId(UUID.fromString("00009999-2222-1111-a456-426655440000"));
-        response.setAccountNumber("A10B3U3OI9");
-        response.setLoanDebt(new BigDecimal("2500"));
-        response.setPercentageDebt(new BigDecimal("250"));
-        response.setStatus(AccountStatus.ACTIVE);
-        response.setBalance(new BigDecimal("3000"));
-        response.setOpeningDate(LocalDate.of(2020, APRIL, 21));
-        response.setClosingDate(LocalDate.of(2027, APRIL, 30));
-        response.setUnpaidLoanDebt(new BigDecimal("1300"));
-        response.setUnpaidPercentageLoanDebt(new BigDecimal("157"));
-        response.setCurrency("$");
-        return response;
+    public static AccountDTOResponse createDTOResponse() {
+        return new AccountDTOResponse(
+                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                "A10B3U3OI9",
+                "John Tate",
+                new BigDecimal("2500"),
+                new BigDecimal("250"),
+                AccountStatus.ACTIVE,
+                new BigDecimal("3000"),
+                LocalDate.of(2027, APRIL, 30),
+                new BigDecimal("1300"),
+                new BigDecimal("157"),
+                "$"
+        );
     }
 
     public static AddAccountDTORequest createRequest() {
-        var request = new AddAccountDTORequest();
-        request.setLoanDebt(new BigDecimal("2500"));
-        request.setPercentageDebt(new BigDecimal("250"));
-        request.setBalance(new BigDecimal("3000"));
-        request.setCurrency("$");
-        request.setStatus(AccountStatus.ACTIVE);
-        request.setAccountNumberLength(10);
-        request.setYearsAmountForClosingDate(7L);
-        return request;
+        return new AddAccountDTORequest(
+                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                new BigDecimal("2500"),
+                new BigDecimal("250"),
+                new BigDecimal("3000"),
+                "$",
+                AccountStatus.ACTIVE,
+                10,
+                7
+        );
     }
 
-    public static AddAccountDTORequest createRequestWithExceptions() {
+    public static AddAccountDTORequest getRequestWithExceptions() {
         var request = new AddAccountDTORequest();
         request.setLoanDebt(new BigDecimal("-2000"));
         request.setPercentageDebt(new BigDecimal("-200"));
@@ -47,47 +50,50 @@ public class DTOAccountCreator {
         request.setCurrency(null);
         request.setStatus(AccountStatus.ACTIVE);
         request.setAccountNumberLength(10);
-        request.setYearsAmountForClosingDate(7L);
+        request.setYearsAmountForClosingDate(3);
         return request;
     }
-    
-    public static AccountResponseDTO getSearchResponse() {
-        var response = new AccountResponseDTO();
-        response.setId(UUID.fromString("00009999-2222-1111-a456-426655440000"));
-        response.setAccountNumber("A10B3U3OI9");
-        response.setStatus(AccountStatus.ACTIVE);
-        response.setBalance(new BigDecimal("3000"));
-        response.setLoanDebt(new BigDecimal("2500"));
-        response.setUnpaidLoanDebt(new BigDecimal("1300"));
-        response.setUnpaidPercentageLoanDebt(new BigDecimal("157"));
-        response.setCurrency("$");
-        return response;
-    }
+
 
     public static UpdateAccountRequest getUpdateRequest() {
-        var request = new UpdateAccountRequest();
-        request.setAccountNumber("A10B3U3OI9");
-        request.setLoanDebt(null);
-        request.setPercentageDebt(null);
-        request.setStatus(AccountStatus.ACTIVE);
-        request.setBalance(new BigDecimal("5000"));
-        request.setUnpaidLoanDebt(new BigDecimal("2000"));
-        request.setUnpaidPercentageLoanDebt(null);
-        return request;
+        return new UpdateAccountRequest(
+                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                "A10B3U3OI9",
+                null,
+                null,
+                AccountStatus.ACTIVE,
+                new BigDecimal("5000"),
+                new BigDecimal("2000"),
+                new BigDecimal("200")
+                );
     }
 
-    public static UpdateAccountResponse getUpdateResponse() {
-        var response = new UpdateAccountResponse();
-        response.setId(UUID.fromString("00009999-2222-1111-a456-426655440000"));
-        response.setAccountNumber("A10B3U3OI9");
-        response.setLoanDebt(new BigDecimal("2500"));
-        response.setPercentageDebt(new BigDecimal("250"));
-        response.setStatus(AccountStatus.ACTIVE);
-        response.setBalance(new BigDecimal("5000"));
-        response.setUnpaidLoanDebt(new BigDecimal("2000"));
-        response.setUnpaidPercentageLoanDebt(new BigDecimal("157"));
-        response.setCurrency("$");
-        return response;
+    public static AccountDTOResponse getUpdatedDTOResponse() {
+        return new AccountDTOResponse(
+                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                "A10B3U3OI9",
+                "John Tate",
+                new BigDecimal("2500"),
+                new BigDecimal("250"),
+                AccountStatus.ACTIVE,
+                new BigDecimal("5000"),
+                LocalDate.of(2027, APRIL, 30),
+                new BigDecimal("2000"),
+                new BigDecimal("200"),
+                "$"
+        );
     }
 
+    public static UpdateAccountRequest getUpdateRequestWithErrors() {
+        return new UpdateAccountRequest(
+                null,
+                "",
+                null,
+                null,
+                AccountStatus.ACTIVE,
+                new BigDecimal("5000"),
+                new BigDecimal("2000"),
+                new BigDecimal("200")
+        );
+    }
 }

@@ -5,12 +5,12 @@ import com.example.credit_service_project.service.AccountService;
 import com.example.credit_service_project.service.account.GetAccountsListServiceImp;
 
 public interface AccountAbstractFabric {
-    AccountService<AddAccountDTOResponse, AddAccountDTORequest> activeCreateService();
+    AccountService<AccountDTOResponse, AddAccountDTORequest> activeCreateService();
 
     GetAccountsListServiceImp activeGetService();
 
-    AccountService<AccountResponseDTO, SearchAccountRequest> activeSearchService();
+    AccountService<AccountDTOResponse, SearchAccountRequest> activeSearchService();
 
 
-    AccountService<UpdateAccountResponse, UpdateAccountRequest> activeUpdateService();
+    AccountService<AccountDTOResponse, UpdateAccountRequest> activeUpdateService();
 }

@@ -27,7 +27,7 @@ public class AccountGenerator {
         return LocalDate.now();
     }
 
-    public LocalDate LocalDateCreateClosingDate(Long yearsAmount) {
+    public LocalDate LocalDateCreateClosingDate(Integer yearsAmount) {
         return createOpeningDay().plusYears(yearsAmount);
     }
 

@@ -7,6 +7,7 @@ import com.example.credit_service_project.service.manager.UpdateMangerServiceImp
 import com.example.credit_service_project.service.utils.ManagerUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOManagerCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -44,10 +45,19 @@ class UpdateMangerServiceImpTest {
     @Test
     public void testDeleteManagerServiceNotFoundException() {
         var request = new UpdateManagerRequest(UUID.randomUUID(), "Simonov", "main_manager@loewen.de");
-
-
         when(repository.findById(request.getId())).thenReturn(Optional.empty());
-
         assertThrows(NotFoundException.class, () -> service.execute(request));
     }
+
+    @Test
+    public void testDeleteManagerServiceValidation() {
+        var request = new UpdateManagerRequest(null, "", "main_manage");
+
+        var validation  = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validation.validate(request);
+        assertEquals(3, set.size());
+    }
+
+
+
 }

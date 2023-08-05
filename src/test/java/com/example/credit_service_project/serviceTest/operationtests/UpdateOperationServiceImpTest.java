@@ -9,6 +9,7 @@ import com.example.credit_service_project.service.operation.UpdateOperationServi
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
+import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -49,10 +50,10 @@ class UpdateOperationServiceImpTest {
         when(util.updateOperation(operation, request))
                 .thenReturn(EntityCreator.getUpdatedOperation());
 
-        when(util.convertUpdatedOperationToUpdateResponse(EntityCreator.getUpdatedOperation()))
-                .thenReturn(DTOOperationCreator.getUpdateResponse());
+        when(util.convertOperationToResponseDTO(EntityCreator.getUpdatedOperation()))
+                .thenReturn(DTOOperationCreator.getUpdateOperationResponseDTO());
 
-        assertEquals(DTOOperationCreator.getUpdateResponse(), service.execute(request));
+        assertEquals(DTOOperationCreator.getUpdateOperationResponseDTO(), service.execute(request));
     }
 
     @Test
@@ -91,4 +92,17 @@ class UpdateOperationServiceImpTest {
     }
 
 
+    @Test
+    public void testUpdateServiceValidation() {
+        var request = new UpdateOperationsRequest(
+                null,
+                true,
+                OperationType.REPLENISHMENT,
+                "Mortgage payment"
+        );
+
+        var validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(request);
+        assertEquals(1, set.size());
+    }
 }
