@@ -1,7 +1,8 @@
 package com.example.credit_service_project.controllers;
 
+import com.example.credit_service_project.DTO.operationDTO.AddOperationPaymentRequest;
 import com.example.credit_service_project.DTO.operationDTO.AddOperationRequestSpendingOrReplenishment;
-import com.example.credit_service_project.DTO.operationDTO.SearchAndDeleteOperationRequest;
+import com.example.credit_service_project.DTO.operationDTO.SearchOperationRequest;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.fabrics.operation.OperationFabricImp;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,12 @@ public class OperationController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @PostMapping("/payment")
+    public ResponseEntity<?> add(@RequestBody AddOperationPaymentRequest request) {
+        var response = fabric.addPaymentOperation().execute(request);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
     @GetMapping
     public ResponseEntity<?> get() {
         var response = fabric.activateGetOperation().execute();
@@ -34,7 +41,7 @@ public class OperationController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> search(@RequestBody SearchAndDeleteOperationRequest request) {
+    public ResponseEntity<?> search(@RequestBody SearchOperationRequest request) {
         var response = fabric.searchOperation().execute(request);
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }

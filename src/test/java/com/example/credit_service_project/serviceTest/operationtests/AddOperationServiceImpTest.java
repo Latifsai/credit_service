@@ -1,7 +1,5 @@
 package com.example.credit_service_project.serviceTest.operationtests;
 
-import com.example.credit_service_project.DTO.operationDTO.SearchAndDeleteOperationRequest;
-import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;

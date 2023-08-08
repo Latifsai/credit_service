@@ -18,6 +18,7 @@ public class ManagerUtil {
 
     public ManagerResponseDTO convertManagerToResponse(Manager manager) {
         return new ManagerResponseDTO(
+                manager.getId(),
                 manager.getName(),
                 manager.getSurname(),
                 manager.getEmail());
@@ -30,6 +31,6 @@ public class ManagerUtil {
     }
 
     private boolean check(String criteria) {
-        return criteria != null && criteria.trim().isEmpty();
+        return criteria != null || !criteria.trim().isEmpty();
     }
 }

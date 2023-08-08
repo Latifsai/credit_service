@@ -19,14 +19,10 @@ import java.util.UUID;
 public class AddOperationRequestSpendingOrReplenishment {
      @NotNull(message = "accountID must be not null!")
      UUID accountID;
-
      UUID cardID;
-
-     @NotNull(message = "accountNumber must be not null!")
-     @NotEmpty(message = "accountNumber must be not empty!")
      String accountNumber;
-
      String cardNumber;
+
      @Positive // make the annotation, which will validate BigDecimal
      BigDecimal sum;
 

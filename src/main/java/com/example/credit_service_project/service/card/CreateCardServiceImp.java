@@ -27,7 +27,7 @@ public class CreateCardServiceImp implements CardService<CardDTOResponse, AddCar
 
     @Override
     public CardDTOResponse execute(AddCardDTORequest request) {
-        Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountId(), request.getAccountNumber());
+        Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         if (account.isPresent()) {
             Card card = util.convertAddRequestToEntity(request, account.get());
             repository.save(card);

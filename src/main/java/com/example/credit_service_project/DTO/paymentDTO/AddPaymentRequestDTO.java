@@ -4,14 +4,13 @@ import lombok.Value;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @Value
-public class UpdatePaymentScheduleDTORequest {
-    UUID uuid;
-    //data to change
-    LocalDate actualPaymentDate;
+public class AddPaymentRequestDTO {
+    UUID accountID;
+    String accountNumber;
+    LocalDate paymentDate;
     BigDecimal mainPayment;
     BigDecimal ratePayment;
 }

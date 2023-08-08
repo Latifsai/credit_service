@@ -1,19 +1,19 @@
 package com.example.credit_service_project.DTO.paymentDTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
 public class PaymentProcessDTOResponse {
-    private String cardNumber;
-    private String holderName;
-    private BigDecimal balance;
-    private LocalDate actualPaymentDate;
-    private boolean isPaid;
+    UUID id;
+    BigDecimal balance;
+    LocalDate actualPaymentDate;
+    BigDecimal surcharge;
+    BigDecimal mainPayment;
+    BigDecimal ratePayment;
+    BigDecimal sumToPay;
+    boolean isPaid;
 }

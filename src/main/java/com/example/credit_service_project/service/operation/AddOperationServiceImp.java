@@ -40,6 +40,8 @@ public class AddOperationServiceImp implements OperationService<OperationRespons
         Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         if (account.isPresent()) {
             Operation operation = util.convertAddRequestFunctionalToOperation(request, account.get());
+
+            account.get().getOperations().add(operation);
             repository.save(operation);
 
             Account accountAfterOperation = util.changeAccountBalance(account.get(), operation);

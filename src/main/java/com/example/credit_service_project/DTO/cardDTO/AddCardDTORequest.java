@@ -13,7 +13,7 @@ import java.util.UUID;
 public class AddCardDTORequest {
 
     @NotNull(message = "accountId must not be null!")
-    UUID accountId;
+    UUID accountID;
 
     @NotNull(message = "accountNumber must not be null!")
     @NotEmpty(message = "accountNumber must not be empty!")

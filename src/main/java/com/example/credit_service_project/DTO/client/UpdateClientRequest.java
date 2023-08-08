@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Value
 public class UpdateClientRequest {
-    @NotNull(message = "ID must bot be null!")
+    @NotNull(message = "ID must ot be null!")
     UUID id;
 
     @Positive(message = "income must be only positive!")

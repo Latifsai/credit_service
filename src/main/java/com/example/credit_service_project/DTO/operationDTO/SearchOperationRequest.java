@@ -6,7 +6,7 @@ import lombok.Value;
 import java.util.UUID;
 
 @Value
-public class SearchAndDeleteOperationRequest {
+public class SearchOperationRequest {
     @NotNull(message = "ID must not be not null!")
     UUID id;
     boolean isDebit;

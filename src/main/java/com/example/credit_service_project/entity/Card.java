@@ -20,6 +20,7 @@ import static jakarta.persistence.CascadeType.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Card {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -54,7 +55,7 @@ public class Card {
     @Enumerated(EnumType.STRING)
     private CardStatus cardStatus;  // ✅
 
-    @OneToOne(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @OneToOne(orphanRemoval = true, cascade = ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 

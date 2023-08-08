@@ -2,13 +2,13 @@ package com.example.credit_service_project.DTO.paymentDTO;
 
 import lombok.Value;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Value
 public class AddPaymentScheduleDTOResponse {
     String accountNumber;
-    String agreementNumber;
-    String ProductName;
-    List<PaymentDTO> paymentsList;
-
+    LocalDate paymentDate;
+    BigDecimal mainPayment;
+    BigDecimal ratePayment;
 }

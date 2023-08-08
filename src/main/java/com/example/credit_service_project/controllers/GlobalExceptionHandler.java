@@ -1,6 +1,5 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.service.errors.exceptions.EmptyListException;
 import com.example.credit_service_project.service.errors.ErrorException;
 import com.example.credit_service_project.service.errors.ExceptionResponse;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
@@ -27,13 +26,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> handleViolationException(NotFoundException e) {
-        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
-        ExceptionResponse response = new ExceptionResponse(errorExceptions);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(EmptyListException.class)
-    public ResponseEntity<?> handleViolationException(EmptyListException e) {
         List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
         ExceptionResponse response = new ExceptionResponse(errorExceptions);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

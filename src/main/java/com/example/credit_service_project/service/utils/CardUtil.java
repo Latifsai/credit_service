@@ -48,4 +48,11 @@ public class CardUtil {
         if (request.getCardStatus() != null) card.setCardStatus(request.getCardStatus());
         return card;
     }
+
+    public Account updateAccountBalance(Account account, Card card){
+        if (!account.getBalance().equals(card.getBalance())) {
+            account.setBalance(card.getBalance());
+        }
+        return account;
+    }
 }

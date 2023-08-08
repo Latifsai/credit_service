@@ -77,17 +77,17 @@ public class Account {
     // по этому полу будет JOIN
     //-> владеющая сторона
 
-    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY,
-            orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-    private Operation operation;
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY,
+            cascade = ALL)
+    private List<Operation> operations;
     //указывает, что связь между таблицами будет установлена через поле account
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY,
             orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     private List<PaymentSchedule> paymentSchedules;
 
-    @OneToOne(mappedBy = "account", orphanRemoval = true,
-            cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "account",
+            cascade = ALL, fetch = FetchType.LAZY)
     @JsonIgnore // to ent a cirle
     private Card card;
 

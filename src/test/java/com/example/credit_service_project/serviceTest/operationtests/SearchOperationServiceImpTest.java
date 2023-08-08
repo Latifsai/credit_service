@@ -1,6 +1,6 @@
 package com.example.credit_service_project.serviceTest.operationtests;
 
-import com.example.credit_service_project.DTO.operationDTO.SearchAndDeleteOperationRequest;
+import com.example.credit_service_project.DTO.operationDTO.SearchOperationRequest;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.operation.SearchOperationServiceImp;
@@ -34,7 +34,7 @@ class SearchOperationServiceImpTest {
 
     @Test
     public void testSearchServiceSuccess() {
-        var request = new SearchAndDeleteOperationRequest(
+        var request = new SearchOperationRequest(
                 UUID.fromString("11117777-9999-1111-b491-426655440000"),
                 true);
 
@@ -52,7 +52,7 @@ class SearchOperationServiceImpTest {
 
     @Test
     public void testSearchServiceNotFoundException() {
-        var request = new SearchAndDeleteOperationRequest(
+        var request = new SearchOperationRequest(
                 UUID.fromString("11117777-9999-1111-b491-426655440000"),
                 true);
 
@@ -64,7 +64,7 @@ class SearchOperationServiceImpTest {
 
     @Test
     public void testSearchServiceValidation() {
-        var request = new SearchAndDeleteOperationRequest(null, true);
+        var request = new SearchOperationRequest(null, true);
         var validator = Validation.buildDefaultValidatorFactory().getValidator();
         var set = validator.validate(request);
         assertEquals(1, set.size());

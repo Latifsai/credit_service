@@ -7,6 +7,7 @@ import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.CardService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
+import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.card.GetCardsServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
@@ -17,11 +18,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CardFabric implements CardAbstractFabric{
+public class CardFabric implements CardAbstractFabric {
 
     private final CardRepository repository;
     private final SearchAccountsServiceImp searchAccountsService;
+    private final UpdateAccountServiceImp updateAccountService;
     private final CardUtil util;
+
     @Override
     public CardService<CardDTOResponse, AddCardDTORequest> activateCreateCard() {
         return new CreateCardServiceImp(repository, searchAccountsService, util);
@@ -35,7 +38,7 @@ public class CardFabric implements CardAbstractFabric{
 
     @Override
     public CardService<CardDTOResponse, UpdateCardDTORequest> activateUpdateCard() {
-        return new UpdateCardServiceImp(repository, util);
+        return new UpdateCardServiceImp(repository, searchAccountsService, updateAccountService, util);
     }
 
     @Override
