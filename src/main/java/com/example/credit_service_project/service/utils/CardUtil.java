@@ -18,6 +18,7 @@ public class CardUtil {
 
         card.setCardNumber(CardGenerator.generateCardNumber());
         card.setHolderName(account.getClient().getName() + " " + account.getClient().getSurname());
+        card.setIBAN(CardGenerator.getIBAN(account.getCountry()));
         card.setOpeningDate(LocalDate.now());
         card.setExpirationDate(CardGenerator.setExpirationDate(card.getOpeningDate(), request.getYearAccessibility()));
         card.setBalance(account.getBalance());

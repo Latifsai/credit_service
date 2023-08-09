@@ -118,7 +118,7 @@ public class EntityCreator {
         operation.setId(UUID.fromString("11117777-9999-1111-b491-426655440000"));
         operation.setSum(new BigDecimal("100"));
         operation.setType(OperationType.SPENDING);
-        operation.setOperationEndMark(LocalDateTime.of(2023,8,1,17,32,49));
+        operation.setOperationEndMark(LocalDateTime.of(2023, 8, 1, 17, 32, 49));
         operation.setOperationDetails("Bought a products in shop.");
         operation.setDebit(true);
         operation.setCurrency("$");
@@ -131,7 +131,7 @@ public class EntityCreator {
         operation.setId(UUID.fromString("11117777-9999-1111-b491-426655440000"));
         operation.setSum(new BigDecimal("100"));
         operation.setType(OperationType.MONTHLY_PAYMENT);
-        operation.setOperationEndMark(LocalDateTime.of(2023,8,1,17,32,49));
+        operation.setOperationEndMark(LocalDateTime.of(2023, 8, 1, 17, 32, 49));
         operation.setOperationDetails("Mortgage payment");
         operation.setDebit(true);
         operation.setCurrency("$");
@@ -177,5 +177,20 @@ public class EntityCreator {
         client.setExpenses(new BigDecimal("2000"));
         client.setManager(getManager());
         return client;
+    }
+
+
+    public static PaymentSchedule getPayment() {
+        return new PaymentSchedule(
+                UUID.fromString("22228888-4444-9999-a456-426655440000"),
+                LocalDate.of(2023, AUGUST, 30),
+                null,
+                new BigDecimal("0"),
+                new BigDecimal("300"),
+                new BigDecimal("57"),
+                false,
+                getAccount()
+                );
+
     }
 }

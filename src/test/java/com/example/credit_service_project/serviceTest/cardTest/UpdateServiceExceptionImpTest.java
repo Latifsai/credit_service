@@ -37,6 +37,7 @@ class UpdateServiceExceptionImpTest {
     public void testUpdateSuccess() {
         var card = EntityCreator.getCard();
         var request = new UpdateCardDTORequest(UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                "A10B3U3OI9",UUID.fromString("00009999-2222-1111-a456-426655440000"),
                 new BigDecimal("5000"), "", null);
 
         when(repository.findById(request.getId())).thenReturn(Optional.of(card));
@@ -53,8 +54,8 @@ class UpdateServiceExceptionImpTest {
 
     @Test
     public void testUpdateNotFoundException() {
-        var request = new UpdateCardDTORequest(
-                UUID.fromString("00009999-2222-1111-a456-426655440000"),
+        var request = new UpdateCardDTORequest(UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                "A10B3U3OI9",UUID.fromString("00009999-2222-1111-a456-426655440000"),
                 new BigDecimal("5000"), "", null);
 
         when(repository.findById(request.getId())).thenReturn(Optional.empty());
@@ -63,8 +64,9 @@ class UpdateServiceExceptionImpTest {
 
     @Test
     public void testUpdateValidation() {
-        var request = new UpdateCardDTORequest(
-                null, new BigDecimal("5000"), "", null);
+        var request = new UpdateCardDTORequest(UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                "A10B3U3OI9",UUID.fromString("00009999-2222-1111-a456-426655440000"),
+                new BigDecimal("5000"), "", null);
 
         var validator = Validation.buildDefaultValidatorFactory().getValidator();
         var set = validator.validate(request);

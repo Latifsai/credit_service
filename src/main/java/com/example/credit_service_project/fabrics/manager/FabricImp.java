@@ -12,6 +12,8 @@ public class FabricImp implements ManagerFabric{
 
     private final ManagerUtil util;
     private final ManagerRepository repository;
+    private final AddManagerServiceImp addManagerService;
+    private final SearchManagerServiceImp searchManagerService;
 
     @Override
     public AddManagerServiceImp add() {
@@ -35,6 +37,6 @@ public class FabricImp implements ManagerFabric{
 
     @Override
     public UpdateMangerServiceImp update() {
-        return new UpdateMangerServiceImp(repository, util);
+        return new UpdateMangerServiceImp(addManagerService, searchManagerService, util);
     }
 }

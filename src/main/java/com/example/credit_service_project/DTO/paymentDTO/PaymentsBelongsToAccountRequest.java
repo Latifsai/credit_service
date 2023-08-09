@@ -8,5 +8,4 @@ import java.util.UUID;
 public class PaymentsBelongsToAccountRequest {
     UUID accountID;
     String accountNumber;
-    String operationDetails;
 }

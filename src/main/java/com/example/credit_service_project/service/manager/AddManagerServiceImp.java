@@ -2,6 +2,7 @@ package com.example.credit_service_project.service.manager;
 
 import com.example.credit_service_project.DTO.manager.AddManagerRequest;
 import com.example.credit_service_project.DTO.manager.ManagerResponseDTO;
+import com.example.credit_service_project.entity.Manager;
 import com.example.credit_service_project.repository.ManagerRepository;
 import com.example.credit_service_project.service.ManagerService;
 import com.example.credit_service_project.service.utils.ManagerUtil;
@@ -20,7 +21,11 @@ public class AddManagerServiceImp implements ManagerService<ManagerResponseDTO, 
     @Override
     public ManagerResponseDTO execute(AddManagerRequest request) {
         var manager = util.convertAddRequestToManager(request);
-        repository.save(manager);
+        saveManager(manager);
         return util.convertManagerToResponse(manager);
+    }
+
+    public Manager saveManager(Manager manager) {
+        return repository.save(manager);
     }
 }

@@ -41,6 +41,9 @@ public class Account {
     @Column(name = "percentage_debt")
     private BigDecimal percentageDebt;
 
+    @Column(name = "country")
+    private String country;
+
     @NotNull(message = "status must not be null!")
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -87,8 +90,8 @@ public class Account {
     private List<PaymentSchedule> paymentSchedules;
 
     @OneToOne(mappedBy = "account",
-            cascade = ALL, fetch = FetchType.LAZY)
-    @JsonIgnore // to ent a cirle
+            cascade = ALL, fetch = FetchType.EAGER)
+   // @JsonIgnore // to ent a cirle
     private Card card;
 
     @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, orphanRemoval = true)

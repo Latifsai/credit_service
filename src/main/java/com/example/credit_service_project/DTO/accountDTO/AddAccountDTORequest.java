@@ -23,6 +23,10 @@ public class AddAccountDTORequest {
     @PositiveOrZero(message = "percentageDebt must be 0 or more")
     private BigDecimal percentageDebt;
 
+    @NotNull(message = "county must not be null!")
+    @NotEmpty(message = "county must not be empty!")
+    private String county;
+
     @PositiveOrZero(message = "balance must be 0 or more")
     private BigDecimal balance;
 

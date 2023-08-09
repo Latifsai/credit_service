@@ -22,6 +22,8 @@ public class ClientFabricImp implements ClientFabric {
 
     private final ClientRepository repository;
     private final SearchManagerServiceImp searchManagerService;
+    private final SearchClientServiceImp searchClientService;
+    private final AddClientServiceImp addClientService;
     private final ClientUtil util;
 
     @Override
@@ -41,6 +43,6 @@ public class ClientFabricImp implements ClientFabric {
 
     @Override
     public ClientService<ClientResponseDTO, UpdateClientRequest> updateClient() {
-        return new UpdateClientServiceImp(repository, util);
+        return new UpdateClientServiceImp(searchClientService,addClientService, util);
     }
 }

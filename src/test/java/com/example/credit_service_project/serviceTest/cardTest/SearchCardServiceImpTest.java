@@ -1,6 +1,5 @@
 package com.example.credit_service_project.serviceTest.cardTest;
 
-import com.example.credit_service_project.DTO.cardDTO.SearchCardDTOCreditRequest;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
 import com.example.credit_service_project.service.errors.exceptions.NotFoundException;

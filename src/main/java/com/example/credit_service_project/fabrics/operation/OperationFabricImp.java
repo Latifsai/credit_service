@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class OperationFabricImp implements OperationFabric {
+    private final AddOperationServiceImp saveService;
     private final OperationRepository repository;
     private final OperationUtils util;
     private final UpdateAccountServiceImp updateAccountService;
@@ -25,11 +26,13 @@ public class OperationFabricImp implements OperationFabric {
     private final UpdateCardServiceImp updateCardService;
     private final GetNearestPaymentServiceImp getNearestPaymentService;
     private final AddPaymentScheduleServiceImp addPaymentScheduleService;
+    private final SearchOperationServiceImp searchOperationService;
+    private final AddOperationServiceImp addOperationService;
 
     @Override
     public OperationService<OperationResponseDTO, AddOperationRequestSpendingOrReplenishment> addOperation() {
         return new AddOperationServiceImp(repository, util, updateAccountService,
-                searchAccountsService,searchCardService, updateCardService);
+                searchAccountsService, searchCardService, updateCardService);
     }
 
     @Override
@@ -44,11 +47,11 @@ public class OperationFabricImp implements OperationFabric {
 
     @Override
     public OperationService<OperationResponseDTO, UpdateOperationsRequest> updateOperation() {
-        return new UpdateOperationServiceImp(repository, util);
+        return new UpdateOperationServiceImp(searchOperationService,addOperationService, util);
     }
 
     @Override
     public OperationService<OperationResponseDTO, AddOperationPaymentRequest> addPaymentOperation() {
-        return new AddPaymentOperationServiceImp(repository,util,getNearestPaymentService, searchAccountsService, updateAccountService, addPaymentScheduleService);
+        return new AddPaymentOperationServiceImp(saveService, util, getNearestPaymentService, searchAccountsService, updateAccountService, addPaymentScheduleService);
     }
 }

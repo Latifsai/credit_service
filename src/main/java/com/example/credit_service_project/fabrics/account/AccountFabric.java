@@ -15,6 +15,8 @@ public class AccountFabric implements AccountAbstractFabric {
 
     private final AccountRepository repository;
     private final SearchClientServiceImp searchClientService;
+    private final SearchAccountsServiceImp searchAccountsService;
+    private final CreateAccountServiceImp createAccountService;
     private final AccountUtil util;
 
     @Override
@@ -34,9 +36,8 @@ public class AccountFabric implements AccountAbstractFabric {
     }
 
 
-
     @Override
     public AccountService<AccountDTOResponse, UpdateAccountRequest> activeUpdateService() {
-        return new UpdateAccountServiceImp(repository, util);
+        return new UpdateAccountServiceImp(searchAccountsService, createAccountService, util);
     }
 }

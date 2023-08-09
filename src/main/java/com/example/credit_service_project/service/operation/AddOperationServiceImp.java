@@ -12,7 +12,7 @@ import com.example.credit_service_project.service.account.UpdateAccountServiceIm
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
 import com.example.credit_service_project.service.card.UpdateCardServiceImp;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
+import com.example.credit_service_project.service.errors.exceptions.OperationNotFoundException;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -33,21 +33,19 @@ public class AddOperationServiceImp implements OperationService<OperationRespons
     private final SearchCardServiceImp searchCardService;
     private final UpdateCardServiceImp updateCardService;
 
-
-
     @Override
-    public OperationResponseDTO execute(AddOperationRequestSpendingOrReplenishment request){
+    public OperationResponseDTO execute(AddOperationRequestSpendingOrReplenishment request) {
         Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         if (account.isPresent()) {
             Operation operation = util.convertAddRequestFunctionalToOperation(request, account.get());
 
             account.get().getOperations().add(operation);
-            repository.save(operation);
+            save(operation);
 
             Account accountAfterOperation = util.changeAccountBalance(account.get(), operation);
             updateAccountService.saveUpdatedAccount(accountAfterOperation);
 
-            Optional<Card> card = searchCardService.findCardByIdAndNumber(request.getCardID(), request.getCardNumber());
+            Optional<Card> card = searchCardService.findCardById(request.getCardID());
             if (card.isPresent()) {
                 Card updatedCard = util.changerCardBalance(account.get(), card.get());
                 updateCardService.updateCard(updatedCard);
@@ -55,8 +53,10 @@ public class AddOperationServiceImp implements OperationService<OperationRespons
 
             return util.convertOperationToResponseDTO(operation);
         }
-        throw new NotFoundException(ErrorsMessage.UNABLE_TO_ADD_OPERATION_MESSAGE);
+        throw new OperationNotFoundException(ErrorsMessage.UNABLE_TO_ADD_OPERATION_MESSAGE);
+    }
 
-
+    public Operation save(Operation operation) {
+        return repository.save(operation);
     }
 }

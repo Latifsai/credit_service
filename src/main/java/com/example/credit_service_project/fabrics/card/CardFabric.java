@@ -2,7 +2,6 @@ package com.example.credit_service_project.fabrics.card;
 
 import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
 import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
-import com.example.credit_service_project.DTO.cardDTO.SearchCardDTOCreditRequest;
 import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.CardService;
@@ -16,6 +15,8 @@ import com.example.credit_service_project.service.utils.CardUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class CardFabric implements CardAbstractFabric {
@@ -23,6 +24,8 @@ public class CardFabric implements CardAbstractFabric {
     private final CardRepository repository;
     private final SearchAccountsServiceImp searchAccountsService;
     private final UpdateAccountServiceImp updateAccountService;
+    private final SearchCardServiceImp searchCardService;
+    private final CreateCardServiceImp createCardServiceImp;
     private final CardUtil util;
 
     @Override
@@ -38,11 +41,11 @@ public class CardFabric implements CardAbstractFabric {
 
     @Override
     public CardService<CardDTOResponse, UpdateCardDTORequest> activateUpdateCard() {
-        return new UpdateCardServiceImp(repository, searchAccountsService, updateAccountService, util);
+        return new UpdateCardServiceImp(searchCardService, createCardServiceImp, searchAccountsService, updateAccountService, util);
     }
 
     @Override
-    public CardService<CardDTOResponse, SearchCardDTOCreditRequest> activateSearchCard() {
+    public CardService<CardDTOResponse, UUID> activateSearchCard() {
         return new SearchCardServiceImp(repository, util);
     }
 }

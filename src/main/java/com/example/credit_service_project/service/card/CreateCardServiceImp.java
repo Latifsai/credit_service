@@ -8,7 +8,7 @@ import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.CardService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
+import com.example.credit_service_project.service.errors.exceptions.CardNotFoundException;
 import com.example.credit_service_project.service.utils.CardUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +30,13 @@ public class CreateCardServiceImp implements CardService<CardDTOResponse, AddCar
         Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         if (account.isPresent()) {
             Card card = util.convertAddRequestToEntity(request, account.get());
-            repository.save(card);
+            saveCard(card);
             return util.convertCardToAddDTOResponse(card);
         }
-        throw new NotFoundException(ErrorsMessage.UNABLE_TO_ADD_CARD_MESSAGE);
+        throw new CardNotFoundException(ErrorsMessage.UNABLE_TO_ADD_CARD_MESSAGE);
+    }
+
+    public Card saveCard(Card card) {
+        return repository.save(card);
     }
 }

@@ -8,6 +8,6 @@ import java.util.UUID;
 @Value
 public class GetBelongsPaymentsResponse {
     UUID accountID;
-    String ownerName;
+    String accountNumber;
     List<PaymentResponseDTO> list;
 }

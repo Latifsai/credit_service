@@ -5,7 +5,7 @@ import com.example.credit_service_project.entity.Manager;
 import com.example.credit_service_project.repository.ManagerRepository;
 import com.example.credit_service_project.service.ManagerService;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
+import com.example.credit_service_project.service.errors.exceptions.ManagerNotFoundException;
 import com.example.credit_service_project.service.utils.ManagerUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +29,6 @@ public class DeleteManagerServiceImp implements ManagerService<ManagerResponseDT
             var response = util.convertManagerToResponse(manager);
             repository.delete(manager);
             return response;
-        }).orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_MANAGER_MESSAGE));
+        }).orElseThrow(() -> new ManagerNotFoundException(ErrorsMessage.NOT_FOUND_MANAGER_MESSAGE));
     }
 }

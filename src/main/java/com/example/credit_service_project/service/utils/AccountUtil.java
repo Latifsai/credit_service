@@ -18,6 +18,7 @@ public class AccountUtil {
     public Account convertAddRequestToAccount(AddAccountDTORequest request, Client client) {
         Account account = new Account();
         account.setClient(client);
+        account.setCountry(request.getCounty());
         account.setAccountNumber(accountGenerator.createRandomAccountNumber(request.getAccountNumberLength()));
         account.setLoanDebt(request.getLoanDebt());
         account.setPercentageDebt(request.getPercentageDebt());

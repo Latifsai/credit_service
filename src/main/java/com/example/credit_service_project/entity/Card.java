@@ -4,7 +4,6 @@ import com.example.credit_service_project.entity.enums.CardStatus;
 import com.example.credit_service_project.entity.enums.PaymentSystem;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -28,6 +27,9 @@ public class Card {
 
     @Column(name = "card_number")
     private String cardNumber;
+
+    @Column(name = "iban")
+    private String IBAN;
 
     @Column(name = "holder_name")
     private String holderName;
@@ -55,7 +57,7 @@ public class Card {
     @Enumerated(EnumType.STRING)
     private CardStatus cardStatus;  // ✅
 
-    @OneToOne(orphanRemoval = true, cascade = ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 

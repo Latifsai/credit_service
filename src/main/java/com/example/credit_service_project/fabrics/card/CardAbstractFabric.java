@@ -4,6 +4,8 @@ import com.example.credit_service_project.DTO.cardDTO.*;
 import com.example.credit_service_project.service.CardService;
 import com.example.credit_service_project.service.card.GetCardsServiceImp;
 
+import java.util.UUID;
+
 public interface CardAbstractFabric {
     CardService<CardDTOResponse, AddCardDTORequest> activateCreateCard();
 
@@ -11,5 +13,5 @@ public interface CardAbstractFabric {
 
     CardService<CardDTOResponse, UpdateCardDTORequest> activateUpdateCard();
 
-    CardService<CardDTOResponse, SearchCardDTOCreditRequest> activateSearchCard();
+    CardService<CardDTOResponse, UUID> activateSearchCard();
 }

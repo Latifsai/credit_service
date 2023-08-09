@@ -5,10 +5,9 @@ import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.repository.ClientRepository;
 import com.example.credit_service_project.service.ClientService;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
+import com.example.credit_service_project.service.errors.exceptions.ClientNotFoundException;
 import com.example.credit_service_project.service.utils.ClientUtil;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ public class SearchClientServiceImp implements ClientService<ClientResponseDTO, 
     public ClientResponseDTO execute(UUID id) {
         Optional<Client> clientOptional = findClientById(id);
         return clientOptional.map(client -> util.convertClientToResponse(client))
-                .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_CLIENT_MESSAGE));
+                .orElseThrow(() -> new ClientNotFoundException(ErrorsMessage.NOT_FOUND_CLIENT_MESSAGE));
     }
 
     public Optional<Client> findClientById(UUID id) {

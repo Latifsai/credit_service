@@ -1,13 +1,14 @@
 package com.example.credit_service_project.service.account;
 
-import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
+import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.service.AccountService;
 import com.example.credit_service_project.service.client.SearchClientServiceImp;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
+import com.example.credit_service_project.service.errors.exceptions.ClientNotFoundException;
 import com.example.credit_service_project.service.utils.AccountUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,13 @@ public class CreateAccountServiceImp implements AccountService<AccountDTORespons
         Optional<Client> clientOptional = searchClientService.findClientById(request.getClientId());
         if (clientOptional.isPresent()) {
             var account = util.convertAddRequestToAccount(request, clientOptional.get());
-            repository.save(account);
+            saveAccount(account);
             return util.convertAccountToAddResponse(account);
         }
-        throw new NotFoundException(ErrorsMessage.UNABLE_TO_ADD_ACCOUNT_MESSAGE);
+        throw new ClientNotFoundException(ErrorsMessage.UNABLE_TO_ADD_ACCOUNT_MESSAGE);
+    }
+
+    public Account saveAccount(Account account) {
+        return repository.save(account);
     }
 }
