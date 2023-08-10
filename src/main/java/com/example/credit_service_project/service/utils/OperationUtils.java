@@ -1,6 +1,9 @@
 package com.example.credit_service_project.service.utils;
 
-import com.example.credit_service_project.DTO.operationDTO.*;
+import com.example.credit_service_project.DTO.operationDTO.AddOperationPaymentRequest;
+import com.example.credit_service_project.DTO.operationDTO.AddOperationRequestSpendingOrReplenishment;
+import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.Operation;
@@ -22,7 +25,6 @@ public class OperationUtils {
     public Operation convertAddRequestFunctionalToOperation(AddOperationRequestSpendingOrReplenishment request, Account account) {
         Operation operation = new Operation();
         operation.setAccount(account);
-
         operation.setSum(request.getSum());
         operation.setType(request.getType());
         operation.setOperationEndMark(LocalDateTime.now());
@@ -100,17 +102,18 @@ public class OperationUtils {
     }
 
 
-    public Account payBill(Account account, PaymentSchedule paymentSchedule) {
+    public Account payBill(Account account, PaymentSchedule paymentSchedule, Card card) {
         if (paymentSchedule.getActualPaymentDate().equals(LocalDate.now())) {
             BigDecimal balance = account.getBalance().subtract(getSumToPay(paymentSchedule));
-            if (balance.intValue() < 0) {
-                throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
-            }
+            if (balance.intValue() < 0) throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
+
             account.setBalance(balance);
             paymentSchedule.setPaid(true);
+            changerCardBalance(account, card);
         }
         return account;
     }
+
 
 
     public BigDecimal getSumToPay(PaymentSchedule p) {

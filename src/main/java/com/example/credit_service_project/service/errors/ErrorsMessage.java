@@ -10,6 +10,7 @@ public class ErrorsMessage {
     public static final String NOT_FOUND_CLIENT_MESSAGE = "NO SUCH CLIENT WAS FOUND!";
     public static final String NOT_FOUND_MANAGER_MESSAGE = "NO SUCH MANAGER WAS FOUND!";
     public static final String NOT_FOUND_NEAREST_PAYMENT_MESSAGE = "NEAREST PAYMENTS WAS FOUND!";
+    public static final String NOT_FOUND_PRODUCT_MESSAGE = "NEAREST PRODUCT WAS FOUND!";
 
 
     public static final String UNABLE_TO_ADD_ACCOUNT_MESSAGE = "THIS CLIENT WAS NOT FOUND, CREATING AN ACCOUNT IS IMPOSSIBLE!";

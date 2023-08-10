@@ -5,7 +5,6 @@ import com.example.credit_service_project.service.OperationService;
 import com.example.credit_service_project.service.operation.GetOperationsServiceImp;
 
 public interface OperationFabric {
-    OperationService<OperationResponseDTO, AddOperationRequestSpendingOrReplenishment> addOperation();
 
     GetOperationsServiceImp activateGetOperation();
 

@@ -7,6 +7,7 @@ import java.util.UUID;
 @Value
 public class AddOperationPaymentRequest {
     UUID accountID;
+    UUID cardID;
     String accountNumber;
     String operationDetails;
 }

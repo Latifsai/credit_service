@@ -14,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 @Validated
@@ -23,15 +21,17 @@ public class CreateAccountServiceImp implements AccountService<AccountDTORespons
     private final AccountRepository repository;
     private final SearchClientServiceImp searchClientService;
     private final AccountUtil util;
+
     @Override
     public AccountDTOResponse execute(AddAccountDTORequest request) {
-        Optional<Client> clientOptional = searchClientService.findClientById(request.getClientId());
-        if (clientOptional.isPresent()) {
-            var account = util.convertAddRequestToAccount(request, clientOptional.get());
-            saveAccount(account);
-            return util.convertAccountToAddResponse(account);
-        }
-        throw new ClientNotFoundException(ErrorsMessage.UNABLE_TO_ADD_ACCOUNT_MESSAGE);
+        Client clientOptional = searchClientService.findClientById(request.getClientId())
+                .orElseThrow(() -> new ClientNotFoundException(ErrorsMessage.UNABLE_TO_ADD_ACCOUNT_MESSAGE));
+
+        var account = util.convertAddRequestToAccount(request, clientOptional);
+        Account savedAccount = saveAccount(account);
+        return util.convertAccountToAddResponse(savedAccount);
+
+
     }
 
     public Account saveAccount(Account account) {

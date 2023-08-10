@@ -15,8 +15,6 @@ public class AddOperationRequestSpendingOrReplenishment {
      UUID accountID;
      UUID cardID;
      String accountNumber;
-
-
      @Positive // make the annotation, which will validate BigDecimal
      BigDecimal sum;
 

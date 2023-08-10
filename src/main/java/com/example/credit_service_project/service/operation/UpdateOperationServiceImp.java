@@ -19,7 +19,7 @@ import java.util.Optional;
 public class UpdateOperationServiceImp implements OperationService<OperationResponseDTO, UpdateOperationsRequest> {
 
     private final SearchOperationServiceImp searchOperationService;
-    private final AddOperationServiceImp addOperationService;
+    private final AddPaymentOperationServiceImp addOperationService;
     private final OperationUtils util;
 
     @Override
@@ -27,7 +27,7 @@ public class UpdateOperationServiceImp implements OperationService<OperationResp
         Optional<Operation> operation = searchOperationService.findOperationByIdAndDebit(request.getId(), request.isDebit());
         return operation.map(o -> {
             var updatedOperation = util.updateOperation(o, request);
-            addOperationService.save(updatedOperation);
+            addOperationService.saveOperation(updatedOperation);
             return util.convertOperationToResponseDTO(updatedOperation);
         }).orElseThrow(() -> new OperationNotFoundException(ErrorsMessage.NOT_FOUND_OPERATION_MESSAGE));
     }

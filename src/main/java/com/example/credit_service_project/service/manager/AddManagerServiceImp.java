@@ -20,9 +20,9 @@ public class AddManagerServiceImp implements ManagerService<ManagerResponseDTO, 
 
     @Override
     public ManagerResponseDTO execute(AddManagerRequest request) {
-        var manager = util.convertAddRequestToManager(request);
-        saveManager(manager);
-        return util.convertManagerToResponse(manager);
+        Manager manager = util.convertAddRequestToManager(request);
+        Manager savedManager = saveManager(manager);
+        return util.convertManagerToResponse(savedManager);
     }
 
     public Manager saveManager(Manager manager) {

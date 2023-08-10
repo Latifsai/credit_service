@@ -13,6 +13,7 @@ public class CardDTOResponse {
     UUID id;
     String cardNumber;
     String holderName;
+    String IBAN;
     BigDecimal balance;
     PaymentSystem paymentSystem;
     CardStatus cardStatus;

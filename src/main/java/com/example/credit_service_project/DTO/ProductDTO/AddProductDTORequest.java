@@ -9,5 +9,7 @@ import java.math.BigDecimal;
 public class AddProductDTORequest {
      String name;
      BigDecimal sum;
+     String details;
+     String currencyCode;
      CalculationType calculationType;
 }

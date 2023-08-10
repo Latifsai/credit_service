@@ -12,13 +12,13 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class GetAccountsListServiceImp  {
+public class GetAccountsListServiceImp {
 
     private final AccountRepository repository;
     private final AccountUtil util;
+
     public List<AccountDTOResponse> execute() {
-        var list = repository.findAll();
-        return list.stream()
+        return repository.findAll().stream()
                 .map(account -> util.convertAccountToAddResponse(account))
                 .toList();
     }

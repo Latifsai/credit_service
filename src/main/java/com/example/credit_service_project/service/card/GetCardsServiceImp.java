@@ -18,8 +18,7 @@ public class GetCardsServiceImp  {
     private final CardUtil util;
 
     public List<CardDTOResponse> execute() {
-        var cards = repository.findAll();
-        return cards.stream()
+        return repository.findAll().stream()
                 .map(card -> util.convertCardToAddDTOResponse(card))
                 .toList();
     }

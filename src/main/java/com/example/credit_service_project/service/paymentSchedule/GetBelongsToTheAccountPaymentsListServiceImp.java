@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,16 +27,16 @@ public class GetBelongsToTheAccountPaymentsListServiceImp implements PaymentSche
 
     @Override
     public GetBelongsPaymentsResponse execute(PaymentsBelongsToAccountRequest request) {
-        Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
-        if (account.isEmpty()) throw new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE);
+        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
+                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
-        var listOfBelongsToAccountPayments = repository.findAllByAccount(account.get());
+        var listOfBelongsToAccountPayments = repository.findAllByAccount(account);
 
         List<PaymentResponseDTO> list = listOfBelongsToAccountPayments.stream()
                 .map(paymentSchedule -> util.convertEntityToPaymentResponse(paymentSchedule))
                 .toList();
 
-        return new GetBelongsPaymentsResponse(account.get().getId(),
-                account.get().getAccountNumber(), list);
+        return new GetBelongsPaymentsResponse(account.getId(),
+                account.getAccountNumber(), list);
     }
 }

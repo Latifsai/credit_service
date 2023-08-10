@@ -18,8 +18,8 @@ public class GetAllClientsService {
     private final ClientUtil util;
 
     public List<ClientResponseDTO> execute() {
-        var list = repository.findAll();
-        return list.stream()
+
+        return repository.findAll().stream()
                 .map(client -> util.convertClientToResponse(client))
                 .toList();
     }

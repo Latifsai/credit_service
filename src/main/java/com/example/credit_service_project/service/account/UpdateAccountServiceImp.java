@@ -24,13 +24,11 @@ public class UpdateAccountServiceImp implements AccountService<AccountDTORespons
 
     @Override
     public AccountDTOResponse execute(UpdateAccountRequest request) {
-        Optional<Account> accountToFind = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
-        if (accountToFind.isPresent()) {
-            var updatedAccount = util.updateAccount(accountToFind.get(), request);
-            createAccountService.saveAccount(updatedAccount);
-            return util.convertAccountToAddResponse(updatedAccount);
-        }
-        throw new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE);
+        Account accountToFind = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
+                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
+        var updatedAccount = util.updateAccount(accountToFind, request);
+        createAccountService.saveAccount(updatedAccount);
+        return util.convertAccountToAddResponse(updatedAccount);
     }
 
     public void saveUpdatedAccount(Account updatedAccount) {

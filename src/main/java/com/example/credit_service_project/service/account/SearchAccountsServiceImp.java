@@ -6,7 +6,7 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.service.AccountService;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
+import com.example.credit_service_project.service.errors.exceptions.AccountNotFoundException;
 import com.example.credit_service_project.service.utils.AccountUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class SearchAccountsServiceImp implements AccountService<AccountDTORespon
     public AccountDTOResponse execute(SearchAccountRequest request) {
         Optional<Account> account = findAccountByIdOrNumber(request.getId(), request.getAccountNumber());
         return account.map(util::convertAccountToAddResponse)
-                .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
+                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
     }
 
     public Optional<Account> findAccountByIdOrNumber(UUID id, String number){

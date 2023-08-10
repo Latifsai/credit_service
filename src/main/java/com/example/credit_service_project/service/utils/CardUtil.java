@@ -1,21 +1,22 @@
 package com.example.credit_service_project.service.utils;
 
-import com.example.credit_service_project.DTO.cardDTO.*;
+import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
+import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.enums.CardStatus;
 import com.example.credit_service_project.generator.CardGenerator;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-@Component
+@Service
 public class CardUtil {
 
     public Card convertAddRequestToEntity(AddCardDTORequest request, Account account) {
         Card card = new Card();
         card.setAccount(account);
-
         card.setCardNumber(CardGenerator.generateCardNumber());
         card.setHolderName(account.getClient().getName() + " " + account.getClient().getSurname());
         card.setIBAN(CardGenerator.getIBAN(account.getCountry()));
@@ -34,6 +35,7 @@ public class CardUtil {
                 card.getId(),
                 card.getCardNumber(),
                 card.getHolderName(),
+                card.getIBAN(),
                 card.getBalance(),
                 card.getPaymentSystem(),
                 card.getCardStatus(),

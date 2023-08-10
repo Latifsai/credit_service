@@ -18,8 +18,8 @@ public class GetOperationsServiceImp {
     private final OperationUtils util;
 
     public List<OperationResponseDTO> execute() {
-        var list = repository.findAll();
-        return list.stream()
+
+        return repository.findAll().stream()
                 .map(o -> util.convertOperationToResponseDTO(o))
                 .toList();
     }

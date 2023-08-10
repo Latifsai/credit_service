@@ -15,8 +15,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -31,17 +29,18 @@ public class UpdateCardServiceImp implements CardService<CardDTOResponse, Update
 
     @Override
     public CardDTOResponse execute(UpdateCardDTORequest request) {
-        Optional<Card> card = searchCardService.findCardById(request.getId());
-        Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
+        Card card = searchCardService.findCardById(request.getId())
+                .orElseThrow(() -> new CardNotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE));
 
-        if (card.isEmpty()) throw new CardNotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE);
-        if (account.isEmpty()) throw new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE);
+        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
+                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
-        var updatedCard = utils.updateCard(card.get(), request);
+        Card updatedCard = utils.updateCard(card, request);
         updateCard(updatedCard);
 
-        var updatedAccount = utils.updateAccountBalance(account.get(), card.get());
+        Account updatedAccount = utils.updateAccountBalance(account, card);
         updateAccountService.saveUpdatedAccount(updatedAccount);
+
         return utils.convertCardToAddDTOResponse(updatedCard);
     }
 

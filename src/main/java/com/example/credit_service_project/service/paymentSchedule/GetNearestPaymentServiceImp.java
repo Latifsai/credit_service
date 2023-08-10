@@ -13,8 +13,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -25,10 +23,10 @@ public class GetNearestPaymentServiceImp implements PaymentScheduleService<Payme
 
     @Override
     public PaymentResponseDTO execute(PaymentsBelongsToAccountRequest request) {
-        Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
-        if (account.isEmpty()) throw new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE);
+        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
+                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
-        PaymentSchedule nearestPayment = getNearestPayment(account.get());
+        PaymentSchedule nearestPayment = getNearestPayment(account);
         return util.convertEntityToPaymentResponse(nearestPayment);
     }
 

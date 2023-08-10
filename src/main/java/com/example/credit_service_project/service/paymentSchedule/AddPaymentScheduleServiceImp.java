@@ -14,8 +14,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -27,13 +25,12 @@ public class AddPaymentScheduleServiceImp implements PaymentScheduleService<AddP
 
     @Override
     public AddPaymentScheduleDTOResponse execute(AddPaymentRequestDTO request) {
-        Optional<Account> account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
+        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
+                .orElseThrow(() -> new PaymentScheduleNotFoundException(ErrorsMessage.UNABLE_TO_ADD_PAYMENT_MESSAGE));
 
-        if (account.isEmpty()) throw new PaymentScheduleNotFoundException(ErrorsMessage.UNABLE_TO_ADD_PAYMENT_MESSAGE);
-
-        PaymentSchedule paymentSchedule = util.convertPaymentDTORequestToPayment(request, account.get());
-        savePayment(paymentSchedule);
-        return util.convertEntityToAddResponse(paymentSchedule);
+        PaymentSchedule paymentSchedule = util.convertPaymentDTORequestToPayment(request, account);
+        PaymentSchedule savedPayment = savePayment(paymentSchedule);
+        return util.convertEntityToAddResponse(savedPayment);
     }
 
     public PaymentSchedule savePayment(PaymentSchedule paymentSchedule) {

@@ -1,7 +1,6 @@
 package com.example.credit_service_project.controllers;
 
 import com.example.credit_service_project.DTO.operationDTO.AddOperationPaymentRequest;
-import com.example.credit_service_project.DTO.operationDTO.AddOperationRequestSpendingOrReplenishment;
 import com.example.credit_service_project.DTO.operationDTO.SearchOperationRequest;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.fabrics.operation.OperationFabricImp;
@@ -16,13 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class OperationController {
     private final OperationFabricImp fabric;
 
-    @PostMapping
-    public ResponseEntity<?> add(@RequestBody AddOperationRequestSpendingOrReplenishment request) {
-        var response = fabric.addOperation().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/payment")
+    @PostMapping()
     public ResponseEntity<?> add(@RequestBody AddOperationPaymentRequest request) {
         var response = fabric.addPaymentOperation().execute(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
