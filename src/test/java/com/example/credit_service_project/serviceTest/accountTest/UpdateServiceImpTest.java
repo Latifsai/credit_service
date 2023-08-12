@@ -3,7 +3,6 @@ package com.example.credit_service_project.serviceTest.accountTest;
 import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.utils.AccountUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOAccountCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;

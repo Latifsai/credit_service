@@ -2,7 +2,6 @@ package com.example.credit_service_project.serviceTest.managerTest;
 
 import com.example.credit_service_project.DTO.manager.UpdateManagerRequest;
 import com.example.credit_service_project.repository.ManagerRepository;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.manager.UpdateMangerServiceImp;
 import com.example.credit_service_project.service.utils.ManagerUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOManagerCreator;

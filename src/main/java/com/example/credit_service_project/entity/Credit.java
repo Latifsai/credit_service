@@ -2,6 +2,7 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CreditStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -52,6 +53,7 @@ public class Credit {
     private CreditStatus creditStatus;
 
     @Column(name = "currency")
+    @Pattern(regexp = "^[A-Z]{3}$",message = "Format is not allowed in service!")
     private String currency;
 
     @OneToOne(mappedBy = "credit", fetch = FetchType.LAZY,

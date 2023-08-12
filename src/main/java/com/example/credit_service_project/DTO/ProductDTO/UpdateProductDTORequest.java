@@ -11,9 +11,9 @@ public class UpdateProductDTORequest {
     BigInteger id;
 
     BigDecimal sum;
-    boolean needGuaranty;
-    boolean earlyRepayment;
-    boolean needIncomeDetails;
+    Boolean needGuaranty;
+    Boolean earlyRepayment;
+    Boolean needIncomeDetails;
     String details;
     CalculationType calculationType;
 }

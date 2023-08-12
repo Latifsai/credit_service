@@ -70,7 +70,7 @@ public class Account {
     private BigDecimal unpaidPercentageLoanDebt;
 
     @NotNull(message = "Currency must not be null!")
-    @Pattern(regexp = "[$€£¥₽₪₴]",message = "Format is not allowed in service!")
+    @Pattern(regexp = "^[A-Z]{3}$",message = "Format is not allowed in service!")
     @Column(name = "currency")
     private String currency;
 

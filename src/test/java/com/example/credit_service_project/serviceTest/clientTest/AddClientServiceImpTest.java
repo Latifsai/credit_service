@@ -3,7 +3,6 @@ package com.example.credit_service_project.serviceTest.clientTest;
 import com.example.credit_service_project.DTO.client.AddClientRequest;
 import com.example.credit_service_project.repository.ClientRepository;
 import com.example.credit_service_project.service.client.AddClientServiceImp;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.manager.SearchManagerServiceImp;
 import com.example.credit_service_project.service.utils.ClientUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOClientCreator;

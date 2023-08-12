@@ -5,7 +5,6 @@ import com.example.credit_service_project.service.account.SearchAccountsServiceI
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
 import com.example.credit_service_project.service.card.UpdateCardServiceImp;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;

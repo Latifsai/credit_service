@@ -21,7 +21,10 @@ public class CreateProductServiceImp implements ProductService<ProductResponseDT
     @Override
     public ProductResponseDTO execute(AddProductDTORequest request) {
         Product product = util.convertFromAddRequestToResponse(request);
-        repository.save(product);
-        return util.toResponse(product);
+        Product savedProduct = saveProduct(product);
+        return util.toResponse(savedProduct);
     }
+     public Product saveProduct(Product product) {
+        return repository.save(product);
+     }
 }

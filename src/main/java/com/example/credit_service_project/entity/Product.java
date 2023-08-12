@@ -2,6 +2,7 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CalculationType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -40,6 +41,7 @@ public class Product {
     private String details;
 
     @Column(name = "currency_code")
+    @Pattern(regexp = "^[A-Z]{3}$",message = "Format is not allowed in service!")
     private String currencyCode;
 
     @Column(name = "calculation_type")

@@ -1,13 +1,14 @@
 package com.example.credit_service_project.controllers;
 
 import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
+import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
 import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.fabrics.card.CardFabric;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -17,27 +18,27 @@ public class CardController {
     private final CardFabric fabric;
 
     @PostMapping
-    public ResponseEntity<?> createCard(@RequestBody AddCardDTORequest request) {
-        var response = fabric.activateCreateCard().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public CardDTOResponse createCard(@RequestBody AddCardDTORequest request) {
+        return fabric.activateCreateCard().execute(request);
     }
 
     @GetMapping
-    public ResponseEntity<?> getCard() {
-        var response = fabric.getCardsService().execute();
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<CardDTOResponse> getCards() {
+        return fabric.getCardsService().execute();
     }
 
     @PutMapping
-    public ResponseEntity<?> updateCard(@RequestBody UpdateCardDTORequest request) {
-        var response = fabric.activateUpdateCard().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public CardDTOResponse updateCard(@RequestBody UpdateCardDTORequest request) {
+        return fabric.activateUpdateCard().execute(request);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> searchCard(@PathVariable UUID id) {
-        var response = fabric.activateSearchCard().execute(id);
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+    @ResponseStatus(HttpStatus.FOUND)
+    public CardDTOResponse searchCard(@PathVariable UUID id) {
+        return fabric.activateSearchCard().execute(id);
     }
 
 }

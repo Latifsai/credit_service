@@ -32,13 +32,13 @@ public class ManagerController {
     }
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
     public ManagerResponseDTO addManager(@RequestBody AddManagerRequest request) {
         return fabric.add().execute(request);
     }
 
     @PutMapping()
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public ManagerResponseDTO addManager(@RequestBody UpdateManagerRequest request) {
         return fabric.update().execute(request);
     }

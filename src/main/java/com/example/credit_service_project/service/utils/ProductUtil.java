@@ -2,27 +2,25 @@ package com.example.credit_service_project.service.utils;
 
 import com.example.credit_service_project.DTO.ProductDTO.AddProductDTORequest;
 import com.example.credit_service_project.DTO.ProductDTO.ProductResponseDTO;
+import com.example.credit_service_project.DTO.ProductDTO.UpdateProductDTORequest;
 import com.example.credit_service_project.entity.Product;
+import com.example.credit_service_project.generator.ProductGenerator;
+import com.example.credit_service_project.service.errors.ErrorsMessage;
+import com.example.credit_service_project.service.errors.exceptions.CurrencyException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductUtil {
 
-    private final List<String> currency = new ArrayList<>();
+    private final Map<String, Double> currencyMap = ProductGenerator.generatCurrencyMap();
 
-    {
-        currency.add("$");
-        currency.add("€");
-        currency.add("£");
-        currency.add("¥");
-        currency.add("₽");
-        currency.add("₪");
-        currency.add("₴");
-    }
+    private final Integer maxAmountCriterionForDeposit = 18_000;
+    private final Integer minAmountCriterionForDeposit = 7_500;
 
     public Product convertFromAddRequestToResponse(AddProductDTORequest request) {
         Product product = new Product();
@@ -35,6 +33,29 @@ public class ProductUtil {
         product.setEarlyRepayment(earlyRepayment(product.getSum(), product.getCurrencyCode()));
         product.setNeedIncomeDetails(true);
         return product;
+    }
+
+    private boolean earlyRepayment(BigDecimal sum, String currencyCode) {
+        if (currencyCode.equals("EUR") && sum.intValue() <= minAmountCriterionForDeposit) return true;
+
+        for (String code : currencyMap.keySet()) {
+            if (currencyCode.equals(code) && sum.intValue() <= (maxAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
+                return true;
+            }
+        }
+
+        throw new CurrencyException(ErrorsMessage.UNABLE_INACCESSIBLE_CURRENCY);
+    }
+
+    private boolean needGuaranty(BigDecimal sum, String currencyCode) {
+        if (currencyCode.equals("EUR") && sum.intValue() >= maxAmountCriterionForDeposit) return true;
+
+        for (String code : currencyMap.keySet()) {
+            if (currencyCode.equals(code) && sum.intValue() >= (maxAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
+                return true;
+            }
+        }
+        throw new CurrencyException(ErrorsMessage.UNABLE_INACCESSIBLE_CURRENCY);
     }
 
     public ProductResponseDTO toResponse(Product product) {
@@ -51,28 +72,18 @@ public class ProductUtil {
         );
     }
 
-    private boolean needGuaranty(BigDecimal sum, String currencyCode) {
-        if (currencyCode.equals(currency.get(0)) && sum.intValue() >= 30_000) return true;
-        if (currencyCode.equals(currency.get(1)) && sum.intValue() >= 35_000) return true;
-        if (currencyCode.equals(currency.get(2)) && sum.intValue() >= 26_086) return true;
-        if (currencyCode.equals(currency.get(3)) && sum.intValue() >= 245_000) return true;
-        if (currencyCode.equals(currency.get(4)) && sum.intValue() >= 3_715_250 ) return true;
-        if (currencyCode.equals(currency.get(5)) && sum.intValue() >= 143_150) return true;
-        if (currencyCode.equals(currency.get(6)) && sum.intValue() >= 1_412_250) return true;
-
-        return false;
-    }
-
-    private boolean earlyRepayment(BigDecimal sum, String currencyCode) {
-        if (currencyCode.equals(currency.get(0)) && sum.intValue() <= 12_000) return true;
-        if (currencyCode.equals(currency.get(1)) && sum.intValue() <= 14_700) return true;
-        if (currencyCode.equals(currency.get(2)) && sum.intValue() <= 12_201) return true;
-        if (currencyCode.equals(currency.get(3)) && sum.intValue() <= 116571) return true;
-        if (currencyCode.equals(currency.get(4)) && sum.intValue() <= 1_572_312) return true;
-        if (currencyCode.equals(currency.get(5)) && sum.intValue() <= 72_471) return true;
-        if (currencyCode.equals(currency.get(6)) && sum.intValue() <= 594_615) return true;
-
-        return false;
+    public Product update(Product product, UpdateProductDTORequest request) {
+        if (request.getSum() != null) product.setSum(request.getSum());
+        if (request.getNeedGuaranty() != null) product.setNeedGuaranty(request.getNeedGuaranty());
+        if (request.getEarlyRepayment() != null) product.setEarlyRepayment(request.getEarlyRepayment());
+        if (request.getNeedIncomeDetails() != null) product.setNeedIncomeDetails(request.getNeedIncomeDetails());
+        if (request.getDetails() != null && !request.getDetails().trim().isEmpty()) {
+            product.setDetails(request.getDetails());
+        }
+        if (request.getCalculationType() != null && !request.getCalculationType().name().isEmpty()) {
+            product.setCalculationType(request.getCalculationType());
+        }
+        return product;
     }
 
 

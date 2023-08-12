@@ -24,13 +24,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> handleNotFoundException(NotFoundException e) {
-        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
-        ExceptionResponse response = new ExceptionResponse(errorExceptions);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(OperationException.class)
     public ResponseEntity<?> handleOperationException(OperationException e) {
         List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
@@ -87,4 +80,23 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NearestPaymentNotFoundException.class)
+    public ResponseEntity<?> handlePaymentNotFoundException(NearestPaymentNotFoundException e) {
+        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
+        ExceptionResponse response = new ExceptionResponse(errorExceptions);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<?> handleProductNotFoundException(ProductNotFoundException e) {
+        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
+        ExceptionResponse response = new ExceptionResponse(errorExceptions);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CurrencyException.class)
+    public ResponseEntity<?> handleProductNotFoundException(CurrencyException e) {
+        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
+        ExceptionResponse response = new ExceptionResponse(errorExceptions);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }

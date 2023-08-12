@@ -2,11 +2,9 @@ package com.example.credit_service_project.serviceTest.clientTest;
 
 import com.example.credit_service_project.repository.ClientRepository;
 import com.example.credit_service_project.service.client.SearchClientServiceImp;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.utils.ClientUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOClientCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
-import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

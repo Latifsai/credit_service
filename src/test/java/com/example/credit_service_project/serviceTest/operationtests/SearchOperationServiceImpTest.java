@@ -2,7 +2,6 @@ package com.example.credit_service_project.serviceTest.operationtests;
 
 import com.example.credit_service_project.DTO.operationDTO.SearchOperationRequest;
 import com.example.credit_service_project.repository.OperationRepository;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.operation.SearchOperationServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;

@@ -33,13 +33,13 @@ public class ClientController {
     }
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
     public ClientResponseDTO addManager(@RequestBody AddClientRequest request) {
         return fabric.addClient().execute(request);
     }
 
     @PutMapping()
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public ClientResponseDTO addManager(@RequestBody UpdateClientRequest request) {
         return fabric.updateClient().execute(request);
     }

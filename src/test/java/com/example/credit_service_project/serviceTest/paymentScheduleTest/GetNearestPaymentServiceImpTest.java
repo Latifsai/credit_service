@@ -1,7 +1,6 @@
 package com.example.credit_service_project.serviceTest.paymentScheduleTest;
 
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.service.errors.exceptions.NotFoundException;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
 import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOPaymentCreator;

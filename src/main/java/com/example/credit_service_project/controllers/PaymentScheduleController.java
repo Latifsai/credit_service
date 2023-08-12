@@ -1,11 +1,9 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.paymentDTO.AddPaymentRequestDTO;
-import com.example.credit_service_project.DTO.paymentDTO.PaymentsBelongsToAccountRequest;
+import com.example.credit_service_project.DTO.paymentDTO.*;
 import com.example.credit_service_project.fabrics.payments.PaymentFabricImp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,21 +14,22 @@ public class PaymentScheduleController {
     private final PaymentFabricImp fabric;
 
     @GetMapping("/search")
-    public ResponseEntity<?> search(@RequestBody PaymentsBelongsToAccountRequest request) {
-        var response = fabric.getNearestPayment().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+    @ResponseStatus(HttpStatus.FOUND)
+    public PaymentResponseDTO search(@RequestBody PaymentsBelongsToAccountRequest request) {
+        return fabric.getNearestPayment().execute(request);
     }
 
     @GetMapping
-    public ResponseEntity<?> get(@RequestBody PaymentsBelongsToAccountRequest request) {
-        var response = fabric.getBelongsPayments().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+    @ResponseStatus(HttpStatus.FOUND)
+    public GetBelongsPaymentsResponse get(@RequestBody PaymentsBelongsToAccountRequest request) {
+        return fabric.getBelongsPayments().execute(request);
+
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody AddPaymentRequestDTO request) {
-        var response = fabric.addPaymentSchedule().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public AddPaymentScheduleDTOResponse add(@RequestBody AddPaymentRequestDTO request) {
+        return fabric.addPaymentSchedule().execute(request);
     }
 
 }

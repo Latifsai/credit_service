@@ -1,14 +1,16 @@
 package com.example.credit_service_project.controllers;
 
 
+import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
 import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.fabrics.account.AccountFabric;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,28 +19,29 @@ public class AccountController {
     private final AccountFabric fabric;
 
     @PostMapping
-    public ResponseEntity<?> createNewAccount(@RequestBody AddAccountDTORequest request) {
-        var response = fabric.activeCreateService().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public AccountDTOResponse createNewAccount(@RequestBody AddAccountDTORequest request) {
+        return fabric.activeCreateService().execute(request);
     }
 
     @GetMapping
-    public ResponseEntity<?> getAccountList() {
-        var response = fabric.activeGetService().execute();
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<AccountDTOResponse> getAccountList() {
+        return fabric.activeGetService().execute();
+
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchAccount(@RequestBody SearchAccountRequest request) {
-        var response = fabric.activeSearchService().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+    @ResponseStatus(HttpStatus.FOUND)
+    public AccountDTOResponse searchAccount(@RequestBody SearchAccountRequest request) {
+        return fabric.activeSearchService().execute(request);
     }
 
 
     @PutMapping
-    public ResponseEntity<?> updateAccount(@RequestBody UpdateAccountRequest request) {
-        var response = fabric.activeUpdateService().execute(request);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    @ResponseStatus(HttpStatus.OK)
+    public AccountDTOResponse updateAccount(@RequestBody UpdateAccountRequest request) {
+        return fabric.activeUpdateService().execute(request);
     }
 
 }
