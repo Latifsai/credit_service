@@ -10,8 +10,6 @@ import com.example.credit_service_project.service.errors.exceptions.CurrencyExce
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -29,17 +27,18 @@ public class ProductUtil {
         product.setDetails(request.getDetails());
         product.setCalculationType(request.getCalculationType());
         product.setCurrencyCode(request.getCurrencyCode());
-        product.setNeedGuaranty(needGuaranty(product.getSum(), product.getCurrencyCode()));
-        product.setEarlyRepayment(earlyRepayment(product.getSum(), product.getCurrencyCode()));
+        product.setNeedGuaranty(needGuaranty(request.getSum(), request.getCurrencyCode()));
+        product.setEarlyRepayment(earlyRepayment(request.getSum(), request.getCurrencyCode()));
         product.setNeedIncomeDetails(true);
         return product;
     }
 
     private boolean earlyRepayment(BigDecimal sum, String currencyCode) {
-        if (currencyCode.equals("EUR") && sum.intValue() <= minAmountCriterionForDeposit) return true;
+        if (currencyCode.equalsIgnoreCase("EUR") && sum.intValue() <= minAmountCriterionForDeposit) return true;
 
         for (String code : currencyMap.keySet()) {
-            if (currencyCode.equals(code) && sum.intValue() <= (maxAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
+            if (currencyCode.equalsIgnoreCase(code)
+                    && sum.intValue() <= (maxAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
                 return true;
             }
         }
@@ -48,11 +47,15 @@ public class ProductUtil {
     }
 
     private boolean needGuaranty(BigDecimal sum, String currencyCode) {
-        if (currencyCode.equals("EUR") && sum.intValue() >= maxAmountCriterionForDeposit) return true;
+        if (currencyCode.equalsIgnoreCase("EUR") && sum.intValue() >= maxAmountCriterionForDeposit) {
+            return true;
+        }
 
         for (String code : currencyMap.keySet()) {
-            if (currencyCode.equals(code) && sum.intValue() >= (maxAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
+            if (currencyCode.equalsIgnoreCase(code) && sum.intValue() >= (maxAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
                 return true;
+            }else {
+                return false;
             }
         }
         throw new CurrencyException(ErrorsMessage.UNABLE_INACCESSIBLE_CURRENCY);

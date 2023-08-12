@@ -9,14 +9,10 @@ import java.util.UUID;
 
 @Value
 public class UpdateCardDTORequest {
-
-     @NotNull(message = "accountID must not be null!")
      UUID accountID;
      String accountNumber;
 
-     @NotNull(message = "ID must not be null!")
      UUID id;
-
      BigDecimal balance;
      String deliveryAddress;
      CardStatus cardStatus;

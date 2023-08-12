@@ -10,10 +10,7 @@ import java.util.UUID;
 
 @Value
 public class UpdateAccountRequest {
-    @NotNull(message = "AccountID must be not null!")
     UUID accountID;
-    @NotNull(message = "accountNumber must be not null!")
-    @NotEmpty(message = "accountNumber must be not empty!")
     String accountNumber;
     //to change
     BigDecimal loanDebt;
@@ -22,4 +19,5 @@ public class UpdateAccountRequest {
     BigDecimal balance;
     BigDecimal unpaidLoanDebt;
     BigDecimal unpaidPercentageLoanDebt;
+    String country;
 }

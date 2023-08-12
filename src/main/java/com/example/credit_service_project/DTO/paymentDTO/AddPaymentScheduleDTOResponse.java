@@ -11,4 +11,7 @@ public class AddPaymentScheduleDTOResponse {
     LocalDate paymentDate;
     BigDecimal mainPayment;
     BigDecimal ratePayment;
+    BigDecimal surcharge;
+    BigDecimal sum;
+    boolean isPaid;
 }

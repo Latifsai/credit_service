@@ -44,7 +44,9 @@ public class AccountUtil {
                 account.getClosingDate(),
                 account.getUnpaidLoanDebt(),
                 account.getUnpaidPercentageLoanDebt(),
-                account.getCurrency());
+                account.getCurrency(),
+                account.getCountry()
+                );
     }
 
 
@@ -55,6 +57,7 @@ public class AccountUtil {
         if (request.getBalance() != null) account.setBalance(request.getBalance());
         if (request.getUnpaidLoanDebt() != null) account.setUnpaidLoanDebt(request.getUnpaidLoanDebt());
         if (request.getUnpaidPercentageLoanDebt() != null) account.setUnpaidPercentageLoanDebt(request.getUnpaidPercentageLoanDebt());
+        if (request.getCountry() != null && !request.getCountry().trim().isEmpty()) account.setCountry(request.getCountry());
         return account;
     }
 

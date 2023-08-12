@@ -9,6 +9,7 @@ import com.example.credit_service_project.service.errors.ErrorsMessage;
 import com.example.credit_service_project.service.errors.exceptions.NearestPaymentNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Comparator;
 
@@ -30,10 +31,16 @@ public class PaymentScheduleUtil {
                 paymentSchedule.getAccount().getAccountNumber(),
                 paymentSchedule.getPaymentDate(),
                 paymentSchedule.getMainPayment(),
-                paymentSchedule.getRatePayment()
+                paymentSchedule.getRatePayment(),
+                paymentSchedule.getSurcharge(),
+                getSum(paymentSchedule),
+                false
         );
     }
 
+    private BigDecimal getSum(PaymentSchedule p) {
+        return p.getMainPayment().add(p.getRatePayment()).add(p.getSurcharge());
+    }
     public PaymentResponseDTO convertEntityToPaymentResponse(PaymentSchedule paymentSchedule) {
         return new PaymentResponseDTO(
                 paymentSchedule.getId(),

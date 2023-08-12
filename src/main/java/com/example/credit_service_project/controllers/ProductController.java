@@ -16,38 +16,37 @@ import java.util.List;
 @RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
-  private final ProductFabricImp fabric;
+    private final ProductFabricImp fabric;
 
-  @PostMapping
-  public ResponseEntity<ProductResponseDTO> add (@RequestBody AddProductDTORequest request) {
-      var response = fabric.create().execute(request);
-      return new ResponseEntity<>(response, HttpStatus.CREATED);
-  }
+    @PostMapping
+    public ResponseEntity<ProductResponseDTO> add(@RequestBody AddProductDTORequest request) {
+        var response = fabric.create().execute(request);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponseDTO>> getAllProducts () {
+    public ResponseEntity<List<ProductResponseDTO>> getAllProducts() {
         var response = fabric.getList().execute();
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> search (@PathVariable BigInteger id) {
+    public ResponseEntity<ProductResponseDTO> search(@PathVariable BigInteger id) {
         var response = fabric.search().execute(id);
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }
 
     @PutMapping
-    public ResponseEntity<ProductResponseDTO> update (@RequestBody UpdateProductDTORequest request) {
+    public ResponseEntity<ProductResponseDTO> update(@RequestBody UpdateProductDTORequest request) {
         var response = fabric.update().execute(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> delete (@PathVariable BigInteger id) {
+    public ResponseEntity<ProductResponseDTO> delete(@PathVariable BigInteger id) {
         var response = fabric.delete().execute(id);
         return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
-
 
 
 }

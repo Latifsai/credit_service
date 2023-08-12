@@ -4,6 +4,7 @@ import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
 import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
 import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.fabrics.card.CardFabric;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class CardController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public CardDTOResponse searchCard(@PathVariable UUID id) {
+    public CardDTOResponse searchCard(@PathVariable @NotNull UUID id) {
         return fabric.activateSearchCard().execute(id);
     }
 

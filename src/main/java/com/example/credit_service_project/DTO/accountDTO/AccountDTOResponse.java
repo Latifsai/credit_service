@@ -20,4 +20,5 @@ public class AccountDTOResponse {
      BigDecimal unpaidLoanDebt;
      BigDecimal unpaidPercentageLoanDebt;
      String currency;
+     String country;
 }
