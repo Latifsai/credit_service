@@ -2,6 +2,10 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -25,25 +29,34 @@ public class CreditOrder {
     private UUID id;
 
     @Column(name = "number")
+    @NotNull(message = "number must not be null!")
+    @NotEmpty(message = "number must not be empty!")
+    @Size(min = 6, max = 20, message = "number must be between 6 and 20!")
     private String number;
 
     @Column(name = "amount")
+    @Positive(message = "amount must not be negative!")
     private BigDecimal amount; // amount of credit m
 
     @Column(name = "creation_date")
+    @NotNull(message = "creationDate must not be null!")
     private LocalDate creationDate;
 
     @Column(name = "client_income")
+    @NotNull(message = "clientIncome must not be null!")
     private BigDecimal clientIncome;
 
     @Column(name = "period_months")
+    @Positive(message = "periodMonths must not be negative!")
     private Integer periodMonths;
 
     @Column(name = "client_monthly_expenditure")
+    @Positive(message = "periodMonths must not be negative!")
     private BigDecimal clientMonthlyExpenditure;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "creditOrderStatus must not be null!")
     private CreditOrderStatus creditOrderStatus;
 
     //future: id of work-giver

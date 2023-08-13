@@ -1,6 +1,5 @@
 package com.example.credit_service_project.serviceTest.generators;
 
-import com.example.credit_service_project.DTO.operationDTO.AddOperationRequestSpendingOrReplenishment;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.entity.enums.OperationType;
 

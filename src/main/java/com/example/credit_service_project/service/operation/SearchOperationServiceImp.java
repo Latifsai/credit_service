@@ -1,7 +1,6 @@
 package com.example.credit_service_project.service.operation;
 
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
-import com.example.credit_service_project.DTO.operationDTO.SearchOperationRequest;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.OperationService;
@@ -18,19 +17,20 @@ import java.util.UUID;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class SearchOperationServiceImp implements OperationService<OperationResponseDTO, SearchOperationRequest> {
+public class SearchOperationServiceImp implements OperationService<OperationResponseDTO, UUID> {
 
     private final OperationRepository repository;
     private final OperationUtils util;
 
     @Override
-    public OperationResponseDTO execute(SearchOperationRequest request) {
-        Optional<Operation> operation = findOperationByIdAndDebit(request.getId(), request.isDebit());
-        return operation.map(o -> util.convertOperationToResponseDTO(o))
+    public OperationResponseDTO execute(UUID id) {
+        Operation operation = findById(id)
                 .orElseThrow(() -> new OperationNotFoundException(ErrorsMessage.NOT_FOUND_OPERATION_MESSAGE));
+        return util.convertOperationToResponseDTO(operation);
+
     }
 
-    public Optional<Operation> findOperationByIdAndDebit(UUID id, boolean isDebit) {
-        return repository.findByIdAndDebit(id, isDebit);
+    public Optional<Operation> findById(UUID id) {
+        return repository.findById(id);
     }
 }

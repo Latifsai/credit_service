@@ -2,6 +2,8 @@ package com.example.credit_service_project.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -24,12 +26,15 @@ public class Agreement {
     private UUID id;
 
     @Column(name = "number")
+    @Size(min = 6, max = 20, message = "number must be between 6 and 20!")
     private String number;
 
     @Column(name = "agreement_date")
+    @NotNull(message = "AgreementDate must not be null!")
     private LocalDate agreementDate;
 
     @Column(name = "termination_date")
+    @NotNull(message = "TerminationDate must not be null!")
     private LocalDate terminationDate;
 
     @Column(name = "active")

@@ -24,9 +24,9 @@ public class UpdateOperationServiceImp implements OperationService<OperationResp
 
     @Override
     public OperationResponseDTO execute(UpdateOperationsRequest request) {
-        Optional<Operation> operation = searchOperationService.findOperationByIdAndDebit(request.getId(), request.isDebit());
+        Optional<Operation> operation = searchOperationService.findById(request.getId());
         return operation.map(o -> {
-            var updatedOperation = util.updateOperation(o, request);
+            Operation updatedOperation = util.updateOperation(o, request);
             addOperationService.saveOperation(updatedOperation);
             return util.convertOperationToResponseDTO(updatedOperation);
         }).orElseThrow(() -> new OperationNotFoundException(ErrorsMessage.NOT_FOUND_OPERATION_MESSAGE));

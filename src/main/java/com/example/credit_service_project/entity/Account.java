@@ -2,10 +2,7 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -31,6 +28,7 @@ public class Account {
 
     @NotNull(message = "accountNumber must not be null!")
     @NotEmpty(message = "accountNumber must not be empty!")
+    @Size(min = 5, max = 16, message = "accountNumber must be between 5 and 16!")
     @Column(name = "account_number")
     private String accountNumber;
 
@@ -43,6 +41,8 @@ public class Account {
     private BigDecimal percentageDebt;
 
     @Column(name = "country")
+    @NotNull(message = "accountNumber must not be null!")
+    @NotBlank(message = "accountNumber must not be empty!")
     private String country;
 
     @NotNull(message = "status must not be null!")
@@ -56,9 +56,11 @@ public class Account {
     private BigDecimal balance;
 
     @Column(name = "opening_date")
+    @NotNull(message = "openingDate must not be null!")
     private LocalDate openingDate;
 
     @Column(name = "closing_date")
+    @NotNull(message = "closingDate must not be null!")
     private LocalDate closingDate;
 
     @PositiveOrZero(message = "unpaidPercentageLoanDebt must be greater than 0")

@@ -1,6 +1,8 @@
 package com.example.credit_service_project.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -26,18 +28,23 @@ public class PaymentSchedule {
     private UUID id;
 
     @Column(name = "payment_date")
+    @NotNull(message = "paymentDate must not be null!")
     private LocalDate paymentDate;
 
     @Column(name = "actual_payment_date")
+    @NotNull(message = "actualPaymentDate must not be null!")
     private LocalDate actualPaymentDate;
 
     @Column(name = "surcharge")
+    @Positive(message = "surcharge must not be negative!")
     private BigDecimal surcharge; // пеня(посчитаная)
 
     @Column(name = "main_payment")
+    @Positive(message = "mainPayment must not be negative!")
     private BigDecimal mainPayment;
 
     @Column(name = "rate_payment")
+    @Positive(message = "ratePayment must not be negative!")
     private BigDecimal ratePayment;
 
     @Column(name = "is_paid")

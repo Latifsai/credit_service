@@ -1,7 +1,6 @@
 package com.example.credit_service_project.service.utils;
 
 import com.example.credit_service_project.DTO.operationDTO.AddOperationPaymentRequest;
-import com.example.credit_service_project.DTO.operationDTO.AddOperationRequestSpendingOrReplenishment;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.entity.Account;
@@ -22,32 +21,6 @@ import static com.example.credit_service_project.entity.enums.OperationType.*;
 @Component
 public class OperationUtils {
 
-    public Operation convertAddRequestFunctionalToOperation(AddOperationRequestSpendingOrReplenishment request, Account account) {
-        Operation operation = new Operation();
-        operation.setAccount(account);
-        operation.setSum(request.getSum());
-        operation.setType(request.getType());
-        operation.setOperationEndMark(LocalDateTime.now());
-        operation.setOperationDetails(request.getOperationDetails());
-        operation.setDebit(handleDebit(operation.getType()));
-        operation.setCurrency(operation.getAccount().getCurrency());
-        return operation;
-    }
-
-    public Account changeAccountBalance(Account account, Operation operation) {
-        BigDecimal balance;
-        if (operation.isDebit()) {
-            balance = account.getBalance().subtract(operation.getSum());
-            if (balance.intValue() < 0) {
-                throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
-            }
-        } else {
-            balance = account.getBalance().add(operation.getSum());
-        }
-        account.setBalance(balance);
-        return account;
-    }
-
     public Card changerCardBalance(Account account, Card card) {
         if (!account.getBalance().equals(card.getBalance())) {
             card.setBalance(account.getBalance());
@@ -65,19 +38,7 @@ public class OperationUtils {
     }
 
 
-    public OperationResponseDTO convertOperationToResponseDTO(Operation operation) {
-        return new OperationResponseDTO(
-                operation.getAccount().getAccountNumber(),
-                operation.getAccount().getBalance(),
-                operation.getId(),
-                operation.getSum(),
-                operation.isDebit(),
-                operation.getType(),
-                operation.getOperationEndMark(),
-                operation.getOperationDetails(),
-                operation.getCurrency()
-        );
-    }
+
 
 
     public Operation updateOperation(Operation operation, UpdateOperationsRequest request) {
@@ -103,11 +64,12 @@ public class OperationUtils {
 
 
     public Account payBill(Account account, PaymentSchedule paymentSchedule, Card card) {
-        if (paymentSchedule.getActualPaymentDate().equals(LocalDate.now())) {
+        if (paymentSchedule.getPaymentDate().equals(LocalDate.now())) {
             BigDecimal balance = account.getBalance().subtract(getSumToPay(paymentSchedule));
             if (balance.intValue() < 0) throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
 
             account.setBalance(balance);
+            paymentSchedule.setActualPaymentDate(LocalDate.now());
             paymentSchedule.setPaid(true);
             changerCardBalance(account, card);
         }
@@ -130,5 +92,19 @@ public class OperationUtils {
         operation.setDebit(handleDebit(operation.getType()));
         operation.setCurrency(account.getCurrency());
         return operation;
+    }
+
+    public OperationResponseDTO convertOperationToResponseDTO(Operation operation) {
+        return new OperationResponseDTO(
+                operation.getAccount().getAccountNumber(),
+                operation.getAccount().getBalance(),
+                operation.getId(),
+                operation.getSum(),
+                operation.isDebit(),
+                operation.getType(),
+                operation.getOperationEndMark(),
+                operation.getOperationDetails(),
+                operation.getCurrency()
+        );
     }
 }

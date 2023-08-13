@@ -1,8 +1,8 @@
 package com.example.credit_service_project.fabrics.operation;
 
 import com.example.credit_service_project.DTO.operationDTO.AddOperationPaymentRequest;
+import com.example.credit_service_project.DTO.operationDTO.GetBelongsAccountOperationsRequest;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
-import com.example.credit_service_project.DTO.operationDTO.SearchOperationRequest;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.OperationService;
@@ -20,6 +20,9 @@ import com.example.credit_service_project.service.utils.OperationUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class OperationFabricImp implements OperationFabric {
@@ -36,14 +39,13 @@ public class OperationFabricImp implements OperationFabric {
     private final CreateCardServiceImp createCardService;
 
 
-
     @Override
-    public GetOperationsServiceImp activateGetOperation() {
-        return new GetOperationsServiceImp(repository, util);
+    public OperationService<List<OperationResponseDTO>, GetBelongsAccountOperationsRequest> getBelongsAccountOperations() {
+        return new GetOperationsServiceImp(repository, util, searchAccountsService);
     }
 
     @Override
-    public OperationService<OperationResponseDTO, SearchOperationRequest> searchOperation() {
+    public OperationService<OperationResponseDTO, UUID> searchOperation() {
         return new SearchOperationServiceImp(repository, util);
     }
 

@@ -1,8 +1,8 @@
 package com.example.credit_service_project.controllers;
 
 import com.example.credit_service_project.DTO.operationDTO.AddOperationPaymentRequest;
+import com.example.credit_service_project.DTO.operationDTO.GetBelongsAccountOperationsRequest;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
-import com.example.credit_service_project.DTO.operationDTO.SearchOperationRequest;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.fabrics.operation.OperationFabricImp;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/operation")
@@ -25,8 +26,8 @@ public class OperationController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
-    public List<OperationResponseDTO> get() {
-        return fabric.activateGetOperation().execute();
+    public List<OperationResponseDTO> get(@RequestBody GetBelongsAccountOperationsRequest request) {
+        return fabric.getBelongsAccountOperations().execute(request);
 
     }
 
@@ -36,9 +37,9 @@ public class OperationController {
         return fabric.updateOperation().execute(request);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public OperationResponseDTO search(@RequestBody SearchOperationRequest request) {
-        return fabric.searchOperation().execute(request);
+    public OperationResponseDTO search(@PathVariable UUID id) {
+        return fabric.searchOperation().execute(id);
     }
 }

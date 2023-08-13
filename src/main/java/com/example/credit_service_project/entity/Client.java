@@ -1,6 +1,7 @@
 package com.example.credit_service_project.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
@@ -21,10 +22,12 @@ public class Client {
 
     @Column(name = "name")
     @NotNull(message = "Name must not be null!")
+    @NotEmpty(message = "Name must not be empty!")
     private String name;
 
     @Column(name = "surname")
     @NotNull(message = "Surname must not be null!")
+    @NotEmpty(message = "Surname must not be empty!")
     private String surname;
 
     @Column(name = "income")
