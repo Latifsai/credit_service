@@ -4,7 +4,7 @@ import com.example.credit_service_project.DTO.accountDTO.*;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.entity.enums.AccountStatus;
-import com.example.credit_service_project.generator.AccountGenerator;
+import com.example.credit_service_project.service.generator.AccountGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

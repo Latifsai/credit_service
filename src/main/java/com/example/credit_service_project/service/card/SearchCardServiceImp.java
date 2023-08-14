@@ -1,6 +1,7 @@
 package com.example.credit_service_project.service.card;
 
 import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
+import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.CardService;
@@ -31,5 +32,9 @@ public class SearchCardServiceImp implements CardService<CardDTOResponse, UUID> 
 
     public Optional<Card> findCardById(UUID id) {
         return repository.findById(id);
+    }
+
+    public Optional<Card> findByAccount(Account account) {
+        return repository.findByAccount(account);
     }
 }

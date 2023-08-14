@@ -4,7 +4,7 @@ import com.example.credit_service_project.DTO.ProductDTO.AddProductDTORequest;
 import com.example.credit_service_project.DTO.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.DTO.ProductDTO.UpdateProductDTORequest;
 import com.example.credit_service_project.entity.Product;
-import com.example.credit_service_project.generator.ProductGenerator;
+import com.example.credit_service_project.service.generator.ProductGenerator;
 import com.example.credit_service_project.service.errors.ErrorsMessage;
 import com.example.credit_service_project.service.errors.exceptions.CurrencyException;
 import org.springframework.stereotype.Service;

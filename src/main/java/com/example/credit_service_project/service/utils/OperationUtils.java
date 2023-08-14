@@ -28,7 +28,6 @@ public class OperationUtils {
         return card;
     }
 
-
     private boolean handleDebit(OperationType type) {
         if (type.equals(REPLENISHMENT)) {
             return false;
@@ -36,10 +35,6 @@ public class OperationUtils {
             return true;
         }
     }
-
-
-
-
 
     public Operation updateOperation(Operation operation, UpdateOperationsRequest request) {
         if (request.getOperationDetails() != null && !request.getOperationDetails().trim().isEmpty()) {
@@ -62,7 +57,6 @@ public class OperationUtils {
         return request.getType() != null;
     }
 
-
     public Account payBill(Account account, PaymentSchedule paymentSchedule, Card card) {
         if (paymentSchedule.getPaymentDate().equals(LocalDate.now())) {
             BigDecimal balance = account.getBalance().subtract(getSumToPay(paymentSchedule));
@@ -76,8 +70,6 @@ public class OperationUtils {
         return account;
     }
 
-
-
     public BigDecimal getSumToPay(PaymentSchedule p) {
         return p.getMainPayment().add(p.getRatePayment()).add(p.getSurcharge());
     }
@@ -86,7 +78,7 @@ public class OperationUtils {
         Operation operation = new Operation();
         operation.setAccount(account);
         operation.setSum(getSumToPay(p));
-        operation.setType(MONTHLY_PAYMENT);
+        operation.setType(request.getType());
         operation.setOperationEndMark(LocalDateTime.now());
         operation.setOperationDetails(request.getOperationDetails());
         operation.setDebit(handleDebit(operation.getType()));
@@ -107,4 +99,5 @@ public class OperationUtils {
                 operation.getCurrency()
         );
     }
+
 }

@@ -20,7 +20,7 @@ public class OperationController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public OperationResponseDTO add(@RequestBody AddOperationPaymentRequest request) {
+    public List<OperationResponseDTO> add(@RequestBody AddOperationPaymentRequest request) {
         return fabric.addPaymentOperation().execute(request);
     }
 

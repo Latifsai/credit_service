@@ -1,4 +1,4 @@
-package com.example.credit_service_project.generator;
+package com.example.credit_service_project.service.generator;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;

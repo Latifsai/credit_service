@@ -3,6 +3,7 @@ package com.example.credit_service_project.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -32,11 +33,10 @@ public class PaymentSchedule {
     private LocalDate paymentDate;
 
     @Column(name = "actual_payment_date")
-    @NotNull(message = "actualPaymentDate must not be null!")
     private LocalDate actualPaymentDate;
 
     @Column(name = "surcharge")
-    @Positive(message = "surcharge must not be negative!")
+    @PositiveOrZero(message = "surcharge must not be negative!")
     private BigDecimal surcharge; // пеня(посчитаная)
 
     @Column(name = "main_payment")

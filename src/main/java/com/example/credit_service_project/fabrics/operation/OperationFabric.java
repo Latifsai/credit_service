@@ -18,5 +18,5 @@ public interface OperationFabric {
 
     OperationService<OperationResponseDTO, UpdateOperationsRequest> updateOperation();
 
-    OperationService<OperationResponseDTO, AddOperationPaymentRequest> addPaymentOperation();
+    OperationService<List<OperationResponseDTO>, AddOperationPaymentRequest> addPaymentOperation();
 }

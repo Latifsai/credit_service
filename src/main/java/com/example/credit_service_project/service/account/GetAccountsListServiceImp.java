@@ -1,6 +1,7 @@
 package com.example.credit_service_project.service.account;
 
 import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.service.utils.AccountUtil;
 import jakarta.transaction.Transactional;
@@ -21,5 +22,9 @@ public class GetAccountsListServiceImp {
         return repository.findAll().stream()
                 .map(account -> util.convertAccountToAddResponse(account))
                 .toList();
+    }
+
+    public List<Account> getAllAccounts() {
+        return repository.findAll();
     }
 }

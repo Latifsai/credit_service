@@ -3,6 +3,7 @@ package com.example.credit_service_project.service.errors;
 public class ErrorsMessage {
 
     public static final String NOT_FOUND_ACCOUNT_MESSAGE = "NO SUCH ACCOUNT WAS FOUND!";
+    public static final String NOT_FOUND_ACCOUNT_LIST_MESSAGE = "NO SUCH ACCOUNTS WAS CREATED!";
     public static final String NOT_FOUND_CARD_MESSAGE = "NO SUCH CARD WAS FOUND!";
 
     public static final String NOT_FOUND_OPERATION_MESSAGE = "NO SUCH OPERATION WAS FOUND!";

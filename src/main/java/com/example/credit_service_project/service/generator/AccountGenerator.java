@@ -1,4 +1,4 @@
-package com.example.credit_service_project.generator;
+package com.example.credit_service_project.service.generator;
 
 import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
 import org.springframework.stereotype.Component;
