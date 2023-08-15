@@ -1,4 +1,4 @@
-package com.example.credit_service_project.service.errors.exceptions;
+package com.example.credit_service_project.validation.exceptions;
 
 public class PaymentException extends RuntimeException{
     public PaymentException(String message) {

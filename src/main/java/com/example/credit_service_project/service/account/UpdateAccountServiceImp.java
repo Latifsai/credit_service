@@ -4,14 +4,12 @@ import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.service.AccountService;
-import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.AccountNotFoundException;
+import com.example.credit_service_project.validation.ErrorsMessage;
+import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
 import com.example.credit_service_project.service.utils.AccountUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

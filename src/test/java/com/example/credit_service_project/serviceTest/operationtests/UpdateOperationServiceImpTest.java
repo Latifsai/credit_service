@@ -3,7 +3,7 @@ package com.example.credit_service_project.serviceTest.operationtests;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.entity.enums.OperationType;
 import com.example.credit_service_project.repository.OperationRepository;
-import com.example.credit_service_project.service.errors.exceptions.OperationException;
+import com.example.credit_service_project.validation.exceptions.OperationException;
 import com.example.credit_service_project.service.operation.UpdateOperationServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;

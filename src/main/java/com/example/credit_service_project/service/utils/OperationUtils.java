@@ -8,8 +8,8 @@ import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.entity.enums.OperationType;
-import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.OperationException;
+import com.example.credit_service_project.validation.ErrorsMessage;
+import com.example.credit_service_project.validation.exceptions.OperationException;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

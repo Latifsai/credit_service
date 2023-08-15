@@ -1,8 +1,8 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.service.errors.ErrorException;
-import com.example.credit_service_project.service.errors.ExceptionResponse;
-import com.example.credit_service_project.service.errors.exceptions.*;
+import com.example.credit_service_project.validation.ErrorException;
+import com.example.credit_service_project.validation.ExceptionResponse;
+import com.example.credit_service_project.validation.exceptions.*;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -12,9 +12,9 @@ import com.example.credit_service_project.service.account.GetAccountsListService
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
-import com.example.credit_service_project.service.errors.ErrorsMessage;
-import com.example.credit_service_project.service.errors.exceptions.AccountNotFoundException;
-import com.example.credit_service_project.service.errors.exceptions.CardNotFoundException;
+import com.example.credit_service_project.validation.ErrorsMessage;
+import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
+import com.example.credit_service_project.validation.exceptions.CardNotFoundException;
 import com.example.credit_service_project.service.paymentSchedule.AddPaymentScheduleServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
