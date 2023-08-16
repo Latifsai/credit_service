@@ -27,7 +27,7 @@ public class ManagerController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public ManagerResponseDTO searchManager(@PathVariable @NotNull UUID id) {
+    public ManagerResponseDTO searchManager(@PathVariable("id") @NotNull UUID id) {
         return fabric.search().execute(id);
     }
 
@@ -44,7 +44,7 @@ public class ManagerController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ManagerResponseDTO deleteManager(@PathVariable @NotNull UUID id) {
         return fabric.delete().execute(id);
     }

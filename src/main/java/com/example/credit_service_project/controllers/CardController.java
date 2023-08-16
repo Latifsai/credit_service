@@ -38,7 +38,7 @@ public class CardController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public CardDTOResponse searchCard(@PathVariable @NotNull UUID id) {
+    public CardDTOResponse searchCard(@PathVariable("id") @NotNull UUID id) {
         return fabric.activateSearchCard().execute(id);
     }
 

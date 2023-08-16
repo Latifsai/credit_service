@@ -1,18 +1,16 @@
 package com.example.credit_service_project.service.generator;
 
 import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.Random;
 
-@Component
 public class AccountGenerator {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞabcdrfgilklmopqrstuvwxyzäöü0123456789";
 
-    public String createRandomAccountNumber(Integer length) {
+    public static String createRandomAccountNumber(Integer length) {
         StringBuilder stringBuilder = new StringBuilder(length);
         Random random = new SecureRandom();
 
@@ -23,15 +21,15 @@ public class AccountGenerator {
         return stringBuilder.toString();
     }
 
-    public LocalDate createOpeningDay() {
+    public static LocalDate createOpeningDay() {
         return LocalDate.now();
     }
 
-    public LocalDate LocalDateCreateClosingDate(Integer yearsAmount) {
+    public static LocalDate LocalDateCreateClosingDate(Integer yearsAmount) {
         return createOpeningDay().plusYears(yearsAmount);
     }
 
-    public BigDecimal getUnpaidLoanDebt(AddAccountDTORequest request) {
+    public static BigDecimal getUnpaidLoanDebt(AddAccountDTORequest request) {
         if (request.getLoanDebt().intValue() == 0 && request.getPercentageDebt().intValue() == 0){
             return new BigDecimal(0);
         }
@@ -39,7 +37,7 @@ public class AccountGenerator {
         // доработать
     }
 
-    public BigDecimal getUnpaidPercentageLoanDebt(AddAccountDTORequest request) {
+    public static BigDecimal getUnpaidPercentageLoanDebt(AddAccountDTORequest request) {
         if (request.getLoanDebt().intValue() == 0 && request.getPercentageDebt().intValue() == 0){
             return new BigDecimal(0);
         }

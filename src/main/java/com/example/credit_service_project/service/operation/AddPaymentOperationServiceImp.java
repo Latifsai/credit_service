@@ -45,7 +45,20 @@ public class AddPaymentOperationServiceImp implements OperationService<List<Oper
 
     @Override
     public List<OperationResponseDTO> execute(AddOperationPaymentRequest request) {
+
+        //передаваемый тип операции, а если будет досрочное погашнеие или оплата с пеней
+        // продумать механизм, который будет определять тип операции
+
         List<Account> accounts = getAccountsListService.getAllAccounts();
+
+        // в реквесте есть поле operationDetails соотвественно оно будет распространяться на все платежи сделанные сегодня,
+        // хотя может быть что описание вообще не подхожит под платеж. Найти решение проблемы
+        // возможные варинты
+        //1) Убрать само поле(bad)
+        //2) Создать механим, котрые относительно кредита будет определять описание к каждой операции:
+            //1) сделать класс со стандартными сообщениями
+            //2) присваивать это сообщенеи в сервисе
+
         List<OperationResponseDTO> donePaymentsList = new ArrayList<>();
 
         if (accounts.isEmpty()) {
@@ -69,6 +82,7 @@ public class AddPaymentOperationServiceImp implements OperationService<List<Oper
                 Operation savedOperation = saveOperation(operation);
 
                 scheduleDailyPaymentCheck(request);
+
                 donePaymentsList.add(util.convertOperationToResponseDTO(savedOperation));
             }
         }

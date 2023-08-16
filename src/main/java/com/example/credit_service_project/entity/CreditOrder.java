@@ -46,9 +46,14 @@ public class CreditOrder {
     @NotNull(message = "clientIncome must not be null!")
     private BigDecimal clientIncome;
 
-    @Column(name = "period_months")
+    @Column(name = "max_period_months")
     @Positive(message = "periodMonths must not be negative!")
-    private Integer periodMonths;
+    private Integer maxPeriodMonths;
+
+
+    @Column(name = "min_period_months")
+    @Positive(message = "periodMonths must not be negative!")
+    private Integer minPeriodMonths;
 
     @Column(name = "client_monthly_expenditure")
     @Positive(message = "periodMonths must not be negative!")

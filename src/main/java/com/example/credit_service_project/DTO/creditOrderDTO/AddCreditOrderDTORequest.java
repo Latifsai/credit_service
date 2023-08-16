@@ -1,15 +1,14 @@
-package com.example.credit_service_project.DTO.creditORDERDTO;
+package com.example.credit_service_project.DTO.creditOrderDTO;
 
 import lombok.Value;
 
 import java.math.BigDecimal;
-import java.util.UUID;
+import java.math.BigInteger;
 
 @Value
 public class AddCreditOrderDTORequest {
-    UUID productID;
-    String productName;
+    BigInteger productID;
     BigDecimal clientIncome;
     BigDecimal clientMonthlyExpenditure;
-    Integer periodMonths;
+    Integer numberLength;
 }

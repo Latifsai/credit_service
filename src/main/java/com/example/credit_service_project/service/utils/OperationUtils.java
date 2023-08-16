@@ -61,7 +61,7 @@ public class OperationUtils {
         if (paymentSchedule.getPaymentDate().equals(LocalDate.now())) {
             BigDecimal balance = account.getBalance().subtract(getSumToPay(paymentSchedule));
             if (balance.intValue() < 0) throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
-
+            // ЗДЕСЬ РЕАЛИЗОВАТЬ МЕХАНИЗМ НАЧИСЛЕНИЯ ПЕНИ
             account.setBalance(balance);
             paymentSchedule.setActualPaymentDate(LocalDate.now());
             paymentSchedule.setPaid(true);

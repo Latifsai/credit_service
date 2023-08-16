@@ -13,21 +13,19 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AccountUtil {
 
-    private final AccountGenerator accountGenerator;
-
     public Account convertAddRequestToAccount(AddAccountDTORequest request, Client client) {
         Account account = new Account();
         account.setClient(client);
         account.setCountry(request.getCounty());
-        account.setAccountNumber(accountGenerator.createRandomAccountNumber(request.getAccountNumberLength()));
+        account.setAccountNumber(AccountGenerator.createRandomAccountNumber(request.getAccountNumberLength()));
         account.setLoanDebt(request.getLoanDebt());
         account.setPercentageDebt(request.getPercentageDebt());
         account.setStatus(AccountStatus.ACTIVE);
         account.setBalance(request.getBalance());
-        account.setOpeningDate(accountGenerator.createOpeningDay());
-        account.setClosingDate(accountGenerator.LocalDateCreateClosingDate(request.getYearsAmountForClosingDate()));
-        account.setUnpaidLoanDebt(accountGenerator.getUnpaidLoanDebt(request));
-        account.setUnpaidPercentageLoanDebt(accountGenerator.getUnpaidPercentageLoanDebt(request));
+        account.setOpeningDate(AccountGenerator.createOpeningDay());
+        account.setClosingDate(AccountGenerator.LocalDateCreateClosingDate(request.getYearsAmountForClosingDate()));
+        account.setUnpaidLoanDebt(AccountGenerator.getUnpaidLoanDebt(request));
+        account.setUnpaidPercentageLoanDebt(AccountGenerator.getUnpaidPercentageLoanDebt(request));
         account.setCurrency(request.getCurrency());
         return account;
     }

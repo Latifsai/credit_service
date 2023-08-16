@@ -39,7 +39,7 @@ public class OperationController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public OperationResponseDTO search(@PathVariable UUID id) {
+    public OperationResponseDTO search(@PathVariable("id") UUID id) {
         return fabric.searchOperation().execute(id);
     }
 }

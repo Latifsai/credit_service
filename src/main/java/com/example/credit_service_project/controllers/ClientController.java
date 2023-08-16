@@ -28,7 +28,7 @@ public class ClientController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public ClientResponseDTO searchManager(@PathVariable @NotNull UUID id) {
+    public ClientResponseDTO searchManager(@PathVariable("id") @NotNull UUID id) {
         return fabric.searchClient().execute(id);
     }
 
