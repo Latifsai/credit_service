@@ -89,13 +89,28 @@ public class AddPaymentOperationServiceImp implements OperationService<List<Oper
 
             job.getJobDataMap().put("request", request);
 
-            Trigger trigger = TriggerBuilder.newTrigger()
+            Trigger mornignTrigger = TriggerBuilder.newTrigger()
                     .withIdentity("paymentCheckTrigger", "paymentGroup")
-                    .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(12, 0))
+                    .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(8, 0))
                     .forJob(job)
                     .build();
 
-            scheduler.scheduleJob(job, trigger);
+            Trigger dayTrigger = TriggerBuilder.newTrigger()
+                    .withIdentity("paymentCheckTrigger", "paymentGroup")
+                    .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(13, 0))
+                    .forJob(job)
+                    .build();
+
+            Trigger evningTrigger = TriggerBuilder.newTrigger()
+                    .withIdentity("paymentCheckTrigger", "paymentGroup")
+                    .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(21, 0))
+                    .forJob(job)
+                    .build();
+
+
+            scheduler.scheduleJob(job, mornignTrigger);
+            scheduler.scheduleJob(job, dayTrigger);
+            scheduler.scheduleJob(job, evningTrigger);
         } catch (SchedulerException e) {
             throw new RuntimeException(e.getMessage());
         }
