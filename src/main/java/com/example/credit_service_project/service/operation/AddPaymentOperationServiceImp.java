@@ -1,24 +1,22 @@
 package com.example.credit_service_project.service.operation;
 
-import com.example.credit_service_project.DTO.operationDTO.AddOperationPaymentRequest;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.repository.OperationRepository;
-import com.example.credit_service_project.service.OperationService;
 import com.example.credit_service_project.service.account.GetAccountsListServiceImp;
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
-import com.example.credit_service_project.validation.exceptions.CardNotFoundException;
 import com.example.credit_service_project.service.paymentSchedule.AddPaymentScheduleServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.service.utils.PaymentCheckJob;
+import com.example.credit_service_project.validation.ErrorsMessage;
+import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
+import com.example.credit_service_project.validation.exceptions.CardNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.quartz.*;
@@ -32,7 +30,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class AddPaymentOperationServiceImp implements OperationService<List<OperationResponseDTO>, AddOperationPaymentRequest> {
+public class AddPaymentOperationServiceImp {
 
     private final OperationRepository repository;
     private final OperationUtils util;
@@ -43,22 +41,9 @@ public class AddPaymentOperationServiceImp implements OperationService<List<Oper
     private final CreateCardServiceImp createCardService;
     private final GetAccountsListServiceImp getAccountsListService;
 
-    @Override
-    public List<OperationResponseDTO> execute(AddOperationPaymentRequest request) {
-
-        //передаваемый тип операции, а если будет досрочное погашнеие или оплата с пеней
-        // продумать механизм, который будет определять тип операции
+    public List<OperationResponseDTO> execute() {
 
         List<Account> accounts = getAccountsListService.getAllAccounts();
-
-        // в реквесте есть поле operationDetails соотвественно оно будет распространяться на все платежи сделанные сегодня,
-        // хотя может быть что описание вообще не подхожит под платеж. Найти решение проблемы
-        // возможные варинты
-        //1) Убрать само поле(bad)
-        //2) Создать механим, котрые относительно кредита будет определять описание к каждой операции:
-            //1) сделать класс со стандартными сообщениями
-            //2) присваивать это сообщенеи в сервисе
-
         List<OperationResponseDTO> donePaymentsList = new ArrayList<>();
 
         if (accounts.isEmpty()) {
@@ -69,19 +54,19 @@ public class AddPaymentOperationServiceImp implements OperationService<List<Oper
             PaymentSchedule paymentSchedule = getNearestPaymentService.getNearestPayment(account);
 
             if (paymentSchedule != null && paymentSchedule.getPaymentDate().equals(LocalDate.now())) {
-                Card card = searchCardService.findByAccount(account)
-                        .orElseThrow(() -> new CardNotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE));
+                Card card = searchCardService.findByAccount(account);
 
                 Account accountAfterOperation = util.payBill(account, paymentSchedule, card);
 
+                // сумма долга и процентная сумма тоже должны изменяться
                 updateAccountService.saveUpdatedAccount(accountAfterOperation);
                 addPaymentScheduleService.savePayment(paymentSchedule);
                 createCardService.saveCard(card);
 
-                Operation operation = util.convertAddOperationPaymentRequestToOperation(request, account, paymentSchedule);
+                Operation operation = util.convertDataToOperationForPayment(account, paymentSchedule);
                 Operation savedOperation = saveOperation(operation);
 
-                scheduleDailyPaymentCheck(request);
+                scheduleDailyPaymentCheck();
 
                 donePaymentsList.add(util.convertOperationToResponseDTO(savedOperation));
             }
@@ -93,7 +78,7 @@ public class AddPaymentOperationServiceImp implements OperationService<List<Oper
         return repository.save(operation);
     }
 
-    public void scheduleDailyPaymentCheck(AddOperationPaymentRequest request) {
+    public void scheduleDailyPaymentCheck() {
         try {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             JobDetail job = JobBuilder.newJob(PaymentCheckJob.class)
@@ -101,7 +86,7 @@ public class AddPaymentOperationServiceImp implements OperationService<List<Oper
                     .storeDurably(true)
                     .build();
 
-            job.getJobDataMap().put("request", request);
+
 
             Trigger mornignTrigger = TriggerBuilder.newTrigger()
                     .withIdentity("paymentCheckTrigger", "paymentGroup")
@@ -121,10 +106,10 @@ public class AddPaymentOperationServiceImp implements OperationService<List<Oper
                     .forJob(job)
                     .build();
 
-
             scheduler.scheduleJob(job, mornignTrigger);
             scheduler.scheduleJob(job, dayTrigger);
             scheduler.scheduleJob(job, evningTrigger);
+
         } catch (SchedulerException e) {
             throw new RuntimeException(e.getMessage());
         }

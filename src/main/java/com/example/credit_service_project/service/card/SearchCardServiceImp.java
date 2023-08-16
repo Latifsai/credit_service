@@ -25,16 +25,17 @@ public class SearchCardServiceImp implements CardService<CardDTOResponse, UUID> 
 
     @Override
     public CardDTOResponse execute(UUID id) {
-        Optional<Card> card = findCardById(id);
-        return card.map(c -> utils.convertCardToAddDTOResponse(c))
+        Card card = findCardById(id);
+        return utils.convertCardToAddDTOResponse(card);
+    }
+
+    public Card findCardById(UUID id) {
+        return repository.findById(id)
                 .orElseThrow(() -> new CardNotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE));
     }
 
-    public Optional<Card> findCardById(UUID id) {
-        return repository.findById(id);
-    }
-
-    public Optional<Card> findByAccount(Account account) {
-        return repository.findByAccount(account);
+    public Card findByAccount(Account account) {
+        return repository.findByAccount(account)
+                .orElseThrow(() -> new CardNotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE));
     }
 }

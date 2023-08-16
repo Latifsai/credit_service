@@ -7,8 +7,6 @@ import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.CardService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
 import com.example.credit_service_project.service.utils.CardUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +23,7 @@ public class CreateCardServiceImp implements CardService<CardDTOResponse, AddCar
 
     @Override
     public CardDTOResponse execute(AddCardDTORequest request) {
-        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
-                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.UNABLE_TO_ADD_CARD_MESSAGE));
+        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 
         Card card = util.convertAddRequestToEntity(request, account);
         Card savedCard = saveCard(card);

@@ -4,8 +4,6 @@ import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.service.AccountService;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
 import com.example.credit_service_project.service.utils.AccountUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +20,8 @@ public class UpdateAccountServiceImp implements AccountService<AccountDTORespons
 
     @Override
     public AccountDTOResponse execute(UpdateAccountRequest request) {
-        Account accountToFind = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
-                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
-        var updatedAccount = util.updateAccount(accountToFind, request);
+        Account accountToFind = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
+        Account updatedAccount = util.updateAccount(accountToFind, request);
         createAccountService.saveAccount(updatedAccount);
         return util.convertAccountToAddResponse(updatedAccount);
     }

@@ -6,8 +6,6 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.service.PaymentScheduleService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
 import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +21,7 @@ public class GetNearestPaymentServiceImp implements PaymentScheduleService<Payme
 
     @Override
     public PaymentResponseDTO execute(PaymentsBelongsToAccountRequest request) {
-        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
-                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
+        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 
         PaymentSchedule nearestPayment = getNearestPayment(account);
         return util.convertEntityToPaymentResponse(nearestPayment);

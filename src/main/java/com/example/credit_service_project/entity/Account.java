@@ -92,9 +92,7 @@ public class Account {
             orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     private List<PaymentSchedule> paymentSchedules;
 
-    @OneToOne(mappedBy = "account",
-            cascade = ALL, fetch = FetchType.EAGER)
-   // @JsonIgnore // to ent a cirle
+    @OneToOne(mappedBy = "account", cascade = ALL, fetch = FetchType.EAGER)
     private Card card;
 
     @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, orphanRemoval = true)

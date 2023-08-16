@@ -7,9 +7,6 @@ import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.service.CardService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
-import com.example.credit_service_project.validation.exceptions.CardNotFoundException;
 import com.example.credit_service_project.service.utils.CardUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,11 +26,9 @@ public class UpdateCardServiceImp implements CardService<CardDTOResponse, Update
 
     @Override
     public CardDTOResponse execute(UpdateCardDTORequest request) {
-        Card card = searchCardService.findCardById(request.getId())
-                .orElseThrow(() -> new CardNotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE));
+        Card card = searchCardService.findCardById(request.getId());
 
-        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
-                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
+        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 
         Card updatedCard = utils.updateCard(card, request);
         updateCard(updatedCard);

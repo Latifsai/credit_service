@@ -1,6 +1,5 @@
 package com.example.credit_service_project.fabrics.operation;
 
-import com.example.credit_service_project.DTO.operationDTO.AddOperationPaymentRequest;
 import com.example.credit_service_project.DTO.operationDTO.GetBelongsAccountOperationsRequest;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
@@ -11,10 +10,7 @@ import com.example.credit_service_project.service.account.SearchAccountsServiceI
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
-import com.example.credit_service_project.service.operation.AddPaymentOperationServiceImp;
-import com.example.credit_service_project.service.operation.GetOperationsServiceImp;
-import com.example.credit_service_project.service.operation.SearchOperationServiceImp;
-import com.example.credit_service_project.service.operation.UpdateOperationServiceImp;
+import com.example.credit_service_project.service.operation.*;
 import com.example.credit_service_project.service.paymentSchedule.AddPaymentScheduleServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
@@ -57,8 +53,20 @@ public class OperationFabricImp implements OperationFabric {
     }
 
     @Override
-    public OperationService<List<OperationResponseDTO>, AddOperationPaymentRequest> addPaymentOperation() {
+    public AddPaymentOperationServiceImp addPaymentOperation() {
         return new AddPaymentOperationServiceImp(repository, util, getNearestPaymentService, updateAccountService,
                 addPaymentScheduleService, searchCardService, createCardService, getAccountsListService);
+    }
+
+    @Override
+    public EarlyPaymentOperationService earlyPaymentOperationService() {
+        return new EarlyPaymentOperationService(searchAccountsService, searchCardService, repository, util,
+                updateAccountService, createCardService);
+    }
+
+    @Override
+    public ReplenishmentOperationService replenishmentOperationService() {
+        return new ReplenishmentOperationService(searchAccountsService, searchCardService, repository, util,
+                updateAccountService, createCardService);
     }
 }

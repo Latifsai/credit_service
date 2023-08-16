@@ -1,6 +1,6 @@
 package com.example.credit_service_project.service.utils;
 
-import com.example.credit_service_project.DTO.operationDTO.AddOperationPaymentRequest;
+import com.example.credit_service_project.DTO.operationDTO.AddOperationEarlyPaymentRequest;
 import com.example.credit_service_project.service.operation.AddPaymentOperationServiceImp;
 import lombok.RequiredArgsConstructor;
 import org.quartz.Job;
@@ -16,7 +16,7 @@ public class PaymentCheckJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        AddOperationPaymentRequest request = (AddOperationPaymentRequest) jobExecutionContext.getJobDetail().getJobDataMap().get("request");
-        paymentService.execute(request);
+        AddOperationEarlyPaymentRequest request = (AddOperationEarlyPaymentRequest) jobExecutionContext.getJobDetail().getJobDataMap().get("request");
+        paymentService.execute();
     }
 }

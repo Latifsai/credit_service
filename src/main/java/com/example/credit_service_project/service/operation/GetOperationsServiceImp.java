@@ -6,8 +6,6 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.OperationService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +31,7 @@ public class GetOperationsServiceImp implements OperationService<List<OperationR
 
     @Override
     public List<OperationResponseDTO> execute(GetBelongsAccountOperationsRequest request) {
-        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())
-                .orElseThrow(() -> new AccountNotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
+        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 
         return repository.findAllByAccount(account).stream()
                 .map(util::convertOperationToResponseDTO)
