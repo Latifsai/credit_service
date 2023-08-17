@@ -2,13 +2,11 @@ package com.example.credit_service_project.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 import static jakarta.persistence.CascadeType.*;
 
@@ -34,14 +32,13 @@ public class Agreement {
     private LocalDate agreementDate;
 
     @Column(name = "termination_date")
-    @NotNull(message = "TerminationDate must not be null!")
     private LocalDate terminationDate;
 
     @Column(name = "active")
     private boolean active;
 
-    @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "credit_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "agreement",cascade = {MERGE, PERSIST, REFRESH},
+            fetch = FetchType.LAZY)
     private Credit credit;
 
     @Override

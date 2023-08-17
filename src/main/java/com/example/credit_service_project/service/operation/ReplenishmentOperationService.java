@@ -37,7 +37,7 @@ public class ReplenishmentOperationService implements OperationService<Operation
         Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getNumber());
         Card card = cardSearchService.findByAccount(account);
 
-        if (request.getSum().intValueExact() < 0) {
+        if (request.getSum().intValue() < 0) {
             throw new OperationException(ErrorsMessage.NEGATIVE_SUM_EXCEPTION);
         }
         BigDecimal newBalance = account.getBalance().add(request.getSum());
@@ -47,7 +47,7 @@ public class ReplenishmentOperationService implements OperationService<Operation
         updateAccountService.saveUpdatedAccount(account);
         updateCardService.saveCard(updatedCard);
 
-        Operation operation = util.convertDataToOperationForREPLENISHMENT(account);
+        Operation operation = util.convertDataToOperationForREPLENISHMENT(request, account);
         repository.save(operation);
         return util.convertOperationToResponseDTO(operation);
     }

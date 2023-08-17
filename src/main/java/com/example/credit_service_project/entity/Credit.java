@@ -69,13 +69,14 @@ public class Credit {
     @Pattern(regexp = "^[A-Z]{3}$",message = "Format is not allowed in service!")
     private String currency;
 
-    @OneToOne(mappedBy = "credit", fetch = FetchType.LAZY,
-            orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
     // связь между таблицами будет установлена через поле credit в классе Account
     //<- обратная сторона
 
-    @OneToOne(mappedBy = "credit", orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+    @OneToOne( orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+    @JoinColumn(name = "agreement_id", referencedColumnName = "id")
     private Agreement agreement;
 
     @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, orphanRemoval = true, fetch = FetchType.LAZY)

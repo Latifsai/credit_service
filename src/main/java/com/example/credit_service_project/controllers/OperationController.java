@@ -28,6 +28,7 @@ public class OperationController {
         return fabric.earlyPaymentOperationService().execute(request);
     }
 
+    // реализовать обьединение запросов
     @PostMapping("/refill")
     @ResponseStatus(HttpStatus.CREATED)
     public OperationResponseDTO add(@RequestBody AddOperationReplenishmentRequest request) {

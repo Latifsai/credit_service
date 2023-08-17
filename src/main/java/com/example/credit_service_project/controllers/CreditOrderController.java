@@ -40,4 +40,11 @@ public class CreditOrderController {
     public CreditOrderResponseDTO update(@RequestBody UpdateCreditOrderDTORequest request) {
         return fabric.update().execute(request);
     }
+
+    @PutMapping("/review")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<CreditOrderResponseDTO>  consideration() {
+        return fabric.considerationOrderService().execute();
+    }
+
 }

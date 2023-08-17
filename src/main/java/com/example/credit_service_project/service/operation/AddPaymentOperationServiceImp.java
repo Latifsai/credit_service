@@ -13,14 +13,11 @@ import com.example.credit_service_project.service.card.SearchCardServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.AddPaymentScheduleServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
-import com.example.credit_service_project.service.utils.PaymentCheckJob;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
-import com.example.credit_service_project.validation.exceptions.CardNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -41,7 +38,9 @@ public class AddPaymentOperationServiceImp {
     private final CreateCardServiceImp createCardService;
     private final GetAccountsListServiceImp getAccountsListService;
 
-    public List<OperationResponseDTO> execute() {
+
+    @Scheduled(cron = "0 0 8,13,21 * * *")
+        public List<OperationResponseDTO> execute() {
 
         List<Account> accounts = getAccountsListService.getAllAccounts();
         List<OperationResponseDTO> donePaymentsList = new ArrayList<>();
@@ -66,7 +65,6 @@ public class AddPaymentOperationServiceImp {
                 Operation operation = util.convertDataToOperationForPayment(account, paymentSchedule);
                 Operation savedOperation = saveOperation(operation);
 
-                scheduleDailyPaymentCheck();
 
                 donePaymentsList.add(util.convertOperationToResponseDTO(savedOperation));
             }
@@ -78,40 +76,4 @@ public class AddPaymentOperationServiceImp {
         return repository.save(operation);
     }
 
-    public void scheduleDailyPaymentCheck() {
-        try {
-            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-            JobDetail job = JobBuilder.newJob(PaymentCheckJob.class)
-                    .withIdentity("paymentCheckJob", "paymentGroup")
-                    .storeDurably(true)
-                    .build();
-
-
-
-            Trigger mornignTrigger = TriggerBuilder.newTrigger()
-                    .withIdentity("paymentCheckTrigger", "paymentGroup")
-                    .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(8, 0))
-                    .forJob(job)
-                    .build();
-
-            Trigger dayTrigger = TriggerBuilder.newTrigger()
-                    .withIdentity("paymentCheckTrigger", "paymentGroup")
-                    .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(13, 0))
-                    .forJob(job)
-                    .build();
-
-            Trigger evningTrigger = TriggerBuilder.newTrigger()
-                    .withIdentity("paymentCheckTrigger", "paymentGroup")
-                    .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(21, 0))
-                    .forJob(job)
-                    .build();
-
-            scheduler.scheduleJob(job, mornignTrigger);
-            scheduler.scheduleJob(job, dayTrigger);
-            scheduler.scheduleJob(job, evningTrigger);
-
-        } catch (SchedulerException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
 }

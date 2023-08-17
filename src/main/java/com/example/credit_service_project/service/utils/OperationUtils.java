@@ -1,5 +1,6 @@
 package com.example.credit_service_project.service.utils;
 
+import com.example.credit_service_project.DTO.operationDTO.AddOperationReplenishmentRequest;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.entity.Account;
@@ -118,10 +119,10 @@ public class OperationUtils {
         return operation;
     }
 
-    public Operation convertDataToOperationForREPLENISHMENT(Account account) {
+    public Operation convertDataToOperationForREPLENISHMENT(AddOperationReplenishmentRequest request, Account account) {
         Operation operation = new Operation();
         operation.setAccount(account);
-        operation.setSum(getAmountForEarlyPayment(account));
+        operation.setSum(request.getSum());
         operation.setType(REPLENISHMENT);
         operation.setOperationEndMark(LocalDateTime.now());
         operation.setOperationDetails(fillDetails(operation.getType(), account));

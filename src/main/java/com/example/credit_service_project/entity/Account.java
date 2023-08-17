@@ -76,8 +76,7 @@ public class Account {
     @Column(name = "currency")
     private String currency;
 
-    @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "credit_id", referencedColumnName = "id")
+    @OneToOne( mappedBy = "account",cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
     private Credit credit;
     //будет создан раздел credit_id основанный на id из класса Credit,
     // по этому полу будет JOIN

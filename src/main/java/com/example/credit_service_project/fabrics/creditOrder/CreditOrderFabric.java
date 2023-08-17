@@ -7,4 +7,5 @@ public interface CreditOrderFabric {
     GetAllCreditService getAll();
     SearchCreditOrderServiceImp search();
     UpdateCreditOrderServiceImp update();
+    ConsiderationOrderService considerationOrderService();
 }

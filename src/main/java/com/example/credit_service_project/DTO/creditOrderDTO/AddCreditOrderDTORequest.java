@@ -4,11 +4,11 @@ import lombok.Value;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.UUID;
 
 @Value
 public class AddCreditOrderDTORequest {
     BigInteger productID;
-    BigDecimal clientIncome;
-    BigDecimal clientMonthlyExpenditure;
+    UUID clientID;
     Integer numberLength;
 }

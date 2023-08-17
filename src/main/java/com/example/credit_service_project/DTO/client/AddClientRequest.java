@@ -10,6 +10,10 @@ public class AddClientRequest {
     UUID managerID;
     String name;
     String surname;
-    BigDecimal income;
+    BigDecimal salary;
+    BigDecimal passiveIncome;
     BigDecimal expenses;
+    String address;
+    String email;
+    String phone;
 }

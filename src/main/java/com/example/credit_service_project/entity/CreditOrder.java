@@ -2,10 +2,7 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -23,6 +20,7 @@ import static jakarta.persistence.CascadeType.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreditOrder {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -42,22 +40,33 @@ public class CreditOrder {
     @NotNull(message = "creationDate must not be null!")
     private LocalDate creationDate;
 
+    @Column(name = "last_update_date")
+    @NotNull(message = "creationDate must not be null!")
+    private LocalDate lastUpdateDate;
+
     @Column(name = "client_income")
-    @NotNull(message = "clientIncome must not be null!")
-    private BigDecimal clientIncome;
-
-    @Column(name = "max_period_months")
-    @Positive(message = "periodMonths must not be negative!")
-    private Integer maxPeriodMonths;
-
-
-    @Column(name = "min_period_months")
-    @Positive(message = "periodMonths must not be negative!")
-    private Integer minPeriodMonths;
+    @NotNull(message = "clientSalary must not be null!")
+    private BigDecimal clientSalary;
 
     @Column(name = "client_monthly_expenditure")
-    @Positive(message = "periodMonths must not be negative!")
+    @Positive(message = "clientMonthlyExpenditure must not be negative!")
     private BigDecimal clientMonthlyExpenditure;
+
+    @Column(name = "passive_income")
+    @PositiveOrZero(message = "periodMonths must not be negative!")
+    private BigDecimal passiveIncome;
+
+
+
+    @Column(name = "max_period_months")
+    @Positive(message = "maxPeriodMonths must not be negative!")
+    private Integer maxPeriodMonths;
+
+    @Column(name = "min_period_months")
+    @Positive(message = "minPeriodMonths must not be negative!")
+    private Integer minPeriodMonths;
+
+
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
