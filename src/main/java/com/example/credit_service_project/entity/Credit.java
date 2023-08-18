@@ -36,13 +36,17 @@ public class Credit {
     @Positive(message = "creditSum must not be negative!")
     private BigDecimal creditSum;
 
+    @Column(name = "period_month")
+    @Positive(message = "periodMonth must not be negative!")
+    private Integer periodMonth;
+
+    @Column(name = "rate_base")
+    @Positive(message = "rateBase must not be negative!")
+    private BigDecimal rateBase;
+
     @Column(name = "interest_rate")
     @Positive(message = "interestRate must not be negative!")
     private BigDecimal interestRate; // процентная сумма, счтается
-
-    @Column(name = "annual_Percentage")
-    @Positive(message = "annualPercentage must not be negative!")
-    private BigDecimal annualPercentage; // проценты,основывается на rateBase
 
     @Column(name = "fine")
     @Positive(message = "fine must not be negative!")
@@ -50,15 +54,6 @@ public class Credit {
 
     @Column(name = "need_deposit")
     private boolean needDeposit;
-
-    @Column(name = "rate_base")
-    @NotNull(message = "rateBase must not be null!")
-    @NotEmpty(message = "rateBase must not be empty!")
-    private String rateBase;
-
-    @Column(name = "period_month")
-    @Positive(message = "periodMonth must not be negative!")
-    private Integer periodMonth;
 
     @Column(name = "credit_status")
     @Enumerated(EnumType.STRING)

@@ -56,8 +56,6 @@ public class CreditOrder {
     @PositiveOrZero(message = "periodMonths must not be negative!")
     private BigDecimal passiveIncome;
 
-
-
     @Column(name = "max_period_months")
     @Positive(message = "maxPeriodMonths must not be negative!")
     private Integer maxPeriodMonths;
@@ -65,8 +63,6 @@ public class CreditOrder {
     @Column(name = "min_period_months")
     @Positive(message = "minPeriodMonths must not be negative!")
     private Integer minPeriodMonths;
-
-
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

@@ -21,8 +21,12 @@ public class SearchAgreementServiceImp implements AgreementService<AgreementResp
 
     @Override
     public AgreementResponse execute(UUID id) {
-        Agreement agreement = repository.findById(id)
-                .orElseThrow(() -> new AgreementNotFoundException(ErrorsMessage.NOT_FOUND_AGREEMENT_MESSAGE));
+        Agreement agreement = findById(id);
         return util.convertToResponse(agreement);
+    }
+
+    public Agreement findById(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new AgreementNotFoundException(ErrorsMessage.NOT_FOUND_AGREEMENT_MESSAGE));
     }
 }

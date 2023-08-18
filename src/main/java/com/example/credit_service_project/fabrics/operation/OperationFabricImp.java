@@ -2,6 +2,7 @@ package com.example.credit_service_project.fabrics.operation;
 
 import com.example.credit_service_project.DTO.operationDTO.GetBelongsAccountOperationsRequest;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.DTO.operationDTO.PaymentsOperationRequest;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.OperationService;
@@ -59,14 +60,9 @@ public class OperationFabricImp implements OperationFabric {
     }
 
     @Override
-    public EarlyPaymentOperationService earlyPaymentOperationService() {
-        return new EarlyPaymentOperationService(searchAccountsService, searchCardService, repository, util,
+    public OperationService<OperationResponseDTO, PaymentsOperationRequest> electorOperation() {
+        return new ReplenishmentAndEarlyPaymentOperationService(searchAccountsService, searchCardService, repository, util,
                 updateAccountService, createCardService);
     }
 
-    @Override
-    public ReplenishmentOperationService replenishmentOperationService() {
-        return new ReplenishmentOperationService(searchAccountsService, searchCardService, repository, util,
-                updateAccountService, createCardService);
-    }
 }

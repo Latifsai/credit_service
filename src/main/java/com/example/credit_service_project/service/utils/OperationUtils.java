@@ -1,7 +1,7 @@
 package com.example.credit_service_project.service.utils;
 
-import com.example.credit_service_project.DTO.operationDTO.AddOperationReplenishmentRequest;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.DTO.operationDTO.PaymentsOperationRequest;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
@@ -90,12 +90,18 @@ public class OperationUtils {
     private BigDecimal getAmountForEarlyPayment(Account account) {
         return account.getUnpaidLoanDebt().add(account.getUnpaidPercentageLoanDebt());
     }
-    public Account payEarlyPayment(Account account, Card card) {
-        if (account.getBalance().compareTo(getAmountForEarlyPayment(account)) < 0) {
+    public Account payEarlyPayment(PaymentsOperationRequest request, Account account, Card card) {
+
+        if (!request.getSum().equals(getAmountForEarlyPayment(account))) {
+            throw new OperationException(ErrorsMessage.INSUFFICIENT_AMOUNT_MESSAGE);
+        }
+
+        if (account.getBalance().compareTo(request.getSum()) < 0) {
             throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
         }
 
-        BigDecimal balanceAfterOperation = account.getBalance().subtract(getAmountForEarlyPayment(account));
+        BigDecimal balanceAfterOperation = account.getBalance()
+                .subtract(request.getSum());
 
         //updated
         account.setBalance(balanceAfterOperation);
@@ -107,25 +113,14 @@ public class OperationUtils {
         // change Credit datas, terminate credit and all credit`s elements
         return account;
     }
-    public Operation convertDataToOperationForEarlyPayment(Account account) {
-        Operation operation = new Operation();
-        operation.setAccount(account);
-        operation.setSum(getAmountForEarlyPayment(account));
-        operation.setType(EARLY_REPAYMENT);
-        operation.setOperationEndMark(LocalDateTime.now());
-        operation.setOperationDetails(fillDetails(operation.getType(), account));
-        operation.setDebit(handleDebit(operation.getType()));
-        operation.setCurrency(account.getCurrency());
-        return operation;
-    }
 
-    public Operation convertDataToOperationForREPLENISHMENT(AddOperationReplenishmentRequest request, Account account) {
+    public Operation convertPaymentsOperationRequestToOperation(PaymentsOperationRequest request, Account account) {
         Operation operation = new Operation();
         operation.setAccount(account);
         operation.setSum(request.getSum());
-        operation.setType(REPLENISHMENT);
+        operation.setType(request.getType());
         operation.setOperationEndMark(LocalDateTime.now());
-        operation.setOperationDetails(fillDetails(operation.getType(), account));
+        operation.setOperationDetails(request.getOperationDetails());
         operation.setDebit(handleDebit(operation.getType()));
         operation.setCurrency(account.getCurrency());
         return operation;

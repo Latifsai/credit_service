@@ -22,17 +22,10 @@ public class OperationController {
         return fabric.addPaymentOperation().execute();
     }
 
-    @PostMapping("/early_payment")
+    @PostMapping("/elective")
     @ResponseStatus(HttpStatus.CREATED)
-    public OperationResponseDTO add(@RequestBody AddOperationEarlyPaymentRequest request) {
-        return fabric.earlyPaymentOperationService().execute(request);
-    }
-
-    // реализовать обьединение запросов
-    @PostMapping("/refill")
-    @ResponseStatus(HttpStatus.CREATED)
-    public OperationResponseDTO add(@RequestBody AddOperationReplenishmentRequest request) {
-        return fabric.replenishmentOperationService().execute(request);
+    public OperationResponseDTO add(@RequestBody PaymentsOperationRequest request) {
+        return fabric.electorOperation().execute(request);
     }
 
 
