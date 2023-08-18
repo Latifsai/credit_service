@@ -19,12 +19,15 @@ public class CreateAgreementServiceImp implements AgreementService<AgreementResp
     private final SearchCreditOrderServiceImp searchCreditOrderService;
     private final AgreementUtil util;
 
-
     @Override
     public AgreementResponse execute(CreateAgreementRequest request) {
         CreditOrder creditOrder = searchCreditOrderService.findById(request.getCreditOrderID());
         Agreement agreement = util.convertCreateRequestToEntity(request, creditOrder);
-        repository.save(agreement);
+        save(agreement);
         return util.convertToResponse(agreement);
+    }
+
+    public Agreement save(Agreement agreement) {
+        return repository.save(agreement);
     }
 }

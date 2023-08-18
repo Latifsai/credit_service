@@ -1,26 +1,23 @@
-package com.example.credit_service_project.service.cerdit;
+package com.example.credit_service_project.fabrics.credit;
 
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
-import com.example.credit_service_project.entity.Account;
-import com.example.credit_service_project.entity.Agreement;
-import com.example.credit_service_project.entity.Credit;
-import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.repository.CreditRepository;
 import com.example.credit_service_project.service.CreditService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
 import com.example.credit_service_project.service.agreement.CreateAgreementServiceImp;
 import com.example.credit_service_project.service.agreement.SearchAgreementServiceImp;
+import com.example.credit_service_project.service.cerdit.CreateCreditServiceImp;
+import com.example.credit_service_project.service.cerdit.GetAllCreditsService;
 import com.example.credit_service_project.service.creditOrder.SearchCreditOrderServiceImp;
 import com.example.credit_service_project.service.utils.CreditUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class CreateCreditServiceImp implements CreditService<AddCreditDTOResponse, AddCreditDTORequest> {
+public class CreditFabricImp implements CreditFabric {
 
     private final CreditRepository repository;
     private final CreditUtil util;
@@ -31,22 +28,14 @@ public class CreateCreditServiceImp implements CreditService<AddCreditDTORespons
     private final CreateAgreementServiceImp updateAgreementService;
 
 
-
-    @Transactional
     @Override
-    public AddCreditDTOResponse execute(AddCreditDTORequest request) {
+    public GetAllCreditsService get() {
+        return new GetAllCreditsService(repository, util);
+    }
 
-        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
-        Agreement agreement = searchAgreementService.findById(request.getAgreementID());
-        CreditOrder creditOrder = searchCreditOrderService.findById(request.getCreditOrderID());
-
-        Credit credit = util.createCreditFromData(request, account, agreement, creditOrder);
-
-        updateAccountService.saveUpdatedAccount(account);
-        updateAgreementService.save(agreement);
-
-        repository.save(credit);
-
-        return util.convertResponse(credit);
+    @Override
+    public CreditService<AddCreditDTOResponse, AddCreditDTORequest> add() {
+        return new CreateCreditServiceImp(repository, util, searchAccountsService, searchAgreementService,
+                searchCreditOrderService, updateAccountService, updateAgreementService);
     }
 }

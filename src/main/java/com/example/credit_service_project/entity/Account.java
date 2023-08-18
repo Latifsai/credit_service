@@ -72,11 +72,11 @@ public class Account {
     private BigDecimal unpaidPercentageLoanDebt;
 
     @NotNull(message = "Currency must not be null!")
-    @Pattern(regexp = "^[A-Z]{3}$",message = "Format is not allowed in service!")
+    @Pattern(regexp = "^[A-Z]{3}$", message = "Format is not allowed in service!")
     @Column(name = "currency")
     private String currency;
 
-    @OneToOne( mappedBy = "account",cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "account", cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
     private Credit credit;
     //будет создан раздел credit_id основанный на id из класса Credit,
     // по этому полу будет JOIN

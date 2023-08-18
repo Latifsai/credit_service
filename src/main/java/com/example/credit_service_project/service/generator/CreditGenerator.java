@@ -7,7 +7,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +22,7 @@ public class CreditGenerator {
             Document document = Jsoup.connect(url).get();
 
             Element table = document.select("div.tab-pane.active table.table").first();
+            assert table != null;
             Elements rows = table.select("tr");
 
             for (int i = 1; i < rows.size(); i++) {
@@ -43,7 +43,7 @@ public class CreditGenerator {
 
     public static BigDecimal calculateInterestRate(BigDecimal sum, BigDecimal percents, Integer mounts) {
         BigDecimal hundred = new BigDecimal("100");
-        int years = mounts / 12;
+        double years = (double) mounts / 12;
         return sum.multiply((percents.divide(hundred,2, HALF_UP))).multiply(BigDecimal.valueOf(years));
     }
 }

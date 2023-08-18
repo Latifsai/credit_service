@@ -2,6 +2,7 @@ package com.example.credit_service_project.service.utils;
 
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
+import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.Credit;
@@ -10,7 +11,6 @@ import com.example.credit_service_project.service.generator.CreditGenerator;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIVE;
 
@@ -33,10 +33,22 @@ public class CreditUtil {
         credit.setNeedDeposit(creditOrder.getProduct().isNeedGuaranty());
         credit.setCreditStatus(ACTIVE);
         credit.setCurrency(account.getCurrency());
-
-        agreement.setTerminationDate(agreement.getAgreementDate().plusMonths(credit.getPeriodMonth()));
         //save agrememt
+        agreement.setTerminationDate(agreement.getAgreementDate().plusMonths(credit.getPeriodMonth()));
+        //update account
+        setDebtToAccount(account, credit);
+
+        //создать график платежей
+
         return credit;
+    }
+
+    private Account setDebtToAccount(Account account, Credit credit) {
+        account.setLoanDebt(credit.getCreditSum());
+        account.setPercentageDebt(credit.getInterestRate());
+        account.setUnpaidLoanDebt(credit.getCreditSum());
+        account.setUnpaidPercentageLoanDebt(credit.getInterestRate());
+        return account;
     }
 
     public AddCreditDTOResponse convertResponse(Credit credit) {
@@ -60,4 +72,18 @@ public class CreditUtil {
         );
     }
 
+    public CreditDTOResponse convertToCreditResponse(Credit credit) {
+        return new CreditDTOResponse(
+                credit.getId(),
+                credit.getCreditType(),
+                credit.getCreditSum(),
+                credit.getInterestRate(),
+                credit.getPeriodMonth(),
+                credit.getFine(),
+                credit.isNeedDeposit(),
+                credit.getCreditStatus(),
+                credit.getCurrency(),
+                credit.getRateBase()
+        );
+    }
 }

@@ -70,7 +70,7 @@ public class Credit {
     // связь между таблицами будет установлена через поле credit в классе Account
     //<- обратная сторона
 
-    @OneToOne( orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+    @OneToOne(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     @JoinColumn(name = "agreement_id", referencedColumnName = "id")
     private Agreement agreement;
 
