@@ -10,13 +10,11 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.math.RoundingMode.HALF_UP;
-
 public class CreditGenerator {
 
     private final static Map<String, Double> rateBaseMap = new HashMap<>();
 
-    public static BigDecimal getRateBaseByCountry(String country) {
+    public static BigDecimal getInterestRateByCountry(String country) {
         String url = "https://www.economy.com/indicators/lending-rate";
         try {
             Document document = Jsoup.connect(url).get();
@@ -40,10 +38,4 @@ public class CreditGenerator {
         return BigDecimal.valueOf(rateBaseMap.get(country));
     }
 
-
-    public static BigDecimal calculateInterestRate(BigDecimal sum, BigDecimal percents, Integer mounts) {
-        BigDecimal hundred = new BigDecimal("100");
-        double years = (double) mounts / 12;
-        return sum.multiply((percents.divide(hundred,2, HALF_UP))).multiply(BigDecimal.valueOf(years));
-    }
 }

@@ -1,7 +1,9 @@
 package com.example.credit_service_project.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -42,6 +44,10 @@ public class PaymentSchedule {
     @Column(name = "rate_payment")
     @Positive(message = "ratePayment must not be negative!")
     private BigDecimal ratePayment;
+
+    @Column(name = "monthly_payment")
+    @Positive(message = "monthlyAmount must not be negative!")
+    private BigDecimal monthlyPayment;
 
     @Column(name = "is_paid")
     private boolean isPaid;

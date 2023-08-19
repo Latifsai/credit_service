@@ -40,13 +40,9 @@ public class Credit {
     @Positive(message = "periodMonth must not be negative!")
     private Integer periodMonth;
 
-    @Column(name = "rate_base")
-    @Positive(message = "rateBase must not be negative!")
-    private BigDecimal rateBase;
-
     @Column(name = "interest_rate")
     @Positive(message = "interestRate must not be negative!")
-    private BigDecimal interestRate; // процентная сумма, счтается
+    private BigDecimal interestRate;
 
     @Column(name = "fine")
     @Positive(message = "fine must not be negative!")

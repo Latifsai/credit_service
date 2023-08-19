@@ -27,17 +27,16 @@ public class CreditUtil {
         credit.setCreditType(request.getCreditType());
         credit.setCreditSum(creditOrder.getAmount());
         credit.setPeriodMonth(request.getPeriodMonth());
-        credit.setRateBase(CreditGenerator.getRateBaseByCountry(account.getCountry()));
-        credit.setInterestRate(CreditGenerator.calculateInterestRate(credit.getCreditSum(),credit.getRateBase(), credit.getPeriodMonth()));
+        credit.setInterestRate(CreditGenerator.getInterestRateByCountry(account.getCountry()));
         credit.setFine(BigDecimal.valueOf(0.1));
         credit.setNeedDeposit(creditOrder.getProduct().isNeedGuaranty());
         credit.setCreditStatus(ACTIVE);
         credit.setCurrency(account.getCurrency());
+
         //save agrememt
         agreement.setTerminationDate(agreement.getAgreementDate().plusMonths(credit.getPeriodMonth()));
         //update account
         setDebtToAccount(account, credit);
-
         //создать график платежей
 
         return credit;
@@ -61,7 +60,6 @@ public class CreditUtil {
                 credit.isNeedDeposit(),
                 credit.getCreditStatus(),
                 credit.getCurrency(),
-                credit.getRateBase(),
                 credit.getAccount().getAccountNumber(),
                 credit.getAgreement().getNumber(),
                 credit.getAgreement().getTerminationDate(),
@@ -82,8 +80,7 @@ public class CreditUtil {
                 credit.getFine(),
                 credit.isNeedDeposit(),
                 credit.getCreditStatus(),
-                credit.getCurrency(),
-                credit.getRateBase()
+                credit.getCurrency()
         );
     }
 }

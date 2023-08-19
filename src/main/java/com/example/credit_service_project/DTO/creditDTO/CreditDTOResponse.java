@@ -17,7 +17,6 @@ public class CreditDTOResponse {
     boolean needDeposit;
     CreditStatus creditStatus;
     String currency;
-    BigDecimal rateBase;
 
 
 

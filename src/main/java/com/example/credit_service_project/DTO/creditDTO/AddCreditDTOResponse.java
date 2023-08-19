@@ -20,7 +20,6 @@ public class AddCreditDTOResponse {
     boolean needDeposit;
     CreditStatus creditStatus;
     String currency;
-    BigDecimal rateBase;
 
     String accountNumber;
     //agreement

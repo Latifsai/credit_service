@@ -8,13 +8,11 @@ import com.example.credit_service_project.repository.PaymentScheduleRepository;
 import com.example.credit_service_project.service.PaymentScheduleService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class AddPaymentScheduleServiceImp implements PaymentScheduleService<AddPaymentScheduleDTOResponse, AddPaymentRequestDTO> {
 
     private final PaymentScheduleRepository repository;
