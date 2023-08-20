@@ -2,6 +2,7 @@ package com.example.credit_service_project.service.cerdit;
 
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
+import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.Credit;
@@ -13,10 +14,13 @@ import com.example.credit_service_project.service.account.UpdateAccountServiceIm
 import com.example.credit_service_project.service.agreement.CreateAgreementServiceImp;
 import com.example.credit_service_project.service.agreement.SearchAgreementServiceImp;
 import com.example.credit_service_project.service.creditOrder.SearchCreditOrderServiceImp;
+import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.service.utils.CreditUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +33,7 @@ public class CreateCreditServiceImp implements CreditService<AddCreditDTORespons
     private final SearchCreditOrderServiceImp searchCreditOrderService;
     private final UpdateAccountServiceImp updateAccountService;
     private final CreateAgreementServiceImp updateAgreementService;
+    private final PaymentScheduleGeneratorService paymentScheduleGeneratorService;
 
     @Transactional
     @Override
@@ -42,9 +47,9 @@ public class CreateCreditServiceImp implements CreditService<AddCreditDTORespons
 
         updateAccountService.saveUpdatedAccount(account);
         updateAgreementService.save(agreement);
-
         repository.save(credit);
 
-        return util.convertResponse(credit);
+        List<PaymentResponseDTO> list = paymentScheduleGeneratorService.execute(credit, credit.getCreditOrder().getProduct(), account);
+        return util.convertResponse(credit, list);
     }
 }

@@ -6,7 +6,7 @@ import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.enums.CardStatus;
-import com.example.credit_service_project.service.generator.CardGenerator;
+import com.example.credit_service_project.service.utils.generator.CardGenerator;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

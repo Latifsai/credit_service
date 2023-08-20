@@ -11,6 +11,7 @@ import com.example.credit_service_project.service.agreement.SearchAgreementServi
 import com.example.credit_service_project.service.cerdit.CreateCreditServiceImp;
 import com.example.credit_service_project.service.cerdit.GetAllCreditsService;
 import com.example.credit_service_project.service.creditOrder.SearchCreditOrderServiceImp;
+import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.service.utils.CreditUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class CreditFabricImp implements CreditFabric {
     private final SearchCreditOrderServiceImp searchCreditOrderService;
     private final UpdateAccountServiceImp updateAccountService;
     private final CreateAgreementServiceImp updateAgreementService;
-
+    private final PaymentScheduleGeneratorService paymentScheduleGeneratorService;
 
     @Override
     public GetAllCreditsService get() {
@@ -36,6 +37,7 @@ public class CreditFabricImp implements CreditFabric {
     @Override
     public CreditService<AddCreditDTOResponse, AddCreditDTORequest> add() {
         return new CreateCreditServiceImp(repository, util, searchAccountsService, searchAgreementService,
-                searchCreditOrderService, updateAccountService, updateAgreementService);
+                searchCreditOrderService, updateAccountService, updateAgreementService,
+                paymentScheduleGeneratorService);
     }
 }

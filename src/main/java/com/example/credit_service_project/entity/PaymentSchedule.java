@@ -1,9 +1,7 @@
 package com.example.credit_service_project.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -21,6 +19,7 @@ import static jakarta.persistence.CascadeType.*;
 @NoArgsConstructor
 @ToString
 public class PaymentSchedule {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -36,14 +35,6 @@ public class PaymentSchedule {
     @Column(name = "surcharge")
     @PositiveOrZero(message = "surcharge must not be negative!")
     private BigDecimal surcharge; // пеня(посчитаная)
-
-    @Column(name = "main_payment")
-    @Positive(message = "mainPayment must not be negative!")
-    private BigDecimal mainPayment;
-
-    @Column(name = "rate_payment")
-    @Positive(message = "ratePayment must not be negative!")
-    private BigDecimal ratePayment;
 
     @Column(name = "monthly_payment")
     @Positive(message = "monthlyAmount must not be negative!")

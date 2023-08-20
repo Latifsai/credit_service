@@ -7,7 +7,6 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.entity.Product;
-import com.example.credit_service_project.entity.enums.CalculationType;
 import com.example.credit_service_project.service.utils.calculators.AnnuityCalculator;
 import com.example.credit_service_project.service.utils.calculators.DifferentiatedPaymentCalculator;
 import com.example.credit_service_project.validation.ErrorsMessage;
@@ -15,6 +14,7 @@ import com.example.credit_service_project.validation.exceptions.NearestPaymentNo
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Comparator;
 
@@ -30,8 +30,7 @@ public class PaymentScheduleUtil {
 
         paymentSchedule.setPaymentDate(request.getPaymentDate());
         paymentSchedule.setSurcharge(ZERO);
-        paymentSchedule.setMainPayment(request.getMainPayment());
-        paymentSchedule.setRatePayment(request.getRatePayment());
+        paymentSchedule.setMonthlyPayment(request.getMonthlyPayment());
         paymentSchedule.setPaid(false);
         return paymentSchedule;
     }
@@ -40,8 +39,7 @@ public class PaymentScheduleUtil {
         return new AddPaymentScheduleDTOResponse(
                 paymentSchedule.getAccount().getAccountNumber(),
                 paymentSchedule.getPaymentDate(),
-                paymentSchedule.getMainPayment(),
-                paymentSchedule.getRatePayment(),
+                paymentSchedule.getMonthlyPayment(),
                 paymentSchedule.getSurcharge(),
                 getSum(paymentSchedule),
                 false
@@ -49,7 +47,7 @@ public class PaymentScheduleUtil {
     }
 
     private BigDecimal getSum(PaymentSchedule p) {
-        return p.getMainPayment().add(p.getRatePayment()).add(p.getSurcharge());
+        return p.getMonthlyPayment().add(p.getSurcharge());
     }
 
     public PaymentResponseDTO convertEntityToPaymentResponse(PaymentSchedule paymentSchedule) {
@@ -58,8 +56,7 @@ public class PaymentScheduleUtil {
                 paymentSchedule.getPaymentDate(),
                 paymentSchedule.getActualPaymentDate(),
                 paymentSchedule.getSurcharge(),
-                paymentSchedule.getMainPayment(),
-                paymentSchedule.getRatePayment(),
+                paymentSchedule.getMonthlyPayment(),
                 paymentSchedule.isPaid()
         );
     }
@@ -73,24 +70,40 @@ public class PaymentScheduleUtil {
     }
 
 
-    public PaymentSchedule convertFromCreditAndProduct(Credit credit, Product product, Account account) {
+    public PaymentSchedule convertFromCreditAndProduct(Account account) {
         PaymentSchedule paymentSchedule = new PaymentSchedule();
         paymentSchedule.setAccount(account);
-
         paymentSchedule.setSurcharge(ZERO);
-        paymentSchedule.setMonthlyPayment(getMonthly(credit, product));
         paymentSchedule.setPaid(false);
         return paymentSchedule;
     }
 
 
-    private BigDecimal getMonthly(Credit credit, Product product) {
+    public BigDecimal[] calculatePayment(Credit credit, Product product) {
         int monthsTemp = credit.getPeriodMonth();
+        BigDecimal[] payments = new BigDecimal[monthsTemp];
+
         if (product.getCalculationType().equals(ANNUITY)) {
-            return AnnuityCalculator.calculate(credit.getCreditSum(), credit.getInterestRate(), monthsTemp);
+
+            BigDecimal monthlyInterestRate = credit.getInterestRate().divide(BigDecimal.valueOf(12 * 100), 10, RoundingMode.HALF_UP);
+
+            for (int month = 0; month < monthsTemp; month++) {
+                payments[month] = AnnuityCalculator.calculate(credit.getCreditSum(),
+                       monthlyInterestRate, monthsTemp);
+            }
+
         } else {
-            return DifferentiatedPaymentCalculator.calculateEMI(credit.getCreditSum(), credit.getInterestRate(), monthsTemp, 1);
+
+            BigDecimal convertedInterestRate = credit.getInterestRate().divide(BigDecimal.valueOf(100), 5, RoundingMode.HALF_UP);
+            BigDecimal monthlyInterestRate = convertedInterestRate.divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_UP);
+
+            for (int month = 0; month < monthsTemp; month++) {
+                payments[month] = DifferentiatedPaymentCalculator.calculateEMI(credit.getCreditSum(),
+                        monthlyInterestRate, monthsTemp, month + 1);
+            }
+
         }
+        return payments;
     }
 
 }

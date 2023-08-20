@@ -4,7 +4,7 @@ import com.example.credit_service_project.DTO.ProductDTO.AddProductDTORequest;
 import com.example.credit_service_project.DTO.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.DTO.ProductDTO.UpdateProductDTORequest;
 import com.example.credit_service_project.entity.Product;
-import com.example.credit_service_project.service.generator.ProductGenerator;
+import com.example.credit_service_project.service.utils.generator.EURToAnyGenerator;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.CurrencyException;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Map;
 @Service
 public class ProductUtil {
 
-    private final Map<String, Double> currencyMap = ProductGenerator.generatCurrencyMap();
+    private final Map<String, Double> currencyMap = EURToAnyGenerator.generatCurrencyMap();
 
     private final Integer maxAmountCriterionForDeposit = 18_000;
     private final Integer minAmountCriterionForDeposit = 7_500;

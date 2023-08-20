@@ -21,12 +21,11 @@ public class SearchProductServiceImp implements ProductService<ProductResponseDT
 
     @Override
     public ProductResponseDTO execute(BigInteger id) {
-        Product product = findById(id)
-                .orElseThrow(() -> new ProductNotFoundException(ErrorsMessage.NOT_FOUND_PRODUCT_MESSAGE));
+        Product product = findById(id);
         return util.toResponse(product);
     }
 
-    public Optional<Product> findById(BigInteger id) {
-        return repository.findById(id);
+    public Product findById(BigInteger id) {
+        return repository.findById(id).orElseThrow(() -> new ProductNotFoundException(ErrorsMessage.NOT_FOUND_PRODUCT_MESSAGE));
     }
 }

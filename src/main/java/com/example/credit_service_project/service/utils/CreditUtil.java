@@ -3,14 +3,16 @@ package com.example.credit_service_project.service.utils;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
 import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
+import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.CreditOrder;
-import com.example.credit_service_project.service.generator.CreditGenerator;
+import com.example.credit_service_project.service.utils.generator.CreditGenerator;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIVE;
 
@@ -28,7 +30,7 @@ public class CreditUtil {
         credit.setCreditSum(creditOrder.getAmount());
         credit.setPeriodMonth(request.getPeriodMonth());
         credit.setInterestRate(CreditGenerator.getInterestRateByCountry(account.getCountry()));
-        credit.setFine(BigDecimal.valueOf(0.1));
+        credit.setFine(BigDecimal.valueOf(0.1)); // разобраться с пеней
         credit.setNeedDeposit(creditOrder.getProduct().isNeedGuaranty());
         credit.setCreditStatus(ACTIVE);
         credit.setCurrency(account.getCurrency());
@@ -37,8 +39,6 @@ public class CreditUtil {
         agreement.setTerminationDate(agreement.getAgreementDate().plusMonths(credit.getPeriodMonth()));
         //update account
         setDebtToAccount(account, credit);
-        //создать график платежей
-
         return credit;
     }
 
@@ -50,7 +50,7 @@ public class CreditUtil {
         return account;
     }
 
-    public AddCreditDTOResponse convertResponse(Credit credit) {
+    public AddCreditDTOResponse convertResponse(Credit credit, List<PaymentResponseDTO> list) {
         return new AddCreditDTOResponse(
                 credit.getId(),
                 credit.getCreditType(),
@@ -66,7 +66,8 @@ public class CreditUtil {
                 credit.getCreditOrder().getNumber(),
                 credit.getCreditOrder().getProduct().getId(),
                 credit.getCreditOrder().getProduct().getName(),
-                credit.getCreditOrder().getProduct().getCalculationType()
+                credit.getCreditOrder().getProduct().getCalculationType(),
+                list
         );
     }
 

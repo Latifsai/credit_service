@@ -9,8 +9,7 @@ import java.time.LocalDate;
 public class AddPaymentScheduleDTOResponse {
     String accountNumber;
     LocalDate paymentDate;
-    BigDecimal mainPayment;
-    BigDecimal ratePayment;
+    BigDecimal monthlyPayment;
     BigDecimal surcharge;
     BigDecimal sum;
     boolean isPaid;

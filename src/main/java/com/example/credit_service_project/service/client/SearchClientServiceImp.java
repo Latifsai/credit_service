@@ -24,13 +24,12 @@ public class SearchClientServiceImp implements ClientService<ClientResponseDTO, 
 
     @Override
     public ClientResponseDTO execute(UUID id) {
-        Optional<Client> clientOptional = findClientById(id);
-        return clientOptional.map(client -> util.convertClientToResponse(client))
-                .orElseThrow(() -> new ClientNotFoundException(ErrorsMessage.NOT_FOUND_CLIENT_MESSAGE));
+        Client client = findClientById(id);
+        return util.convertClientToResponse(client);
     }
 
-    public Optional<Client> findClientById(UUID id) {
-        return repository.findById(id);
+    public Client findClientById(UUID id) {
+        return repository.findById(id).orElseThrow(() -> new ClientNotFoundException(ErrorsMessage.NOT_FOUND_CLIENT_MESSAGE));
     }
 
 }

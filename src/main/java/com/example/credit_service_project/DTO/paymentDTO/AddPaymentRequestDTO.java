@@ -11,6 +11,5 @@ public class AddPaymentRequestDTO {
     UUID accountID;
     String accountNumber;
     LocalDate paymentDate;
-    BigDecimal mainPayment;
-    BigDecimal ratePayment;
+    BigDecimal monthlyPayment;
 }

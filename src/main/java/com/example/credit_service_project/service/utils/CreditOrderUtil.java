@@ -7,7 +7,7 @@ import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderDT
 import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.Product;
-import com.example.credit_service_project.service.generator.CreditOrderGenerator;
+import com.example.credit_service_project.service.utils.generator.CreditOrderGenerator;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -23,7 +23,7 @@ public class CreditOrderUtil {
         CreditOrder creditOrder = new CreditOrder();
         creditOrder.setProduct(product);
         creditOrder.setNumber(CreditOrderGenerator.createCreditOrderNumber(request.getNumberLength()));
-        creditOrder.setAmount(product.getSum());
+        creditOrder.setAmount(CreditOrderGenerator.convertCurrency(product, client.getAccount()));
         creditOrder.setCreationDate(LocalDate.now());
         creditOrder.setClientSalary(client.getSalary());
         creditOrder.setPassiveIncome(client.getPassiveIncome());

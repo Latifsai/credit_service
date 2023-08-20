@@ -27,11 +27,9 @@ public class AddCreditOrderServiceImp implements CreditOrderService<AddCreditOrd
 
     @Override
     public AddCreditOrderResponseDTO execute(AddCreditOrderDTORequest request) {
-        Product product = searchProductService.findById(request.getProductID())
-                .orElseThrow(() -> new ProductNotFoundException(ErrorsMessage.NOT_FOUND_PRODUCT_MESSAGE));
+        Product product = searchProductService.findById(request.getProductID());
 
-        Client client = searchClientService.findClientById(request.getClientID())
-                .orElseThrow(() -> new ClientNotFoundException(ErrorsMessage.NOT_FOUND_CLIENT_MESSAGE));
+        Client client = searchClientService.findClientById(request.getClientID());
 
         CreditOrder creditOrder = util.convertAddRequestToEntity(request, product, client);
         CreditOrder saved = save(creditOrder);

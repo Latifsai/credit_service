@@ -1,4 +1,4 @@
-package com.example.credit_service_project.service.generator;
+package com.example.credit_service_project.service.utils.generator;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductGenerator {
+public class EURToAnyGenerator {
 
-    public static Map<String, Double> generatCurrencyMap() {
+    public static Map<String, Double> generatCurrencyMap() { // евро к отстальным
         Map<String, Double> currencyMap = new HashMap<>();
         String url = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html";
 
@@ -31,6 +31,8 @@ public class ProductGenerator {
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
+        currencyMap.put("EUR", 1.0);
+
         return currencyMap;
     }
 }

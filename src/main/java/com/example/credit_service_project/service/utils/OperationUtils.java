@@ -72,7 +72,7 @@ public class OperationUtils {
     }
 
     public BigDecimal getSumToPayForPayment(PaymentSchedule p) {
-        return p.getMainPayment().add(p.getRatePayment()).add(p.getSurcharge());
+        return p.getMonthlyPayment().add(p.getSurcharge());
     }
 
     public Operation convertDataToOperationForPayment(Account account, PaymentSchedule p) {

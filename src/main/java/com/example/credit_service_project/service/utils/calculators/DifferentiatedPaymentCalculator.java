@@ -5,14 +5,13 @@ import java.math.RoundingMode;
 
 public class DifferentiatedPaymentCalculator {
 
-    public static BigDecimal calculateEMI(BigDecimal principal, BigDecimal interestRate, int monthsTerm, int currentMonth) {
+    public static BigDecimal calculateEMI(BigDecimal principal, BigDecimal monthlyInterestRate, int monthsTerm, int currentMonth) {
+        BigDecimal principalPayment = principal.divide(BigDecimal.valueOf(monthsTerm), 2, RoundingMode.HALF_UP);
+        BigDecimal remainingPrincipal = principal.subtract(principalPayment.multiply(BigDecimal.valueOf(currentMonth)));
+        BigDecimal interestPayment = remainingPrincipal.multiply(monthlyInterestRate);
+        BigDecimal payment = principalPayment.add(interestPayment);
 
-        BigDecimal monthlyInterestRate = interestRate.divide(BigDecimal.valueOf(12 * 100), 10, RoundingMode.HALF_UP);
-
-        BigDecimal numerator = principal.subtract(BigDecimal.valueOf(currentMonth - 1).multiply(principal).divide(BigDecimal.valueOf(monthsTerm), 10, RoundingMode.HALF_UP));
-
-        BigDecimal emi = principal.divide(BigDecimal.valueOf(monthsTerm), 10, RoundingMode.HALF_UP).add(numerator.multiply(monthlyInterestRate));
-        return emi.setScale(2, RoundingMode.HALF_UP);
+        return payment.setScale(2, RoundingMode.HALF_UP);
     }
 
 

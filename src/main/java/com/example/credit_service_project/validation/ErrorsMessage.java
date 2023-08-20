@@ -12,6 +12,8 @@ public class ErrorsMessage {
     public static final String NOT_FOUND_NEAREST_PAYMENT_MESSAGE = "NEAREST PAYMENTS WAS FOUND!";
     public static final String NOT_FOUND_PRODUCT_MESSAGE = "NEAREST PRODUCT WAS FOUND!";
     public static final String NOT_FOUND_AGREEMENT_MESSAGE = "NEAREST PRODUCT WAS FOUND!";
+    public static final String UNKNOWN_TARGET_CURRENCY = "TARGET CURRENCY IS UNKNOWN!";
+    public static final String UNKNOWN_SOURCE_CURRENCY = "SOURCE CURRENCY IS UNKNOWN!";
 
 
     public static final String UNABLE_TO_ADD_ACCOUNT_MESSAGE = "THIS CLIENT WAS NOT FOUND, CREATING AN ACCOUNT IS IMPOSSIBLE!";

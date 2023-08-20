@@ -12,7 +12,6 @@ public class PaymentResponseDTO {
     LocalDate paymentDate;
     LocalDate actualPaymentDate;
     BigDecimal surcharge;
-    BigDecimal mainPayment;
-    BigDecimal ratePayment;
+    BigDecimal monthlyPayment;
     boolean isPaid;
 }

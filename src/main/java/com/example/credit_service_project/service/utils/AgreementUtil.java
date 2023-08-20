@@ -5,7 +5,7 @@ import com.example.credit_service_project.DTO.agreementDTO.CreateAgreementReques
 import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
-import com.example.credit_service_project.service.generator.AgreementGenerator;
+import com.example.credit_service_project.service.utils.generator.AgreementGenerator;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.AgreementException;
 import org.springframework.stereotype.Service;

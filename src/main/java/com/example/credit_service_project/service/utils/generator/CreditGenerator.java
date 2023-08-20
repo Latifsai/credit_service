@@ -1,4 +1,4 @@
-package com.example.credit_service_project.service.generator;
+package com.example.credit_service_project.service.utils.generator;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

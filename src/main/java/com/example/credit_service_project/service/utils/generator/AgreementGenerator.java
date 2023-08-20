@@ -1,13 +1,9 @@
-package com.example.credit_service_project.service.generator;
+package com.example.credit_service_project.service.utils.generator;
 
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class CreditOrderGenerator {
-
-
-    public static Integer minPeriod = 12;
-    public static Integer maxPeriod = 120;
+public class AgreementGenerator {
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ0123456789";
 
@@ -21,5 +17,4 @@ public class CreditOrderGenerator {
         }
         return stringBuilder.toString();
     }
-
 }
