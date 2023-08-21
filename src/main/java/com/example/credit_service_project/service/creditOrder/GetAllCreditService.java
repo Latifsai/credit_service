@@ -6,6 +6,7 @@ import com.example.credit_service_project.repository.CreditOrderRepository;
 import com.example.credit_service_project.service.utils.CreditOrderUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,9 +17,10 @@ public class GetAllCreditService {
     private final CreditOrderRepository repository;
     private final CreditOrderUtil util;
 
+    @Transactional(readOnly = true)
     public List<CreditOrderResponseDTO> execute() {
         return getOrders().stream()
-                .map(creditOrder -> util.convertToResponse(creditOrder))
+                .map(util::convertToResponse)
                 .toList();
     }
 

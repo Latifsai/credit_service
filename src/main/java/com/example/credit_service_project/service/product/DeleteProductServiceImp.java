@@ -19,8 +19,7 @@ public class DeleteProductServiceImp implements ProductService<ProductResponseDT
 
     @Override
     public ProductResponseDTO execute(BigInteger id) {
-        Product product = searchProductService.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException(ErrorsMessage.NOT_FOUND_PRODUCT_MESSAGE));
+        Product product = searchProductService.findById(id);
         return util.toResponse(product);
     }
 }

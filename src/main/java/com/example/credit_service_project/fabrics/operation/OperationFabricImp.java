@@ -9,10 +9,15 @@ import com.example.credit_service_project.service.OperationService;
 import com.example.credit_service_project.service.account.GetAccountsListServiceImp;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
+import com.example.credit_service_project.service.agreement.CreateAgreementServiceImp;
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
+import com.example.credit_service_project.service.cerdit.CreateCreditServiceImp;
+import com.example.credit_service_project.service.cerdit.GetAllUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.service.creditOrder.AddCreditOrderServiceImp;
 import com.example.credit_service_project.service.operation.*;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
+import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -30,12 +35,15 @@ public class OperationFabricImp implements OperationFabric {
     private final UpdateAccountServiceImp updateAccountService;
     private final SearchAccountsServiceImp searchAccountsService;
     private final GetNearestPaymentServiceImp getNearestPaymentService;
-    private final AddPaymentScheduleServiceImp addPaymentScheduleService;
+    private final PaymentScheduleGeneratorAndSaveService generatorAndSaveService;
     private final SearchOperationServiceImp searchOperationService;
     private final SearchCardServiceImp searchCardService;
     private final CreateCardServiceImp createCardService;
     private final GetAccountsListServiceImp getAccountsListService;
-
+    private final GetAllUnpaidPaymentsBelongsCreditService getAllUnpaidPaymentsBelongsCreditService;
+    private final CreateCreditServiceImp addCreditService;
+    private final AddCreditOrderServiceImp addCreditOrderService;
+    private final CreateAgreementServiceImp addAgreementService;
 
     @Override
     public OperationService<List<OperationResponseDTO>, GetBelongsAccountOperationsRequest> getBelongsAccountOperations() {
@@ -55,13 +63,14 @@ public class OperationFabricImp implements OperationFabric {
     @Override
     public AddPaymentOperationServiceImp addPaymentOperation() {
         return new AddPaymentOperationServiceImp(repository, util, getNearestPaymentService, updateAccountService,
-                addPaymentScheduleService, searchCardService, createCardService, getAccountsListService);
+                generatorAndSaveService, searchCardService, createCardService, getAccountsListService);
     }
 
     @Override
     public OperationService<OperationResponseDTO, PaymentsOperationRequest> electorOperation() {
         return new ReplenishmentAndEarlyPaymentOperationService(searchAccountsService, searchCardService, repository, util,
-                updateAccountService, createCardService);
+                updateAccountService, createCardService, getAllUnpaidPaymentsBelongsCreditService, generatorAndSaveService,
+                addCreditService, addCreditOrderService, addAgreementService);
     }
 
 }

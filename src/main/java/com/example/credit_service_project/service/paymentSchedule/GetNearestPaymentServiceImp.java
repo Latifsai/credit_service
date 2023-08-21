@@ -7,18 +7,18 @@ import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.service.PaymentScheduleService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class GetNearestPaymentServiceImp implements PaymentScheduleService<PaymentResponseDTO, PaymentsBelongsToAccountRequest> {
 
     private final SearchAccountsServiceImp searchAccountsService;
     private final PaymentScheduleUtil util;
 
+    @Transactional(readOnly = true)
     @Override
     public PaymentResponseDTO execute(PaymentsBelongsToAccountRequest request) {
         Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());

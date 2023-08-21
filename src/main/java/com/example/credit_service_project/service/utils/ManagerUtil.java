@@ -4,9 +4,9 @@ import com.example.credit_service_project.DTO.manager.AddManagerRequest;
 import com.example.credit_service_project.DTO.manager.ManagerResponseDTO;
 import com.example.credit_service_project.DTO.manager.UpdateManagerRequest;
 import com.example.credit_service_project.entity.Manager;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class ManagerUtil {
     public Manager convertAddRequestToManager(AddManagerRequest request) {
         Manager manager = new Manager();
@@ -31,6 +31,6 @@ public class ManagerUtil {
     }
 
     private boolean check(String criteria) {
-        return criteria != null || !criteria.trim().isEmpty();
+        return criteria != null && !criteria.trim().isEmpty();
     }
 }

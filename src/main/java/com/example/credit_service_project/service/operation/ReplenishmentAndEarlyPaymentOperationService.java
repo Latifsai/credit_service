@@ -6,13 +6,18 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.entity.PaymentSchedule;
+import com.example.credit_service_project.entity.enums.CreditOrderStatus;
+import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.OperationService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
+import com.example.credit_service_project.service.agreement.CreateAgreementServiceImp;
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
+import com.example.credit_service_project.service.cerdit.CreateCreditServiceImp;
 import com.example.credit_service_project.service.cerdit.GetAllUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.service.creditOrder.AddCreditOrderServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
@@ -38,6 +43,10 @@ public class ReplenishmentAndEarlyPaymentOperationService implements OperationSe
     private final CreateCardServiceImp updateCardService;
     private final GetAllUnpaidPaymentsBelongsCreditService getAllUnpaidPaymentsBelongsCreditService;
     private final PaymentScheduleGeneratorAndSaveService saveService;
+    private final CreateCreditServiceImp addCreditService;
+    private final AddCreditOrderServiceImp addCreditOrderService;
+    private final CreateAgreementServiceImp addAgreementService;
+
 
     @Override
     public OperationResponseDTO execute(PaymentsOperationRequest request) {
@@ -57,17 +66,25 @@ public class ReplenishmentAndEarlyPaymentOperationService implements OperationSe
         } else if (request.getType().equals(EARLY_REPAYMENT)) {
             if (account.getCredit().getCreditOrder().getProduct().isEarlyRepayment()) {
                 account = util.payEarlyPayment(request, account, card);
-                List<PaymentSchedule> unpaid = getAllUnpaidPaymentsBelongsCreditService.findUnpaidPaymentByAccount(account);
-                for (PaymentSchedule paymentSchedule : unpaid) {
+                List<PaymentSchedule> unpaidPayments = getAllUnpaidPaymentsBelongsCreditService.findUnpaidPaymentByAccount(account);
+                for (PaymentSchedule paymentSchedule : unpaidPayments) {
                     paymentSchedule.setPaid(true);
                     paymentSchedule.setActualPaymentDate(LocalDate.now());
                     saveService.save(paymentSchedule);
                 }
-            }else {
+                    account.getCredit().setCreditStatus(CreditStatus.CLOSED);
+                    account.getCredit().getCreditOrder().setCreditOrderStatus(CreditOrderStatus.CLOSED);
+                    account.getCredit().getAgreement().setActive(false);
+                    account.getCredit().getAgreement().setTerminationDate(LocalDate.now());
+
+                    addCreditService.saveCredit(account.getCredit());
+                    addCreditOrderService.saveOrder(account.getCredit().getCreditOrder());
+                    addAgreementService.saveAgreement(account.getCredit().getAgreement());
+
+            } else {
                 throw new EarlyPaymentException(ErrorsMessage.EARLY_PAYMENT_EXCEPTION_MESSAGE);
             }
         }
-
         updateAccountService.saveUpdatedAccount(account);
         updateCardService.saveCard(card);
         Operation operation = util.convertPaymentsOperationRequestToOperation(request, account);

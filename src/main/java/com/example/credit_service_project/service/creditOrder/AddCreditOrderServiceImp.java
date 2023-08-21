@@ -10,9 +10,6 @@ import com.example.credit_service_project.service.CreditOrderService;
 import com.example.credit_service_project.service.client.SearchClientServiceImp;
 import com.example.credit_service_project.service.product.SearchProductServiceImp;
 import com.example.credit_service_project.service.utils.CreditOrderUtil;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.ClientNotFoundException;
-import com.example.credit_service_project.validation.exceptions.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,12 +29,12 @@ public class AddCreditOrderServiceImp implements CreditOrderService<AddCreditOrd
         Client client = searchClientService.findClientById(request.getClientID());
 
         CreditOrder creditOrder = util.convertAddRequestToEntity(request, product, client);
-        CreditOrder saved = save(creditOrder);
+        CreditOrder saved = saveOrder(creditOrder);
 
         return util.convertToAddResponse(saved, product);
     }
 
-    public CreditOrder save(CreditOrder creditOrder) {
+    public CreditOrder saveOrder(CreditOrder creditOrder) {
         return repository.save(creditOrder);
     }
 }

@@ -11,6 +11,7 @@ import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.CreditNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +24,7 @@ public class GetAllUnpaidPaymentsBelongsCreditService {
     private final GetBelongsToTheAccountPaymentsListServiceImp belongsToTheAccountPaymentsListService;
     private final PaymentScheduleUtil util;
 
+    @Transactional(readOnly = true)
     public List<PaymentResponseDTO> execute(UUID creditID) {
         Credit credit = repository.findById(creditID)
                 .orElseThrow(() -> new CreditNotFoundException(ErrorsMessage.NOT_FOUND_CREDIT_MESSAGE));

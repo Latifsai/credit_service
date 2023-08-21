@@ -3,24 +3,24 @@ package com.example.credit_service_project.service.client;
 import com.example.credit_service_project.DTO.client.ClientResponseDTO;
 import com.example.credit_service_project.repository.ClientRepository;
 import com.example.credit_service_project.service.utils.ClientUtil;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class GetAllClientsService {
 
     private final ClientRepository repository;
     private final ClientUtil util;
 
+    @Transactional(readOnly = true)
     public List<ClientResponseDTO> execute() {
 
         return repository.findAll().stream()
-                .map(client -> util.convertClientToResponse(client))
+                .map(util::convertClientToResponse)
                 .toList();
     }
 }

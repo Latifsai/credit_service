@@ -26,10 +26,4 @@ public class PaymentScheduleController {
 
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public AddPaymentScheduleDTOResponse add(@RequestBody AddPaymentRequestDTO request) {
-        return fabric.addPaymentSchedule().execute(request);
-    }
-
 }

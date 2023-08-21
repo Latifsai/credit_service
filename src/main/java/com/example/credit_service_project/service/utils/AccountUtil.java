@@ -1,15 +1,19 @@
 package com.example.credit_service_project.service.utils;
 
-import com.example.credit_service_project.DTO.accountDTO.*;
+import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
+import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import com.example.credit_service_project.service.utils.generator.AccountGenerator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class AccountUtil {
 
@@ -18,14 +22,13 @@ public class AccountUtil {
         account.setClient(client);
         account.setCountry(request.getCounty());
         account.setAccountNumber(AccountGenerator.createRandomAccountNumber(request.getAccountNumberLength()));
-        account.setLoanDebt(request.getLoanDebt());
-        account.setPercentageDebt(request.getPercentageDebt());
+        account.setLoanDebt(BigDecimal.ZERO);
+        account.setPercentageDebt(BigDecimal.ZERO);
         account.setStatus(AccountStatus.ACTIVE);
         account.setBalance(request.getBalance());
         account.setOpeningDate(AccountGenerator.createOpeningDay());
         account.setClosingDate(AccountGenerator.LocalDateCreateClosingDate(request.getYearsAmountForClosingDate()));
-        account.setUnpaidLoanDebt(AccountGenerator.getUnpaidLoanDebt(request));
-        account.setUnpaidPercentageLoanDebt(AccountGenerator.getUnpaidPercentageLoanDebt(request));
+        account.setUnpaidCreditSum(BigDecimal.ZERO);
         account.setCurrency(request.getCurrency());
         return account;
     }
@@ -40,8 +43,7 @@ public class AccountUtil {
                 account.getStatus(),
                 account.getBalance(),
                 account.getClosingDate(),
-                account.getUnpaidLoanDebt(),
-                account.getUnpaidPercentageLoanDebt(),
+                account.getUnpaidCreditSum(),
                 account.getCurrency(),
                 account.getCountry()
                 );
@@ -53,8 +55,7 @@ public class AccountUtil {
         if (request.getPercentageDebt() != null) account.setPercentageDebt(request.getPercentageDebt());
         if (request.getStatus() != null) account.setStatus(request.getStatus());
         if (request.getBalance() != null) account.setBalance(request.getBalance());
-        if (request.getUnpaidLoanDebt() != null) account.setUnpaidLoanDebt(request.getUnpaidLoanDebt());
-        if (request.getUnpaidPercentageLoanDebt() != null) account.setUnpaidPercentageLoanDebt(request.getUnpaidPercentageLoanDebt());
+        if (request.getUnpaidCreditSum() != null) account.setUnpaidCreditSum(request.getUnpaidCreditSum());
         if (request.getCountry() != null && !request.getCountry().trim().isEmpty()) account.setCountry(request.getCountry());
         return account;
     }

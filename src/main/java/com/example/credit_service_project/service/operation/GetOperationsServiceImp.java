@@ -7,14 +7,13 @@ import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.OperationService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class GetOperationsServiceImp implements OperationService<List<OperationResponseDTO>, GetBelongsAccountOperationsRequest> {
 
@@ -22,13 +21,7 @@ public class GetOperationsServiceImp implements OperationService<List<OperationR
     private final OperationUtils util;
     private final SearchAccountsServiceImp searchAccountsService;
 
-//    public List<OperationResponseDTO> getAll() {
-//
-//        return repository.findAll().stream()
-//                .map(o -> util.convertOperationToResponseDTO(o))
-//                .toList();
-//    }
-
+    @Transactional(readOnly = true)
     @Override
     public List<OperationResponseDTO> execute(GetBelongsAccountOperationsRequest request) {
         Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());

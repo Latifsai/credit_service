@@ -23,11 +23,11 @@ public class CreateAgreementServiceImp implements AgreementService<AgreementResp
     public AgreementResponse execute(CreateAgreementRequest request) {
         CreditOrder creditOrder = searchCreditOrderService.findById(request.getCreditOrderID());
         Agreement agreement = util.convertCreateRequestToEntity(request, creditOrder);
-        save(agreement);
+        saveAgreement(agreement);
         return util.convertToResponse(agreement);
     }
 
-    public Agreement save(Agreement agreement) {
+    public Agreement saveAgreement(Agreement agreement) {
         return repository.save(agreement);
     }
 }

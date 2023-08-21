@@ -9,14 +9,14 @@ import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.service.utils.generator.CreditGenerator;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIVE;
 
-@Component
+@Service
 public class CreditUtil {
 
     public Credit createCreditFromData(AddCreditDTORequest request, Account account, Agreement agreement, CreditOrder creditOrder) {
@@ -45,8 +45,8 @@ public class CreditUtil {
     private Account setDebtToAccount(Account account, Credit credit) {
         account.setLoanDebt(credit.getCreditSum());
         account.setPercentageDebt(credit.getInterestRate());
-        account.setUnpaidCreditSum(credit.getCreditSum().add());
-        return account;// remake
+        account.setUnpaidCreditSum(credit.getCreditSum().add(credit.getFine()));
+        return account;
     }
 
     public AddCreditDTOResponse convertResponse(Credit credit, List<PaymentResponseDTO> list) {

@@ -3,23 +3,23 @@ package com.example.credit_service_project.service.manager;
 import com.example.credit_service_project.DTO.manager.ManagerResponseDTO;
 import com.example.credit_service_project.repository.ManagerRepository;
 import com.example.credit_service_project.service.utils.ManagerUtil;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class GetAllManagersService {
 
     private final ManagerRepository repository;
     private final ManagerUtil util;
 
+    @Transactional(readOnly = true)
     public List<ManagerResponseDTO> execute() {
         return repository.findAll().stream()
-                .map(manager -> util.convertManagerToResponse(manager))
+                .map(util::convertManagerToResponse)
                 .toList();
     }
 }

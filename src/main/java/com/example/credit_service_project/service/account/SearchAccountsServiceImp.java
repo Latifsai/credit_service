@@ -8,20 +8,21 @@ import com.example.credit_service_project.service.AccountService;
 import com.example.credit_service_project.service.utils.AccountUtil;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
-@Transactional
+
 @RequiredArgsConstructor
 public class SearchAccountsServiceImp implements AccountService<AccountDTOResponse, SearchAccountRequest> {
 
     private final AccountRepository repository;
     private final AccountUtil util;
 
+    @Transactional(readOnly = true)
     @Override
     public AccountDTOResponse execute(SearchAccountRequest request) {
         Account account = findAccountByIdOrNumber(request.getId(), request.getAccountNumber());

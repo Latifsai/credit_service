@@ -24,14 +24,10 @@ public class CreateAccountServiceImp implements AccountService<AccountDTORespons
 
     @Override
     public AccountDTOResponse execute(AddAccountDTORequest request) {
-        Client clientOptional = searchClientService.findClientById(request.getClientId())
-                .orElseThrow(() -> new ClientNotFoundException(ErrorsMessage.UNABLE_TO_ADD_ACCOUNT_MESSAGE));
-
-        var account = util.convertAddRequestToAccount(request, clientOptional);
+        Client client = searchClientService.findClientById(request.getClientId());
+        Account account = util.convertAddRequestToAccount(request, client);
         Account savedAccount = saveAccount(account);
         return util.convertAccountToAddResponse(savedAccount);
-
-
     }
 
     public Account saveAccount(Account account) {

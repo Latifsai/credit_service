@@ -66,6 +66,7 @@ public class Account {
     @PositiveOrZero(message = "unpaidPercentageLoanDebt must be greater than 0")
     @Column(name = "unpaid_credit_sum")
     private BigDecimal unpaidCreditSum;
+
     @NotNull(message = "Currency must not be null!")
     @Pattern(regexp = "^[A-Z]{3}$", message = "Format is not allowed in service!")
     @Column(name = "currency")

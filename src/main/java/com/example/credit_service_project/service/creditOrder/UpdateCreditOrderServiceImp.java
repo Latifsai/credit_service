@@ -20,7 +20,7 @@ public class UpdateCreditOrderServiceImp implements CreditOrderService<CreditOrd
     public CreditOrderResponseDTO execute(UpdateCreditOrderDTORequest request) {
         CreditOrder creditOrder = searchCreditOrderService.findById(request.getUuid());
         CreditOrder updated = util.update(request, creditOrder);
-        addCreditOrderService.save(updated);
+        addCreditOrderService.saveOrder(updated);
         return util.convertToResponse(updated);
     }
 }

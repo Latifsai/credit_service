@@ -5,6 +5,7 @@ import com.example.credit_service_project.repository.ProductRepository;
 import com.example.credit_service_project.service.utils.ProductUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class GetProductsListService {
     private final ProductRepository repository;
     private final ProductUtil util;
 
+    @Transactional(readOnly = true)
     public List<ProductResponseDTO> execute() {
         return repository.findAll().stream()
                 .map(util::toResponse)

@@ -11,6 +11,7 @@ import com.example.credit_service_project.service.account.UpdateAccountServiceIm
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
+import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.AccountNotFoundException;
@@ -32,7 +33,7 @@ public class AddPaymentOperationServiceImp {
     private final OperationUtils util;
     private final GetNearestPaymentServiceImp getNearestPaymentService;
     private final UpdateAccountServiceImp updateAccountService;
-    private final AddPaymentScheduleServiceImp addPaymentScheduleService;
+    private final PaymentScheduleGeneratorAndSaveService saveService;
     private final SearchCardServiceImp searchCardService;
     private final CreateCardServiceImp createCardService;
     private final GetAccountsListServiceImp getAccountsListService;
@@ -58,7 +59,7 @@ public class AddPaymentOperationServiceImp {
 
                 // сумма долга и процентная сумма тоже должны изменяться
                 updateAccountService.saveUpdatedAccount(accountAfterOperation);
-                addPaymentScheduleService.savePayment(paymentSchedule);
+                saveService.save(paymentSchedule);
                 createCardService.saveCard(card);
 
 

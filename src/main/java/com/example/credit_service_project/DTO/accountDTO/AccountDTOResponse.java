@@ -17,8 +17,7 @@ public class AccountDTOResponse {
      AccountStatus status;
      BigDecimal balance;
      LocalDate closingDate;
-     BigDecimal unpaidLoanDebt;
-     BigDecimal unpaidPercentageLoanDebt;
+     BigDecimal unpaidCreditSum;
      String currency;
      String country;
 }

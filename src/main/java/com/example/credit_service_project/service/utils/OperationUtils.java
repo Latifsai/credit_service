@@ -7,12 +7,10 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.entity.PaymentSchedule;
-import com.example.credit_service_project.entity.enums.CreditOrderStatus;
-import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.entity.enums.OperationType;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.OperationException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,7 +20,7 @@ import java.util.Map;
 
 import static com.example.credit_service_project.entity.enums.OperationType.*;
 
-@Component
+@Service
 public class OperationUtils {
 
     public Card changerCardBalance(Account account, Card card) {
@@ -33,11 +31,7 @@ public class OperationUtils {
     }
 
     private boolean handleDebit(OperationType type) {
-        if (type.equals(REPLENISHMENT)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !type.equals(REPLENISHMENT);
     }
 
     public Operation updateOperation(Operation operation, UpdateOperationsRequest request) {
@@ -117,12 +111,7 @@ public class OperationUtils {
         account.setPercentageDebt(BigDecimal.ZERO);
         account.setLoanDebt(BigDecimal.ZERO);
         changerCardBalance(account, card);
-        // change Credit datas, terminate credit and all credit`s elements
-        account.getCredit().setCreditStatus(CreditStatus.CLOSED);
-
-        account.getCredit().getCreditOrder().setCreditOrderStatus(CreditOrderStatus.CLOSED);
-        account.getCredit().getAgreement().setActive(true);
-        account.getCredit().getAgreement().setTerminationDate(LocalDate.now());
+        // change Credit datas, terminate credit and all credit`s element
         return account;
     }
 

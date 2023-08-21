@@ -17,7 +17,6 @@ public class UpdateAccountRequest {
     BigDecimal percentageDebt;
     AccountStatus status;
     BigDecimal balance;
-    BigDecimal unpaidLoanDebt;
-    BigDecimal unpaidPercentageLoanDebt;
+    BigDecimal unpaidCreditSum;
     String country;
 }

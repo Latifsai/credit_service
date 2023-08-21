@@ -27,8 +27,4 @@ public class PaymentFabricImp implements PaymentFabric {
     public PaymentScheduleService<GetBelongsPaymentsResponse, PaymentsBelongsToAccountRequest> getBelongsPayments() {
         return new GetBelongsToTheAccountPaymentsListServiceImp(util, repository, searchAccountsService);
     }
-
-    public PaymentScheduleService<AddPaymentScheduleDTOResponse, AddPaymentRequestDTO> addPaymentSchedule() {
-        return new AddPaymentScheduleServiceImp(repository, util, searchAccountsService);
-    }
 }

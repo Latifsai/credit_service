@@ -9,6 +9,7 @@ import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.AgreementNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -19,6 +20,7 @@ public class SearchAgreementServiceImp implements AgreementService<AgreementResp
     private final AgreementRepository repository;
     private final AgreementUtil util;
 
+    @Transactional(readOnly = true)
     @Override
     public AgreementResponse execute(UUID id) {
         Agreement agreement = findById(id);

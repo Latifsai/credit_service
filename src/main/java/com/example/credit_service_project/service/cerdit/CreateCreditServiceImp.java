@@ -16,7 +16,6 @@ import com.example.credit_service_project.service.agreement.SearchAgreementServi
 import com.example.credit_service_project.service.creditOrder.SearchCreditOrderServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.service.utils.CreditUtil;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,10 +46,14 @@ public class CreateCreditServiceImp implements CreditService<AddCreditDTORespons
         Credit credit = util.createCreditFromData(request, account, agreement, creditOrder);
 
         updateAccountService.saveUpdatedAccount(account);
-        updateAgreementService.save(agreement);
-        repository.save(credit);
+        updateAgreementService.saveAgreement(agreement);
+        saveCredit(credit);
 
         List<PaymentResponseDTO> list = paymentScheduleGeneratorService.execute(credit, credit.getCreditOrder().getProduct(), account);
         return util.convertResponse(credit, list);
+    }
+
+    public Credit saveCredit(Credit credit) {
+        return repository.save(credit);
     }
 }

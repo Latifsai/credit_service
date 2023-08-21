@@ -9,6 +9,7 @@ import com.example.credit_service_project.validation.exceptions.ProductNotFoundE
 import com.example.credit_service_project.service.utils.ProductUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.util.Optional;
@@ -19,6 +20,7 @@ public class SearchProductServiceImp implements ProductService<ProductResponseDT
     private final ProductRepository repository;
     private final ProductUtil util;
 
+    @Transactional(readOnly = true)
     @Override
     public ProductResponseDTO execute(BigInteger id) {
         Product product = findById(id);
@@ -26,6 +28,7 @@ public class SearchProductServiceImp implements ProductService<ProductResponseDT
     }
 
     public Product findById(BigInteger id) {
-        return repository.findById(id).orElseThrow(() -> new ProductNotFoundException(ErrorsMessage.NOT_FOUND_PRODUCT_MESSAGE));
+        return repository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(ErrorsMessage.NOT_FOUND_PRODUCT_MESSAGE));
     }
 }

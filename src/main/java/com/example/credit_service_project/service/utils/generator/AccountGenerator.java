@@ -28,23 +28,4 @@ public class AccountGenerator {
     public static LocalDate LocalDateCreateClosingDate(Integer yearsAmount) {
         return createOpeningDay().plusYears(yearsAmount);
     }
-
-    public static BigDecimal getUnpaidLoanDebt(AddAccountDTORequest request) {
-        if (request.getLoanDebt().intValue() == 0 && request.getPercentageDebt().intValue() == 0){
-            return new BigDecimal(0);
-        }
-        return null;
-        // доработать
-    }
-
-    public static BigDecimal getUnpaidPercentageLoanDebt(AddAccountDTORequest request) {
-        if (request.getLoanDebt().intValue() == 0 && request.getPercentageDebt().intValue() == 0){
-            return new BigDecimal(0);
-        }
-        return null;
-        // доработать
-    }
-
-
-
 }

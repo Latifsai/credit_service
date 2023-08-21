@@ -4,8 +4,6 @@ import com.example.credit_service_project.DTO.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.DTO.ProductDTO.UpdateProductDTORequest;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.service.ProductService;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.ProductNotFoundException;
 import com.example.credit_service_project.service.utils.ProductUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,8 +19,7 @@ public class UpdateProductServiceImp implements ProductService<ProductResponseDT
 
     @Override
     public ProductResponseDTO execute(UpdateProductDTORequest request) {
-        Product product = searchProductService.findById(request.getId())
-                .orElseThrow(() -> new ProductNotFoundException(ErrorsMessage.NOT_FOUND_PRODUCT_MESSAGE));
+        Product product = searchProductService.findById(request.getId());
 
         Product updatedProduct = util.update(product, request);
         Product savedProduct = createProductService.saveProduct(updatedProduct);

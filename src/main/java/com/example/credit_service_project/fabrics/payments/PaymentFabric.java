@@ -7,6 +7,4 @@ public interface PaymentFabric {
     PaymentScheduleService<PaymentResponseDTO, PaymentsBelongsToAccountRequest> getNearestPayment();
 
     PaymentScheduleService<GetBelongsPaymentsResponse, PaymentsBelongsToAccountRequest> getBelongsPayments();
-
-    PaymentScheduleService<AddPaymentScheduleDTOResponse, AddPaymentRequestDTO> addPaymentSchedule();
 }

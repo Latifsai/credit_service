@@ -5,24 +5,23 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.CardService;
+import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.CardNotFoundException;
-import com.example.credit_service_project.service.utils.CardUtil;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class SearchCardServiceImp implements CardService<CardDTOResponse, UUID> {
 
     private final CardRepository repository;
     private final CardUtil utils;
 
+    @Transactional(readOnly = true)
     @Override
     public CardDTOResponse execute(UUID id) {
         Card card = findCardById(id);
