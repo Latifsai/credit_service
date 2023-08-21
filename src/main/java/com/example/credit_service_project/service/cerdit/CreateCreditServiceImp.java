@@ -14,8 +14,9 @@ import com.example.credit_service_project.service.account.UpdateAccountServiceIm
 import com.example.credit_service_project.service.agreement.CreateAgreementServiceImp;
 import com.example.credit_service_project.service.agreement.SearchAgreementServiceImp;
 import com.example.credit_service_project.service.creditOrder.SearchCreditOrderServiceImp;
-import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorService;
+import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.service.utils.CreditUtil;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +34,7 @@ public class CreateCreditServiceImp implements CreditService<AddCreditDTORespons
     private final SearchCreditOrderServiceImp searchCreditOrderService;
     private final UpdateAccountServiceImp updateAccountService;
     private final CreateAgreementServiceImp updateAgreementService;
-    private final PaymentScheduleGeneratorService paymentScheduleGeneratorService;
+    private final PaymentScheduleGeneratorAndSaveService paymentScheduleGeneratorService;
 
     @Transactional
     @Override

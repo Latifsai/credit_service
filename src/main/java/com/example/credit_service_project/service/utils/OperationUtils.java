@@ -7,6 +7,8 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.entity.PaymentSchedule;
+import com.example.credit_service_project.entity.enums.CreditOrderStatus;
+import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.entity.enums.OperationType;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.OperationException;
@@ -61,9 +63,15 @@ public class OperationUtils {
     public Account payBill(Account account, PaymentSchedule paymentSchedule, Card card) {
         if (paymentSchedule.getPaymentDate().equals(LocalDate.now())) {
             BigDecimal balance = account.getBalance().subtract(getSumToPayForPayment(paymentSchedule));
-            if (balance.intValue() < 0) throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
+
+            if (balance.compareTo(paymentSchedule.getMonthlyPayment()) < 0) {
+                throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
+            }
             // ЗДЕСЬ РЕАЛИЗОВАТЬ МЕХАНИЗМ НАЧИСЛЕНИЯ ПЕНИ
+
             account.setBalance(balance);
+            account.setUnpaidCreditSum(account.getUnpaidCreditSum().subtract(paymentSchedule.getMonthlyPayment()));
+            //substract and set new setUnpaidCreditSum
             paymentSchedule.setActualPaymentDate(LocalDate.now());
             paymentSchedule.setPaid(true);
             changerCardBalance(account, card);
@@ -88,7 +96,7 @@ public class OperationUtils {
     }
 
     private BigDecimal getAmountForEarlyPayment(Account account) {
-        return account.getUnpaidLoanDebt().add(account.getUnpaidPercentageLoanDebt());
+        return account.getUnpaidCreditSum();
     }
     public Account payEarlyPayment(PaymentsOperationRequest request, Account account, Card card) {
 
@@ -105,12 +113,16 @@ public class OperationUtils {
 
         //updated
         account.setBalance(balanceAfterOperation);
-        account.setUnpaidPercentageLoanDebt(BigDecimal.ZERO);
-        account.setUnpaidLoanDebt(BigDecimal.ZERO);
+        account.setUnpaidCreditSum(BigDecimal.ZERO);
         account.setPercentageDebt(BigDecimal.ZERO);
         account.setLoanDebt(BigDecimal.ZERO);
         changerCardBalance(account, card);
         // change Credit datas, terminate credit and all credit`s elements
+        account.getCredit().setCreditStatus(CreditStatus.CLOSED);
+
+        account.getCredit().getCreditOrder().setCreditOrderStatus(CreditOrderStatus.CLOSED);
+        account.getCredit().getAgreement().setActive(true);
+        account.getCredit().getAgreement().setTerminationDate(LocalDate.now());
         return account;
     }
 

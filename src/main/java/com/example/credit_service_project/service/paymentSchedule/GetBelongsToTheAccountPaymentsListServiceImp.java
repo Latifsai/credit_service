@@ -4,6 +4,7 @@ import com.example.credit_service_project.DTO.paymentDTO.GetBelongsPaymentsRespo
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentsBelongsToAccountRequest;
 import com.example.credit_service_project.entity.Account;
+import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.repository.PaymentScheduleRepository;
 import com.example.credit_service_project.service.PaymentScheduleService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
@@ -27,7 +28,7 @@ public class GetBelongsToTheAccountPaymentsListServiceImp implements PaymentSche
     public GetBelongsPaymentsResponse execute(PaymentsBelongsToAccountRequest request) {
         Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 
-        var listOfBelongsToAccountPayments = repository.findAllByAccount(account);
+        var listOfBelongsToAccountPayments = findAllByAccount(account);
 
         List<PaymentResponseDTO> list = listOfBelongsToAccountPayments.stream()
                 .map(paymentSchedule -> util.convertEntityToPaymentResponse(paymentSchedule))
@@ -35,5 +36,9 @@ public class GetBelongsToTheAccountPaymentsListServiceImp implements PaymentSche
 
         return new GetBelongsPaymentsResponse(account.getId(),
                 account.getAccountNumber(), list);
+    }
+
+    public List<PaymentSchedule> findAllByAccount (Account account) {
+        return repository.findAllByAccount(account);
     }
 }

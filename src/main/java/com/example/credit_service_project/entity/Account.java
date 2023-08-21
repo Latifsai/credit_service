@@ -64,13 +64,8 @@ public class Account {
     private LocalDate closingDate;
 
     @PositiveOrZero(message = "unpaidPercentageLoanDebt must be greater than 0")
-    @Column(name = "unpaid_load_debt")
-    private BigDecimal unpaidLoanDebt;
-
-    @PositiveOrZero(message = "unpaidPercentageLoanDebt must be greater than 0")
-    @Column(name = "unpaid_percentage_load_debt")
-    private BigDecimal unpaidPercentageLoanDebt;
-
+    @Column(name = "unpaid_credit_sum")
+    private BigDecimal unpaidCreditSum;
     @NotNull(message = "Currency must not be null!")
     @Pattern(regexp = "^[A-Z]{3}$", message = "Format is not allowed in service!")
     @Column(name = "currency")

@@ -17,8 +17,8 @@ public class ProductUtil {
 
     private final Map<String, Double> currencyMap = EURToAnyGenerator.generatCurrencyMap();
 
-    private final Integer maxAmountCriterionForDeposit = 18_000;
-    private final Integer minAmountCriterionForDeposit = 7_500;
+    private final Integer maxAmountCriterionForDeposit = 25_000;
+    private final Integer minAmountCriterionForDeposit = 10_000;
 
     public Product convertFromAddRequestToResponse(AddProductDTORequest request) {
         Product product = new Product();
@@ -38,7 +38,7 @@ public class ProductUtil {
 
         for (String code : currencyMap.keySet()) {
             if (currencyCode.equalsIgnoreCase(code)
-                    && sum.intValue() <= (maxAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
+                    && sum.intValue() <= (minAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
                 return true;
             }
         }

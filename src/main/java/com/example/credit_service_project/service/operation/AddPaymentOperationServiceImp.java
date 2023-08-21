@@ -10,7 +10,6 @@ import com.example.credit_service_project.service.account.GetAccountsListService
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
-import com.example.credit_service_project.service.paymentSchedule.AddPaymentScheduleServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
@@ -61,6 +60,7 @@ public class AddPaymentOperationServiceImp {
                 updateAccountService.saveUpdatedAccount(accountAfterOperation);
                 addPaymentScheduleService.savePayment(paymentSchedule);
                 createCardService.saveCard(card);
+
 
                 Operation operation = util.convertDataToOperationForPayment(account, paymentSchedule);
                 Operation savedOperation = saveOperation(operation);

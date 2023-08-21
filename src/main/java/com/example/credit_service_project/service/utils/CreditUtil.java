@@ -45,9 +45,8 @@ public class CreditUtil {
     private Account setDebtToAccount(Account account, Credit credit) {
         account.setLoanDebt(credit.getCreditSum());
         account.setPercentageDebt(credit.getInterestRate());
-        account.setUnpaidLoanDebt(credit.getCreditSum());
-        account.setUnpaidPercentageLoanDebt(credit.getInterestRate());
-        return account;
+        account.setUnpaidCreditSum(credit.getCreditSum().add());
+        return account;// remake
     }
 
     public AddCreditDTOResponse convertResponse(Credit credit, List<PaymentResponseDTO> list) {

@@ -4,7 +4,6 @@ import com.example.credit_service_project.DTO.paymentDTO.*;
 import com.example.credit_service_project.repository.PaymentScheduleRepository;
 import com.example.credit_service_project.service.PaymentScheduleService;
 import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.service.paymentSchedule.AddPaymentScheduleServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.GetBelongsToTheAccountPaymentsListServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
 import com.example.credit_service_project.service.utils.PaymentScheduleUtil;

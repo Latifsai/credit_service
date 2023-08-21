@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PaymentScheduleGeneratorService {
+public class PaymentScheduleGeneratorAndSaveService {
 
     private final PaymentScheduleUtil util;
     private final PaymentScheduleRepository repository;
@@ -31,9 +31,13 @@ public class PaymentScheduleGeneratorService {
             PaymentSchedule paymentSchedule = util.convertFromCreditAndProduct(account);
             paymentSchedule.setMonthlyPayment(payments[month]);
             paymentSchedule.setPaymentDate(LocalDate.now().plusMonths((month + 1)));
-            repository.save(paymentSchedule);
+            save(paymentSchedule);
             responses.add(util.convertEntityToPaymentResponse(paymentSchedule));
         }
         return responses;
+    }
+
+    public PaymentSchedule save(PaymentSchedule paymentSchedule) {
+        return repository.save(paymentSchedule);
     }
 }
