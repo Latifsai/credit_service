@@ -10,9 +10,12 @@ import com.example.credit_service_project.service.agreement.CreateAgreementServi
 import com.example.credit_service_project.service.agreement.SearchAgreementServiceImp;
 import com.example.credit_service_project.service.cerdit.CreateCreditServiceImp;
 import com.example.credit_service_project.service.cerdit.GetAllCreditsService;
+import com.example.credit_service_project.service.cerdit.GetAllUnpaidPaymentsBelongsCreditService;
 import com.example.credit_service_project.service.creditOrder.SearchCreditOrderServiceImp;
+import com.example.credit_service_project.service.paymentSchedule.GetBelongsToTheAccountPaymentsListServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.service.utils.CreditUtil;
+import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +31,8 @@ public class CreditFabricImp implements CreditFabric {
     private final UpdateAccountServiceImp updateAccountService;
     private final CreateAgreementServiceImp updateAgreementService;
     private final PaymentScheduleGeneratorAndSaveService paymentScheduleGeneratorService;
-
+    private final GetBelongsToTheAccountPaymentsListServiceImp belongsToTheAccountPaymentsListService;
+    private final PaymentScheduleUtil paymentScheduleUtil;
     @Override
     public GetAllCreditsService get() {
         return new GetAllCreditsService(repository, util);
@@ -39,5 +43,11 @@ public class CreditFabricImp implements CreditFabric {
         return new CreateCreditServiceImp(repository, util, searchAccountsService, searchAgreementService,
                 searchCreditOrderService, updateAccountService, updateAgreementService,
                 paymentScheduleGeneratorService);
+    }
+
+    @Override
+    public GetAllUnpaidPaymentsBelongsCreditService getAllUnpaidPaymentsBelongsCreditService() {
+        return new GetAllUnpaidPaymentsBelongsCreditService(repository, belongsToTheAccountPaymentsListService,
+                paymentScheduleUtil);
     }
 }
