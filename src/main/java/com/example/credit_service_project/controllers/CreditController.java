@@ -17,7 +17,7 @@ import java.util.UUID;
 @RequestMapping("/credit")
 public class CreditController {
 
-    CreditFabricImp fabric;
+    private final CreditFabricImp fabric;
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)

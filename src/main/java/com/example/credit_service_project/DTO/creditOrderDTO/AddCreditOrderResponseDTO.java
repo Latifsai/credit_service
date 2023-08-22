@@ -19,4 +19,5 @@ public class AddCreditOrderResponseDTO {
     Integer maxPeriodMonths;
     Integer minPeriodMonths;
     CreditOrderStatus creditOrderStatus;
+    String currency;
 }

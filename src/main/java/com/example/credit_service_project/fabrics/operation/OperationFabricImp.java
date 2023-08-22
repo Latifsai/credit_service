@@ -62,8 +62,8 @@ public class OperationFabricImp implements OperationFabric {
 
     @Override
     public AddPaymentOperationServiceImp addPaymentOperation() {
-        return new AddPaymentOperationServiceImp(repository, util, getNearestPaymentService, updateAccountService,
-                generatorAndSaveService, searchCardService, createCardService, getAccountsListService);
+        return new AddPaymentOperationServiceImp(repository, util, getAllUnpaidPaymentsBelongsCreditService, updateAccountService,
+                generatorAndSaveService, searchCardService, createCardService, getAccountsListService, addCreditService);
     }
 
     @Override

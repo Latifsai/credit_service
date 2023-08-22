@@ -99,4 +99,12 @@ public class GlobalExceptionHandler {
         ExceptionResponse response = new ExceptionResponse(errorExceptions);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+
+    @ExceptionHandler(AgreementException.class)
+    public ResponseEntity<?> handleProductNotFoundException(AgreementException e) {
+        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
+        ExceptionResponse response = new ExceptionResponse(errorExceptions);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }

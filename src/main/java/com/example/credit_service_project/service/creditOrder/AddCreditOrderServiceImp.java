@@ -31,7 +31,7 @@ public class AddCreditOrderServiceImp implements CreditOrderService<AddCreditOrd
         CreditOrder creditOrder = util.convertAddRequestToEntity(request, product, client);
         CreditOrder saved = saveOrder(creditOrder);
 
-        return util.convertToAddResponse(saved, product);
+        return util.convertToAddResponse(saved, product, client);
     }
 
     public CreditOrder saveOrder(CreditOrder creditOrder) {

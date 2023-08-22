@@ -25,12 +25,11 @@ public class CreditUtil {
         credit.setAccount(account);
         credit.setAgreement(agreement);
         credit.setCreditOrder(creditOrder);
-
+        credit.setFine(BigDecimal.ZERO);
         credit.setCreditType(request.getCreditType());
         credit.setCreditSum(creditOrder.getAmount());
         credit.setPeriodMonth(request.getPeriodMonth());
         credit.setInterestRate(CreditGenerator.getInterestRateByCountry(account.getCountry()));
-        credit.setFine(BigDecimal.valueOf(0.1)); // разобраться с пеней
         credit.setNeedDeposit(creditOrder.getProduct().isNeedGuaranty());
         credit.setCreditStatus(ACTIVE);
         credit.setCurrency(account.getCurrency());

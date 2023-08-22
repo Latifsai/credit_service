@@ -18,7 +18,7 @@ public class UpdateCreditOrderServiceImp implements CreditOrderService<CreditOrd
 
     @Override
     public CreditOrderResponseDTO execute(UpdateCreditOrderDTORequest request) {
-        CreditOrder creditOrder = searchCreditOrderService.findById(request.getUuid());
+        CreditOrder creditOrder = searchCreditOrderService.findById(request.getId());
         CreditOrder updated = util.update(request, creditOrder);
         addCreditOrderService.saveOrder(updated);
         return util.convertToResponse(updated);

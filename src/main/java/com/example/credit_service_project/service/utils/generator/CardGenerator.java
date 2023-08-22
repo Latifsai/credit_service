@@ -27,6 +27,7 @@ public class CardGenerator {
         COUNTRY_IBAN_LENGTHS.put("Ukraine", 27);
         COUNTRY_IBAN_LENGTHS.put("Russia", 12);
         COUNTRY_IBAN_LENGTHS.put("Rusland", 12);
+        COUNTRY_IBAN_LENGTHS.put("United States", 12);
         COUNTRY_IBAN_LENGTHS.put("USA", 12);
         COUNTRY_IBAN_LENGTHS.put("Israel", 21);
         COUNTRY_IBAN_LENGTHS.put("Poland", 26);
@@ -46,6 +47,7 @@ public class CardGenerator {
         COUNTRY_CODES.put("Russia", "RU");
         COUNTRY_CODES.put("Rusland", "");
         COUNTRY_CODES.put("USA", "");
+        COUNTRY_CODES.put("United States", "");
         COUNTRY_CODES.put("Israel", "IL");
         COUNTRY_CODES.put("Poland", "PL");
         COUNTRY_CODES.put("China", "");

@@ -22,7 +22,6 @@ public class GetNearestPaymentServiceImp implements PaymentScheduleService<Payme
     @Override
     public PaymentResponseDTO execute(PaymentsBelongsToAccountRequest request) {
         Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
-
         PaymentSchedule nearestPayment = getNearestPayment(account);
         return util.convertEntityToPaymentResponse(nearestPayment);
     }

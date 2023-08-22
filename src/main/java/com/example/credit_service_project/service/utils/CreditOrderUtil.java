@@ -25,6 +25,7 @@ public class CreditOrderUtil {
         creditOrder.setNumber(CreditOrderGenerator.createCreditOrderNumber(request.getNumberLength()));
         creditOrder.setAmount(CreditOrderGenerator.convertCurrency(product, client.getAccount()));
         creditOrder.setCreationDate(LocalDate.now());
+        creditOrder.setLastUpdateDate(creditOrder.getCreationDate());
         creditOrder.setClientSalary(client.getSalary());
         creditOrder.setPassiveIncome(client.getPassiveIncome());
         creditOrder.setClientMonthlyExpenditure(client.getExpenses());
@@ -34,7 +35,7 @@ public class CreditOrderUtil {
         return creditOrder;
     }
 
-    public AddCreditOrderResponseDTO convertToAddResponse(CreditOrder order, Product product) {
+    public AddCreditOrderResponseDTO convertToAddResponse(CreditOrder order, Product product, Client client) {
         return new AddCreditOrderResponseDTO(
                 product.getId(),
                 product.getName(),
@@ -44,7 +45,8 @@ public class CreditOrderUtil {
                 order.getCreationDate(),
                 order.getMaxPeriodMonths(),
                 order.getMinPeriodMonths(),
-                order.getCreditOrderStatus()
+                order.getCreditOrderStatus(),
+                client.getAccount().getCurrency()
         );
     }
 
@@ -63,13 +65,15 @@ public class CreditOrderUtil {
     public CreditOrder update(UpdateCreditOrderDTORequest request, CreditOrder creditOrder) {
 
         if (request.getAmount() != null) creditOrder.setAmount(request.getAmount());
-        creditOrder.setCreditOrderStatus(IN_REVIEW);
+        creditOrder.setCreditOrderStatus(request.getCreditOrderStatus());
         if (request.getClientSalary() != null) creditOrder.setClientSalary(request.getClientSalary());
         if (request.getPassiveIncome() != null) creditOrder.setPassiveIncome(request.getPassiveIncome());
-        if (request.getClientMonthlyExpenditure() != null)
+        if (request.getClientMonthlyExpenditure() != null) {
             creditOrder.setClientMonthlyExpenditure(request.getClientMonthlyExpenditure());
+        }
+        creditOrder.setLastUpdateDate(LocalDate.now());
+            return creditOrder;
 
-        return creditOrder;
     }
 
     public CreditOrder considerationOfApplication(CreditOrder order) {

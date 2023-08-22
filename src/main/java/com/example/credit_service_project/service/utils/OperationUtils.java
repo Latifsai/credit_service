@@ -3,16 +3,14 @@ package com.example.credit_service_project.service.utils;
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.DTO.operationDTO.PaymentsOperationRequest;
 import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
-import com.example.credit_service_project.entity.Account;
-import com.example.credit_service_project.entity.Card;
-import com.example.credit_service_project.entity.Operation;
-import com.example.credit_service_project.entity.PaymentSchedule;
+import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.entity.enums.OperationType;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.OperationException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -58,11 +56,6 @@ public class OperationUtils {
         if (paymentSchedule.getPaymentDate().equals(LocalDate.now())) {
             BigDecimal balance = account.getBalance().subtract(getSumToPayForPayment(paymentSchedule));
 
-            if (balance.compareTo(paymentSchedule.getMonthlyPayment()) < 0) {
-                throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
-            }
-            // ЗДЕСЬ РЕАЛИЗОВАТЬ МЕХАНИЗМ НАЧИСЛЕНИЯ ПЕНИ
-
             account.setBalance(balance);
             account.setUnpaidCreditSum(account.getUnpaidCreditSum().subtract(paymentSchedule.getMonthlyPayment()));
             //substract and set new setUnpaidCreditSum
@@ -71,6 +64,11 @@ public class OperationUtils {
             changerCardBalance(account, card);
         }
         return account;
+    }
+
+    public BigDecimal calculateFine(BigDecimal interestRate, BigDecimal payment, int dayOfDelay) {
+        return payment.multiply((interestRate.divide(BigDecimal.valueOf(100),5, RoundingMode.HALF_UP)))
+                .multiply(BigDecimal.valueOf(dayOfDelay/365));
     }
 
     public BigDecimal getSumToPayForPayment(PaymentSchedule p) {
@@ -92,6 +90,7 @@ public class OperationUtils {
     private BigDecimal getAmountForEarlyPayment(Account account) {
         return account.getUnpaidCreditSum();
     }
+
     public Account payEarlyPayment(PaymentsOperationRequest request, Account account, Card card) {
 
         if (!request.getSum().equals(getAmountForEarlyPayment(account))) {

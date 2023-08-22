@@ -51,7 +51,7 @@ public class Client {
     private String email;
 
     @Column(name = "phone")
-    @Pattern(regexp = "^\\+\\d{2}\\s\\d{3}\\s\\d{9}$\n")
+    @Pattern(regexp = "^(?:(?:\\+\\d{1,3}\\s?)|(?:\\d{1,4}\\s?))?(?:\\d{4,14})$", message = "Number is not supported!")
     private String phone;
 
     @Column(name = "registration_date")

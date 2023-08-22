@@ -23,7 +23,7 @@ public class CardUtil {
         card.setOpeningDate(LocalDate.now());
         card.setExpirationDate(CardGenerator.setExpirationDate(card.getOpeningDate(), request.getYearAccessibility()));
         card.setBalance(account.getBalance());
-        card.setDeliveryAddress(request.getDeliveryAddress());
+        card.setDeliveryAddress(account.getClient().getAddress());
         card.setDigitalValet(request.isDigitalValet());
         card.setPaymentSystem(request.getPaymentSystem());
         card.setCardStatus(CardStatus.ACTIVE);

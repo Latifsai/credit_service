@@ -2,10 +2,7 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CreditStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -45,8 +42,8 @@ public class Credit {
     private BigDecimal interestRate;
 
     @Column(name = "fine")
-    @Positive(message = "fine must not be negative!")
-    private BigDecimal fine; // пеня в процентах, основывается на rateBase
+    @PositiveOrZero(message = "fine must not be negative!")
+    private BigDecimal fine;
 
     @Column(name = "need_deposit")
     private boolean needDeposit;
