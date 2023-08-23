@@ -47,10 +47,10 @@ public class CreateCreditServiceImp implements CreditService<AddCreditDTORespons
 
         updateAccountService.saveUpdatedAccount(account);
         updateAgreementService.saveAgreement(agreement);
-        saveCredit(credit);
+        Credit savedCredit = saveCredit(credit);
 
         List<PaymentResponseDTO> list = paymentScheduleGeneratorService.execute(credit, credit.getCreditOrder().getProduct(), account);
-        return util.convertResponse(credit, list);
+        return util.convertResponse(savedCredit, list);
     }
 
     public Credit saveCredit(Credit credit) {

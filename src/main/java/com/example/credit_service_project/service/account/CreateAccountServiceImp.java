@@ -7,8 +7,6 @@ import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.repository.AccountRepository;
 import com.example.credit_service_project.service.AccountService;
 import com.example.credit_service_project.service.client.SearchClientServiceImp;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.ClientNotFoundException;
 import com.example.credit_service_project.service.utils.AccountUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
