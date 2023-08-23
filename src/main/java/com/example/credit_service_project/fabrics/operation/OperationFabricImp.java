@@ -16,7 +16,6 @@ import com.example.credit_service_project.service.cerdit.CreateCreditServiceImp;
 import com.example.credit_service_project.service.cerdit.GetAllUnpaidPaymentsBelongsCreditService;
 import com.example.credit_service_project.service.creditOrder.AddCreditOrderServiceImp;
 import com.example.credit_service_project.service.operation.*;
-import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +33,6 @@ public class OperationFabricImp implements OperationFabric {
     private final OperationUtils util;
     private final UpdateAccountServiceImp updateAccountService;
     private final SearchAccountsServiceImp searchAccountsService;
-    private final GetNearestPaymentServiceImp getNearestPaymentService;
     private final PaymentScheduleGeneratorAndSaveService generatorAndSaveService;
     private final SearchOperationServiceImp searchOperationService;
     private final SearchCardServiceImp searchCardService;
@@ -44,6 +42,7 @@ public class OperationFabricImp implements OperationFabric {
     private final CreateCreditServiceImp addCreditService;
     private final AddCreditOrderServiceImp addCreditOrderService;
     private final CreateAgreementServiceImp addAgreementService;
+
 
     @Override
     public OperationService<List<OperationResponseDTO>, GetBelongsAccountOperationsRequest> getBelongsAccountOperations() {
@@ -62,8 +61,9 @@ public class OperationFabricImp implements OperationFabric {
 
     @Override
     public AddPaymentOperationServiceImp addPaymentOperation() {
-        return new AddPaymentOperationServiceImp(repository, util, getAllUnpaidPaymentsBelongsCreditService, updateAccountService,
-                generatorAndSaveService, searchCardService, createCardService, getAccountsListService, addCreditService);
+        return new AddPaymentOperationServiceImp(repository, util, getAllUnpaidPaymentsBelongsCreditService,
+                updateAccountService, generatorAndSaveService, searchCardService, createCardService,
+                getAccountsListService, addCreditService, addCreditOrderService, addAgreementService);
     }
 
     @Override

@@ -1,17 +1,18 @@
 package com.example.credit_service_project.service.operation;
 
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
-import com.example.credit_service_project.entity.Account;
-import com.example.credit_service_project.entity.Card;
-import com.example.credit_service_project.entity.Operation;
-import com.example.credit_service_project.entity.PaymentSchedule;
+import com.example.credit_service_project.entity.*;
+import com.example.credit_service_project.entity.enums.CreditOrderStatus;
+import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.account.GetAccountsListServiceImp;
 import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
+import com.example.credit_service_project.service.agreement.CreateAgreementServiceImp;
 import com.example.credit_service_project.service.card.CreateCardServiceImp;
 import com.example.credit_service_project.service.card.SearchCardServiceImp;
 import com.example.credit_service_project.service.cerdit.CreateCreditServiceImp;
 import com.example.credit_service_project.service.cerdit.GetAllUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.service.creditOrder.AddCreditOrderServiceImp;
 import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
@@ -41,6 +42,8 @@ public class AddPaymentOperationServiceImp {
     private final CreateCardServiceImp createCardService;
     private final GetAccountsListServiceImp getAccountsListService;
     private final CreateCreditServiceImp creditService;
+    private final AddCreditOrderServiceImp addCreditOrderService;
+    private final CreateAgreementServiceImp createAgreementService;
 
     @Scheduled(cron = "0 0 23 * * *")
     public List<OperationResponseDTO> execute() {
@@ -66,7 +69,7 @@ public class AddPaymentOperationServiceImp {
                     if (account.getBalance().compareTo(paymentSchedule.getMonthlyPayment()) < 0) {
                         handleImmediateFine(account, paymentSchedule);
                     } else {
-                        handleSuccessfulPayment(donePaymentsList, accountAfterOperation, paymentSchedule, card);
+                        handleSuccessfulPayment(donePaymentsList, accountAfterOperation, paymentSchedule);
                     }
                     updateAccountService.saveUpdatedAccount(accountAfterOperation);
                     saveService.save(paymentSchedule);
@@ -77,12 +80,27 @@ public class AddPaymentOperationServiceImp {
                 if (paymentSchedule != null && !paymentSchedule.getSurcharge().equals(BigDecimal.ZERO)) {
                     handleDelayedFine(paymentSchedule, account);
                 }
-
             }
+
+            if (account.getUnpaidCreditSum().compareTo(BigDecimal.ZERO) == 0) {
+                closePaidCredit(account);
+            }
+
         }
+
         return donePaymentsList;
     }
 
+    private void closePaidCredit(Account account) {
+        Credit credit = account.getCredit();
+        credit.setCreditStatus(CreditStatus.CLOSED);
+        credit.getCreditOrder().setCreditOrderStatus(CreditOrderStatus.CLOSED);
+        credit.getAgreement().setActive(false);
+
+        creditService.saveCredit(credit);
+        addCreditOrderService.saveOrder(credit.getCreditOrder());
+        createAgreementService.saveAgreement(credit.getAgreement());
+    }
 
     private void handleImmediateFine(Account account, PaymentSchedule paymentSchedule) {
         int dayOfDelay = 1;
@@ -93,7 +111,7 @@ public class AddPaymentOperationServiceImp {
         creditService.saveCredit(account.getCredit());
     }
 
-    private void handleSuccessfulPayment(List<OperationResponseDTO> donePaymentsList, Account account, PaymentSchedule paymentSchedule, Card card) {
+    private void handleSuccessfulPayment(List<OperationResponseDTO> donePaymentsList, Account account, PaymentSchedule paymentSchedule) {
         Operation operation = util.convertDataToOperationForPayment(account, paymentSchedule);
         Operation savedOperation = saveOperation(operation);
         donePaymentsList.add(util.convertOperationToResponseDTO(savedOperation));

@@ -19,7 +19,6 @@ import static jakarta.persistence.CascadeType.*;
 @NoArgsConstructor
 @ToString
 public class PaymentSchedule {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
