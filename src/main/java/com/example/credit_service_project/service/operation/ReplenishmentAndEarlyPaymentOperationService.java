@@ -2,10 +2,7 @@ package com.example.credit_service_project.service.operation;
 
 import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.DTO.operationDTO.PaymentsOperationRequest;
-import com.example.credit_service_project.entity.Account;
-import com.example.credit_service_project.entity.Card;
-import com.example.credit_service_project.entity.Operation;
-import com.example.credit_service_project.entity.PaymentSchedule;
+import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
 import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.repository.OperationRepository;
@@ -55,6 +52,7 @@ public class ReplenishmentAndEarlyPaymentOperationService implements OperationSe
         Card card = cardSearchService.findByAccount(account);
 
         if (request.getType().equals(REPLENISHMENT)) {
+
             if (request.getSum().intValueExact() < 0) {
                 throw new OperationException(ErrorsMessage.NEGATIVE_SUM_EXCEPTION);
             }
@@ -64,7 +62,8 @@ public class ReplenishmentAndEarlyPaymentOperationService implements OperationSe
             card = util.changerCardBalance(account, card);
 
         } else if (request.getType().equals(EARLY_REPAYMENT)) {
-            if (account.getCredit().getCreditOrder().getProduct().isEarlyRepayment()) {
+            Credit credit = account.getCredit();
+            if (credit.getCreditOrder().getProduct().isEarlyRepayment()) {
                 account = util.payEarlyPayment(request, account, card);
                 List<PaymentSchedule> unpaidPayments = getAllUnpaidPaymentsBelongsCreditService.findUnpaidPaymentByAccount(account);
                 for (PaymentSchedule paymentSchedule : unpaidPayments) {
@@ -72,14 +71,14 @@ public class ReplenishmentAndEarlyPaymentOperationService implements OperationSe
                     paymentSchedule.setActualPaymentDate(LocalDate.now());
                     saveService.save(paymentSchedule);
                 }
-                    account.getCredit().setCreditStatus(CreditStatus.CLOSED);
-                    account.getCredit().getCreditOrder().setCreditOrderStatus(CreditOrderStatus.CLOSED);
-                    account.getCredit().getAgreement().setActive(false);
-                    account.getCredit().getAgreement().setTerminationDate(LocalDate.now());
+                credit.setCreditStatus(CreditStatus.CLOSED);
+                credit.getCreditOrder().setCreditOrderStatus(CreditOrderStatus.CLOSED);
+                credit.getAgreement().setActive(false);
+                credit.getAgreement().setTerminationDate(LocalDate.now());
 
-                    addCreditService.saveCredit(account.getCredit());
-                    addCreditOrderService.saveOrder(account.getCredit().getCreditOrder());
-                    addAgreementService.saveAgreement(account.getCredit().getAgreement());
+                addCreditService.saveCredit(credit);
+                addCreditOrderService.saveOrder(credit.getCreditOrder());
+                addAgreementService.saveAgreement(credit.getAgreement());
 
             } else {
                 throw new EarlyPaymentException(ErrorsMessage.EARLY_PAYMENT_EXCEPTION_MESSAGE);

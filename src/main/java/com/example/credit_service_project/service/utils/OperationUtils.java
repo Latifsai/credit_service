@@ -101,8 +101,7 @@ public class OperationUtils {
             throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);
         }
 
-        BigDecimal balanceAfterOperation = account.getBalance()
-                .subtract(request.getSum());
+        BigDecimal balanceAfterOperation = account.getBalance().subtract(request.getSum());
 
         //updated
         account.setBalance(balanceAfterOperation);

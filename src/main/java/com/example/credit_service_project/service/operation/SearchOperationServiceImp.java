@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,13 +23,12 @@ public class SearchOperationServiceImp implements OperationService<OperationResp
     @Transactional(readOnly = true)
     @Override
     public OperationResponseDTO execute(UUID id) {
-        Operation operation = findById(id)
-                .orElseThrow(() -> new OperationNotFoundException(ErrorsMessage.NOT_FOUND_OPERATION_MESSAGE));
+        Operation operation = findById(id);
         return util.convertOperationToResponseDTO(operation);
-
     }
 
-    public Optional<Operation> findById(UUID id) {
-        return repository.findById(id);
+    public Operation findById(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new OperationNotFoundException(ErrorsMessage.NOT_FOUND_OPERATION_MESSAGE));
     }
 }
