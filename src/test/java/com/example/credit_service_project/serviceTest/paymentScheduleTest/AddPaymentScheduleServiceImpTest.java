@@ -1,8 +1,8 @@
 package com.example.credit_service_project.serviceTest.paymentScheduleTest;
 
 import com.example.credit_service_project.repository.PaymentScheduleRepository;
-import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
+import com.example.credit_service_project.services.account.SearchAccountsServiceImp;
+import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOPaymentCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import org.junit.jupiter.api.Test;

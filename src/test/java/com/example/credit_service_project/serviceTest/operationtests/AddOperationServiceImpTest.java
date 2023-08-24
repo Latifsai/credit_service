@@ -1,11 +1,11 @@
 package com.example.credit_service_project.serviceTest.operationtests;
 
 import com.example.credit_service_project.repository.OperationRepository;
-import com.example.credit_service_project.service.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.service.account.UpdateAccountServiceImp;
-import com.example.credit_service_project.service.card.SearchCardServiceImp;
-import com.example.credit_service_project.service.card.UpdateCardServiceImp;
-import com.example.credit_service_project.service.utils.OperationUtils;
+import com.example.credit_service_project.services.account.SearchAccountsServiceImp;
+import com.example.credit_service_project.services.account.UpdateAccountServiceImp;
+import com.example.credit_service_project.services.card.SearchCardServiceImp;
+import com.example.credit_service_project.services.card.UpdateCardServiceImp;
+import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import jakarta.validation.Validation;

@@ -1,9 +1,9 @@
 package com.example.credit_service_project.serviceTest.accountTest;
 
 import com.example.credit_service_project.repository.AccountRepository;
-import com.example.credit_service_project.service.account.CreateAccountServiceImp;
-import com.example.credit_service_project.service.client.SearchClientServiceImp;
-import com.example.credit_service_project.service.utils.AccountUtil;
+import com.example.credit_service_project.services.account.CreateAccountServiceImp;
+import com.example.credit_service_project.services.client.SearchClientServiceImp;
+import com.example.credit_service_project.services.utils.AccountUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOAccountCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import jakarta.validation.Validation;

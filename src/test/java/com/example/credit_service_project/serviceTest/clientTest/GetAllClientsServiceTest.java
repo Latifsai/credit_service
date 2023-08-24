@@ -1,8 +1,8 @@
 package com.example.credit_service_project.serviceTest.clientTest;
 
 import com.example.credit_service_project.repository.ClientRepository;
-import com.example.credit_service_project.service.client.GetAllClientsService;
-import com.example.credit_service_project.service.utils.ClientUtil;
+import com.example.credit_service_project.services.client.GetAllClientsService;
+import com.example.credit_service_project.services.utils.ClientUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOClientCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import org.junit.jupiter.api.Test;

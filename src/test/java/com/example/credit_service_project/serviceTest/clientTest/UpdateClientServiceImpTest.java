@@ -2,8 +2,8 @@ package com.example.credit_service_project.serviceTest.clientTest;
 
 import com.example.credit_service_project.DTO.client.UpdateClientRequest;
 import com.example.credit_service_project.repository.ClientRepository;
-import com.example.credit_service_project.service.client.UpdateClientServiceImp;
-import com.example.credit_service_project.service.utils.ClientUtil;
+import com.example.credit_service_project.services.client.UpdateClientServiceImp;
+import com.example.credit_service_project.services.utils.ClientUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOClientCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import jakarta.validation.Validation;

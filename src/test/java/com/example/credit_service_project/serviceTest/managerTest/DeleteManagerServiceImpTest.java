@@ -1,8 +1,8 @@
 package com.example.credit_service_project.serviceTest.managerTest;
 
 import com.example.credit_service_project.repository.ManagerRepository;
-import com.example.credit_service_project.service.manager.DeleteManagerServiceImp;
-import com.example.credit_service_project.service.utils.ManagerUtil;
+import com.example.credit_service_project.services.manager.DeleteManagerServiceImp;
+import com.example.credit_service_project.services.utils.ManagerUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOManagerCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import org.junit.jupiter.api.Test;

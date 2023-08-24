@@ -4,8 +4,8 @@ import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsReque
 import com.example.credit_service_project.entity.enums.OperationType;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.validation.exceptions.OperationException;
-import com.example.credit_service_project.service.operation.UpdateOperationServiceImp;
-import com.example.credit_service_project.service.utils.OperationUtils;
+import com.example.credit_service_project.services.operation.UpdateOperationServiceImp;
+import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
 import jakarta.validation.Validation;
