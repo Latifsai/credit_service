@@ -13,7 +13,7 @@
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"
-                 path="10-crate-clients-table.sql"/>
+                 path="10-create-clients-table.sql"/>
         <rollback>
             <sqlFile dbms="mysql"
                      encoding="utf8"
@@ -23,6 +23,16 @@
                      stripComments="true"
                      path="10-drop-clients-table.sql"/>
         </rollback>
+    </changeSet>
+
+    <changeSet id="addForeignKey" author="latif">
+        <addForeignKeyConstraint
+                baseTableName="clients"
+                baseColumnNames="manager_id"
+                constraintName="FK_clients_managers"
+                referencedTableName="managers"
+                referencedColumnNames="id"
+        />
     </changeSet>
 
 

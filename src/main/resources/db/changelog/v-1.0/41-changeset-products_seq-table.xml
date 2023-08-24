@@ -5,15 +5,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-
-    <changeSet id="2" author="latif">
+    <changeSet id="6.1" author="latif">
         <sqlFile dbms="mysql"
                  encoding="utf8"
                  endDelimiter="\nGO"
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"
-                 path="01-create-mangers-table.sql"/>
+                 path="41-create-products_seq-table.sql"/>
         <rollback>
             <sqlFile dbms="mysql"
                      encoding="utf8"
@@ -21,9 +20,11 @@
                      relativeToChangelogFile="true"
                      splitStatements="true"
                      stripComments="true"
-                     path="01-drop-mangers-table.sql"/>
+                     path="41-drop-products_seq-table.sql"/>
         </rollback>
     </changeSet>
 
-
+    <changeSet id="insert" author="latif">
+       <sql>INSERT INTO products_seq(next_val) values (1)</sql>
+    </changeSet>
 </databaseChangeLog>

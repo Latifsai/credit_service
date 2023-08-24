@@ -11,6 +11,7 @@
     <include file="20-changeset-accounts-table.xml" relativeToChangelogFile="true" />
     <include file="30-changeset-cards-table.xml" relativeToChangelogFile="true" />
     <include file="40-changeset-products-table.xml" relativeToChangelogFile="true" />
+    <include file="41-changeset-products_seq-table.xml" relativeToChangelogFile="true" />
     <include file="50-changeset-credit_orders-table.xml" relativeToChangelogFile="true" />
     <include file="60-changeset-agreements-table.xml" relativeToChangelogFile="true" />
     <include file="70-changeset-credits-table.xml" relativeToChangelogFile="true" />

@@ -5,4 +5,32 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+
+    <changeSet id="10" author="latif">
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="80-create-payment_schedules-table.sql"/>
+        <rollback>
+            <sqlFile dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"
+                     path="80-drop-payment_schedules-table.sql"/>
+        </rollback>
+    </changeSet>
+
+
+    <changeSet id="addForeignKey" author="latif">
+        <addForeignKeyConstraint baseTableName="payment_schedules"
+                                 baseColumnNames="account_id"
+                                 constraintName="FK_payment_schedules_accounts"
+                                 referencedTableName="accounts"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>

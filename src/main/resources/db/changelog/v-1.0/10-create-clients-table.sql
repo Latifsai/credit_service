@@ -13,9 +13,3 @@ create table clients (
     manager_id binary(16),
     primary key (id)
 ) engine = InnoDB;
-
-
-alter table clients
-    add constraint FKb04ux70c9nn0yi4y3pmitlfo9
-    foreign key (manager_id)
-    references managers (id)

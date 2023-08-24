@@ -5,4 +5,38 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <changeSet id="5" author="latif">
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="30-create-cards-table.sql"/>
+        <rollback>
+            <sqlFile dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"
+                     path="30-drop-cards-table.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="addForeignKeyCards" author="latif">
+        <addForeignKeyConstraint baseTableName="cards"
+                                 baseColumnNames="account_id"
+                                 constraintName="FK_cards_accounts"
+                                 referencedTableName="accounts"
+                                 referencedColumnNames="id" />
+    </changeSet>
+
+    <changeSet id="addUniqueConstraint" author="latif">
+        <addUniqueConstraint tableName="cards"
+                             columnNames="account_id"
+                             constraintName="UK_ra8oohxt2tbbk56h9fxiq493e"
+                             />
+    </changeSet>
+
 </databaseChangeLog>

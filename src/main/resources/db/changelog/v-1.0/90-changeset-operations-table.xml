@@ -5,4 +5,31 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <changeSet id="11" author="latif">
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="90-create-operations-table.sql"/>
+        <rollback>
+            <sqlFile dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"
+                     path="90-drop-operations-table.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="addForeignKey" author="latif">
+        <addForeignKeyConstraint baseTableName="operations"
+                                 baseColumnNames="account_id"
+                                 constraintName="FK_operations_accounts"
+                                 referencedTableName="accounts"
+                                 referencedColumnNames="id" />
+    </changeSet>
+
 </databaseChangeLog>

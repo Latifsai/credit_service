@@ -5,4 +5,59 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+
+    <changeSet id="9" author="latif">
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="70-create-credits-table.sql"/>
+        <rollback>
+            <sqlFile dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"
+                     path="70-drop-credits-table.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="addUniqueConstraint" author="latif">
+        <addUniqueConstraint tableName="credits"
+                             columnNames="account_id"
+                             constraintName="UK_qkf65l97sk7dgxec4wykxw1l4"/>
+
+        <addUniqueConstraint tableName="credits"
+                             columnNames="agreement_id"
+                             constraintName="UK_3c95v6mqxbk5uc8jn1qngq553"/>
+
+        <addUniqueConstraint tableName="credits"
+                             columnNames="credit_order_id"
+                             constraintName="UK_2d4vsbh39kvme3re9awrfpkhl"/>
+    </changeSet>
+
+    <changeSet id="addForeignKeys" author="latif">
+        <addForeignKeyConstraint baseTableName="credits"
+                                 baseColumnNames="account_id"
+                                 constraintName="FK_credits_accounts"
+                                 referencedTableName="accounts"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="credits"
+                                 baseColumnNames="agreement_id"
+                                 constraintName="FK_credits_agreements"
+                                 referencedTableName="agreements"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="credits"
+                                 baseColumnNames="credit_order_id"
+                                 constraintName="FK_credits_credit_order"
+                                 referencedTableName="credit_orders"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
 </databaseChangeLog>
