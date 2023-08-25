@@ -1,8 +1,6 @@
 package com.example.credit_service_project.DTO.accountDTO;
 
 import com.example.credit_service_project.entity.enums.AccountStatus;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
 import java.math.BigDecimal;

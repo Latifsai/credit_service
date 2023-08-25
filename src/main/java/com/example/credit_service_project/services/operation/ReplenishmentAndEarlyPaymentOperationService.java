@@ -14,7 +14,7 @@ import com.example.credit_service_project.services.card.CreateCardServiceImp;
 import com.example.credit_service_project.services.card.SearchCardServiceImp;
 import com.example.credit_service_project.services.credit.CreateCreditServiceImp;
 import com.example.credit_service_project.services.credit.GetAllUnpaidPaymentsBelongsCreditService;
-import com.example.credit_service_project.services.creditOrder.AddCreditOrderServiceImp;
+import com.example.credit_service_project.services.creditOrder.CreateCreditOrderServiceImp;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
@@ -41,7 +41,7 @@ public class ReplenishmentAndEarlyPaymentOperationService implements OperationSe
     private final GetAllUnpaidPaymentsBelongsCreditService getAllUnpaidPaymentsBelongsCreditService;
     private final PaymentScheduleGeneratorAndSaveService saveService;
     private final CreateCreditServiceImp addCreditService;
-    private final AddCreditOrderServiceImp addCreditOrderService;
+    private final CreateCreditOrderServiceImp addCreditOrderService;
     private final CreateAgreementServiceImp addAgreementService;
 
 

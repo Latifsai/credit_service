@@ -27,25 +27,24 @@ public class CreditOrder {
     private UUID id;
 
     @Column(name = "number")
-    @NotNull(message = "number must not be null!")
-    @NotEmpty(message = "number must not be empty!")
-    @Size(min = 6, max = 20, message = "number must be between 6 and 20!")
+    @NotBlank(message = "Number must not be blank!")
+    @Size(min = 6, max = 20, message = "Number must be between 6 and 20!")
     private String number;
 
     @Column(name = "amount")
-    @Positive(message = "amount must not be negative!")
+    @Positive(message = "Amount must not be negative!")
     private BigDecimal amount; // amount of credit m
 
     @Column(name = "creation_date")
-    @NotNull(message = "creationDate must not be null!")
+    @NotBlank(message = "Creation date must not be blank!")
     private LocalDate creationDate;
 
     @Column(name = "last_update_date")
-    @NotNull(message = "creationDate must not be null!")
+    @NotBlank(message = "Last update date date must not be blank!")
     private LocalDate lastUpdateDate;
 
     @Column(name = "client_income")
-    @NotNull(message = "clientSalary must not be null!")
+    @NotBlank(message = "Client salary date must not be blank!")
     private BigDecimal clientSalary;
 
     @Column(name = "client_monthly_expenditure")
@@ -66,7 +65,7 @@ public class CreditOrder {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "creditOrderStatus must not be null!")
+    @NotBlank(message = "Credit order status must not be blank!")
     private CreditOrderStatus creditOrderStatus;
 
     //future: id of work-giver

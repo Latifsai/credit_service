@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Random;
 
 public class AccountGenerator {
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞabcdrfgilklmopqrstuvwxyzäöü0123456789";
+    private static final String CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞabcdrfgilklmopqrstuvwxyzäöü";
 
     public static String createRandomAccountNumber(Integer length) {
         StringBuilder stringBuilder = new StringBuilder(length);

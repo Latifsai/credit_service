@@ -6,10 +6,8 @@ import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.entity.Manager;
 import com.example.credit_service_project.repository.ClientRepository;
 import com.example.credit_service_project.services.ClientService;
-import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.services.manager.SearchManagerServiceImp;
 import com.example.credit_service_project.services.utils.ClientUtil;
-import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,9 +23,7 @@ public class AddClientServiceImp implements ClientService<ClientResponseDTO, Add
 
     @Override
     public ClientResponseDTO execute(AddClientRequest request) {
-        Manager manager = searchManagerService.findManagerById(request.getManagerID())
-                .orElseThrow(() -> new NotFoundException(ErrorsMessage.UNABLE_TO_ADD_CLIENT_MESSAGE));
-
+        Manager manager = searchManagerService.findManagerById(request.getManagerID());
         Client client = util.convertAddRequestToEntity(request, manager);
         Client savedClient = saveClient(client);
         return util.convertClientToResponse(savedClient);

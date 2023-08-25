@@ -18,8 +18,8 @@ import java.util.UUID;
 @RequestMapping("/order")
 public class CreditOrderController {
 
-    private final AddCreditOrderServiceImp create;
-    private final ConsiderationOrderService considerationOrderService;
+    private final CreateCreditOrderServiceImp create;
+    private final DecisionOrderService considerationOrderService;
     private final GetAllCreditOrdersService getAllOrders;
     private final SearchCreditOrderServiceImp search;
     private final UpdateCreditOrderServiceImp update;

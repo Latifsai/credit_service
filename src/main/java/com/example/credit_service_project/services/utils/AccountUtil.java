@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 
 @Service
@@ -20,7 +21,7 @@ public class AccountUtil {
     public Account convertAddRequestToAccount(AddAccountDTORequest request, Client client) {
         Account account = new Account();
         account.setClient(client);
-        account.setCountry(request.getCounty());
+        account.setCountry(request.getCountry());
         account.setAccountNumber(AccountGenerator.createRandomAccountNumber(request.getAccountNumberLength()));
         account.setLoanDebt(BigDecimal.ZERO);
         account.setPercentageDebt(BigDecimal.ZERO);
@@ -30,6 +31,7 @@ public class AccountUtil {
         account.setClosingDate(AccountGenerator.LocalDateCreateClosingDate(request.getYearsAmountForClosingDate()));
         account.setUnpaidCreditSum(BigDecimal.ZERO);
         account.setCurrency(request.getCurrency());
+        account.setLastUpdateDate(LocalDate.now());
         return account;
     }
 
@@ -57,6 +59,7 @@ public class AccountUtil {
         if (request.getBalance() != null) account.setBalance(request.getBalance());
         if (request.getUnpaidCreditSum() != null) account.setUnpaidCreditSum(request.getUnpaidCreditSum());
         if (request.getCountry() != null && !request.getCountry().trim().isEmpty()) account.setCountry(request.getCountry());
+        account.setLastUpdateDate(LocalDate.now());
         return account;
     }
 

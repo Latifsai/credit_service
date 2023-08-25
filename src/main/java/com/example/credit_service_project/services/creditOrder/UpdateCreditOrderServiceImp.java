@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UpdateCreditOrderServiceImp implements CreditOrderService<CreditOrderResponseDTO, UpdateCreditOrderDTORequest> {
 
-    private final AddCreditOrderServiceImp addCreditOrderService;
+    private final CreateCreditOrderServiceImp addCreditOrderService;
     private final SearchCreditOrderServiceImp searchCreditOrderService;
     private final CreditOrderUtil util;
 

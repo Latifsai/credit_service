@@ -27,8 +27,7 @@ public class GetBelongsToTheAccountPaymentsListServiceImp implements PaymentSche
     @Override
     public GetBelongsPaymentsResponse execute(PaymentsBelongsToAccountRequest request) {
         Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
-
-        var listOfBelongsToAccountPayments = findAllByAccount(account);
+        List<PaymentSchedule> listOfBelongsToAccountPayments = findAllByAccount(account);
 
         List<PaymentResponseDTO> list = listOfBelongsToAccountPayments.stream()
                 .map(util::convertEntityToPaymentResponse)
@@ -38,7 +37,7 @@ public class GetBelongsToTheAccountPaymentsListServiceImp implements PaymentSche
                 account.getAccountNumber(), list);
     }
 
-    public List<PaymentSchedule> findAllByAccount (Account account) {
+    public List<PaymentSchedule> findAllByAccount(Account account) {
         return repository.findAllByAccount(account);
     }
 }

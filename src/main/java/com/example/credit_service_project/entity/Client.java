@@ -20,13 +20,11 @@ public class Client {
     private UUID id;
 
     @Column(name = "name")
-    @NotNull(message = "Name must not be null!")
-    @NotEmpty(message = "Name must not be empty!")
+    @NotBlank(message = "Name must not be blank!")
     private String name;
 
     @Column(name = "surname")
-    @NotNull(message = "Surname must not be null!")
-    @NotEmpty(message = "Surname must not be empty!")
+    @NotBlank(message = "Surname must not be blank!")
     private String surname;
 
     @Column(name = "salary")
@@ -42,31 +40,31 @@ public class Client {
     private BigDecimal expenses;
 
     @Column(name = "address")
-    @NotNull(message = "address must not be null!")
-    @NotEmpty(message = "address must not be empty!")
+    @NotBlank(message = "Address must not be blank!")
     private String address;
 
     @Column(name = "email")
-    @Email(message = "must be email!")
+    @NotBlank(message = "email must not be blank!")
+    @Email(message = "Format must be email!")
     private String email;
 
     @Column(name = "phone")
-    @Pattern(regexp = "^(?:(?:\\+\\d{1,3}\\s?)|(?:\\d{1,4}\\s?))?(?:\\d{4,14})$", message = "Number is not supported!")
+    @Pattern(regexp = "^(?:\\+\\d{1,3}\\s?)?(?:\\d{1,4}\\s?)?\\d{6,14}$", message = "Number is not supported!")
     private String phone;
 
     @Column(name = "registration_date")
-    @NotNull(message = "registrationDate must not be null!")
+    @NotBlank(message = "registrationDate must not be blank!")
     private LocalDate registrationDate;
 
     @Column(name = "update_date")
-    @NotNull(message = "updateDate must not be null!")
+    @NotBlank(message = "registrationDate must not be blank!")
     private LocalDate updateDate;
 
     @OneToOne(mappedBy = "client", orphanRemoval = true,
             cascade = {MERGE, PERSIST, REFRESH})
     private Account account;
 
-    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private Manager manager;
 }

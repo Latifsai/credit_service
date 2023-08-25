@@ -12,7 +12,7 @@ import com.example.credit_service_project.services.card.CreateCardServiceImp;
 import com.example.credit_service_project.services.card.SearchCardServiceImp;
 import com.example.credit_service_project.services.credit.CreateCreditServiceImp;
 import com.example.credit_service_project.services.credit.GetAllUnpaidPaymentsBelongsCreditService;
-import com.example.credit_service_project.services.creditOrder.AddCreditOrderServiceImp;
+import com.example.credit_service_project.services.creditOrder.CreateCreditOrderServiceImp;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -42,7 +43,7 @@ public class AddPaymentOperationServiceImp {
     private final CreateCardServiceImp createCardService;
     private final GetAccountsListServiceImp getAccountsListService;
     private final CreateCreditServiceImp creditService;
-    private final AddCreditOrderServiceImp addCreditOrderService;
+    private final CreateCreditOrderServiceImp addCreditOrderService;
     private final CreateAgreementServiceImp createAgreementService;
 
     @Scheduled(cron = "0 0 23 * * *")
@@ -75,6 +76,8 @@ public class AddPaymentOperationServiceImp {
                     saveService.save(paymentSchedule);
                     createCardService.saveCard(card);
 
+                } else if (paymentSchedule != null && !paymentSchedule.getPaymentDate().equals(currentDate)) {
+                    return Collections.emptyList();
                 }
 
                 if (paymentSchedule != null && !paymentSchedule.getSurcharge().equals(BigDecimal.ZERO)) {

@@ -27,7 +27,6 @@ public class UpdateCardServiceImp implements CardService<CardDTOResponse, Update
     @Override
     public CardDTOResponse execute(UpdateCardDTORequest request) {
         Card card = searchCardService.findCardById(request.getId());
-
         Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 
         Card updatedCard = utils.updateCard(card, request);

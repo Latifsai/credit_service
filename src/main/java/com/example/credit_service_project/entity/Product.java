@@ -2,8 +2,7 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CalculationType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
@@ -19,6 +18,7 @@ import java.util.Objects;
 @Table(name = "products")
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,8 +26,7 @@ public class Product {
     private BigInteger id;
 
     @Column(name = "name")
-    @NotNull(message = "Name must not be null!")
-    @NotEmpty(message = "Name must not be empty!")
+    @NotBlank(message = "Name must not be blank!")
     private String name;
 
     @Column(name = "sum")
@@ -44,17 +43,17 @@ public class Product {
     private boolean needIncomeDetails;
 
     @Column(name = "details")
-    @NotNull(message = "Details must not be null!")
-    @NotEmpty(message = "Details must not be empty!")
+    @NotBlank(message = "Details must not be blank!")
     private String details;
 
     @Column(name = "currency_code")
-    @Pattern(regexp = "^[A-Z]{3}$",message = "Format is not allowed in service!")
+    @NotBlank(message = "Currency code must not be blank!")
+    @Pattern(regexp = "^[A-Z]{3}$", message = "Format is not allowed in service!")
     private String currencyCode;
 
     @Column(name = "calculation_type")
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "CalculationType must not be null!")
+    @NotBlank(message = "Calculation type code must not be blank!")
     private CalculationType calculationType;
 
     @Override

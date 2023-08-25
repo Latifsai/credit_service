@@ -25,10 +25,11 @@ public class Agreement {
 
     @Column(name = "number")
     @Size(min = 6, max = 20, message = "number must be between 6 and 20!")
+    @NotBlank(message = "number must not be blank")
     private String number;
 
     @Column(name = "agreement_date")
-    @NotNull(message = "AgreementDate must not be null!")
+    @NotBlank(message = "AgreementDate must not be blank!")
     private LocalDate agreementDate;
 
     @Column(name = "termination_date")

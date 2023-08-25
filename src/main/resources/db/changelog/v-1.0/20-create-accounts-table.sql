@@ -7,6 +7,7 @@ create table accounts (
     currency varchar(255) not null,
     loan_debt decimal(38, 2),
     opening_date date not null,
+    last_update_date date not null,
     percentage_debt decimal(38, 2),
     status enum ('ACTIVE','BLOCKED','DELETED') not null,
     unpaid_credit_sum decimal(38, 2),

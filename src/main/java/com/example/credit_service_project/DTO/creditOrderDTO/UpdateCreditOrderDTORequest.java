@@ -9,8 +9,6 @@ import java.util.UUID;
 @Value
 public class UpdateCreditOrderDTORequest {
     UUID id;
-
-    BigDecimal amount;
     BigDecimal clientSalary;
     BigDecimal passiveIncome;
     BigDecimal clientMonthlyExpenditure;

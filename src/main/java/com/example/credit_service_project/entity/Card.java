@@ -3,17 +3,17 @@ package com.example.credit_service_project.entity;
 import com.example.credit_service_project.entity.enums.CardStatus;
 import com.example.credit_service_project.entity.enums.PaymentSystem;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
-import static jakarta.persistence.CascadeType.*;
+import static jakarta.persistence.CascadeType.ALL;
 
 @Entity
 @Getter
@@ -30,27 +30,24 @@ public class Card {
     private UUID id;
 
     @Column(name = "card_number")
-    @NotNull(message = "accountNumber must not be null!")
-    @NotEmpty(message = "accountNumber must not be empty!")
+    @NotBlank(message = "accountNumber must not be blank!")
     @Size(min = 7, max = 12, message = "cardNumber must be between 5 and 16!")
     private String cardNumber;
 
     @Column(name = "iban")
-    @NotNull(message = "IBAN must not be null!")
-    @NotEmpty(message = "IBAN must not be empty!")
+    @NotBlank(message = "IBAN must not be blank!")
     private String IBAN;
 
     @Column(name = "holder_name")
-    @NotNull(message = "holderName must not be null!")
-    @NotEmpty(message = "holderName must not be empty!")
+    @NotBlank(message = "holderName must not be blank!")
     private String holderName;
 
     @Column(name = "opening_date")
-    @NotNull(message = "openingDate must not be null!")
+    @NotBlank(message = "openingDate must not be blank!")
     private LocalDate openingDate;
 
     @Column(name = "expiration_date")
-    @NotNull(message = "expirationDate must not be null!")
+    @NotBlank(message = "expirationDate must not be blank!")
     private LocalDate expirationDate;
 
     @Column(name = "balance")
@@ -58,8 +55,7 @@ public class Card {
     private BigDecimal balance; // ✅
 
     @Column(name = "delivery_address")
-    @NotNull(message = "deliveryAddress must not be null!")
-    @NotEmpty(message = "deliveryAddress must not be empty!")
+    @NotBlank(message = "deliveryAddress must not be blank!")
     private String deliveryAddress; // ✅
 
     @Column(name = "is_digital_valet")
@@ -67,12 +63,12 @@ public class Card {
 
     @Column(name = "payment_system")
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "paymentSystem must not be null!")
+    @NotBlank(message = "paymentSystem must not be blank!")
     private PaymentSystem paymentSystem;
 
     @Column(name = "card_status")
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "cardStatus must not be null!")
+    @NotBlank(message = "cardStatus must not be blank!")
     private CardStatus cardStatus;  // ✅
 
     @OneToOne(cascade = ALL, fetch = FetchType.EAGER)

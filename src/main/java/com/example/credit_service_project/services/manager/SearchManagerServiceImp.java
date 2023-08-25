@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,12 +23,12 @@ public class SearchManagerServiceImp implements ManagerService<ManagerResponseDT
     @Transactional(readOnly = true)
     @Override
     public ManagerResponseDTO execute(UUID id) {
-        Optional<Manager> manager = findManagerById(id);
-        return manager.map(util::convertManagerToResponse)
-                .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_MANAGER_MESSAGE));
+        Manager manager = findManagerById(id);
+        return util.convertManagerToResponse(manager);
     }
 
-    public Optional<Manager> findManagerById(UUID id) {
-        return repository.findById(id);
+    public Manager findManagerById(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_MANAGER_MESSAGE));
     }
 }

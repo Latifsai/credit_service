@@ -2,7 +2,10 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CreditStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -25,24 +28,23 @@ public class Credit {
     private UUID id;
 
     @Column(name = "credit_type")
-    @NotNull(message = "creditType must not be null!")
-    @NotEmpty(message = "creditType must not be empty!")
+    @NotBlank(message = "Credit type must not be blank!")
     private String creditType; //
 
     @Column(name = "credit_Limit")
-    @Positive(message = "creditSum must not be negative!")
+    @Positive(message = "Credit sum must not be negative!")
     private BigDecimal creditSum;
 
     @Column(name = "period_month")
-    @Positive(message = "periodMonth must not be negative!")
+    @Positive(message = "Period month must not be negative!")
     private Integer periodMonth;
 
     @Column(name = "interest_rate")
-    @Positive(message = "interestRate must not be negative!")
+    @Positive(message = "Interest rate must not be negative!")
     private BigDecimal interestRate;
 
     @Column(name = "fine")
-    @PositiveOrZero(message = "fine must not be negative!")
+    @PositiveOrZero(message = "Fine must not be negative!")
     private BigDecimal fine;
 
     @Column(name = "need_deposit")
@@ -50,11 +52,12 @@ public class Credit {
 
     @Column(name = "credit_status")
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "creditStatus must not be null!")
+    @NotBlank(message = "CreditStatus must not be blank!")
     private CreditStatus creditStatus;
 
     @Column(name = "currency")
     @Pattern(regexp = "^[A-Z]{3}$",message = "Format is not allowed in service!")
+    @NotBlank(message = "Currency must not be blank!")
     private String currency;
 
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})

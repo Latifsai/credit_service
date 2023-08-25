@@ -26,18 +26,18 @@ public class PaymentSchedule {
     private UUID id;
 
     @Column(name = "payment_date")
-    @NotNull(message = "paymentDate must not be null!")
+    @NotBlank(message = "Payment date must not be null!")
     private LocalDate paymentDate;
 
     @Column(name = "actual_payment_date")
     private LocalDate actualPaymentDate;
 
     @Column(name = "surcharge")
-    @PositiveOrZero(message = "surcharge must not be negative!")
+    @PositiveOrZero(message = "Surcharge must not be negative or must be zero!") //!!!!!!!!
     private BigDecimal surcharge; // пеня(посчитаная)
 
     @Column(name = "monthly_payment")
-    @Positive(message = "monthlyAmount must not be negative!")
+    @Positive(message = "Monthly amount must not be negative!")
     private BigDecimal monthlyPayment;
 
     @Column(name = "is_paid")

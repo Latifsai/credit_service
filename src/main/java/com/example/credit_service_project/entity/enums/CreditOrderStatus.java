@@ -4,5 +4,5 @@ public enum CreditOrderStatus {
     IN_REVIEW, // по дефолту
     DECLINED, //отказано
     APPROVED, // одобренно
-    CLOSED // одобренно
+    CLOSED
 }

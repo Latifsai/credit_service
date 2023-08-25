@@ -17,7 +17,6 @@ public class PaymentScheduleController {
     private final GetBelongsToTheAccountPaymentsListServiceImp getBelongsToTheAccountPaymentsList;
     private final GetNearestPaymentServiceImp getNearestPayment;
 
-
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.FOUND)
     public PaymentResponseDTO search(@RequestBody PaymentsBelongsToAccountRequest request) {
@@ -28,7 +27,6 @@ public class PaymentScheduleController {
     @ResponseStatus(HttpStatus.FOUND)
     public GetBelongsPaymentsResponse get(@RequestBody PaymentsBelongsToAccountRequest request) {
         return getBelongsToTheAccountPaymentsList.execute(request);
-
     }
 
 }

@@ -36,11 +36,13 @@ public class OperationUtils {
         if (request.getOperationDetails() != null && !request.getOperationDetails().trim().isEmpty()) {
             operation.setOperationDetails(request.getOperationDetails());
         }
-        if (checkType(operation, request)) operation.setType(request.getType());
+        if (request.getType() != null) {
+            checkType(operation, request);
+        }
         return operation;
     }
 
-    private boolean checkType(Operation operation, UpdateOperationsRequest request) {
+    private void checkType(Operation operation, UpdateOperationsRequest request) {
         if ((operation.getType().equals(REPLENISHMENT) && !request.getType().equals(REPLENISHMENT)) ||
                 ((operation.getType().equals(MONTHLY_PAYMENT)
                         || operation.getType().equals(EARLY_REPAYMENT)
@@ -48,8 +50,13 @@ public class OperationUtils {
                         && request.getType().equals(REPLENISHMENT))) {
 
             throw new OperationException(ErrorsMessage.OPERATION_TYPE_CHANGE_MESSAGE);
+        } else {
+            operation.setType(request.getType());
         }
-        return request.getType() != null;
+    }
+
+    public BigDecimal getSumToPayForPayment(PaymentSchedule p) {
+        return p.getMonthlyPayment().add(p.getSurcharge());
     }
 
     public Account payBill(Account account, PaymentSchedule paymentSchedule, Card card) {
@@ -57,23 +64,22 @@ public class OperationUtils {
             BigDecimal balance = account.getBalance().subtract(getSumToPayForPayment(paymentSchedule));
 
             account.setBalance(balance);
-            account.setUnpaidCreditSum(account.getUnpaidCreditSum().subtract(paymentSchedule.getMonthlyPayment()));
+            account.setUnpaidCreditSum(account.getUnpaidCreditSum().subtract(getSumToPayForPayment(paymentSchedule)));
             //substract and set new setUnpaidCreditSum
             paymentSchedule.setActualPaymentDate(LocalDate.now());
             paymentSchedule.setPaid(true);
+            paymentSchedule.setSurcharge(BigDecimal.ZERO);
             changerCardBalance(account, card);
         }
         return account;
     }
 
     public BigDecimal calculateFine(BigDecimal interestRate, BigDecimal payment, int dayOfDelay) {
-        return payment.multiply((interestRate.divide(BigDecimal.valueOf(100),5, RoundingMode.HALF_UP)))
-                .multiply(BigDecimal.valueOf(dayOfDelay/365));
+        return payment.multiply((interestRate.divide(BigDecimal.valueOf(100), 5, RoundingMode.HALF_UP)))
+                .multiply(BigDecimal.valueOf(dayOfDelay / 365));
     }
 
-    public BigDecimal getSumToPayForPayment(PaymentSchedule p) {
-        return p.getMonthlyPayment().add(p.getSurcharge());
-    }
+
 
     public Operation convertDataToOperationForPayment(Account account, PaymentSchedule p) {
         Operation operation = new Operation();

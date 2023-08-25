@@ -2,8 +2,7 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.OperationType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -34,16 +33,15 @@ public class Operation {
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Type must not be null!")
+    @NotBlank(message = "Type must not be blank!")
     private OperationType type;
 
     @Column(name = "operation_end_mark")
-    @NotNull(message = "OperationEndMark must not be null!")
+    @NotBlank(message = "Operation end mark must not be blank!")
     private LocalDateTime operationEndMark;
 
     @Column(name = "operation_details")
-    @NotNull(message = "OperationDetails must not be null!")
-    @NotEmpty(message = "OperationDetails must not be empty!")
+    @NotBlank(message = "Operation details must not be blank!")
     private String operationDetails;
 
     @Column(name = "debit")
@@ -51,6 +49,7 @@ public class Operation {
 
     @Column(name = "currency")
     @Pattern(regexp = "^[A-Z]{3}$",message = "Format is not allowed in service!")
+    @NotBlank(message = "Currency must not be blank!")
     private String currency;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = ALL)

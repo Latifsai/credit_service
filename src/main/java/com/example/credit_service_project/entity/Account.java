@@ -26,8 +26,7 @@ public class Account {
     @Column(name = "id")
     private UUID id;
 
-    @NotNull(message = "accountNumber must not be null!")
-    @NotEmpty(message = "accountNumber must not be empty!")
+    @NotBlank(message = "accountNumber must not be blank!")
     @Size(min = 5, max = 16, message = "accountNumber must be between 5 and 16!")
     @Column(name = "account_number")
     private String accountNumber;
@@ -41,33 +40,36 @@ public class Account {
     private BigDecimal percentageDebt;
 
     @Column(name = "country")
-    @NotNull(message = "accountNumber must not be null!")
-    @NotBlank(message = "accountNumber must not be empty!")
+    @NotBlank(message = "country must not be blank!")
     private String country;
 
-    @NotNull(message = "status must not be null!")
+    @NotBlank(message = "status must not be blank!")
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
-    @NotNull(message = "balance must not be null!")
+    @NotBlank(message = "balance must not be blank!")
     @PositiveOrZero(message = "Balance must be greater than 0")
     @Column(name = "balance")
     private BigDecimal balance;
 
     @Column(name = "opening_date")
-    @NotNull(message = "openingDate must not be null!")
+    @NotBlank(message = "openingDate must not be blank!")
     private LocalDate openingDate;
 
+    @Column(name = "last_update_date")
+    @NotBlank(message = "lastUpdateDate must not be blank!")
+    private LocalDate lastUpdateDate;
+
     @Column(name = "closing_date")
-    @NotNull(message = "closingDate must not be null!")
+    @NotBlank(message = "closingDate must not be blank!")
     private LocalDate closingDate;
 
     @PositiveOrZero(message = "unpaidPercentageLoanDebt must be greater than 0")
     @Column(name = "unpaid_credit_sum")
     private BigDecimal unpaidCreditSum;
 
-    @NotNull(message = "Currency must not be null!")
+    @NotBlank(message = "Currency must not be blank!")
     @Pattern(regexp = "^[A-Z]{3}$", message = "Format is not allowed in service!")
     @Column(name = "currency")
     private String currency;

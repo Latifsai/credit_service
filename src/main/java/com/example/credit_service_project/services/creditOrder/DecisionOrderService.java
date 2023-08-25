@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ConsiderationOrderService {
+public class DecisionOrderService {
 
     private final GetAllCreditOrdersService getAllCreditService;
     private final CreditOrderRepository repository;
