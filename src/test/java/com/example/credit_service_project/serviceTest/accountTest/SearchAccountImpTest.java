@@ -2,7 +2,7 @@ package com.example.credit_service_project.serviceTest.accountTest;
 
 import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.repository.AccountRepository;
-import com.example.credit_service_project.services.account.SearchAccountsServiceImp;
+import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.services.utils.AccountUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOAccountCreator;
@@ -31,7 +31,7 @@ public class SearchAccountImpTest {
     private AccountUtil util;
 
     @InjectMocks
-    private SearchAccountsServiceImp service;
+    private AccountSearchService service;
 
     @Test
     public void testSearchIfPresent() {
@@ -41,7 +41,7 @@ public class SearchAccountImpTest {
                 .thenReturn(Optional.of(account));
         when(util.convertAccountToAddResponse(account)).thenReturn(DTOAccountCreator.createDTOResponse());
 
-        assertEquals(DTOAccountCreator.createDTOResponse(), service.execute(request));
+        assertEquals(DTOAccountCreator.createDTOResponse(), service.searchAccount(request));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class SearchAccountImpTest {
         when(repository.findByIdOrAccountNumber(request.getId(), request.getAccountNumber()))
                 .thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
-        assertThrows(NotFoundException.class, () -> service.execute(request));
+        assertThrows(NotFoundException.class, () -> service.searchAccount(request));
     }
 
     @Test

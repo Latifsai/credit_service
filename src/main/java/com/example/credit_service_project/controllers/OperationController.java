@@ -18,16 +18,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OperationController {
 
-    private final AddPaymentOperationServiceImp createPaymentOperation;
-    private final GetOperationsServiceImp get;
+    private final PaymentProcessingService createPaymentOperation;
+    private final GetOperationsService get;
     private final ReplenishmentAndEarlyPaymentOperationService replenishmentAndEarlyPaymentOperation;
-    private final SearchOperationServiceImp search;
-    private final UpdateOperationServiceImp update;
+    private final OperationSearchService search;
+    private final OperationUpdateService update;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public List<OperationResponseDTO> add() {
-        return createPaymentOperation.execute();
+        return createPaymentOperation.handlePayments();
     }
 
     @PostMapping("/elective")
@@ -40,20 +40,20 @@ public class OperationController {
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
     public List<OperationResponseDTO> get(@RequestBody GetBelongsAccountOperationsRequest request) {
-        return get.execute(request);
+        return get.getAllOperations(request);
 
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OperationResponseDTO update(@RequestBody UpdateOperationsRequest request) {
-        return update.execute(request);
+        return update.updateOperation(request);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public OperationResponseDTO search(@PathVariable("id") @NotNull UUID id) {
-        return search.execute(id);
+        return search.searchOperation(id);
     }
 
 

@@ -16,12 +16,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DecisionOrderService {
 
+    /**
+     Here is the process of accepting loan applications. Applications are processed within 5 days.
+     */
+
     private final GetAllCreditOrdersService getAllCreditService;
     private final CreditOrderRepository repository;
     private final CreditOrderUtil util;
 
     @Scheduled(cron = "0 0 15 * * *")
-    public List<CreditOrderResponseDTO> execute() {
+    public List<CreditOrderResponseDTO> acceptOrder() {
         List<CreditOrder> orders = getAllCreditService.getOrders();
         List<CreditOrderResponseDTO> responsesList = new ArrayList<>();
 

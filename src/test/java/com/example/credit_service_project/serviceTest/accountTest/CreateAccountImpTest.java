@@ -1,8 +1,8 @@
 package com.example.credit_service_project.serviceTest.accountTest;
 
 import com.example.credit_service_project.repository.AccountRepository;
-import com.example.credit_service_project.services.account.CreateAccountServiceImp;
-import com.example.credit_service_project.services.client.SearchClientServiceImp;
+import com.example.credit_service_project.services.account.AccountCreationService;
+import com.example.credit_service_project.services.client.ClientSearchService;
 import com.example.credit_service_project.services.utils.AccountUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOAccountCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
@@ -26,11 +26,11 @@ public class CreateAccountImpTest {
     @Mock
     private AccountRepository repository;
     @Mock
-    private SearchClientServiceImp searchClientService;
+    private ClientSearchService searchClientService;
     @Mock
     private AccountUtil util;
     @InjectMocks
-    private CreateAccountServiceImp service;
+    private AccountCreationService service;
 
     @Test
     @DisplayName("Test when input is correct")
@@ -47,7 +47,7 @@ public class CreateAccountImpTest {
 
         when(util.convertAccountToAddResponse(account)).thenReturn(DTOAccountCreator.createDTOResponse());
 
-        var actual = service.execute(DTOAccountCreator.createRequest());
+        var actual = service.createAccount(DTOAccountCreator.createRequest());
         var expected = DTOAccountCreator.createDTOResponse();
         assertEquals(expected, actual);
     }

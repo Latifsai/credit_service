@@ -4,7 +4,7 @@ import com.example.credit_service_project.DTO.creditDTO.AddCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
 import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
-import com.example.credit_service_project.services.credit.CreateCreditServiceImp;
+import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.GetAllCreditsService;
 import com.example.credit_service_project.services.credit.GetAllUnpaidPaymentsBelongsCreditService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @RequestMapping("/credit")
 public class CreditController {
 
-    private final CreateCreditServiceImp create;
+    private final CreditCreateService create;
     private final GetAllCreditsService getAllCredits;
     private final GetAllUnpaidPaymentsBelongsCreditService getAllUnpaidPaymentsBelongsCreditService;
 
@@ -27,19 +27,19 @@ public class CreditController {
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
     public List<CreditDTOResponse> get() {
-        return getAllCredits.execute();
+        return getAllCredits.getAllCredits();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AddCreditDTOResponse create(@RequestBody AddCreditDTORequest request) {
-        return create.execute(request);
+        return create.createCredit(request);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public List<PaymentResponseDTO> getUnpaidPayments(@PathVariable("id") UUID id) {
-        return getAllUnpaidPaymentsBelongsCreditService.execute(id);
+        return getAllUnpaidPaymentsBelongsCreditService.getAllUnpaidPaymentsBelongsCredit(id);
     }
 
 }

@@ -6,15 +6,14 @@ import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
 import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.repository.OperationRepository;
-import com.example.credit_service_project.services.OperationService;
-import com.example.credit_service_project.services.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.services.account.UpdateAccountServiceImp;
-import com.example.credit_service_project.services.agreement.CreateAgreementServiceImp;
-import com.example.credit_service_project.services.card.CreateCardServiceImp;
-import com.example.credit_service_project.services.card.SearchCardServiceImp;
-import com.example.credit_service_project.services.credit.CreateCreditServiceImp;
+import com.example.credit_service_project.services.account.AccountSearchService;
+import com.example.credit_service_project.services.account.AccountUpdateService;
+import com.example.credit_service_project.services.agreement.AgreementCreateService;
+import com.example.credit_service_project.services.card.CardCreateService;
+import com.example.credit_service_project.services.card.CardSearchService;
+import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.GetAllUnpaidPaymentsBelongsCreditService;
-import com.example.credit_service_project.services.creditOrder.CreateCreditOrderServiceImp;
+import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
@@ -31,24 +30,22 @@ import static com.example.credit_service_project.entity.enums.OperationType.*;
 
 @Service
 @RequiredArgsConstructor
-public class ReplenishmentAndEarlyPaymentOperationService implements OperationService<OperationResponseDTO, PaymentsOperationRequest> {
-    private final SearchAccountsServiceImp searchAccountsService;
-    private final SearchCardServiceImp cardSearchService;
+public class ReplenishmentAndEarlyPaymentOperationService {
+    private final AccountSearchService accountSearchService;
+    private final CardSearchService cardSearchService;
     private final OperationRepository repository;
     private final OperationUtils util;
-    private final UpdateAccountServiceImp updateAccountService;
-    private final CreateCardServiceImp updateCardService;
+    private final AccountUpdateService updateAccountService;
+    private final CardCreateService updateCardService;
     private final GetAllUnpaidPaymentsBelongsCreditService getAllUnpaidPaymentsBelongsCreditService;
     private final PaymentScheduleGeneratorAndSaveService saveService;
-    private final CreateCreditServiceImp addCreditService;
-    private final CreateCreditOrderServiceImp addCreditOrderService;
-    private final CreateAgreementServiceImp addAgreementService;
+    private final CreditCreateService addCreditService;
+    private final CreditOrderCreateService addCreditOrderService;
+    private final AgreementCreateService addAgreementService;
 
-
-    @Override
     public OperationResponseDTO execute(PaymentsOperationRequest request) {
 
-        Account account = searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getNumber());
+        Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getNumber());
         Card card = cardSearchService.findByAccount(account);
 
         if (request.getType().equals(REPLENISHMENT)) {

@@ -17,8 +17,7 @@ public class GetAllClientsService {
     private final ClientUtil util;
 
     @Transactional(readOnly = true)
-    public List<ClientResponseDTO> execute() {
-
+    public List<ClientResponseDTO> getAllClients() {
         return repository.findAll().stream()
                 .map(util::convertClientToResponse)
                 .toList();

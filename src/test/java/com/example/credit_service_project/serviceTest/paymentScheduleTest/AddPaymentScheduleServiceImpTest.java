@@ -1,7 +1,7 @@
 package com.example.credit_service_project.serviceTest.paymentScheduleTest;
 
 import com.example.credit_service_project.repository.PaymentScheduleRepository;
-import com.example.credit_service_project.services.account.SearchAccountsServiceImp;
+import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOPaymentCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
@@ -24,7 +24,7 @@ class AddPaymentScheduleServiceImpTest {
     @Mock
     private PaymentScheduleUtil util;
     @Mock
-    private SearchAccountsServiceImp searchAccountsService;
+    private AccountSearchService accountSearchService;
     @InjectMocks
     private AddPaymentScheduleServiceImp service;
 
@@ -34,7 +34,7 @@ class AddPaymentScheduleServiceImpTest {
         var account = EntityCreator.getAccount();
         var payment = EntityCreator.getPayment();
 
-        when(searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
+        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
                 .thenReturn(Optional.of(account));
 
         when(util.convertPaymentDTORequestToPayment(request, account))
@@ -50,7 +50,7 @@ class AddPaymentScheduleServiceImpTest {
     public void testAddPaymentNotFoundException() {
         var request = DTOPaymentCreator.getAddPaymentRequest();
 
-        when(searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
+        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
                 .thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> service.execute(request));

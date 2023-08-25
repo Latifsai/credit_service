@@ -5,10 +5,10 @@ import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
 import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
-import com.example.credit_service_project.services.account.CreateAccountServiceImp;
-import com.example.credit_service_project.services.account.GetAccountsListServiceImp;
-import com.example.credit_service_project.services.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.services.account.UpdateAccountServiceImp;
+import com.example.credit_service_project.services.account.AccountCreationService;
+import com.example.credit_service_project.services.account.GetAllAccountsService;
+import com.example.credit_service_project.services.account.AccountSearchService;
+import com.example.credit_service_project.services.account.AccountUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,34 +20,34 @@ import java.util.List;
 @RequestMapping("/account")
 public class AccountController {
 
-    private final CreateAccountServiceImp create;
-    private final GetAccountsListServiceImp get;
-    private final SearchAccountsServiceImp search;
-    private final UpdateAccountServiceImp update;
+    private final AccountCreationService create;
+    private final GetAllAccountsService get;
+    private final AccountSearchService search;
+    private final AccountUpdateService update;
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AccountDTOResponse createNewAccount(@RequestBody AddAccountDTORequest request) {
-        return create.execute(request);
+        return create.createAccount(request);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
     public List<AccountDTOResponse> getAccountList() {
-        return get.execute();
+        return get.getAllAccounts();
 
     }
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.FOUND)
     public AccountDTOResponse searchAccount(@RequestBody SearchAccountRequest request) {
-        return search.execute(request);
+        return search.searchAccount(request);
     }
 
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public AccountDTOResponse updateAccount(@RequestBody UpdateAccountRequest request) {
-        return update.execute(request);
+        return update.updateAccount(request);
     }
 
 }

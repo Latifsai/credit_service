@@ -33,14 +33,14 @@ class GetAllClientsServiceTest {
         when(repository.findAll()).thenReturn(List.of(EntityCreator.getClient()));
         when(util.convertClientToResponse(EntityCreator.getClient())).thenReturn(DTOClientCreator.getResponse());
 
-        assertEquals(List.of(DTOClientCreator.getResponse()), service.execute());
+        assertEquals(List.of(DTOClientCreator.getResponse()), service.getAllClients());
     }
 
     @Test
     public void testGetAllClientsEmpty() {
         when(repository.findAll()).thenReturn(Collections.emptyList());
 
-        assertEquals(Collections.emptyList(), service.execute());
+        assertEquals(Collections.emptyList(), service.getAllClients());
     }
 
 }

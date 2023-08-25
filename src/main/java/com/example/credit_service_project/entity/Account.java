@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import static jakarta.persistence.CascadeType.*;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Getter
 @Setter
@@ -19,7 +20,6 @@ import static jakarta.persistence.CascadeType.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -74,22 +74,22 @@ public class Account {
     @Column(name = "currency")
     private String currency;
 
-    @OneToOne(mappedBy = "account", cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "account", cascade = {MERGE, PERSIST, REFRESH}, fetch = LAZY)
     private Credit credit;
     //будет создан раздел credit_id основанный на id из класса Credit,
     // по этому полу будет JOIN
     //-> владеющая сторона
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "account", fetch = LAZY,
             cascade = ALL)
     private List<Operation> operations;
     //указывает, что связь между таблицами будет установлена через поле account
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "account", fetch = LAZY,
             orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     private List<PaymentSchedule> paymentSchedules;
 
-    @OneToOne(mappedBy = "account", cascade = ALL, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "account", cascade = ALL, fetch = LAZY)
     private Card card;
 
     @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, orphanRemoval = true)
@@ -107,5 +107,28 @@ public class Account {
     @Override
     public int hashCode() {
         return Objects.hash(accountNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", loanDebt=" + loanDebt +
+                ", percentageDebt=" + percentageDebt +
+                ", country='" + country + '\'' +
+                ", status=" + status +
+                ", balance=" + balance +
+                ", openingDate=" + openingDate +
+                ", lastUpdateDate=" + lastUpdateDate +
+                ", closingDate=" + closingDate +
+                ", unpaidCreditSum=" + unpaidCreditSum +
+                ", currency='" + currency + '\'' +
+                ", credit=" + credit +
+                ", operations=" + operations +
+                ", paymentSchedules=" + paymentSchedules +
+                ", card=" + card +
+                ", client=" + client +
+                '}';
     }
 }

@@ -15,40 +15,40 @@ import java.util.List;
 @RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
-    private final CreateProductServiceImp create;
-    private final DeleteProductServiceImp delete;
-    private final GetProductsListService get;
-    private final SearchProductServiceImp search;
-    private final UpdateProductServiceImp update;
+    private final ProductCreateService create;
+    private final ProductDeleteService delete;
+    private final GetAllProductsService get;
+    private final ProductSearchService search;
+    private final ProductUpdateService update;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductResponseDTO add(@RequestBody AddProductDTORequest request) {
-        return create.execute(request);
+        return create.createProduct(request);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
     public List<ProductResponseDTO> getAllProducts() {
-        return get.execute();
+        return get.getAllProducts();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public ProductResponseDTO search(@PathVariable BigInteger id) {
-        return search.execute(id);
+        return search.searchProduct(id);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public ProductResponseDTO updateProduct(@RequestBody UpdateProductDTORequest request) {
-        return update.execute(request);
+        return update.updateProduct(request);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ProductResponseDTO delete(@PathVariable BigInteger id) {
-        return delete.execute(id);
+        return delete.deleteProduct(id);
     }
 
 

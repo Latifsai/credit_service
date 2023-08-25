@@ -2,7 +2,7 @@ package com.example.credit_service_project.serviceTest.cardTest;
 
 import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.repository.CardRepository;
-import com.example.credit_service_project.services.card.UpdateCardServiceImp;
+import com.example.credit_service_project.services.card.CardUpdateService;
 import com.example.credit_service_project.services.utils.CardUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOCardCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
@@ -30,7 +30,7 @@ class UpdateServiceExceptionImpTest {
     private CardUtil utils;
 
     @InjectMocks
-    private UpdateCardServiceImp updateService;
+    private CardUpdateService updateService;
 
     @Test
     public void testUpdateSuccess() {
@@ -46,7 +46,7 @@ class UpdateServiceExceptionImpTest {
         when(utils.convertCardToAddDTOResponse(EntityCreator.getUpdatedCard()))
                 .thenReturn(DTOCardCreator.getUpdatedCardResponse());
 
-        var actual = updateService.execute(request);
+        var actual = updateService.updateCard(request);
         assertNotNull(actual);
         assertEquals(DTOCardCreator.getUpdatedCardResponse(), actual);
     }
@@ -58,7 +58,7 @@ class UpdateServiceExceptionImpTest {
                 new BigDecimal("5000"), "", null);
 
         when(repository.findById(request.getId())).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> updateService.execute(request));
+        assertThrows(NotFoundException.class, () -> updateService.updateCard(request));
     }
 
     @Test

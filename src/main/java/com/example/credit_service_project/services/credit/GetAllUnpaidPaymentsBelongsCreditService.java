@@ -5,7 +5,7 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.repository.CreditRepository;
-import com.example.credit_service_project.services.paymentSchedule.GetBelongsToTheAccountPaymentsListServiceImp;
+import com.example.credit_service_project.services.paymentSchedule.GetBelongsToAccountPaymentsService;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
@@ -21,11 +21,11 @@ import java.util.UUID;
 // can be used by client and admin
 public class GetAllUnpaidPaymentsBelongsCreditService {
     private final CreditRepository repository;
-    private final GetBelongsToTheAccountPaymentsListServiceImp belongsToTheAccountPaymentsListService;
+    private final GetBelongsToAccountPaymentsService belongsToTheAccountPaymentsListService;
     private final PaymentScheduleUtil util;
 
     @Transactional(readOnly = true)
-    public List<PaymentResponseDTO> execute(UUID creditID) {
+    public List<PaymentResponseDTO> getAllUnpaidPaymentsBelongsCredit(UUID creditID) {
         Credit credit = repository.findById(creditID)
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_CREDIT_MESSAGE));
 

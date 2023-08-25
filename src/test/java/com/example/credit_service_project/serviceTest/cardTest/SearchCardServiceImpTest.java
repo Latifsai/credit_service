@@ -1,7 +1,7 @@
 package com.example.credit_service_project.serviceTest.cardTest;
 
 import com.example.credit_service_project.repository.CardRepository;
-import com.example.credit_service_project.services.card.SearchCardServiceImp;
+import com.example.credit_service_project.services.card.CardSearchService;
 import com.example.credit_service_project.services.utils.CardUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOCardCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
@@ -28,7 +28,7 @@ class SearchCardServiceImpTest {
     private CardUtil utils;
 
     @InjectMocks
-    private SearchCardServiceImp service;
+    private CardSearchService service;
 
     @Test
     public void testSearchSuccess() {
@@ -40,7 +40,7 @@ class SearchCardServiceImpTest {
 
         when(utils.convertCardToAddDTOResponse(card)).thenReturn(DTOCardCreator.getCardResponse());
 
-        var response = service.execute(request);
+        var response = service.searchCard(request);
 
         assertNotNull(response);
         assertEquals(DTOCardCreator.getCardResponse(), response);
@@ -52,7 +52,7 @@ class SearchCardServiceImpTest {
         when(repository.findByIdAndCardNumber(request.getId(), request.getCardNumber()))
                 .thenReturn(Optional.empty());
 
-        assertThrows(NotFoundException.class, () -> service.execute(request));
+        assertThrows(NotFoundException.class, () -> service.searchCard(request));
     }
 
     @Test

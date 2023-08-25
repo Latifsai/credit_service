@@ -18,40 +18,40 @@ import java.util.UUID;
 @RequestMapping("/order")
 public class CreditOrderController {
 
-    private final CreateCreditOrderServiceImp create;
+    private final CreditOrderCreateService create;
     private final DecisionOrderService considerationOrderService;
     private final GetAllCreditOrdersService getAllOrders;
-    private final SearchCreditOrderServiceImp search;
-    private final UpdateCreditOrderServiceImp update;
+    private final CreditOrderSearchService search;
+    private final CreditOrderUpdateService update;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AddCreditOrderResponseDTO add(@RequestBody AddCreditOrderDTORequest request) {
-        return create.execute(request);
+        return create.createCreditOrder(request);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
     public List<CreditOrderResponseDTO> getAll() {
-        return getAllOrders.execute();
+        return getAllOrders.getAllCreditOrders();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public CreditOrderResponseDTO find(@PathVariable("id") @NotNull UUID id) {
-        return search.execute(id);
+        return search.searchCreditOrder(id);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CreditOrderResponseDTO update(@RequestBody UpdateCreditOrderDTORequest request) {
-        return update.execute(request);
+        return update.updateCreditOrder(request);
     }
 
     @PutMapping("/review")
     @ResponseStatus(HttpStatus.CREATED)
     public List<CreditOrderResponseDTO>  consideration() {
-        return considerationOrderService.execute();
+        return considerationOrderService.acceptOrder();
     }
 
 }

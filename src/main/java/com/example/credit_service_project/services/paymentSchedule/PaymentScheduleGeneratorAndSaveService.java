@@ -22,7 +22,7 @@ public class PaymentScheduleGeneratorAndSaveService {
     private final PaymentScheduleUtil util;
     private final PaymentScheduleRepository repository;
 
-    public List<PaymentResponseDTO> execute(Credit credit, Product product, Account account) {
+    public List<PaymentResponseDTO> generatePaymentSchedule(Credit credit, Product product, Account account) {
         List<PaymentResponseDTO> responses = new ArrayList<>();
 
         int monthsTemp = credit.getPeriodMonth();

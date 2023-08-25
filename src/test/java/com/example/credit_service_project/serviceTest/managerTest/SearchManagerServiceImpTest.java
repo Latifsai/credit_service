@@ -1,7 +1,7 @@
 package com.example.credit_service_project.serviceTest.managerTest;
 
 import com.example.credit_service_project.repository.ManagerRepository;
-import com.example.credit_service_project.services.manager.SearchManagerServiceImp;
+import com.example.credit_service_project.services.manager.ManagerSearchService;
 import com.example.credit_service_project.services.utils.ManagerUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOManagerCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
@@ -25,7 +25,7 @@ class SearchManagerServiceImpTest {
     @Mock
     private ManagerUtil util;
     @InjectMocks
-    private SearchManagerServiceImp service;
+    private ManagerSearchService service;
 
     @Test
     public void testSearchManagerServiceSuccess() {
@@ -35,7 +35,7 @@ class SearchManagerServiceImpTest {
         when(repository.findById(id)).thenReturn(Optional.of(manager));
         when(util.convertManagerToResponse(manager)).thenReturn(DTOManagerCreator.getResponseDTO());
 
-        assertEquals(DTOManagerCreator.getResponseDTO(), service.execute(id));
+        assertEquals(DTOManagerCreator.getResponseDTO(), service.searchManager(id));
     }
 
     @Test
@@ -44,6 +44,6 @@ class SearchManagerServiceImpTest {
 
         when(repository.findById(id)).thenReturn(Optional.empty());
 
-        assertThrows(NotFoundException.class, () -> service.execute(id));
+        assertThrows(NotFoundException.class, () -> service.searchManager(id));
     }
 }

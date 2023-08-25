@@ -1,10 +1,10 @@
 package com.example.credit_service_project.serviceTest.operationtests;
 
 import com.example.credit_service_project.repository.OperationRepository;
-import com.example.credit_service_project.services.account.SearchAccountsServiceImp;
-import com.example.credit_service_project.services.account.UpdateAccountServiceImp;
-import com.example.credit_service_project.services.card.SearchCardServiceImp;
-import com.example.credit_service_project.services.card.UpdateCardServiceImp;
+import com.example.credit_service_project.services.account.AccountSearchService;
+import com.example.credit_service_project.services.account.AccountUpdateService;
+import com.example.credit_service_project.services.card.CardSearchService;
+import com.example.credit_service_project.services.card.CardUpdateService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
@@ -30,13 +30,13 @@ class AddOperationServiceImpTest {
     private OperationUtils util;
 
     @Mock
-    private UpdateAccountServiceImp updateAccountService;
+    private AccountUpdateService updateAccountService;
     @Mock
-    private SearchAccountsServiceImp searchAccountsService;
+    private AccountSearchService accountSearchService;
     @Mock
-    private SearchCardServiceImp searchCardService;
+    private CardSearchService searchCardService;
     @Mock
-    private UpdateCardServiceImp updateCardService;
+    private CardUpdateService updateCardService;
     @InjectMocks
     private AddOperationServiceImp addOperationService;
 
@@ -49,7 +49,7 @@ class AddOperationServiceImpTest {
         var card = EntityCreator.getCard();
 
 
-        when(searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
+        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
                 .thenReturn(Optional.of(account));
 
         when(util.convertAddRequestFunctionalToOperation(request, account))
@@ -77,7 +77,7 @@ class AddOperationServiceImpTest {
         var request = DTOOperationCreator.getRequestSpendingOrReplenishment();
 
 
-        when(searchAccountsService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
+        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
                 .thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> addOperationService.execute(request));

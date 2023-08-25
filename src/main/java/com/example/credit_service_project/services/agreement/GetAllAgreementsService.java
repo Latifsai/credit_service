@@ -17,7 +17,7 @@ public class GetAllAgreementsService {
     private final AgreementRepository repository;
 
     @Transactional(readOnly = true)
-    public List<AgreementResponse> execute() {
+    public List<AgreementResponse> getAllAgreements() {
         return repository.findAll().stream()
                 .map(util::convertToResponse)
                 .toList();

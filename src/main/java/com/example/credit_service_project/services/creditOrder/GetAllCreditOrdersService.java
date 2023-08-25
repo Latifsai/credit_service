@@ -18,7 +18,7 @@ public class GetAllCreditOrdersService {
     private final CreditOrderUtil util;
 
     @Transactional(readOnly = true)
-    public List<CreditOrderResponseDTO> execute() {
+    public List<CreditOrderResponseDTO> getAllCreditOrders() {
         return getOrders().stream()
                 .map(util::convertToResponse)
                 .toList();

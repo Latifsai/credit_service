@@ -1,7 +1,7 @@
 package com.example.credit_service_project.serviceTest.accountTest;
 
 import com.example.credit_service_project.repository.AccountRepository;
-import com.example.credit_service_project.services.account.UpdateAccountServiceImp;
+import com.example.credit_service_project.services.account.AccountUpdateService;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.services.utils.AccountUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOAccountCreator;
@@ -29,7 +29,7 @@ public class UpdateServiceImpTest {
     private AccountUtil util;
 
     @InjectMocks
-    private UpdateAccountServiceImp service;
+    private AccountUpdateService service;
 
     @Test
     public void upgradeTestSuccess() {
@@ -41,7 +41,7 @@ public class UpdateServiceImpTest {
 
         when(util.updateAccount(account, request)).thenReturn(EntityCreator.getUpgratedAccount());
         when(util.convertAccountToAddResponse(updatedAccount)).thenReturn(DTOAccountCreator.getUpdatedDTOResponse());
-        assertEquals(DTOAccountCreator.getUpdatedDTOResponse(), service.execute(request));
+        assertEquals(DTOAccountCreator.getUpdatedDTOResponse(), service.updateAccount(request));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class UpdateServiceImpTest {
         when(repository.findByIdOrAccountNumber(request.getAccountID(), request.getAccountNumber()))
                 .thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
-        assertThrows(NotFoundException.class, () -> service.execute(request));
+        assertThrows(NotFoundException.class, () -> service.updateAccount(request));
     }
 
     @Test

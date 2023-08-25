@@ -3,7 +3,6 @@ package com.example.credit_service_project.services.agreement;
 import com.example.credit_service_project.DTO.agreementDTO.AgreementResponse;
 import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.repository.AgreementRepository;
-import com.example.credit_service_project.services.AgreementService;
 import com.example.credit_service_project.services.utils.AgreementUtil;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
@@ -15,14 +14,13 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class SearchAgreementServiceImp implements AgreementService<AgreementResponse, UUID> {
+public class SearchAgreementServiceImp {
 
     private final AgreementRepository repository;
     private final AgreementUtil util;
 
     @Transactional(readOnly = true)
-    @Override
-    public AgreementResponse execute(UUID id) {
+    public AgreementResponse searchAgreement(UUID id) {
         Agreement agreement = findById(id);
         return util.convertToResponse(agreement);
     }

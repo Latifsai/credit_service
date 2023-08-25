@@ -17,11 +17,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ManagerController {
 
-    private final AddManagerServiceImp create;
-    private final DeleteManagerServiceImp delete;
+    private final ManagerCreationService create;
+    private final ManagerDeleteService delete;
     private final GetAllManagersService getAll;
-    private final SearchManagerServiceImp search;
-    private final UpdateMangerServiceImp update;
+    private final ManagerSearchService search;
+    private final ManagerUpdateService update;
 
     @GetMapping()
     @ResponseStatus(HttpStatus.FOUND)
@@ -32,19 +32,19 @@ public class ManagerController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public ManagerResponseDTO searchManager(@PathVariable("id") @NotNull UUID id) {
-        return search.execute(id);
+        return search.searchManager(id);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ManagerResponseDTO addManager(@RequestBody AddManagerRequest request) {
-        return create.execute(request);
+        return create.createManager(request);
     }
 
     @PutMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ManagerResponseDTO addManager(@RequestBody UpdateManagerRequest request) {
-        return update.execute(request);
+        return update.updateManager(request);
     }
 
     @DeleteMapping("/{id}")

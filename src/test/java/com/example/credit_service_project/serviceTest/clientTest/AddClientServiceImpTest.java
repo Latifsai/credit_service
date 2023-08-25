@@ -2,8 +2,8 @@ package com.example.credit_service_project.serviceTest.clientTest;
 
 import com.example.credit_service_project.DTO.client.AddClientRequest;
 import com.example.credit_service_project.repository.ClientRepository;
-import com.example.credit_service_project.services.client.AddClientServiceImp;
-import com.example.credit_service_project.services.manager.SearchManagerServiceImp;
+import com.example.credit_service_project.services.client.ClientCreateService;
+import com.example.credit_service_project.services.manager.ManagerSearchService;
 import com.example.credit_service_project.services.utils.ClientUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOClientCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
@@ -27,11 +27,11 @@ class AddClientServiceImpTest {
     @Mock
     private ClientRepository repository;
     @Mock
-    private SearchManagerServiceImp searchManagerService;
+    private ManagerSearchService searchManagerService;
     @Mock
     private ClientUtil util;
     @InjectMocks
-    private AddClientServiceImp service;
+    private ClientCreateService service;
 
     @Test
     public void testAddClientSuccess() {
@@ -43,14 +43,14 @@ class AddClientServiceImpTest {
         when(util.convertAddRequestToEntity(request, manager)).thenReturn(client);
         when(util.convertClientToResponse(client)).thenReturn(DTOClientCreator.getResponse());
 
-        assertEquals(DTOClientCreator.getResponse(), service.execute(request));
+        assertEquals(DTOClientCreator.getResponse(), service.createClient(request));
     }
 
     @Test
     public void testAddClientNotFoundException() {
         var request = new AddClientRequest(UUID.randomUUID(), "Aziz", "Snow", new BigDecimal("2500"), new BigDecimal("1500"));
         when(searchManagerService.findManagerById(request.getManagerID())).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> service.execute(request));
+        assertThrows(NotFoundException.class, () -> service.createClient(request));
     }
 
     @Test

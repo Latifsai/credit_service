@@ -17,7 +17,7 @@ public class GetAllCreditsService {
     private final CreditUtil util;
 
     @Transactional(readOnly = true)
-    public List<CreditDTOResponse> execute () {
+    public List<CreditDTOResponse> getAllCredits() {
         return repository.findAll().stream()
                 .map(util::convertToCreditResponse)
                 .toList();

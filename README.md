@@ -15,7 +15,7 @@ Here, managers can create new accounts based on data from clients, an account is
 Here managers can create and add new products and services to the database for which you can get a loan.
 
 ##### Create Order Service: 
-Here, authorized users users through the account can apply for a loan by providing the necessary information. This service processes applications, conducts preliminary analysis and sends data to the decision service.
+Here, authorized users through the account can apply for a loan by providing the necessary information. This service processes applications, conducts preliminary analysis and sends data to the decision service.
 
 ##### Decision Order Service: 
 Based on the analysis of data from applications, this service determines whether to approve the application or not. Decision on a positive outcome transferred to the Create Agreement service.

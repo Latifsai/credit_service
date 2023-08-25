@@ -3,10 +3,10 @@ package com.example.credit_service_project.controllers;
 import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
 import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
 import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
-import com.example.credit_service_project.services.card.CreateCardServiceImp;
-import com.example.credit_service_project.services.card.GetCardsServiceImp;
-import com.example.credit_service_project.services.card.SearchCardServiceImp;
-import com.example.credit_service_project.services.card.UpdateCardServiceImp;
+import com.example.credit_service_project.services.card.CardCreateService;
+import com.example.credit_service_project.services.card.GetAllCardsService;
+import com.example.credit_service_project.services.card.CardSearchService;
+import com.example.credit_service_project.services.card.CardUpdateService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,33 +20,33 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CardController {
 
-    private final CreateCardServiceImp create;
-    private final GetCardsServiceImp get;
-    private final SearchCardServiceImp search;
-    private final UpdateCardServiceImp update;
+    private final CardCreateService create;
+    private final GetAllCardsService get;
+    private final CardSearchService search;
+    private final CardUpdateService update;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CardDTOResponse createCard(@RequestBody AddCardDTORequest request) {
-        return create.execute(request);
+        return create.createService(request);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
     public List<CardDTOResponse> getCards() {
-        return get.execute();
+        return get.getAllCards();
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CardDTOResponse updateCard(@RequestBody UpdateCardDTORequest request) {
-        return update.execute(request);
+        return update.updateCard(request);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public CardDTOResponse searchCard(@PathVariable("id") @NotNull UUID id) {
-        return search.execute(id);
+        return search.searchCard(id);
     }
 
 }

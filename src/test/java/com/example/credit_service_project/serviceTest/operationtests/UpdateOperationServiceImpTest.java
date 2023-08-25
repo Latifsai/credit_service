@@ -4,7 +4,7 @@ import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsReque
 import com.example.credit_service_project.entity.enums.OperationType;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.validation.exceptions.OperationException;
-import com.example.credit_service_project.services.operation.UpdateOperationServiceImp;
+import com.example.credit_service_project.services.operation.OperationUpdateService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.serviceTest.generators.DTOOperationCreator;
 import com.example.credit_service_project.serviceTest.generators.EntityCreator;
@@ -30,7 +30,7 @@ class UpdateOperationServiceImpTest {
     @Mock
     private OperationUtils util;
     @InjectMocks
-    UpdateOperationServiceImp service;
+    OperationUpdateService service;
 
     @Test
     public void testUpdateServiceSuccess() {
@@ -52,7 +52,7 @@ class UpdateOperationServiceImpTest {
         when(util.convertOperationToResponseDTO(EntityCreator.getUpdatedOperation()))
                 .thenReturn(DTOOperationCreator.getUpdateOperationResponseDTO());
 
-        assertEquals(DTOOperationCreator.getUpdateOperationResponseDTO(), service.execute(request));
+        assertEquals(DTOOperationCreator.getUpdateOperationResponseDTO(), service.updateOperation(request));
     }
 
     @Test
@@ -68,7 +68,7 @@ class UpdateOperationServiceImpTest {
         when(repository.findByIdAndDebit(request.getId(), request.isDebit()))
                 .thenReturn(Optional.empty());
 
-        assertThrows(NotFoundException.class, () -> service.execute(request));
+        assertThrows(NotFoundException.class, () -> service.updateOperation(request));
     }
 
     @Test
@@ -87,7 +87,7 @@ class UpdateOperationServiceImpTest {
 
         when(util.updateOperation(operation, request)).thenThrow(OperationException.class);
 
-        assertThrows(OperationException.class, () -> service.execute(request));
+        assertThrows(OperationException.class, () -> service.updateOperation(request));
     }
 
 
