@@ -13,9 +13,9 @@ Welcome to the Loan Service README! This project aims to tell about how the cred
 
 ## Getting Started
 * Checkout the project from GitHub:
-  ```
-  git clone https://github.com/Latifsai/credit_service
-  ```
+```
+git clone https://github.com/Latifsai/credit_service
+```
 * Open IDE of your choice and Import as existing maven project in your workspace:
 
 ```
