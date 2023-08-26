@@ -6,8 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,11 +17,11 @@ import java.util.UUID;
 import static jakarta.persistence.CascadeType.ALL;
 
 @Entity
-@Data
+@Setter
+@Getter
 @Table(name = "operations")
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -56,4 +57,19 @@ public class Operation {
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
     //в таблице будет создано поле account_id на основе id в классе Account
+
+
+    @Override
+    public String toString() {
+        return "Operation{" +
+                "id=" + id +
+                ", sum=" + sum +
+                ", type=" + type +
+                ", operationEndMark=" + operationEndMark +
+                ", operationDetails='" + operationDetails + '\'' +
+                ", debit=" + debit +
+                ", currency='" + currency + '\'' +
+                ", account=" + account +
+                '}';
+    }
 }

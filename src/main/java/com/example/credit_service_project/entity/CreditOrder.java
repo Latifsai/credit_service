@@ -16,7 +16,6 @@ import static jakarta.persistence.CascadeType.*;
 @Getter
 @Setter
 @Table(name = "credit_orders")
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreditOrder {
@@ -88,5 +87,22 @@ public class CreditOrder {
     @Override
     public int hashCode() {
         return Objects.hash(number, product);
+    }
+
+    public String toString() {
+        return "CreditOrder{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", amount=" + amount +
+                ", creationDate=" + creationDate +
+                ", lastUpdateDate=" + lastUpdateDate +
+                ", clientSalary=" + clientSalary +
+                ", clientMonthlyExpenditure=" + clientMonthlyExpenditure +
+                ", passiveIncome=" + passiveIncome +
+                ", maxPeriodMonths=" + maxPeriodMonths +
+                ", minPeriodMonths=" + minPeriodMonths +
+                ", creditOrderStatus=" + creditOrderStatus +
+                ", product=" + product +
+                '}';
     }
 }

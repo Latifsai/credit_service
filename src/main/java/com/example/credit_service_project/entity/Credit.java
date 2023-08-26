@@ -20,7 +20,6 @@ import static jakarta.persistence.CascadeType.*;
 @Table(name = "credits")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -85,5 +84,22 @@ public class Credit {
     @Override
     public int hashCode() {
         return Objects.hash(creditOrder);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Credit{" +
+                "id=" + id +
+                ", creditType='" + creditType + '\'' +
+                ", creditSum=" + creditSum +
+                ", periodMonth=" + periodMonth +
+                ", interestRate=" + interestRate +
+                ", fine=" + fine +
+                ", needDeposit=" + needDeposit +
+                ", creditStatus=" + creditStatus +
+                ", currency='" + currency + '\'' +
+                ", creditOrder=" + creditOrder +
+                '}';
     }
 }

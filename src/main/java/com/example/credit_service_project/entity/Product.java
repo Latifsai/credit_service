@@ -14,11 +14,9 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@ToString
 @Table(name = "products")
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,5 +65,20 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sum=" + sum +
+                ", needGuaranty=" + needGuaranty +
+                ", earlyRepayment=" + earlyRepayment +
+                ", needIncomeDetails=" + needIncomeDetails +
+                ", details='" + details + '\'' +
+                ", currencyCode='" + currencyCode + '\'' +
+                ", calculationType=" + calculationType +
+                '}';
     }
 }

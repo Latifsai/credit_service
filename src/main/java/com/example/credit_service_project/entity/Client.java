@@ -2,16 +2,20 @@ package com.example.credit_service_project.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 import static jakarta.persistence.CascadeType.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "clients")
 public class Client {
     @Id
@@ -67,4 +71,36 @@ public class Client {
     @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private Manager manager;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(account, client.account) && Objects.equals(manager, client.manager);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(account, manager);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", salary=" + salary +
+                ", passiveIncome=" + passiveIncome +
+                ", expenses=" + expenses +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", updateDate=" + updateDate +
+                ", manager=" + manager +
+                '}';
+    }
+
 }

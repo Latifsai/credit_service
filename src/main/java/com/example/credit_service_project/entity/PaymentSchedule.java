@@ -17,7 +17,6 @@ import static jakarta.persistence.CascadeType.*;
 @Table(name = "payment_schedules")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class PaymentSchedule {
 
     @Id
@@ -58,5 +57,18 @@ public class PaymentSchedule {
     @Override
     public int hashCode() {
         return Objects.hash(account);
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentSchedule{" +
+                "id=" + id +
+                ", paymentDate=" + paymentDate +
+                ", actualPaymentDate=" + actualPaymentDate +
+                ", surcharge=" + surcharge +
+                ", monthlyPayment=" + monthlyPayment +
+                ", isPaid=" + isPaid +
+                ", account=" + account +
+                '}';
     }
 }

@@ -80,6 +80,10 @@ public class Account {
     // по этому полу будет JOIN
     //-> владеющая сторона
 
+    @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, orphanRemoval = true)
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    private Client client;
+
     @OneToMany(mappedBy = "account", fetch = LAZY,
             cascade = ALL)
     private List<Operation> operations;
@@ -91,10 +95,6 @@ public class Account {
 
     @OneToOne(mappedBy = "account", cascade = ALL, fetch = LAZY)
     private Card card;
-
-    @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, orphanRemoval = true)
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
-    private Client client;
 
     @Override
     public boolean equals(Object o) {
@@ -125,9 +125,6 @@ public class Account {
                 ", unpaidCreditSum=" + unpaidCreditSum +
                 ", currency='" + currency + '\'' +
                 ", credit=" + credit +
-                ", operations=" + operations +
-                ", paymentSchedules=" + paymentSchedules +
-                ", card=" + card +
                 ", client=" + client +
                 '}';
     }

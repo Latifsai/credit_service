@@ -19,7 +19,6 @@ import static jakarta.persistence.CascadeType.ALL;
 @Getter
 @Setter
 @Table(name = "cards")
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Card {
@@ -86,5 +85,23 @@ public class Card {
     @Override
     public int hashCode() {
         return Objects.hash(cardNumber, account);
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", IBAN='" + IBAN + '\'' +
+                ", holderName='" + holderName + '\'' +
+                ", openingDate=" + openingDate +
+                ", expirationDate=" + expirationDate +
+                ", balance=" + balance +
+                ", deliveryAddress='" + deliveryAddress + '\'' +
+                ", isDigitalValet=" + isDigitalValet +
+                ", paymentSystem=" + paymentSystem +
+                ", cardStatus=" + cardStatus +
+                ", account=" + account +
+                '}';
     }
 }

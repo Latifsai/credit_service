@@ -15,7 +15,6 @@ import static jakarta.persistence.CascadeType.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Table(name = "agreements")
 public class Agreement {
     @Id
@@ -53,5 +52,16 @@ public class Agreement {
     @Override
     public int hashCode() {
         return Objects.hash(number, credit);
+    }
+
+    @Override
+    public String toString() {
+        return "Agreement{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", agreementDate=" + agreementDate +
+                ", terminationDate=" + terminationDate +
+                ", active=" + active +
+                '}';
     }
 }
