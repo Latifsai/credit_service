@@ -7,6 +7,7 @@ import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderDT
 import com.example.credit_service_project.entity.Client;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.Product;
+import com.example.credit_service_project.services.utils.calculators.CurrencyConverter;
 import com.example.credit_service_project.services.utils.generator.CreditOrderGenerator;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class CreditOrderUtil {
         CreditOrder creditOrder = new CreditOrder();
         creditOrder.setProduct(product);
         creditOrder.setNumber(CreditOrderGenerator.createCreditOrderNumber(request.getNumberLength()));
-        creditOrder.setAmount(CreditOrderGenerator.convertCurrency(product, client.getAccount()));
+        creditOrder.setAmount(CurrencyConverter.convertCurrency(product, client.getAccount()));
         creditOrder.setCreationDate(LocalDate.now());
         creditOrder.setLastUpdateDate(creditOrder.getCreationDate());
         creditOrder.setClientSalary(client.getSalary());

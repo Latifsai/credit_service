@@ -4,7 +4,6 @@ import com.example.credit_service_project.DTO.paymentDTO.AddPaymentRequestDTO;
 import com.example.credit_service_project.DTO.paymentDTO.AddPaymentScheduleDTOResponse;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
-import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.services.utils.calculators.AnnuityCalculator;
@@ -79,26 +78,25 @@ public class PaymentScheduleUtil {
     }
 
 
-    public BigDecimal[] calculatePayment(Credit credit, Product product) {
-        int monthsTemp = credit.getPeriodMonth();
+    public BigDecimal[] calculatePayment(Integer monthsAmount, BigDecimal interestRate, BigDecimal creditSum, Product product) {
+        int monthsTemp = monthsAmount;
         BigDecimal[] payments = new BigDecimal[monthsTemp];
 
         if (product.getCalculationType().equals(ANNUITY)) {
 
-            BigDecimal monthlyInterestRate = credit.getInterestRate().divide(BigDecimal.valueOf(12 * 100), 10, RoundingMode.HALF_UP);
+            BigDecimal monthlyInterestRate = interestRate.divide(BigDecimal.valueOf(12 * 100), 10, RoundingMode.HALF_UP);
 
             for (int month = 0; month < monthsTemp; month++) {
-                payments[month] = AnnuityCalculator.calculate(credit.getCreditSum(),
-                       monthlyInterestRate, monthsTemp);
+                payments[month] = AnnuityCalculator.calculate(creditSum, monthlyInterestRate, monthsTemp);
             }
 
         } else {
 
-            BigDecimal convertedInterestRate = credit.getInterestRate().divide(BigDecimal.valueOf(100), 5, RoundingMode.HALF_UP);
+            BigDecimal convertedInterestRate = interestRate.divide(BigDecimal.valueOf(100), 5, RoundingMode.HALF_UP);
             BigDecimal monthlyInterestRate = convertedInterestRate.divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_UP);
 
             for (int month = 0; month < monthsTemp; month++) {
-                payments[month] = DifferentiatedPaymentCalculator.calculateEMI(credit.getCreditSum(),
+                payments[month] = DifferentiatedPaymentCalculator.calculateEMI(creditSum,
                         monthlyInterestRate, monthsTemp, month + 1);
             }
 

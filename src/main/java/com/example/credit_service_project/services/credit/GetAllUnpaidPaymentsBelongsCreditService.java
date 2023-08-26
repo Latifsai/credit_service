@@ -37,7 +37,6 @@ public class GetAllUnpaidPaymentsBelongsCreditService {
 
     public List<PaymentSchedule> findUnpaidPaymentByAccount(Account account) {
         List<PaymentSchedule> payments = belongsToTheAccountPaymentsListService.findAllByAccount(account);
-
         return payments.stream()
                 .filter(paymentSchedule -> !paymentSchedule.isPaid())
                 .toList();

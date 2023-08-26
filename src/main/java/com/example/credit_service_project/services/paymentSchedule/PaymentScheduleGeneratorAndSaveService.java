@@ -26,7 +26,7 @@ public class PaymentScheduleGeneratorAndSaveService {
         List<PaymentResponseDTO> responses = new ArrayList<>();
 
         int monthsTemp = credit.getPeriodMonth();
-        BigDecimal[] payments = util.calculatePayment(credit, product);
+        BigDecimal[] payments = util.calculatePayment(monthsTemp, credit.getInterestRate(), credit.getCreditSum(), product);
         for (int month = 0; month < monthsTemp; month++) {
             PaymentSchedule paymentSchedule = util.convertFromCreditAndProduct(account);
             paymentSchedule.setMonthlyPayment(payments[month]);
