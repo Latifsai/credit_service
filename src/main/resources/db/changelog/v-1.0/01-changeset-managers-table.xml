@@ -25,5 +25,19 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="insert" author="latif">
+        <sql>
+            INSERT INTO managers VALUES (UNHEX(REPLACE('1adf0e65-73e5-4be2-86b4-92ca651aceb4', '-', '')), 'beliy@gmail.com', 'Oleg', 'Belov');
+            INSERT INTO managers VALUES (UNHEX(REPLACE('35c3fe62-4279-4c21-a586-9ab31ee8348b','-','')), 'pol_Nikole@codopoliz.com', 'Nikole', 'Polenko');
+            INSERT INTO managers VALUES (UNHEX(REPLACE('56ada824-6e9b-4b6e-9054-e318639e232e','-','')), 'thor_bjorn@iCloud.com', 'Bjorn', 'Halfthorsonn');
+            INSERT INTO managers VALUES (UNHEX(REPLACE('59f85267-0e1d-4d2b-b9f9-cf61592ff186','-','')), 'k_k@mail.com', 'Kirill', 'Krabzov');
+            INSERT INTO managers VALUES (UNHEX(REPLACE('60c46888-ed68-4925-a743-fae589a5c8ab','-','')), 'nedd_snow_manager@mail.com', 'Nedd', 'Stark');
+            INSERT INTO managers VALUES (UNHEX(REPLACE('66b91b23-d9ec-4945-be1b-5bdb54733179','-','')), 'kim_chin@gmail.com', 'Kim', 'Huawu');
+            INSERT INTO managers VALUES (UNHEX(REPLACE('725baa74-a3e3-4ed1-8277-8e3c520f7722','-','')), 'vinchester@gmail.com', 'Sam', 'Vinchester');
+            INSERT INTO managers VALUES (UNHEX(REPLACE('931a5c6f-b054-4057-8b8f-c176fb26f82b','-','')), 'marty@hushmail.org', 'Martin', 'Hilux');
+            INSERT INTO managers VALUES (UNHEX(REPLACE('f3e613d0-325e-446a-80b0-3f4f40693b19','-','')), 'greece_Niko@iCloud.com', 'Niko', 'Hadolous');
+            INSERT INTO managers VALUES (UNHEX(REPLACE('fefe509c-4100-44c1-b198-d1a983d6b93f','-','')), 'clinton@outlook.com', 'Gregor', 'Clinton');
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>
