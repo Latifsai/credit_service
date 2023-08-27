@@ -8,6 +8,7 @@ import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.services.utils.calculators.CurrencyConverter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class GetPreliminaryCalculationOfProduct {
     private final AccountSearchService accountSearchService;
     private final ProductSearchService searchService;
@@ -29,14 +31,14 @@ public class GetPreliminaryCalculationOfProduct {
 
         BigDecimal transferredSum = CurrencyConverter.convertCurrency(product, account);
 
-        BigDecimal[] payments = util.calculatePayment(request.getMonthTerm(),  request.getInterestRate(),
+        BigDecimal[] payments = util.calculatePayment(request.getMonthTerm(), request.getInterestRate(),
                 transferredSum, product);
 
         for (int month = 0; month < request.getMonthTerm(); month++) {
             int actualMonth = month + 1;
             responses.add(new PreliminaryCalculationResponse((actualMonth), LocalDate.now().plusMonths(actualMonth), payments[month]));
         }
-
+        log.info("Get preliminary calculation for a Product: {}", product);
         return responses;
     }
 

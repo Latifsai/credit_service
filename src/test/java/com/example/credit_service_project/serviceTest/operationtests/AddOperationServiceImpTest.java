@@ -1,6 +1,6 @@
 package com.example.credit_service_project.serviceTest.operationtests;
 
-import com.example.credit_service_project.repository.OperationRepository;
+import com.example.credit_service_project.repositories.OperationRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.account.AccountUpdateService;
 import com.example.credit_service_project.services.card.CardSearchService;

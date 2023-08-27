@@ -8,10 +8,12 @@ import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.account.AccountUpdateService;
 import com.example.credit_service_project.services.utils.CardUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CardUpdateService {
 
     private final CardSearchService searchCardService;
@@ -30,6 +32,7 @@ public class CardUpdateService {
         Account updatedAccount = utils.updateAccountBalance(account, card);
         updateAccountService.saveUpdatedAccount(updatedAccount);
 
+        log.info("Update card: {}", card);
         return utils.convertCardToAddDTOResponse(updatedCard);
     }
 

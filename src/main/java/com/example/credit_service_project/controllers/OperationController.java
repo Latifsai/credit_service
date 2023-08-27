@@ -33,7 +33,7 @@ public class OperationController {
     @PostMapping("/elective")
     @ResponseStatus(HttpStatus.CREATED)
     public OperationResponseDTO add(@RequestBody PaymentsOperationRequest request) {
-        return replenishmentAndEarlyPaymentOperation.execute(request);
+        return replenishmentAndEarlyPaymentOperation.performOperation(request);
     }
 
 

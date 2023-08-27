@@ -7,7 +7,7 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.CreditOrder;
-import com.example.credit_service_project.repository.CreditRepository;
+import com.example.credit_service_project.repositories.CreditRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.account.AccountUpdateService;
 import com.example.credit_service_project.services.agreement.AgreementCreateService;
@@ -16,12 +16,14 @@ import com.example.credit_service_project.services.creditOrder.CreditOrderSearch
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.services.utils.CreditUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CreditCreateService {
 
     private final CreditRepository repository;
@@ -46,6 +48,7 @@ public class CreditCreateService {
         Credit savedCredit = saveCredit(credit);
 
         List<PaymentResponseDTO> list = paymentScheduleGeneratorService.generatePaymentSchedule(credit, credit.getCreditOrder().getProduct(), account);
+        log.info("Create and save credit: {}", credit);
         return util.convertResponse(savedCredit, list);
     }
 

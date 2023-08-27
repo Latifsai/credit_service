@@ -1,6 +1,6 @@
 package com.example.credit_service_project.serviceTest.clientTest;
 
-import com.example.credit_service_project.repository.ClientRepository;
+import com.example.credit_service_project.repositories.ClientRepository;
 import com.example.credit_service_project.services.client.ClientSearchService;
 import com.example.credit_service_project.services.utils.ClientUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOClientCreator;

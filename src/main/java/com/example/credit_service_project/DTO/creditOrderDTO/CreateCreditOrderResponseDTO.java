@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Value
-public class AddCreditOrderResponseDTO {
+public class CreateCreditOrderResponseDTO {
     BigInteger productID;
     String productName;
     UUID id;

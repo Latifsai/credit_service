@@ -1,6 +1,6 @@
 package com.example.credit_service_project.serviceTest.accountTest;
 
-import com.example.credit_service_project.repository.AccountRepository;
+import com.example.credit_service_project.repositories.AccountRepository;
 import com.example.credit_service_project.services.account.GetAllAccountsService;
 import com.example.credit_service_project.services.utils.AccountUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOAccountCreator;

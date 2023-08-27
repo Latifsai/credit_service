@@ -5,10 +5,12 @@ import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsReque
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OperationUpdateService {
 
     private final OperationSearchService searchOperationService;
@@ -19,6 +21,7 @@ public class OperationUpdateService {
         Operation operation = searchOperationService.findById(request.getId());
         Operation updatedOperation = util.updateOperation(operation, request);
         addOperationService.saveOperation(updatedOperation);
+        log.info("Update operation: {}", updatedOperation);
         return util.convertOperationToResponseDTO(updatedOperation);
     }
 }

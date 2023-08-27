@@ -1,7 +1,7 @@
 package com.example.credit_service_project.serviceTest.clientTest;
 
 import com.example.credit_service_project.DTO.client.AddClientRequest;
-import com.example.credit_service_project.repository.ClientRepository;
+import com.example.credit_service_project.repositories.ClientRepository;
 import com.example.credit_service_project.services.client.ClientCreateService;
 import com.example.credit_service_project.services.manager.ManagerSearchService;
 import com.example.credit_service_project.services.utils.ClientUtil;

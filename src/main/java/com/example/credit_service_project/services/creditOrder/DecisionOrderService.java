@@ -2,9 +2,10 @@ package com.example.credit_service_project.services.creditOrder;
 
 import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
 import com.example.credit_service_project.entity.CreditOrder;
-import com.example.credit_service_project.repository.CreditOrderRepository;
+import com.example.credit_service_project.repositories.CreditOrderRepository;
 import com.example.credit_service_project.services.utils.CreditOrderUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DecisionOrderService {
 
     /**
@@ -40,6 +42,7 @@ public class DecisionOrderService {
                 responsesList.add(util.convertToResponse(creditOrder));
             }
         }
+        log.info("Consider the order");
         return responsesList;
     }
 

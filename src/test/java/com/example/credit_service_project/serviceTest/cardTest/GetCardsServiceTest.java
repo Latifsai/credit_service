@@ -1,6 +1,6 @@
 package com.example.credit_service_project.serviceTest.cardTest;
 
-import com.example.credit_service_project.repository.CardRepository;
+import com.example.credit_service_project.repositories.CardRepository;
 import com.example.credit_service_project.services.card.GetAllCardsService;
 import com.example.credit_service_project.services.utils.CardUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOCardCreator;

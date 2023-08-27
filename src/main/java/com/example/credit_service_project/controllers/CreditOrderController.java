@@ -1,9 +1,6 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.creditOrderDTO.AddCreditOrderDTORequest;
-import com.example.credit_service_project.DTO.creditOrderDTO.AddCreditOrderResponseDTO;
-import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
-import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderDTORequest;
+import com.example.credit_service_project.DTO.creditOrderDTO.*;
 import com.example.credit_service_project.services.creditOrder.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -19,14 +16,15 @@ import java.util.UUID;
 public class CreditOrderController {
 
     private final CreditOrderCreateService create;
-    private final DecisionOrderService considerationOrderService;
+    private final DecisionOrderService decisionOrderService;
     private final GetAllCreditOrdersService getAllOrders;
     private final CreditOrderSearchService search;
     private final CreditOrderUpdateService update;
+    private final CheckCreditOrderStatusService checkCreditOrderStatus;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AddCreditOrderResponseDTO add(@RequestBody AddCreditOrderDTORequest request) {
+    public CreateCreditOrderResponseDTO create(@RequestBody CreateCreditOrderDTORequest request) {
         return create.createCreditOrder(request);
     }
 
@@ -50,8 +48,15 @@ public class CreditOrderController {
 
     @PutMapping("/review")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<CreditOrderResponseDTO>  consideration() {
-        return considerationOrderService.acceptOrder();
+    public List<CreditOrderResponseDTO> decision() {
+        return decisionOrderService.acceptOrder();
     }
+
+    @GetMapping("/check/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public CheckCreditOrderStatusResponse checkStatus(@PathVariable("id") @NotNull UUID id) {
+        return checkCreditOrderStatus.checkOrderStatus(id);
+    }
+
 
 }

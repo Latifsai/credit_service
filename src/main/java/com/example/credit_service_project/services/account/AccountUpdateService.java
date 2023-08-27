@@ -7,13 +7,13 @@ import com.example.credit_service_project.entity.enums.AccountStatus;
 import com.example.credit_service_project.services.utils.AccountUtil;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.AccountStatusException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Slf4j
 public class AccountUpdateService {
 
     private final AccountSearchService accountSearchService;
@@ -25,8 +25,9 @@ public class AccountUpdateService {
         if (accountToFind.getStatus().equals(AccountStatus.ACTIVE)) {
             Account updatedAccount = util.updateAccount(accountToFind, request);
             accountCreationService.saveAccount(updatedAccount);
+            log.info("Update account with number {}", updatedAccount.getAccountNumber());
             return util.convertAccountToAddResponse(updatedAccount);
-        }else {
+        } else {
             throw new AccountStatusException(ErrorsMessage.ACCOUNT_STATUS_EXCEPTION_MESSAGE);
         }
     }

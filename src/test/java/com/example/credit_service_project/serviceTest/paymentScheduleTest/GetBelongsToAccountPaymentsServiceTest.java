@@ -1,7 +1,7 @@
 package com.example.credit_service_project.serviceTest.paymentScheduleTest;
 
 import com.example.credit_service_project.DTO.paymentDTO.GetBelongsPaymentsResponse;
-import com.example.credit_service_project.repository.PaymentScheduleRepository;
+import com.example.credit_service_project.repositories.PaymentScheduleRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.paymentSchedule.GetBelongsToAccountPaymentsService;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;

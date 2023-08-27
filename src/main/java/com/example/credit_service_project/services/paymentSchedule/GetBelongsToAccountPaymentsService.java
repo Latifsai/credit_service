@@ -5,10 +5,11 @@ import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentsBelongsToAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.PaymentSchedule;
-import com.example.credit_service_project.repository.PaymentScheduleRepository;
+import com.example.credit_service_project.repositories.PaymentScheduleRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class GetBelongsToAccountPaymentsService {
 
     private final PaymentScheduleUtil util;
@@ -31,6 +33,7 @@ public class GetBelongsToAccountPaymentsService {
                 .map(util::convertEntityToPaymentResponse)
                 .toList();
 
+        log.info("Get belongs to account payments");
         return new GetBelongsPaymentsResponse(account.getId(),
                 account.getAccountNumber(), list);
     }

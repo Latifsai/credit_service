@@ -6,7 +6,7 @@ import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.GetAllCreditsService;
-import com.example.credit_service_project.services.credit.GetAllUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBelongsCreditService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,7 @@ public class CreditController {
 
     private final CreditCreateService create;
     private final GetAllCreditsService getAllCredits;
-    private final GetAllUnpaidPaymentsBelongsCreditService getAllUnpaidPaymentsBelongsCreditService;
+    private final CheckUnpaidPaymentsBelongsCreditService checkUnpaidPaymentsBelongsCreditService;
 
 
     @GetMapping
@@ -39,7 +39,7 @@ public class CreditController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public List<PaymentResponseDTO> getUnpaidPayments(@PathVariable("id") UUID id) {
-        return getAllUnpaidPaymentsBelongsCreditService.getAllUnpaidPaymentsBelongsCredit(id);
+        return checkUnpaidPaymentsBelongsCreditService.checkUnpaidPaymentsBelongsCredit(id);
     }
 
 

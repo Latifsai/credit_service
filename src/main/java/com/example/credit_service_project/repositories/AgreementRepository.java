@@ -1,9 +1,8 @@
-package com.example.credit_service_project.repository;
+package com.example.credit_service_project.repositories;
 
 import com.example.credit_service_project.entity.Agreement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
 import java.util.UUID;
 
 public interface AgreementRepository extends JpaRepository<Agreement, UUID> {

@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.creditOrderDTO.AddCreditOrderDTORequest;
-import com.example.credit_service_project.DTO.creditOrderDTO.AddCreditOrderResponseDTO;
+import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderDTORequest;
+import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderResponseDTO;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
 import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderDTORequest;
 import com.example.credit_service_project.entity.Client;
@@ -20,7 +20,7 @@ import static com.example.credit_service_project.entity.enums.CreditOrderStatus.
 @Service
 public class CreditOrderUtil {
 
-    public CreditOrder convertAddRequestToEntity(AddCreditOrderDTORequest request, Product product, Client client) {
+    public CreditOrder convertAddRequestToEntity(CreateCreditOrderDTORequest request, Product product, Client client) {
         CreditOrder creditOrder = new CreditOrder();
         creditOrder.setProduct(product);
         creditOrder.setNumber(CreditOrderGenerator.createCreditOrderNumber(request.getNumberLength()));
@@ -36,8 +36,8 @@ public class CreditOrderUtil {
         return creditOrder;
     }
 
-    public AddCreditOrderResponseDTO convertToAddResponse(CreditOrder order, Product product, Client client) {
-        return new AddCreditOrderResponseDTO(
+    public CreateCreditOrderResponseDTO convertToAddResponse(CreditOrder order, Product product, Client client) {
+        return new CreateCreditOrderResponseDTO(
                 product.getId(),
                 product.getName(),
                 order.getId(),

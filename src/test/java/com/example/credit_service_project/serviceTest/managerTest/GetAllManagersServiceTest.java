@@ -1,6 +1,6 @@
 package com.example.credit_service_project.serviceTest.managerTest;
 
-import com.example.credit_service_project.repository.ManagerRepository;
+import com.example.credit_service_project.repositories.ManagerRepository;
 import com.example.credit_service_project.services.manager.GetAllManagersService;
 import com.example.credit_service_project.services.utils.ManagerUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOManagerCreator;

@@ -1,7 +1,7 @@
 package com.example.credit_service_project.serviceTest.accountTest;
 
 import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
-import com.example.credit_service_project.repository.AccountRepository;
+import com.example.credit_service_project.repositories.AccountRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.services.utils.AccountUtil;

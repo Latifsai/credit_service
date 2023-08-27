@@ -1,6 +1,6 @@
 package com.example.credit_service_project.serviceTest.paymentScheduleTest;
 
-import com.example.credit_service_project.repository.PaymentScheduleRepository;
+import com.example.credit_service_project.repositories.PaymentScheduleRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.serviceTest.generators.DTOPaymentCreator;

@@ -4,20 +4,21 @@ import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
 import com.example.credit_service_project.entity.enums.CreditStatus;
-import com.example.credit_service_project.repository.OperationRepository;
+import com.example.credit_service_project.repositories.OperationRepository;
 import com.example.credit_service_project.services.account.AccountUpdateService;
 import com.example.credit_service_project.services.account.GetAllAccountsService;
 import com.example.credit_service_project.services.agreement.AgreementCreateService;
 import com.example.credit_service_project.services.card.CardCreateService;
 import com.example.credit_service_project.services.card.CardSearchService;
 import com.example.credit_service_project.services.credit.CreditCreateService;
-import com.example.credit_service_project.services.credit.GetAllUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBelongsCreditService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +31,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PaymentProcessingService {
 
     private final OperationRepository repository;
     private final OperationUtils util;
-    private final GetAllUnpaidPaymentsBelongsCreditService getUnpaidPaymentsService;
+    private final CheckUnpaidPaymentsBelongsCreditService getUnpaidPaymentsService;
     private final AccountUpdateService updateAccountService;
     private final PaymentScheduleGeneratorAndSaveService saveService;
     private final CardSearchService searchCardService;
@@ -88,7 +90,7 @@ public class PaymentProcessingService {
             }
 
         }
-
+        log.info("Get all the execution of the operation today:{}", donePaymentsList);
         return donePaymentsList;
     }
 

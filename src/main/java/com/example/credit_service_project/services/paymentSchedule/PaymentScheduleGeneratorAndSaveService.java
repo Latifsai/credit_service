@@ -5,9 +5,10 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.entity.Product;
-import com.example.credit_service_project.repository.PaymentScheduleRepository;
+import com.example.credit_service_project.repositories.PaymentScheduleRepository;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PaymentScheduleGeneratorAndSaveService {
 
     private final PaymentScheduleUtil util;
@@ -34,6 +36,7 @@ public class PaymentScheduleGeneratorAndSaveService {
             save(paymentSchedule);
             responses.add(util.convertEntityToPaymentResponse(paymentSchedule));
         }
+        log.info("Generate payment schedule for a period of: {} and for a sum of: {}", monthsTemp, credit.getCreditSum());
         return responses;
     }
 

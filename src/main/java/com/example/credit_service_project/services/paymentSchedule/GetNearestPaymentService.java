@@ -7,11 +7,13 @@ import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class GetNearestPaymentService {
 
     private final AccountSearchService accountSearchService;
@@ -21,6 +23,7 @@ public class GetNearestPaymentService {
     public PaymentResponseDTO getNearestPayment(PaymentsBelongsToAccountRequest request) {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         PaymentSchedule nearestPayment = getNearestPaymentForAccount(account);
+        log.info("Get nearest payment:{}", nearestPayment);
         return util.convertEntityToPaymentResponse(nearestPayment);
     }
 
