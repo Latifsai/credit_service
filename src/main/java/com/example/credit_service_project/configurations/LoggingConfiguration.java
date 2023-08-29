@@ -53,8 +53,9 @@ public class LoggingConfiguration {
     public void doAfterReturn(Object returnObject) {
         log.info("""
                 Return value: {}
-                END OF REQUEST
+                END OF REQUEST  
                 """, returnObject);
+        // модет быстро забитсья
     }
 
     @AfterThrowing(throwing = "exception", pointcut = "controllerLog()")

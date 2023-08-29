@@ -36,7 +36,7 @@ public class Client {
     private BigDecimal salary;
 
     @Column(name = "passive_income")
-    @Positive(message = "Income must not be negative!")
+    @PositiveOrZero(message = "Income must not be negative!")
     private BigDecimal passiveIncome;
 
     @Column(name = "expenses")
@@ -53,15 +53,15 @@ public class Client {
     private String email;
 
     @Column(name = "phone")
-    @Pattern(regexp = "^(?:\\+\\d{1,3}\\s?)?(?:\\d{1,4}\\s?)?\\d{6,14}$", message = "Number is not supported!")
+    @Pattern(regexp = "^(?:\\+\\d{1,3}\\s?)?\\d{1,4}\\s?\\d{2,3}\\s?\\d{3,9}$", message = "Number is not supported!")
     private String phone;
 
     @Column(name = "registration_date")
-    @NotBlank(message = "registrationDate must not be blank!")
+    @NotNull(message = "registrationDate must not be null!")
     private LocalDate registrationDate;
 
     @Column(name = "update_date")
-    @NotBlank(message = "registrationDate must not be blank!")
+    @NotNull(message = "registrationDate must not be null!")
     private LocalDate updateDate;
 
     @OneToOne(mappedBy = "client", orphanRemoval = true,

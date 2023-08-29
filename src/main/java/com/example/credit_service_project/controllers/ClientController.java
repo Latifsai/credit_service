@@ -34,19 +34,19 @@ public class ClientController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public ClientResponseDTO searchManager(@PathVariable("id") @NotNull UUID id) {
+    public ClientResponseDTO searchClient(@PathVariable("id") @NotNull UUID id) {
         return search.searchClient(id);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientResponseDTO addManager(@RequestBody AddClientRequest request) {
+    public ClientResponseDTO createClient (@RequestBody AddClientRequest request) {
         return create.createClient(request);
     }
 
     @PutMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientResponseDTO addManager(@RequestBody UpdateClientRequest request) {
+    public ClientResponseDTO updateClient(@RequestBody UpdateClientRequest request) {
         return update.updateClient(request);
     }
 

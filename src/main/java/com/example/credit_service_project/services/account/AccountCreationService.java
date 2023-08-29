@@ -28,7 +28,7 @@ public class AccountCreationService {
         Client client = searchClientService.findClientById(request.getClientId());
         Account account = util.convertAddRequestToAccount(request, client);
         Account savedAccount = saveAccount(account);
-        log.info("Create and save account: {}", savedAccount);
+        log.info("Create and save account: {}", savedAccount); // перписать дать часть информаации необходимую
         return util.convertAccountToAddResponse(savedAccount);
     }
 
