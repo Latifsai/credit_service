@@ -43,26 +43,25 @@ public class Account {
     @NotBlank(message = "country must not be blank!")
     private String country;
 
-    @NotBlank(message = "status must not be blank!")
+    @NotNull(message = "status must not be null!")
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
-    @NotBlank(message = "balance must not be blank!")
     @PositiveOrZero(message = "Balance must be greater than 0")
     @Column(name = "balance")
     private BigDecimal balance;
 
     @Column(name = "opening_date")
-    @NotBlank(message = "openingDate must not be blank!")
+    @NotNull(message = "openingDate must not be null!")
     private LocalDate openingDate;
 
     @Column(name = "last_update_date")
-    @NotBlank(message = "lastUpdateDate must not be blank!")
+    @NotNull(message = "lastUpdateDate must not be null!")
     private LocalDate lastUpdateDate;
 
     @Column(name = "closing_date")
-    @NotBlank(message = "closingDate must not be blank!")
+    @NotNull(message = "closingDate must not be null!")
     private LocalDate closingDate;
 
     @PositiveOrZero(message = "unpaidPercentageLoanDebt must be greater than 0")

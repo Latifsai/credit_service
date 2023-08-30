@@ -23,7 +23,7 @@ public class GetNearestPaymentService {
     public PaymentResponseDTO getNearestPayment(PaymentsBelongsToAccountRequest request) {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         PaymentSchedule nearestPayment = getNearestPaymentForAccount(account);
-        log.info("Get nearest payment:{}", nearestPayment);
+        log.info("Get nearest payment with ID: {}", nearestPayment.getId());
         return util.convertEntityToPaymentResponse(nearestPayment);
     }
 

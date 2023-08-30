@@ -1,12 +1,14 @@
 package com.example.credit_service_project.DTO.creditDTO;
 
 import com.example.credit_service_project.entity.enums.CreditStatus;
+import lombok.Builder;
 import lombok.Value;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Value
+@Builder
 public class CreditDTOResponse {
     UUID id;
     String creditType;

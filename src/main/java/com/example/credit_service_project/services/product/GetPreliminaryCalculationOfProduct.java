@@ -38,7 +38,7 @@ public class GetPreliminaryCalculationOfProduct {
             int actualMonth = month + 1;
             responses.add(new PreliminaryCalculationResponse((actualMonth), LocalDate.now().plusMonths(actualMonth), payments[month]));
         }
-        log.info("Get preliminary calculation for a Product: {}", product);
+        log.info("Get preliminary calculation for a Product with ID: {}", product.getId());
         return responses;
     }
 

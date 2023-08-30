@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.utils;
 
 import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
-import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
+import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Client;
@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class AccountUtil {
 
-    public Account convertAddRequestToAccount(AddAccountDTORequest request, Client client) {
+    public Account convertAddRequestToAccount(CreateAccountDTORequest request, Client client) {
         Account account = new Account();
         account.setClient(client);
         account.setCountry(request.getCountry());
@@ -36,19 +36,19 @@ public class AccountUtil {
     }
 
     public AccountDTOResponse convertAccountToAddResponse(Account account) {
-        return new AccountDTOResponse(
-                account.getId(),
-                account.getAccountNumber(),
-                account.getClient().getName() + " " + account.getClient().getSurname(),
-                account.getLoanDebt(),
-                account.getPercentageDebt(),
-                account.getStatus(),
-                account.getBalance(),
-                account.getClosingDate(),
-                account.getUnpaidCreditSum(),
-                account.getCurrency(),
-                account.getCountry()
-                );
+        return AccountDTOResponse.builder()
+                .id(account.getId())
+                .accountNumber(account.getAccountNumber())
+                .clientInitial(account.getClient().getName() + " " + account.getClient().getSurname())
+                .loanDebt(account.getLoanDebt())
+                .percentageDebt(account.getPercentageDebt())
+                .status(account.getStatus())
+                .balance(account.getBalance())
+                .closingDate(account.getClosingDate())
+                .unpaidCreditSum(account.getUnpaidCreditSum())
+                .currency(account.getCurrency())
+                .country(account.getCountry())
+                .build();
     }
 
 

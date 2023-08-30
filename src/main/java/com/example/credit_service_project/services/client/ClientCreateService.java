@@ -24,7 +24,7 @@ public class ClientCreateService {
         Manager manager = searchManagerService.findManagerById(request.getManagerID());
         Client client = util.convertAddRequestToEntity(request, manager);
         Client savedClient = saveClient(client);
-        log.info("Create and save client: {}", savedClient);
+        log.info("Create and save client with ID: {}", savedClient.getId());
         return util.convertClientToResponse(savedClient);
     }
 

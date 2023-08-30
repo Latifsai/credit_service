@@ -37,18 +37,18 @@ public class CreditOrderUtil {
     }
 
     public CreateCreditOrderResponseDTO convertToAddResponse(CreditOrder order, Product product, Client client) {
-        return new CreateCreditOrderResponseDTO(
-                product.getId(),
-                product.getName(),
-                order.getId(),
-                order.getNumber(),
-                order.getAmount(),
-                order.getCreationDate(),
-                order.getMaxPeriodMonths(),
-                order.getMinPeriodMonths(),
-                order.getCreditOrderStatus(),
-                client.getAccount().getCurrency()
-        );
+        return  CreateCreditOrderResponseDTO.builder()
+                .productID(product.getId())
+                .productName(product.getName())
+                .id(order.getId())
+                .number(order.getNumber())
+                .amount(order.getAmount())
+                .creationDate(order.getCreationDate())
+                .maxPeriodMonths(order.getMaxPeriodMonths())
+                .minPeriodMonths(order.getMinPeriodMonths())
+                .creditOrderStatus(order.getCreditOrderStatus())
+                .currency(client.getAccount().getCurrency())
+                .build();
     }
 
     public CreditOrderResponseDTO convertToResponse(CreditOrder order) {

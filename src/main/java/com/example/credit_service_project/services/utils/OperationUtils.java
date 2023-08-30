@@ -156,16 +156,17 @@ public class OperationUtils {
     }
 
     public OperationResponseDTO convertOperationToResponseDTO(Operation operation) {
-        return new OperationResponseDTO(
-                operation.getAccount().getAccountNumber(),
-                operation.getAccount().getBalance(),
-                operation.getId(),
-                operation.getSum(),
-                operation.isDebit(),
-                operation.getType(),
-                operation.getOperationEndMark(),
-                operation.getOperationDetails(),
-                operation.getCurrency()
-        );
+        return OperationResponseDTO
+                .builder()
+                .accountNumber(operation.getAccount().getAccountNumber())
+                .balance(operation.getAccount().getBalance())
+                .id(operation.getId())
+                .sum(operation.getSum())
+                .isDebit(operation.isDebit())
+                .type(operation.getType())
+                .operationEndMark(operation.getOperationEndMark())
+                .operationDetails(operation.getOperationDetails())
+                .currency(operation.getCurrency())
+                .build();
     }
 }

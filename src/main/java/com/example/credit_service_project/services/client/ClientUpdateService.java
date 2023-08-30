@@ -21,7 +21,7 @@ public class ClientUpdateService {
         Client client = searchClientService.findClientById(request.getId());
         Client updatedClient = util.updateClient(client, request);
         addClientService.saveClient(updatedClient);
-        log.info("Update client: {}", client);
+        log.info("Update client with id: {}", client.getId());
         return util.convertClientToResponse(updatedClient);
     }
 }

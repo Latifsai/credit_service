@@ -21,7 +21,7 @@ public class CreditOrderUpdateService {
         CreditOrder creditOrder = searchCreditOrderService.findById(request.getId());
         CreditOrder updated = util.update(request, creditOrder);
         addCreditOrderService.saveOrder(updated);
-        log.info("Update credit order: {}", creditOrder);
+        log.info("Update credit order with number: {}", creditOrder.getNumber());
         return util.convertToResponse(updated);
     }
 }

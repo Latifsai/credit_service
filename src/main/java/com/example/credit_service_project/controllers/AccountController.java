@@ -2,7 +2,7 @@ package com.example.credit_service_project.controllers;
 
 
 import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
-import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
+import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.services.account.AccountCreationService;
@@ -24,9 +24,10 @@ public class AccountController {
     private final GetAllAccountsService get;
     private final AccountSearchService search;
     private final AccountUpdateService update;
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AccountDTOResponse createNewAccount(@RequestBody AddAccountDTORequest request) {
+    public AccountDTOResponse createNewAccount(@RequestBody CreateAccountDTORequest request) {
         return create.createAccount(request);
     }
 

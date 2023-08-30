@@ -21,7 +21,7 @@ public class OperationUpdateService {
         Operation operation = searchOperationService.findById(request.getId());
         Operation updatedOperation = util.updateOperation(operation, request);
         addOperationService.saveOperation(updatedOperation);
-        log.info("Update operation: {}", updatedOperation);
+        log.info("Update operation with ID: {}", updatedOperation.getId());
         return util.convertOperationToResponseDTO(updatedOperation);
     }
 }

@@ -30,19 +30,20 @@ public class ClientUtil {
     }
 
     public ClientResponseDTO convertClientToResponse(Client client) {
-        return new ClientResponseDTO(
-                client.getId(),
-                client.getManager().getId(),
-                client.getManager().getEmail(),
-                client.getName(),
-                client.getSurname(),
-                client.getSalary().add(client.getPassiveIncome()),
-                client.getExpenses(),
-                client.getAddress(),
-                client.getEmail(),
-                client.getPhone(),
-                client.getRegistrationDate(),
-                client.getUpdateDate());
+        return ClientResponseDTO.builder()
+                .id(client.getId())
+                .managerId(client.getManager().getId())
+                .managerEmail(client.getManager().getEmail())
+                .name(client.getName())
+                .surname(client.getSurname())
+                .income(client.getSalary().add(client.getPassiveIncome()))
+                .expenses(client.getExpenses())
+                .address(client.getAddress())
+                .email(client.getEmail())
+                .phone(client.getPhone())
+                .registrationDate(client.getRegistrationDate())
+                .updateDate(client.getUpdateDate())
+                .build();
     }
 
     public Client updateClient(Client client, UpdateClientRequest request) {
@@ -58,6 +59,7 @@ public class ClientUtil {
     private boolean checkInput(BigDecimal input) {
         return input != null;
     }
+
     private boolean checkForStrings(String criteria) {
         return criteria != null && !criteria.trim().isEmpty();
     }

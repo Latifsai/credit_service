@@ -31,17 +31,18 @@ public class CardUtil {
     }
 
     public CardDTOResponse convertCardToAddDTOResponse(Card card) {
-        return new CardDTOResponse(
-                card.getId(),
-                card.getCardNumber(),
-                card.getHolderName(),
-                card.getIBAN(),
-                card.getBalance(),
-                card.getPaymentSystem(),
-                card.getCardStatus(),
-                card.getAccount().getAccountNumber(),
-                card.getExpirationDate(),
-                card.getAccount().getCurrency());
+        return CardDTOResponse.builder()
+                .id(card.getId())
+                .cardNumber(card.getCardNumber())
+                .holderName(card.getHolderName())
+                .IBAN(card.getIBAN())
+                .balance(card.getBalance())
+                .paymentSystem(card.getPaymentSystem())
+                .cardStatus(card.getCardStatus())
+                .accountNumber(card.getAccount().getAccountNumber())
+                .expirationDate(card.getExpirationDate())
+                .currency(card.getAccount().getCurrency())
+                .build();
     }
 
     public Card updateCard(Card card, UpdateCardDTORequest request) {

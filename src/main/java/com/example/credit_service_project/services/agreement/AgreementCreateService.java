@@ -24,7 +24,7 @@ public class AgreementCreateService {
         CreditOrder creditOrder = searchCreditOrderService.findById(request.getCreditOrderID());
         Agreement agreement = util.convertCreateRequestToEntity(request, creditOrder);
         Agreement savedAgreement = saveAgreement(agreement);
-        log.info("Create agreement: {}", savedAgreement);
+        log.info("Create agreement with number: {}", savedAgreement.getNumber());
         return util.convertToResponse(savedAgreement);
     }
 

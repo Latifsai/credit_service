@@ -1,7 +1,7 @@
 package com.example.credit_service_project.serviceTest.generators;
 
 import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
-import com.example.credit_service_project.DTO.accountDTO.AddAccountDTORequest;
+import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 
@@ -29,8 +29,8 @@ public class DTOAccountCreator {
         );
     }
 
-    public static AddAccountDTORequest createRequest() {
-        return new AddAccountDTORequest(
+    public static CreateAccountDTORequest createRequest() {
+        return new CreateAccountDTORequest(
                 UUID.fromString("00009999-2222-1111-a456-426655440000"),
                 new BigDecimal("2500"),
                 new BigDecimal("250"),
@@ -42,8 +42,8 @@ public class DTOAccountCreator {
         );
     }
 
-    public static AddAccountDTORequest getRequestWithExceptions() {
-        var request = new AddAccountDTORequest();
+    public static CreateAccountDTORequest getRequestWithExceptions() {
+        var request = new CreateAccountDTORequest();
         request.setLoanDebt(new BigDecimal("-2000"));
         request.setPercentageDebt(new BigDecimal("-200"));
         request.setBalance(new BigDecimal("-10"));

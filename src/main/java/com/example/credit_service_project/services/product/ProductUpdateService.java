@@ -21,7 +21,7 @@ public class ProductUpdateService {
         Product product = searchProductService.findById(request.getId());
         Product updatedProduct = util.update(product, request);
         Product savedProduct = createProductService.saveProduct(updatedProduct);
-        log.info("Update product: {}", updatedProduct);
+        log.info("Update product with ID: {}", updatedProduct);
         return util.toResponse(savedProduct);
     }
 }

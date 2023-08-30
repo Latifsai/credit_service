@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Value
-public class AddAccountDTORequest {
+public class CreateAccountDTORequest {
      UUID clientId;
      String country;
      BigDecimal balance;

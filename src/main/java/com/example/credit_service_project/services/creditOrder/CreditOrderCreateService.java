@@ -29,7 +29,7 @@ public class CreditOrderCreateService {
 
         CreditOrder creditOrder = util.convertAddRequestToEntity(request, product, client);
         CreditOrder savedOrder = saveOrder(creditOrder);
-        log.info("Create credit order: {}", savedOrder);
+        log.info("Create credit order with number: {}", savedOrder.getNumber());
         return util.convertToAddResponse(savedOrder, product, client);
     }
 

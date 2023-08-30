@@ -68,38 +68,38 @@
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('7095f6cf-1d3d-414f-800a-ba563b5ba6d5', '-', '')), 'Mendji street 34',
                     'brandon@mail.com', '2000.00', 'Brandon', '230.00', '+48 453 777 215', '2018-12-15',
-                    '3100.00', 'Mcgregor', '2022-07-28', UNHEX(REPLACE('60c46888-ed68-4925-a743-fae589a5c8ab', '-', '')));
+                    '6346.00', 'Mcgregor', '2022-07-28', UNHEX(REPLACE('60c46888-ed68-4925-a743-fae589a5c8ab', '-', '')));
             INSERT INTO clients
-            VALUES (UNHEX(REPLACE('906141bf-dfd4-47d2-815e-e29a0ef660fe', '-', '')), 'Altdorfer Str 37',
-                    'volodya@gmail.com', '30000.00', 'Vladimir', '10000.00', '+47 987 65 432', '2006-07-01',
-                    '100000.00', 'Karpov', '2010-10-10', UNHEX(REPLACE('35c3fe62-4279-4c21-a586-9ab31ee8348b', '-', '')));
+            VALUES (UNHEX(REPLACE('906141bf-dfd4-47d2-815e-e29a0ef660fe', '-', '')), 'Gülveren Sk. 6',
+                    'volodya@gmail.com', '30000.00', 'Vladimir', '10000.00', '+90 222 658 4328', '2015-07-01',
+                    '100000.00', 'Karpov', '2019-10-10', UNHEX(REPLACE('35c3fe62-4279-4c21-a586-9ab31ee8348b', '-', '')));
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('a3ca9f00-3886-46c9-b1c2-6af707c72c6c', '-', '')), '23th Street',
-                    'hoch_luna@yahoo.org', '1979.00', 'Luna', '330.00', '+1 880 454 6633', '2009-03-04',
+                    'hoch_luna@yahoo.org', '1979.00', 'Luna', '330.00', '+55 88 4548 6633', '2009-03-04',
                     '4780.00', 'Hochberg', '2018-08-02', UNHEX(REPLACE('66b91b23-d9ec-4945-be1b-5bdb54733179', '-', '')));
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('ab2b2e5f-3fbd-47bb-bb2b-b30e998bec27', '-', '')), 'Via Aversa 32',
-                    'lalan@hushmail.com', '1400.00', 'Lalan', '213.00', '+39 342 120 9210', '2023-03-07',
-                    '2250.00', 'Andrellton', '2023-08-29', UNHEX(REPLACE('931a5c6f-b054-4057-8b8f-c176fb26f82b', '-', '')));
+                    'lalan@hushmail.com', '159760.00', 'Lalan', '1500.00', '+81 810 120 920', '2023-03-07',
+                    '342000.00', 'Andrellton', '2023-08-29', UNHEX(REPLACE('931a5c6f-b054-4057-8b8f-c176fb26f82b', '-', '')));
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('c2c05179-806e-42a4-8f30-1cf4d7711952', '-', '')), 'Winterfell street 245',
                     'j_snow@gmail.com', '1330.00', 'John', '300.00', '+44 880 857 9353', '2022-06-15',
                     '2800.00', 'Stark', '2022-06-15', UNHEX(REPLACE('59f85267-0e1d-4d2b-b9f9-cf61592ff186', '-', '')));
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('caf07bfc-9de3-4b0b-800f-8d76fc332266', '-', '')), 'Mendji street 34',
-                    'melli@gmail.com', '437.00', 'Mellisa', '0.00', '+44 115 777 2125', '2021-08-15',
-                    '1100.00', 'Greyshoe', '2022-03-29', UNHEX(REPLACE('59f85267-0e1d-4d2b-b9f9-cf61592ff186', '-', '')));
+                    'melli@gmail.com', '2760.00', 'Mellisa', '0.00', '+972 2 7772125', '2021-08-15',
+                    '12853.00', 'Greyshoe', '2022-03-29', UNHEX(REPLACE('59f85267-0e1d-4d2b-b9f9-cf61592ff186', '-', '')));
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('e5b763ff-ee88-462a-94c6-4302bb6e8d99', '-', '')), 'Mosin Str 76',
                     'lev_lanister@mail.com', '1400.00', 'Lev', '100.00', '+49 167 31105233', '2019-10-18',
                     '2450.00', 'Lanister', '2019-10-18', UNHEX(REPLACE('1adf0e65-73e5-4be2-86b4-92ca651aceb4', '-', '')));
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('ec5499c8-9bc1-4e87-a4a4-ee4ace2e001d', '-', '')), 'Mans Avenu 32', 'vitka@yahoo.org',
-                    '800.00', 'Vita', '0.00', '+1 888 9842241', '2017-09-19', '2000.00', 'Kravchenko', '2023-08-29',
+                    '12000.00', 'Vita', '0.00', '+66 800 020600', '2017-09-19', '25000.00', 'Kravchenko', '2023-08-29',
                     UNHEX(REPLACE('1adf0e65-73e5-4be2-86b4-92ca651aceb4', '-', '')));
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('eda11578-10ae-4ec6-a1a9-c0bbdfe0e4c6', '-', '')), 'Lera Odos', 'eanna@mail.com',
-                    '376.00', 'Eanna', '120.00', '+30 133 234 7648', '2023-01-01', '1200.00', 'Prodocous', '2023-01-01',
+                    '3076.00', 'Eanna', '1549.00', '+40 43 234 7648', '2023-01-01', '6572.00', 'Prodocous', '2023-01-01',
                     UNHEX(REPLACE('725baa74-a3e3-4ed1-8277-8e3c520f7722', '-', '')));
         </sql>
     </changeSet>

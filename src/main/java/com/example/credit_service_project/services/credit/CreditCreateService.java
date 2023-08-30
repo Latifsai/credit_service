@@ -47,8 +47,10 @@ public class CreditCreateService {
         updateAgreementService.saveAgreement(agreement);
         Credit savedCredit = saveCredit(credit);
 
-        List<PaymentResponseDTO> list = paymentScheduleGeneratorService.generatePaymentSchedule(credit, credit.getCreditOrder().getProduct(), account);
-        log.info("Create and save credit: {}", credit);
+        List<PaymentResponseDTO> list = paymentScheduleGeneratorService.generatePaymentSchedule(credit,
+                credit.getCreditOrder().getProduct(), account);
+
+        log.info("Create and save credit with ID: {}", credit.getId());
         return util.convertResponse(savedCredit, list);
     }
 

@@ -62,17 +62,17 @@ public class ProductUtil {
     }
 
     public ProductResponseDTO toResponse(Product product) {
-        return new ProductResponseDTO(
-                product.getId(),
-                product.getName(),
-                product.getSum(),
-                product.isNeedGuaranty(),
-                product.isEarlyRepayment(),
-                product.isNeedIncomeDetails(),
-                product.getDetails(),
-                product.getCurrencyCode(),
-                product.getCalculationType()
-        );
+        return ProductResponseDTO.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .sum(product.getSum())
+                .needGuaranty(product.isNeedGuaranty())
+                .earlyRepayment(product.isEarlyRepayment())
+                .needIncomeDetails(product.isNeedIncomeDetails())
+                .details(product.getDetails())
+                .currencyCode(product.getCurrencyCode())
+                .calculationType(product.getCalculationType())
+                .build();
     }
 
     public Product update(Product product, UpdateProductDTORequest request) {

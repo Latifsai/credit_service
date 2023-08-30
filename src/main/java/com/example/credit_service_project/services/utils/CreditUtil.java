@@ -49,37 +49,38 @@ public class CreditUtil {
     }
 
     public AddCreditDTOResponse convertResponse(Credit credit, List<PaymentResponseDTO> list) {
-        return new AddCreditDTOResponse(
-                credit.getId(),
-                credit.getCreditType(),
-                credit.getCreditSum(),
-                credit.getPeriodMonth(),
-                credit.getFine(),
-                credit.isNeedDeposit(),
-                credit.getCreditStatus(),
-                credit.getCurrency(),
-                credit.getAccount().getAccountNumber(),
-                credit.getAgreement().getNumber(),
-                credit.getAgreement().getTerminationDate(),
-                credit.getCreditOrder().getNumber(),
-                credit.getCreditOrder().getProduct().getId(),
-                credit.getCreditOrder().getProduct().getName(),
-                credit.getCreditOrder().getProduct().getCalculationType(),
-                list
-        );
+        return AddCreditDTOResponse.builder()
+                .id(credit.getId())
+                .creditType(credit.getCreditType())
+                .creditSum(credit.getCreditSum())
+                .periodMonth(credit.getPeriodMonth())
+                .fine(credit.getFine())
+                .needDeposit(credit.isNeedDeposit())
+                .creditStatus(credit.getCreditStatus())
+                .currency(credit.getCurrency())
+                .accountNumber(credit.getAccount().getAccountNumber())
+                .agreementNumber(credit.getAgreement().getNumber())
+                .terminationDate(credit.getAgreement().getTerminationDate())
+                .creditOrderNumber(credit.getCreditOrder().getNumber())
+                .productID(credit.getCreditOrder().getProduct().getId())
+                .productName(credit.getCreditOrder().getProduct().getName())
+                .calculationType(credit.getCreditOrder().getProduct().getCalculationType())
+                .list(list)
+                .build();
     }
 
     public CreditDTOResponse convertToCreditResponse(Credit credit) {
-        return new CreditDTOResponse(
-                credit.getId(),
-                credit.getCreditType(),
-                credit.getCreditSum(),
-                credit.getInterestRate(),
-                credit.getPeriodMonth(),
-                credit.getFine(),
-                credit.isNeedDeposit(),
-                credit.getCreditStatus(),
-                credit.getCurrency()
-        );
+        return CreditDTOResponse
+                .builder()
+                .id(credit.getId())
+                .creditType(credit.getCreditType())
+                .creditSum(credit.getCreditSum())
+                .interestRate(credit.getInterestRate())
+                .periodMonth(credit.getPeriodMonth())
+                .fine(credit.getFine())
+                .needDeposit(credit.isNeedDeposit())
+                .creditStatus(credit.getCreditStatus())
+                .currency(credit.getCurrency())
+                .build();
     }
 }

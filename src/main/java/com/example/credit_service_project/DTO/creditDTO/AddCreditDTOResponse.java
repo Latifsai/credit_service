@@ -3,6 +3,7 @@ package com.example.credit_service_project.DTO.creditDTO;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.enums.CalculationType;
 import com.example.credit_service_project.entity.enums.CreditStatus;
+import lombok.Builder;
 import lombok.Value;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 
 @Value
+@Builder
 public class AddCreditDTOResponse {
     UUID id;
     String creditType;
@@ -31,7 +33,7 @@ public class AddCreditDTOResponse {
     String creditOrderNumber;
     //product
     BigInteger productID;
-    String name;
+    String productName;
     CalculationType calculationType;
     List<PaymentResponseDTO> list;
 }

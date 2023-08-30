@@ -24,7 +24,7 @@ public class CardCreateService {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         Card card = util.convertAddRequestToEntity(request, account);
         Card savedCard = saveCard(card);
-        log.info("Create and save card: {}", savedCard);
+        log.info("Create and save card with IBAN: {}", savedCard.getIBAN());
         return util.convertCardToAddDTOResponse(savedCard);
     }
 

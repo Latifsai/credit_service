@@ -88,7 +88,7 @@ public class ReplenishmentAndEarlyPaymentOperationService {
         Operation operation = util.convertPaymentsOperationRequestToOperation(request, account);
         Operation savedOperation = repository.save(operation);
 
-        log.info("Perform operation: {}", savedOperation);
+        log.info("Perform operation with ID: {}", savedOperation.getId());
         return util.convertOperationToResponseDTO(savedOperation);
     }
 }

@@ -32,7 +32,7 @@ public class CardUpdateService {
         Account updatedAccount = utils.updateAccountBalance(account, card);
         updateAccountService.saveUpdatedAccount(updatedAccount);
 
-        log.info("Update card: {}", card);
+        log.info("Update card with IBAN: {}", card.getIBAN());
         return utils.convertCardToAddDTOResponse(updatedCard);
     }
 

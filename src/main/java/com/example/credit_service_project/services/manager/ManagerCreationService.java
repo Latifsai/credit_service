@@ -20,7 +20,7 @@ public class ManagerCreationService {
     public ManagerResponseDTO createManager(AddManagerRequest request) {
         Manager manager = util.convertAddRequestToManager(request);
         Manager savedManager = saveManager(manager);
-        log.info("Create and save manager: {}", manager);
+        log.info("Create and save manager with ID: {}", manager.getId());
         return util.convertManagerToResponse(savedManager);
     }
 

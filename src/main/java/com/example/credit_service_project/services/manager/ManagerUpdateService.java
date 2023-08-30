@@ -21,7 +21,7 @@ public class ManagerUpdateService {
         Manager manager = searchManagerService.findManagerById(request.getId());
         Manager updatedManager = util.update(manager, request);
         addManagerService.saveManager(updatedManager);
-        log.info("Update manager: {}", manager);
+        log.info("Update manager with ID: {}", manager.getId());
         return util.convertManagerToResponse(updatedManager);
     }
 }
