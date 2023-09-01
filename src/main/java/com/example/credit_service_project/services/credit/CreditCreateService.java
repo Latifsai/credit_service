@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.credit;
 
-import com.example.credit_service_project.DTO.creditDTO.AddCreditDTORequest;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
@@ -35,7 +35,7 @@ public class CreditCreateService {
     private final AgreementCreateService updateAgreementService;
     private final PaymentScheduleGeneratorAndSaveService paymentScheduleGeneratorService;
 
-    public AddCreditDTOResponse createCredit(AddCreditDTORequest request) {
+    public AddCreditDTOResponse createCredit(CreateCreditDTORequest request) {
 
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         Agreement agreement = searchAgreementService.findById(request.getAgreementID());

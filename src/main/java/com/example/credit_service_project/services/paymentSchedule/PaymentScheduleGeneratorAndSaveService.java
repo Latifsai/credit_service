@@ -26,13 +26,16 @@ public class PaymentScheduleGeneratorAndSaveService {
 
     public List<PaymentResponseDTO> generatePaymentSchedule(Credit credit, Product product, Account account) {
         List<PaymentResponseDTO> responses = new ArrayList<>();
+        LocalDate firstPaymentDate = LocalDate.now().plusMonths(credit.getCreditHolidayMonthsAmount());
 
         int monthsTemp = credit.getPeriodMonth();
         BigDecimal[] payments = util.calculatePayment(monthsTemp, credit.getInterestRate(), credit.getCreditSum(), product);
         for (int month = 0; month < monthsTemp; month++) {
             PaymentSchedule paymentSchedule = util.convertFromCreditAndProduct(account);
             paymentSchedule.setMonthlyPayment(payments[month]);
-            paymentSchedule.setPaymentDate(LocalDate.now().plusMonths((month + 1)));
+
+            paymentSchedule.setPaymentDate(firstPaymentDate.plusMonths((month + 1)));
+
             save(paymentSchedule);
             responses.add(util.convertEntityToPaymentResponse(paymentSchedule));
         }

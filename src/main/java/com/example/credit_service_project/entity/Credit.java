@@ -2,11 +2,11 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CreditStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
-import lombok.*;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -51,7 +51,7 @@ public class Credit {
 
     @Column(name = "credit_status")
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "CreditStatus must not be blank!")
+    @NotNull(message = "CreditStatus must not be  null!")
     private CreditStatus creditStatus;
 
     @Column(name = "currency")
@@ -59,6 +59,9 @@ public class Credit {
     @NotBlank(message = "Currency must not be blank!")
     private String currency;
 
+    @Column(name = "credit_holiday_months_amount")
+    @PositiveOrZero(message = "creditHolidayMonthsAmount must be zero or more")
+    private Integer creditHolidayMonthsAmount;
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;

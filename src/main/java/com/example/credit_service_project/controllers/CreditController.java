@@ -1,6 +1,6 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.creditDTO.AddCreditDTORequest;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
 import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
@@ -32,7 +32,7 @@ public class CreditController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AddCreditDTOResponse create(@RequestBody AddCreditDTORequest request) {
+    public AddCreditDTOResponse create(@RequestBody CreateCreditDTORequest request) {
         return create.createCredit(request);
     }
 

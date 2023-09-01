@@ -6,11 +6,12 @@ import java.util.UUID;
 
 
 @Value
-public class AddCreditDTORequest {
+public class CreateCreditDTORequest {
     UUID accountID;
     String accountNumber;
     UUID agreementID;
     UUID creditOrderID;
     Integer periodMonth;
+    Integer creditHolidaysMonth;
     String creditType;
 }

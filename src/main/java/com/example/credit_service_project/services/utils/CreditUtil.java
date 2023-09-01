@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.creditDTO.AddCreditDTORequest;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
 import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
@@ -19,7 +19,7 @@ import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIV
 @Service
 public class CreditUtil {
 
-    public Credit createCreditFromData(AddCreditDTORequest request, Account account, Agreement agreement, CreditOrder creditOrder) {
+    public Credit createCreditFromData(CreateCreditDTORequest request, Account account, Agreement agreement, CreditOrder creditOrder) {
         Credit credit = new Credit();
 
         credit.setAccount(account);
@@ -33,6 +33,7 @@ public class CreditUtil {
         credit.setNeedDeposit(creditOrder.getProduct().isNeedGuaranty());
         credit.setCreditStatus(ACTIVE);
         credit.setCurrency(account.getCurrency());
+        credit.setCreditHolidayMonthsAmount(request.getCreditHolidaysMonth());
 
         //save agrememt
         agreement.setTerminationDate(agreement.getAgreementDate().plusMonths(credit.getPeriodMonth()));
