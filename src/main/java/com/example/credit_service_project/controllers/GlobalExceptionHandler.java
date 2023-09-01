@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> handleAccountNotFoundException(NotFoundException e) {
+    public ResponseEntity<?> handleNotFoundException(NotFoundException e) {
         List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
         ExceptionResponse response = new ExceptionResponse(errorExceptions);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(CurrencyException.class)
-    public ResponseEntity<?> handleProductNotFoundException(CurrencyException e) {
+    public ResponseEntity<?> handleCurrencyException(CurrencyException e) {
         List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
         ExceptionResponse response = new ExceptionResponse(errorExceptions);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -48,7 +48,7 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(AgreementException.class)
-    public ResponseEntity<?> handleProductNotFoundException(AgreementException e) {
+    public ResponseEntity<?> handleAgreementException(AgreementException e) {
         List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
         ExceptionResponse response = new ExceptionResponse(errorExceptions);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -62,14 +62,20 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EarlyPaymentException.class)
-    public ResponseEntity<?> handleProductNotFoundException(EarlyPaymentException e) {
+    public ResponseEntity<?> handleEarlyPaymentException(EarlyPaymentException e) {
         List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
         ExceptionResponse response = new ExceptionResponse(errorExceptions);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(PaymentException.class)
-    public ResponseEntity<?> handleProductNotFoundException(PaymentException e) {
+    public ResponseEntity<?> handlePaymentException(PaymentException e) {
+        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
+        ExceptionResponse response = new ExceptionResponse(errorExceptions);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(IsAlreadyExistException.class)
+    public ResponseEntity<?> handleIsAlreadyExistException(IsAlreadyExistException e) {
         List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
         ExceptionResponse response = new ExceptionResponse(errorExceptions);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
