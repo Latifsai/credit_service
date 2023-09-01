@@ -3,6 +3,7 @@ package com.example.credit_service_project.services.card;
 import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
+import com.example.credit_service_project.entity.enums.CardStatus;
 import com.example.credit_service_project.repositories.CardRepository;
 import com.example.credit_service_project.services.utils.CardUtil;
 import com.example.credit_service_project.validation.ErrorsMessage;
@@ -35,7 +36,9 @@ public class CardSearchService {
     }
 
     public Card findByAccount(Account account) {
-        return repository.findByAccount(account)
+        return repository.findByAccount(account).stream()
+                .filter(card -> card.getCardStatus().equals(CardStatus.ACTIVE))
+                .findFirst()
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE));
     }
 }

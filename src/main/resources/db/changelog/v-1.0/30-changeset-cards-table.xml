@@ -32,11 +32,131 @@
                                  referencedColumnNames="id" />
     </changeSet>
 
-    <changeSet id="addUniqueConstraint" author="latif">
-        <addUniqueConstraint tableName="cards"
-                             columnNames="account_id"
-                             constraintName="UK_ra8oohxt2tbbk56h9fxiq493e"
-                             />
+    <changeSet id="insert" author="latif">
+        <sql>
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('08af60f4-4391-4e81-9847-0e9d8b66237f', '-', '')), '3891283651102381', '0.00',
+                    '078664171086', 'ENDED', 'Mans Avenu 32', '2022-11-12', 'Vita Kravchenko', true, '2017-10-12',
+                    'VISA', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('01df3a04-47fe-11ee-be56-0242ac120002', '-', '')), '3891283651102381', '17309.50',
+                    '245565361003', 'ACTIVE', 'Mans Avenu 32', '2026-11-29', 'Vita Kravchenko', true, '2022-11-20',
+                    'VISA', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('1903e34a-0eb6-4715-9584-f7be38a441a5', '-', '')), 'IL213341260483390995712',
+                    '15890.00', '880835100241', 'ACTIVE', 'Mendji street 34', '2025-09-30', 'Mellisa Greyshoe', true,
+                    '2021-09-20', 'VISA', UNHEX(REPLACE('5c644c79-b060-42b0-8c47-513e8e8e7535', '-', '')));
+
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('1bb5e722-4db6-4b3e-af49-64704511b37e', '-', '')), 'GB39JKWI21072008099823',
+                    '2500.00', '210443811828', 'ACTIVE', 'Wormwood street A65', '2027-10-29', 'Alisa Wellhouse', true,
+                    '2022-10-29', 'VISA', UNHEX(REPLACE('c6f3f18d-705b-4230-a200-925bfab7bf72', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('22621ac7-5d87-43e1-b80f-326bd61499b6', '-', '')), 'DE05243247778842135895',
+                    '4530.00', '967907074744', 'ACTIVE', 'Mosin Str 76', '2024-11-03', 'Lev Lanister', true,
+                    '2019-11-02', 'MAESTRO', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('3eeb30af-a231-4677-909f-f177f6526492', '-', '')), '8730151360005833', '233800.00',
+                    '009297546892', 'ACTIVE', 'Via Aversa 32', '2026-03-30', 'Lalan Andrellton', true, '2023-03-30',
+                    'VISA', UNHEX(REPLACE('f53ee69d-c79d-4e97-8d90-1b964ca6be95', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('5db94829-1755-422a-8523-581e4b6380d5', '-', '')), 'GB82ZGFY53978678825990',
+                    '33489.00', '886245894294', 'ACTIVE', 'Winterfell street 245', '2026-06-30', 'John Stark', true,
+                    '2022-06-30', 'VISA', UNHEX(REPLACE('33c02962-82ce-4ece-9642-5efbd55ba6c2', '-', '')));
+
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('5f0f3eb9-7d10-47b6-b0a9-307b1bb0ca9a', '-', '')), 'BR19426981904381011594500',
+                    '0.00', '512660077106', 'ENDED', '23th Street', '2014-03-30', 'Luna Hochberg', true,
+                    '2009-03-15', 'VISA', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('fb272878-47ff-11ee-be56-0242ac120002', '-', '')), 'BR19426981904381011594500',
+                    '0.00', '512660077106', 'ENDED', '23th Street', '2019-04-15', 'Luna Hochberg', true,
+                    '2014-03-18', 'VISA', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('0bdd5ea8-4800-11ee-be56-0242ac120002', '-', '')), 'BR19426981904381011594500',
+                    '3657.00', '512660077106', 'ACTIVE', '23th Street', '2024-05-03', 'Luna Hochberg', true,
+                    '2019-04-24', 'VISA', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('6ce5aec4-aea7-4f5a-b365-77f0035d851d', '-', '')), '9456080995975776', '0.00',
+                    '286782002103', 'ENDED', 'Argyle street 15', '2016-10-30', 'Bruce Li', true, '2013-10-14',
+                    'VISA', UNHEX(REPLACE('21a93546-aacb-4182-b65e-e52867e359bb', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('b902b452-4800-11ee-be56-0242ac120002', '-', '')), '9456080995975776', '0.00',
+                    '286782002103', 'ENDED', 'Argyle street 15', '2016-10-30', 'Bruce Li', true, '2013-10-14',
+                    'VISA', UNHEX(REPLACE('21a93546-aacb-4182-b65e-e52867e359bb', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('de282e38-4800-11ee-be56-0242ac120002', '-', '')), '9456080995975776', '0.00',
+                    '286782002103', 'ENDED', 'Argyle street 15', '2020-11-15', 'Bruce Li', true, '2016-11-04',
+                    'VISA', UNHEX(REPLACE('21a93546-aacb-4182-b65e-e52867e359bb', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('1d33a13e-4801-11ee-be56-0242ac120002', '-', '')), '9456080995975776', '38568.91',
+                    '286782002103', 'ACTIVE', 'Argyle street 15', '2024-11-30', 'Bruce Li', true, '2020-11-20',
+                    'VISA', UNHEX(REPLACE('21a93546-aacb-4182-b65e-e52867e359bb', '-', '')));
+
+
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('777dd8f8-b53b-4553-bc55-95c406762a93', '-', '')), 'NO0028474755321', '54690.98',
+                    '395435303839', 'ACTIVE', 'Karl Johans Street 12', '2024-06-30', 'Sven Jägnar', true,
+                    '2019-05-13', 'MASTERCARD', UNHEX(REPLACE('d965437f-893f-422c-bbf4-ce7b3b7a7cd1', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('82c95910-3673-4435-b2b9-021b06f06ed6', '-', '')), 'RO74QZML2134739493627463',
+                    '12798.31', '395972340480', 'ACTIVE', 'Lera Odos', '2027-09-30', 'Eanna Prodocous', true,
+                    '2023-09-05', 'MAESTRO', UNHEX(REPLACE('5b6e86c9-7f2e-437e-8a6b-a74b988fe72c', '-', '')));
+
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('a52e35af-9c0c-478e-945a-696c298b2afc', '-', '')), '3978393740176343', '0.00',
+                    '260377814941', 'ENDED', '39th Ave', '1993-02-27', 'Oliver Bisquit', true, '1989-01-27',
+                    'AMERICAN_EXPRESS', UNHEX(REPLACE('d56b5706-f5ea-40ad-9cf6-35f63f44e861', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('a86a7034-4801-11ee-be56-0242ac120002', '-', '')), '3978393740176343', '0.00',
+                    '260377814941', 'ENDED', '39th Ave', '1996-03-30', 'Oliver Bisquit', true, '1993-02-28',
+                    'AMERICAN_EXPRESS', UNHEX(REPLACE('d56b5706-f5ea-40ad-9cf6-35f63f44e861', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('5c3f3ca2-4802-11ee-be56-0242ac120002', '-', '')), '3978393740176343', '0.00',
+                    '260377814941', 'ENDED', '39th Ave', '1999-08-30', 'Oliver Bisquit', true, '1996-04-04',
+                    'AMERICAN_EXPRESS', UNHEX(REPLACE('d56b5706-f5ea-40ad-9cf6-35f63f44e861', '-', '')));
+
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('b3a55dba-2cab-46bc-9d58-ae8645c64411', '-', '')), 'NO4902080595377', '0.00',
+                    '796099571148', 'ENDED', 'Storgata pedestrian street 99', '2020-07-30', 'Ragnar Lothbrok', true,
+                    '2017-07-10', 'MASTERCARD', UNHEX(REPLACE('bf6f91ea-28d0-4196-adc6-ab7c31d28b7e', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('23d8e042-4803-11ee-be56-0242ac120002', '-', '')), 'NO4902080595377', '0.00',
+                    '796099571148', 'ENDED', 'Storgata pedestrian street 99', '2020-07-30', 'Ragnar Lothbrok', true,
+                    '2017-07-10', 'MASTERCARD', UNHEX(REPLACE('bf6f91ea-28d0-4196-adc6-ab7c31d28b7e', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('3d24fcde-4803-11ee-be56-0242ac120002', '-', '')), 'NO4902080595377', '220450.68',
+                    '796099571148', 'ACTIVE', 'Storgata pedestrian street 99', '2025-08-30', 'Ragnar Lothbrok', true,
+                    '2020-08-04', 'MASTERCARD', UNHEX(REPLACE('bf6f91ea-28d0-4196-adc6-ab7c31d28b7e', '-', '')));
+
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('ca4fb76a-89c6-4b72-90db-63ca0a53bbc1', '-', '')), 'TR872919321986270658122556',
+                    '0.00', '447646393399', 'ENDED', 'Gülveren Sk. 6', '2020-07-30', 'Vladimir Karpov', true,
+                    '2015-07-19', 'VISA', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('b1ee8f26-4803-11ee-be56-0242ac120002', '-', '')), 'TR872919321986270658122556',
+                    '80780.00', '447646393399', 'ACTIVE', 'Gülveren Sk. 6', '2025-08-30', 'Vladimir Karpov', true,
+                    '2020-07-30', 'VISA', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+
+
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('e783ea10-00b1-43e2-a6da-e89f6ffd2b3f', '-', '')), 'GR1736869378372281324517315',
+                    '800.00', '359709881954', 'ACTIVE', 'Lera Odos 21', '2028-08-31', 'Eilley Prodocous', true,
+                    '2023-08-31', 'VISA', UNHEX(REPLACE('0b8a9af4-9893-435d-a379-e18862324b91', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('ff40a0cc-2ee7-44c0-9de2-60f115f98edd', '-', '')), 'IT05982820536201043026',
+                    '10879.94', '423914692290', 'ACTIVE', 'Via Casillina 65', '2026-09-30', 'Raiden Thorson', true,
+                    '2023-09-13', 'MAESTRO', UNHEX(REPLACE('5343f0ca-2db4-43e0-83e2-168c28937c5e', '-', '')));
+            INSERT INTO cards
+            VALUES (UNHEX(REPLACE('f5cd089a-f57a-4776-8706-03bd5b26f5ba', '-', '')), 'PL81339721840177603468754699',
+                    '38568.91', '801644583784', 'ACTIVE', 'Mendji street 34', '2023-12-30', 'Brandon Mcgregor', true,
+                    '2018-12-26', 'VISA', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+        </sql>
+
     </changeSet>
+
+
 
 </databaseChangeLog>

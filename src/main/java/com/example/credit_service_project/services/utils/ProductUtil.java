@@ -34,31 +34,13 @@ public class ProductUtil {
     }
 
     private boolean earlyRepayment(BigDecimal sum, String currencyCode) {
-        if (currencyCode.equalsIgnoreCase("EUR") && sum.intValue() <= minAmountCriterionForDeposit) return true;
-
-        for (String code : currencyMap.keySet()) {
-            if (currencyCode.equalsIgnoreCase(code)
-                    && sum.intValue() <= (minAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
-                return true;
-            }
-        }
-
-        throw new CurrencyException(ErrorsMessage.UNABLE_INACCESSIBLE_CURRENCY);
+        return currencyMap.containsKey(currencyCode)
+                && sum.intValue() <= (minAmountCriterionForDeposit * currencyMap.get(currencyCode));
     }
 
     private boolean needGuaranty(BigDecimal sum, String currencyCode) {
-        if (currencyCode.equalsIgnoreCase("EUR") && sum.intValue() >= maxAmountCriterionForDeposit) {
-            return true;
-        }
-
-        for (String code : currencyMap.keySet()) {
-            if (currencyCode.equalsIgnoreCase(code) && sum.intValue() >= (maxAmountCriterionForDeposit * currencyMap.get(currencyCode))) {
-                return true;
-            }else {
-                return false;
-            }
-        }
-        throw new CurrencyException(ErrorsMessage.UNABLE_INACCESSIBLE_CURRENCY);
+        return currencyMap.containsKey(currencyCode)
+                && sum.intValue() >= (maxAmountCriterionForDeposit * currencyMap.get(currencyCode));
     }
 
     public ProductResponseDTO toResponse(Product product) {

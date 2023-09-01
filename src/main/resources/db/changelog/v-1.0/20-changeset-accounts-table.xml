@@ -63,7 +63,7 @@
             '2021-09-10', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('3e5facea-c6eb-4d9f-acbe-6d1d1769b834', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('bf6f91ea-28d0-4196-adc6-ab7c31d28b7e', '-', '')), 'YyfppiZicDXẞ',
-            '220450.68', '2017-07-30', 'Norway', 'NOK', '0.00', '2017-07-04',
+            '220450.68', '2025-07-30', 'Norway', 'NOK', '0.00', '2017-07-04',
             '2022-04-12', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('4a4a540c-1e62-4026-a742-b402ebdd4214', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('21a93546-aacb-4182-b65e-e52867e359bb', '-', '')), 'lüNtUGS',

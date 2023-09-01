@@ -24,4 +24,275 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="insert" author="latif">
+        <sql>
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty, need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'EUR', 'Erstzulassung: 12.2018, Kilometerstand: 44.925 km, Kraftstoff: Benzin, Getriebe: Automatik, Leistung: 121 PS / 89 kW', false, 'Mazda CX-3', false, true, '16850.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'EUR',
+                    'Erstzulassung: 04.2020, Kilometerstand: 69.095 km, Kraftstoff: Benzin, Getriebe: Schaltgetriebe,
+                    Leistung: 121 PS/89 kW',
+                    false, 'Ford Focus', false, true, '16850.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty, need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'EUR',
+                    'Erstzulassung: 01.2019, Kilometerstand: 36.566 km, Kraftstoff: Benzin, Getriebe: Automatik, Leistung: 192 PS/141 kW',
+                    false, 'BMW 2er', false, true, '22040.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'EUR',
+                    'Erstzulassung: 06.2016, Kilometerstand: 28.135 km, Kraftstoff: Benzin, Getriebe: Schaltgetriebe,
+                    Leistung: 90 PS/66 kW',
+                    false, 'BMW 2er', false, true, '11730.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty, need_income_details, sum)
+            VALUES ('ANNUITY', 'EUR',
+                    'Erstzulassung: 09.2016, Kilometerstand: 70.141 km, Kraftstoff: Benzin, Getriebe: Schaltgetriebe, Leistung: 150 PS/110 kW',
+                    false, 'Skoda Octavia', false, true, '15650.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'EUR',
+                    'Erstzulassung: 02.2018, Kilometerstand: 25.536 km, Kraftstoff: Benzin, Getriebe: Schaltgetriebe, Leistung: 85 PS/62 kW',
+                    false, 'Suzuki Jimny', false, true, '16480.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'EUR',
+                    'Erstzulassung: 04.2015, Kilometerstand: 67.800 km, Kraftstoff: Benzin, Getriebe: Automatik,
+                    Leistung: 300 PS/221 kW',
+                    false, 'Audi S3 2.0 TFSI quattro', true, true, '28570.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty, need_income_details, sum)
+            VALUES ('ANNUITY', 'EUR',
+                    'Erstzulassung: 02.2018, Kilometerstand: 96.371 km, Kraftstoff: Diesel, Getriebe: Automatik, Leistung: 258 PS/190 kW',
+                    false, 'Mercedes-Benz E-Klasse', true, true, '35790.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'EUR',
+                    'Erstzulassung: 08.2016, Kilometerstand: 78.571 km, Kraftstoff: Benzin, Getriebe: Automatik, Leistung: 185 PS/135 kW',
+                    false, 'BMW 5er 520i', false, true, '23300.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'EUR',
+                    'Erstzulassung: 04.2017, Kilometerstand: 99.983 km, Kraftstoff: Hybrid, Getriebe: Automatik, Leistung: 185 PS/135 kW',
+                    false, 'BMW 3er 330e', false, true, '21580.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'EUR',
+                    'Erstzulassung: 07.2019, Kilometerstand: 19.564 km, Kraftstoff: Benzin, Getriebe: Automatik, Leistung: 185 PS/100 kW',
+                    false, 'BMW 2er 218i Sport Line', false, true, '24780.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'USD',
+                    '41,613 miles, 3.5L 6-Cylinder Turbo Gas Engine, 16 City / 25 Highway, Obsidian Exterior, Black Leather Seats',
+                    false, 'Lexus LS 200', true, true, '56990.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'USD',
+                    '5,863 miles, 2.5L 4-Cylinder Turbo Gas Engine, 22 City / 30 Highway, Deep Crystal Blue Mica Exterior',
+                    false, 'MAZDA CX-30 2.5 Turbo', true, true, '31999.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'USD',
+                    '57,933 miles, 2.0L 4-Cylinder Turbo Gas Engine, 22 City / 31 Highway, Gray Metallic Exterior',
+                    false, 'MINI Cooper Clubman S', false, true, '21912.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'USD',
+                    '6,020 miles, Gasoline Engine, 23 City / 32 Highway, Denim Blue Exterior',
+                    false, 'Volvo S90 B6 Ultimate', true, true, '72332.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'NOK',
+                    'Make: Ford, Model: Ranger, Trim: 2.0 Raptor, Mi: 41,000 km, Year: 2021, Fuel type: Diesel, Body type: Pickup, Color: Black',
+                    false, 'Ford Ranger 2.0 Raptor', true, true, '649990.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'NOK',
+                    'Make: Bmw, Model: 5 Series, Trim: 530d xDrive, Mi: 186,128 km, Year: 2016, Fuel type: Diesel, Body type: Wagon, Color: Black',
+                    false, 'Bmw 5 Series 530d xDrive', true, true, '354147.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'NOK',
+                    'Make: Volvo, Model: Xc60, Trim: 2.4 D5, Mi: 199,999 km, Year: 2014, Fuel type: Diesel, Body type: Crossover, Color: Black',
+                    false, 'Volvo Xc60 2.4 D5', true, true, '354147.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'NOK',
+                    'Make: Subaru, Model: Outback, Trim: 2.5, Mi: 226,000 km, Year: 2011, Fuel type: Petrol, Body type: Crossover, Color: Gray',
+                    true, 'Subaru Outback 2.5', false, true, '99900.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'JPY',
+                    'Month/Year: 12.2019, Color: PEARL WHITE, Mileage: 6,826 km, Repaired: No Repair History, Steering: Right, Transmission: AT, Fuel: HYBRID',
+                    false, 'TOYOTA COROLLA HYBRID', false, true, '2103000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'JPY',
+                    'Month/Year: 11.2022, Color: BLACK, Mileage: 35 km, Repaired: No Repair History, Steering: Right, Transmission: AT, Fuel: HYBRID',
+                    false, 'TOYOTA CAMRY WS', true, true, '4475000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'JPY',
+                    'Month/Year: 01.2017, Color: BLACK, Mileage: 47,000 km, Repaired: No Repair History, Steering: Right, Transmission: AT, Fuel: GASOLINE',
+                    false, 'LEXUS GS GS200T', false, true, '3194000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'JPY',
+                    'Month/Year: 03.2023, Color: BLACK, Mileage: 3,562 km, Repaired: No Repair History, Steering: Right, Transmission: AT, Fuel: GASOLINE',
+                    false, 'LEXUS RX RX350 F SPORT', true, true, '22125000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'JPY',
+                    'Month/Year: 03.2009, Color: BLACK, Mileage: 99,968 km, Repaired: No Repair History, Steering: Right, Transmission: MT, Fuel: GASOLINE',
+                    true, 'SUBARU LEGACY TOURING WAGON 2.0GT', false, true, '1335000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'THB',
+                    'Condo for sale in Royal Lee The Terminal Phuket, Sakhu, Phuket. You can buy this condo for a base price of ฿3,200,000 (฿100,000/SqM). This property is a 32 SqM studio condo with 1 bathroom that is available for sale.',
+                    false, 'Studio Condo at Royal Lee The Terminal Phuket', true, true, '3200000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'THB',
+                    '1 Bedroom Condo for sale in Rawai, Phuket. This property is a 47 SqM condo with 1 bedroom and 1 bathroom that is available for sale. You can buy this condo for a base price of ฿6,200,000 (฿132,000/SqM).',
+                    false, '1 Bedroom Condo at The Title Rawai Phase 3 West Wing', true, true, '6200000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'THB',
+                    '3 Bedroom Villa for sale in The Park Hua Hin, Thap Tai, Prachuap Khiri Khan. This property is a 145.14 SqM villa with 3 bedrooms and 3 bathrooms that is available. It is located in Thap Tai, Prachuap Khiri Khan',
+                    false, '3 Bedroom Villa at The Park Hua Hin', true, true, '9622500.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'THB',
+                    '1 Bedroom Condo for sale in Sombat Pattaya Condotel, Pratumnak Hill, Chonburi. A fully renovated and maintained condo foreign-owned.',
+                    false, 'Fully Renovated Condo with 99 m2 of Usable Area', true, true, '3400000.00');
+
+            INSERT INTO products
+            VALUES ('30', 'DIFFERENTIATED', 'THB',
+                    '2 Bedroom Condo for sale in The Rich Nana, Khlong Toei Nuea, Bangkok near BTS Nana. Condo for sale in Bangkok, early Sukhumvit area. This 70m2 condo will feature 2 bedrooms.',
+                    false, '2 Bedroom Condo for Sale at 2-Bedroom Modern Condo', true, true, '19000000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'EUR',
+                    'Education loan. This loan is available for students of higher and secondary education. If you are under 18 then you will need parental consent.',
+                    false, 'Education Loan', false, true, '15000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'USD',
+                    'A loan for the development or opening of a small-sized business.',
+                    false, 'Small Business Development Loan', true, true, '97097.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'USD',
+                    'A loan for the development or opening of a medium-sized business.',
+                    false, 'Medium Business Development Loan', true, true, '350000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('DIFFERENTIATED', 'USD',
+                    'A loan for the development or opening of a big-sized business.',
+                    false, 'Big Business Development Loan', true, true, '500000.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'Super Retina XDR display with ProMotion technology and Always-On display.',
+                    true, 'iPhone 14', false, true, '1249.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'Super Retina XDR display.',
+                    true, 'iPhone 13', false, true, '999.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'The 11" display gives you an immersive and portable experience. And the 12.9" XDR display is a stunning and expansive way to view HDR content with 2TB storage.',
+                    true, 'iPad Pro', false, true, '2579.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'The ultra-tough 49mm titanium case with Action button strikes a balance with weight, ruggedness, and corrosion resistance.',
+                    true, 'Apple Watch Ultra', false, true, '1128.93');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'Bright Always-On Retina display with an expansive edge-to-edge design.',
+                    true, 'Apple Watch Series 8', false, true, '529.93');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'Apple M1 chip delivers powerful CPU, GPU, and machine learning performance.',
+                    true, 'MacBook Air 13-inch', false, true, '1299.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'M2 Pro or M2 Max — the most powerful and efficient chip ever in a pro laptop — helps you take on the most demanding projects.',
+                    true, 'MacBook Pro 14-inch', false, true, '2599.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'Apple M1 chip delivers powerful CPU, GPU, and machine learning performance.',
+                    true, 'iMac 24-inch', false, true, '1699.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'Extreme Dynamic Range (XDR) for next-level brightness, contrast, and color.',
+                    true, 'Pro Display XDR', false, true, '6299.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    '27-inch 5K Retina display draws you in with 14.7 million pixels and one billion colors.',
+                    true, 'Studio Display', false, true, '1999.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'Supercharged by the M2 Max or M2 Ultra chip — our most powerful chips yet.',
+                    true, 'Mac Studio', false, true, '2699.00');
+
+            INSERT INTO products(calculation_type, currency_code, details, early_repayment, name, need_guaranty,
+                                 need_income_details, sum)
+            VALUES ('ANNUITY', 'CAD',
+                    'Up to 6 hours of listening time with one charge.',
+                    true, 'AirPods 3rd generation', false, true, '229.00');
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

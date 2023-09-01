@@ -1,9 +1,9 @@
 create table products (
-    id decimal(38, 0) not null,
+    id bigint not null auto_increment,
     calculation_type enum ('ANNUITY','DIFFERENTIATED') not null,
     currency_code varchar(255),
     details varchar(255) not null,
-    early_guaranty bit,
+    early_repayment bit,
     name varchar(255) not null,
     need_guaranty bit,
     need_income_details bit,

@@ -10,7 +10,7 @@ create table credit_orders (
     min_period_months integer,
     number varchar(20) not null,
     passive_income decimal(38, 2),
-    product_id decimal(38, 0),
+    product_id bigint,
     primary key (id)
 ) engine = InnoDB;
 

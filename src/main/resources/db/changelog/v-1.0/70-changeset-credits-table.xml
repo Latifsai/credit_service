@@ -26,9 +26,6 @@
     </changeSet>
 
     <changeSet id="addUniqueConstraint" author="latif">
-        <addUniqueConstraint tableName="credits"
-                             columnNames="account_id"
-                             constraintName="UK_qkf65l97sk7dgxec4wykxw1l4"/>
 
         <addUniqueConstraint tableName="credits"
                              columnNames="agreement_id"

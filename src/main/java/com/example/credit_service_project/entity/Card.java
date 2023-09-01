@@ -4,6 +4,7 @@ import com.example.credit_service_project.entity.enums.CardStatus;
 import com.example.credit_service_project.entity.enums.PaymentSystem;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -42,11 +43,11 @@ public class Card {
     private String holderName;
 
     @Column(name = "opening_date")
-    @NotBlank(message = "openingDate must not be blank!")
+    @NotNull(message = "openingDate must not be null!")
     private LocalDate openingDate;
 
     @Column(name = "expiration_date")
-    @NotBlank(message = "expirationDate must not be blank!")
+    @NotNull(message = "expirationDate must not be null!")
     private LocalDate expirationDate;
 
     @Column(name = "balance")
@@ -62,15 +63,15 @@ public class Card {
 
     @Column(name = "payment_system")
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "paymentSystem must not be blank!")
+    @NotNull(message = "paymentSystem must not be null!")
     private PaymentSystem paymentSystem;
 
     @Column(name = "card_status")
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "cardStatus must not be blank!")
+    @NotNull(message = "cardStatus must not be null!")
     private CardStatus cardStatus;  // ✅
 
-    @OneToOne(cascade = ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 

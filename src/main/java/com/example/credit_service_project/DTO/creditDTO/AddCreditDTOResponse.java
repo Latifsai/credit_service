@@ -32,7 +32,7 @@ public class AddCreditDTOResponse {
     //creditOrder
     String creditOrderNumber;
     //product
-    BigInteger productID;
+    Long productID;
     String productName;
     CalculationType calculationType;
     List<PaymentResponseDTO> list;

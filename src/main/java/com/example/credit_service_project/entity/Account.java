@@ -3,7 +3,10 @@ package com.example.credit_service_project.entity;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -73,8 +76,8 @@ public class Account {
     @Column(name = "currency")
     private String currency;
 
-    @OneToOne(mappedBy = "account", cascade = {MERGE, PERSIST, REFRESH}, fetch = LAZY)
-    private Credit credit;
+    @OneToMany(mappedBy = "account", cascade = {MERGE, PERSIST, REFRESH}, fetch = LAZY)
+    private List<Credit> credits;
     //будет создан раздел credit_id основанный на id из класса Credit,
     // по этому полу будет JOIN
     //-> владеющая сторона
@@ -92,8 +95,8 @@ public class Account {
             orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     private List<PaymentSchedule> paymentSchedules;
 
-    @OneToOne(mappedBy = "account", cascade = ALL, fetch = LAZY)
-    private Card card;
+    @OneToMany(mappedBy = "account", cascade = ALL, fetch = LAZY)
+    private List<Card> cards;
 
     @Override
     public boolean equals(Object o) {
@@ -123,7 +126,7 @@ public class Account {
                 ", closingDate=" + closingDate +
                 ", unpaidCreditSum=" + unpaidCreditSum +
                 ", currency='" + currency + '\'' +
-                ", credit=" + credit +
+                ", credit=" + credits +
                 ", client=" + client +
                 '}';
     }

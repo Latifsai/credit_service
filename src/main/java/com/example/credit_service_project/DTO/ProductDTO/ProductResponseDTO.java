@@ -10,7 +10,7 @@ import java.math.BigInteger;
 @Value
 @Builder
 public class ProductResponseDTO {
-     BigInteger id;
+     Long id;
      String name;
      BigDecimal sum;
      boolean needGuaranty;

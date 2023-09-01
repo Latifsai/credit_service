@@ -8,6 +8,7 @@ create table credits (
     interest_rate decimal(38, 2),
     need_deposit bit,
     period_month integer,
+    credit_holiday_months_amount integer,
     account_id binary(16),
     agreement_id binary(16),
     credit_order_id binary(16),

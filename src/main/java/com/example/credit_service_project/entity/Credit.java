@@ -62,7 +62,8 @@ public class Credit {
     @Column(name = "credit_holiday_months_amount")
     @PositiveOrZero(message = "creditHolidayMonthsAmount must be zero or more")
     private Integer creditHolidayMonthsAmount;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {MERGE, PERSIST, REFRESH})
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
     // связь между таблицами будет установлена через поле credit в классе Account

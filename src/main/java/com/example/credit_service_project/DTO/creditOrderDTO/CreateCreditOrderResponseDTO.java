@@ -12,7 +12,7 @@ import java.util.UUID;
 @Value
 @Builder
 public class CreateCreditOrderResponseDTO {
-    BigInteger productID;
+    Long productID;
     String productName;
     UUID id;
     String number;

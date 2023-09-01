@@ -3,12 +3,15 @@ package com.example.credit_service_project.entity;
 import com.example.credit_service_project.entity.enums.CalculationType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Objects;
 
 @Entity
@@ -19,9 +22,9 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private BigInteger id;
+    private Long id;
 
     @Column(name = "name")
     @NotBlank(message = "Name must not be blank!")
@@ -34,7 +37,7 @@ public class Product {
     @Column(name = "need_guaranty")
     private boolean needGuaranty;
 
-    @Column(name = "early_guaranty")
+    @Column(name = "early_repayment")
     private boolean earlyRepayment;
 
     @Column(name = "need_income_details")
@@ -51,7 +54,7 @@ public class Product {
 
     @Column(name = "calculation_type")
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "Calculation type code must not be blank!")
+    @NotNull(message = "Calculation type code must not be null!")
     private CalculationType calculationType;
 
     @Override

@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.credit;
 
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Agreement;
@@ -15,11 +15,15 @@ import com.example.credit_service_project.services.agreement.SearchAgreementServ
 import com.example.credit_service_project.services.creditOrder.CreditOrderSearchService;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.services.utils.CreditUtil;
+import com.example.credit_service_project.validation.ErrorsMessage;
+import com.example.credit_service_project.validation.exceptions.IsAlreadyExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIVE;
 
 @Service
 @RequiredArgsConstructor
@@ -36,8 +40,10 @@ public class CreditCreateService {
     private final PaymentScheduleGeneratorAndSaveService paymentScheduleGeneratorService;
 
     public AddCreditDTOResponse createCredit(CreateCreditDTORequest request) {
-
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
+
+        checkActiveCredit(account);
+
         Agreement agreement = searchAgreementService.findById(request.getAgreementID());
         CreditOrder creditOrder = searchCreditOrderService.findById(request.getCreditOrderID());
 
@@ -56,5 +62,15 @@ public class CreditCreateService {
 
     public Credit saveCredit(Credit credit) {
         return repository.save(credit);
+    }
+
+
+    private void checkActiveCredit(Account account) {
+        if (!account.getCredits().isEmpty()) {
+            List<Credit> getActiveCreditBelongsAccounts = repository.findByAccountAndCreditStatus(account, ACTIVE);
+            if (getActiveCreditBelongsAccounts.size() == 1) {
+                throw new IsAlreadyExistException(ErrorsMessage.CREDIT_IS_ALREADY_EXIST_EXCEPTION_MESSAGE);
+            }
+        }
     }
 }
