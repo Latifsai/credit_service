@@ -60,7 +60,7 @@
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('4a4a540c-1e62-4026-a742-b402ebdd4214', '-', '')), 'Storgata pedestrian street 99',
                     'konung_ragnar@iCloud.com', '19600.00', 'Ragnar', '20000.00', '+47 880 85 935', '2017-06-29',
-                    '50000.00', 'Lothbrok', '2022-11-17', UNHEX(REPLACE('56ada824-6e9b-4b6e-9054-e318639e232e', '-', '')));
+                    '500000.00', 'Lothbrok', '2022-11-17', UNHEX(REPLACE('56ada824-6e9b-4b6e-9054-e318639e232e', '-', '')));
             INSERT INTO clients
             VALUES (UNHEX(REPLACE('5388f283-47b0-4a7e-a698-bd7150c35ab7', '-', '')), 'Argyle street 15',
                     'li_bruce@iCloud.com', '20000.00', 'Bruce', '22000.00', '+1 453 919 4321', '2013-10-11',

@@ -55,12 +55,13 @@ public class Credit {
     private CreditStatus creditStatus;
 
     @Column(name = "currency")
-    @Pattern(regexp = "^[A-Z]{3}$",message = "Format is not allowed in service!")
+    @Pattern(regexp = "^[A-Z]{3}$", message = "Format is not allowed in service!")
     @NotBlank(message = "Currency must not be blank!")
     private String currency;
 
     @Column(name = "credit_holiday_months_amount")
-    @PositiveOrZero(message = "creditHolidayMonthsAmount must be zero or more")
+    @Max(message = "creditHolidayMonthsAmount must be max 6!", value = 6)
+    @Min(message = "creditHolidayMonthsAmount must be min 0!", value = 0)
     private Integer creditHolidayMonthsAmount;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {MERGE, PERSIST, REFRESH})

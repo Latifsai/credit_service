@@ -30,7 +30,81 @@
                                  baseColumnNames="product_id"
                                  constraintName="FK_credit_orders_products"
                                  referencedTableName="products"
-                                 referencedColumnNames="id" />
+                                 referencedColumnNames="id"/>
     </changeSet>
+
+
+    <changeSet id="insert" author="latif">
+        <sql>
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('11477b3a-420e-49e8-99ac-ec8126d7917c', '-', '')), 8770.74, 3076.00, 6572.00,
+                    '2023-08-28', 'APPROVED', '2023-09-02', 120, 12, 'RO3H7IÜJBD', 1549.00, 41, 'eanna@mail.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('1701da47-0bf3-4d69-b26d-201274c2e6ef', '-', '')), 6201.42, 1979.00, 4780.00,
+                    '2010-02-15', 'APPROVED', '2010-02-15', 120, 12, 'LVBNXXEB8P', 330.00, 42, 'hoch_luna@yahoo.org');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('203c3d1f-4568-47a9-a834-da2ff06df9b3', '-', '')), 368572.83, 2760.00, 12853.00,
+                    '2022-08-02', 'DECLINED', '2022-08-02', 120, 12, 'C4ODSSJPNB', 0.00, 32, 'melli@gmail.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('33a4e92a-b962-4b6f-b04d-6b2adf4f1b88', '-', '')), 38810.68, 6000.00, 9800.00,
+                    '1994-05-27', 'APPROVED', '1994-05-27', 120, 12, 'FXÜZ8YÄVVY', 35000.00, 8, 'oliver@iCloud.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('395e6c00-3eaf-4360-8bb2-904294fd4479', '-', '')), 43954.21, 12000.00, 25000.00,
+                    '2020-10-17', 'APPROVED', '2020-10-17', 120, 12, 'JÜ4T3JHK8W', 0.00, 42, 'vitka@yahoo.org');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('451d0563-68b1-48a3-86cf-7618d0db9e28', '-', '')), 7863.17, 2000.00, 6346.00,
+                    '2010-01-24', 'APPROVED', '2023-09-02', 120, 12, 'GDE1VOH0YH', 230.00, 37, 'brandon@mail.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('55367d55-be19-4fb8-8d92-613f77005a35', '-', '')), 252013.10, 30000.00, 100000.00,
+                    '2017-11-02', 'APPROVED', '2017-11-02', 120, 12, 'MF7QEA333G', 10000.00, 19, 'volodya@gmail.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('574ad06b-160c-48c5-b5d0-b083f7e0a918', '-', '')), 179755.90, 10000.00, 35000.00,
+                    '2021-09-02', 'DECLINED', '2021-09-02', 120, 12, 'OI8AMZKVUL', 10000.00, 5, 'svangar@iCloud.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('586a52e1-66f1-42a5-a532-eacb3d44599a', '-', '')), 1029971.52, 19600.00, 500000.00,
+                    '2019-03-15', 'APPROVED', '2019-03-15', 120, 12, 'X31ÖPG0ÖS7', 20000.00, 28,
+                    'konung_ragnar@iCloud.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('6b3e08cf-61e5-4eae-ad0c-8ddc2b68b4f7', '-', '')), 394402.43, 687.56, 1800.00,
+                    '2023-09-02', 'DECLINED', '2023-09-02', 120, 12, 'X5S5UYX8L4', 89.00, 34, 'alice@gmail.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('6e935276-e7f1-4ac2-8acf-8af9c42d78e4', '-', '')), 2103000.00, 159760.00, 342000.00,
+                    '2023-09-02', 'APPROVED', '2023-09-02', 120, 12, 'FMÄ6WHG3QB', 1500.00, 20, 'lalan@hushmail.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('8256b86f-9f66-4689-84e9-a14c2dcc097e', '-', '')), 1363.95, 1400.00, 2450.00,
+                    '2022-04-23', 'APPROVED', '2022-04-23', 120, 12, 'JBXN7ZVDFT', 100.00, 44,
+                    'lev_lanister@mail.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('8df047ef-5cbf-4bb5-9f01-d6b639817d48', '-', '')), 12830.70, 1330.00, 2800.00,
+                    '2023-09-01', 'APPROVED', '2023-09-01', 120, 12, 'ALQ8RTOAGC', 300.00, 31, 'j_snow@gmail.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('9b2dba50-1cef-40e7-b3df-d9fde83df579', '-', '')), 473035.78, 20000.00, 44000.00,
+                    '2023-09-02', 'DECLINED', '2023-09-02', 120, 12, 'GJX6V25VOZ', 22000.00, 33,
+                    'li_bruce@iCloud.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('ba9c45e4-2e03-4fde-bee2-cf3e6121b4cf', '-', '')), 16850.00, 1390.00, 2870.00,
+                    '2023-09-02', 'DECLINED', '2023-09-02', 120, 12, '7WIEPZCW95', 0.00, 2, 'pro_eilley@gmail.com');
+
+            INSERT INTO credit_orders
+            VALUES (UNHEX(REPLACE('cce4dd73-440d-47cc-a812-1a55bba83e49', '-', '')), 30832.93, 2560.00, 4680.00,
+                    '2023-09-01', 'APPROVED', '2023-09-01', 120, 12, 'PHNXJKÖXZ9', 2250.00, 18, 'raiden@iCloud.com');
+
+        </sql>
+    </changeSet>
+
 
 </databaseChangeLog>

@@ -2,11 +2,17 @@ package com.example.credit_service_project.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Objects;
+import java.util.UUID;
 
 import static jakarta.persistence.CascadeType.*;
 
@@ -28,7 +34,7 @@ public class Agreement {
     private String number;
 
     @Column(name = "agreement_date")
-    @NotBlank(message = "AgreementDate must not be blank!")
+    @NotNull(message = "AgreementDate must not be null!")
     private LocalDate agreementDate;
 
     @Column(name = "termination_date")
@@ -36,6 +42,10 @@ public class Agreement {
 
     @Column(name = "active")
     private boolean active;
+
+    @Column(name = "credit_order_number")
+    @NotBlank(message = "creditOrderNumber must not be blank!")
+    private String creditOrderNumber;
 
     @OneToOne(mappedBy = "agreement",cascade = {MERGE, PERSIST, REFRESH},
             fetch = FetchType.LAZY)

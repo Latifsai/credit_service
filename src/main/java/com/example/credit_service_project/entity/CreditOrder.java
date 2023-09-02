@@ -35,15 +35,15 @@ public class CreditOrder {
     private BigDecimal amount; // amount of credit m
 
     @Column(name = "creation_date")
-    @NotBlank(message = "Creation date must not be blank!")
+    @NotNull(message = "Creation date must not be null!")
     private LocalDate creationDate;
 
     @Column(name = "last_update_date")
-    @NotBlank(message = "Last update date date must not be blank!")
+    @NotNull(message = "Last update date date must not be null!")
     private LocalDate lastUpdateDate;
 
     @Column(name = "client_income")
-    @NotBlank(message = "Client salary date must not be blank!")
+    @Positive(message = "Client salary date must not be negative!")
     private BigDecimal clientSalary;
 
     @Column(name = "client_monthly_expenditure")
@@ -64,8 +64,12 @@ public class CreditOrder {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "Credit order status must not be blank!")
+    @NotNull(message = "Credit order status must not be null!")
     private CreditOrderStatus creditOrderStatus;
+
+    @Column(name = "client_email")
+    @NotBlank(message = "Client`s e-mail must not be blank!")
+    private String clientEmail;
 
     //future: id of work-giver
     @OneToOne(mappedBy = "creditOrder", fetch = FetchType.LAZY,

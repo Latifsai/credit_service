@@ -12,10 +12,10 @@ import com.example.credit_service_project.services.utils.generator.CreditOrderGe
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import static com.example.credit_service_project.entity.enums.CreditOrderStatus.*;
+import static java.math.RoundingMode.HALF_EVEN;
 
 @Service
 public class CreditOrderUtil {
@@ -33,6 +33,7 @@ public class CreditOrderUtil {
         creditOrder.setMaxPeriodMonths(CreditOrderGenerator.maxPeriod);
         creditOrder.setMinPeriodMonths(CreditOrderGenerator.minPeriod);
         creditOrder.setCreditOrderStatus(IN_REVIEW);
+        creditOrder.setClientEmail(client.getEmail());
         return creditOrder;
     }
 
@@ -77,21 +78,25 @@ public class CreditOrderUtil {
     }
 
     public CreditOrder considerationOfApplication(CreditOrder order) {
-        if (getMountPayment(order).compareTo(get15PercentFromIncome(order)) >= 0
-            || order.getPassiveIncome().compareTo(new BigDecimal("500")) >= 0) {
+        if (getMountPayment(order).compareTo(get30PercentFromIncome(order)) >= 0
+            || order.getPassiveIncome().compareTo(new BigDecimal("1000")) >= 0) {
             order.setCreditOrderStatus(APPROVED);
         } else {
             order.setCreditOrderStatus(DECLINED);
         }
+        order.setLastUpdateDate(LocalDate.now());
         return order;
     }
 
-    private BigDecimal get15PercentFromIncome(CreditOrder order) {
-        return ((order.getClientSalary().add(order.getPassiveIncome())).multiply(new BigDecimal("15")))
-                .divide(new BigDecimal("100"), 2, RoundingMode.HALF_EVEN);
+    private BigDecimal get30PercentFromIncome(CreditOrder order) {
+        return ((order.getClientSalary().subtract(order.getClientMonthlyExpenditure()).add(order.getPassiveIncome()))
+                .multiply(new BigDecimal("30")))
+                .divide(new BigDecimal("100"), 2, HALF_EVEN);
     }
 
     private BigDecimal getMountPayment(CreditOrder order) {
-        return order.getAmount().divide(new BigDecimal(order.getMinPeriodMonths()), 2, RoundingMode.HALF_EVEN);
+        return order.getAmount().divide(
+                (BigDecimal.valueOf(order.getMaxPeriodMonths()).divide(BigDecimal.valueOf(2), 0, HALF_EVEN)),
+                2, HALF_EVEN);
     }
 }

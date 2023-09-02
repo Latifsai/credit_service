@@ -13,6 +13,7 @@ import com.example.credit_service_project.services.card.CardCreateService;
 import com.example.credit_service_project.services.card.CardSearchService;
 import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.services.credit.CreditSearchService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.services.utils.OperationUtils;
@@ -27,6 +28,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIVE;
 import static com.example.credit_service_project.entity.enums.OperationType.*;
 
 @Service
@@ -44,6 +46,7 @@ public class ReplenishmentAndEarlyPaymentOperationService {
     private final CreditCreateService addCreditService;
     private final CreditOrderCreateService addCreditOrderService;
     private final AgreementCreateService addAgreementService;
+    private final CreditSearchService creditSearchService;
 
     public OperationResponseDTO performOperation(PaymentsOperationRequest request) {
 
@@ -61,7 +64,7 @@ public class ReplenishmentAndEarlyPaymentOperationService {
             card = util.changerCardBalance(account, card);
 
         } else if (request.getType().equals(EARLY_REPAYMENT)) {
-            Credit credit = account.getCredit();
+            Credit credit = creditSearchService.searchCreditByAccountAndStatus(account,ACTIVE);
             if (credit.getCreditOrder().getProduct().isEarlyRepayment()) {
                 account = util.payEarlyPayment(request, account, card);
                 List<PaymentSchedule> unpaidPayments = checkUnpaidPaymentsBelongsCreditService.findUnpaidPaymentByAccount(account);

@@ -10,31 +10,33 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 
+import static java.math.RoundingMode.HALF_UP;
+
 public class CurrencyConverter {
     public static BigDecimal convertCurrency(Product product, Account account) {
-    Map<String, Double> exchangeRates = EURToAnyGenerator.generatCurrencyMap();
-    BigDecimal sum = product.getSum();
-    String productCurrency = product.getCurrencyCode();
-    String accountCurrency = account.getCurrency();
+        Map<String, Double> exchangeRates = EURToAnyGenerator.generatCurrencyMap();
+        BigDecimal sum = product.getSum();
+        String productCurrency = product.getCurrencyCode();
+        String accountCurrency = account.getCurrency();
 
-    if (productCurrency.equals(accountCurrency)) {
-        return sum;
-    }
-
-    if (exchangeRates.containsKey(productCurrency)) {
-        BigDecimal exchangeRate = BigDecimal.valueOf(exchangeRates.get(productCurrency));
-
-        if (accountCurrency.equals("EUR")) {
-            return sum.multiply(exchangeRate);
-        } else if (exchangeRates.containsKey(accountCurrency)) {
-            BigDecimal targetExchangeRate = BigDecimal.valueOf(exchangeRates.get(accountCurrency));
-            BigDecimal convertedSum = sum.multiply(targetExchangeRate).divide(exchangeRate, 2, RoundingMode.HALF_UP);
-            return convertedSum;
-        } else {
-            throw new OperationException(ErrorsMessage.UNKNOWN_TARGET_CURRENCY);
+        if (productCurrency.equals(accountCurrency)) {
+            return sum;
         }
-    } else {
-        throw new OperationException(ErrorsMessage.UNKNOWN_SOURCE_CURRENCY);
+
+        if (exchangeRates.containsKey(productCurrency)) {
+            BigDecimal exchangeRate = BigDecimal.valueOf(exchangeRates.get(productCurrency));
+
+            if (accountCurrency.equals("EUR") ) {
+                return sum.divide(exchangeRate,2, HALF_UP); // 1 000 JPY * 150
+            } else if (exchangeRates.containsKey(accountCurrency)) {
+                BigDecimal targetExchangeRate = BigDecimal.valueOf(exchangeRates.get(accountCurrency));
+                BigDecimal convertedSum = sum.multiply(targetExchangeRate).divide(exchangeRate, 2, HALF_UP);
+                return convertedSum;
+            } else {
+                throw new OperationException(ErrorsMessage.UNKNOWN_TARGET_CURRENCY);
+            }
+        } else {
+            throw new OperationException(ErrorsMessage.UNKNOWN_SOURCE_CURRENCY);
+        }
     }
-}
 }

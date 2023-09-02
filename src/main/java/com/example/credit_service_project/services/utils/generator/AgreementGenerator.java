@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class AgreementGenerator {
 
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ0123456789";
+    private static final String CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ";
 
     public static String createCreditOrderNumber(Integer length) {
         StringBuilder stringBuilder = new StringBuilder(length);

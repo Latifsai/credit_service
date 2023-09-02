@@ -24,6 +24,7 @@ public class AgreementUtil {
         agreement.setNumber(AgreementGenerator.createCreditOrderNumber(request.getNumberLength()));
         agreement.setAgreementDate(LocalDate.now());
         agreement.setActive(true);
+        agreement.setCreditOrderNumber(order.getNumber());
         return agreement;
     }
 

@@ -12,6 +12,7 @@ import com.example.credit_service_project.services.card.CardCreateService;
 import com.example.credit_service_project.services.card.CardSearchService;
 import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.services.credit.CreditSearchService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
 import com.example.credit_service_project.services.utils.OperationUtils;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIVE;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -45,6 +48,7 @@ public class PaymentProcessingService {
     private final CreditCreateService creditService;
     private final CreditOrderCreateService addCreditOrderService;
     private final AgreementCreateService createAgreementService;
+    private final CreditSearchService creditSearchService;
 
     @Scheduled(cron = "0 0 23 * * *")
     public List<OperationResponseDTO> handlePayments() {
@@ -94,8 +98,12 @@ public class PaymentProcessingService {
         return donePaymentsList;
     }
 
+    private Credit getCredit (Account account) {
+        return creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE);
+    }
+
     private void closePaidCredit(Account account) {
-        Credit credit = account.getCredit();
+        Credit credit = getCredit(account);
         credit.setCreditStatus(CreditStatus.CLOSED);
         credit.getCreditOrder().setCreditOrderStatus(CreditOrderStatus.CLOSED);
         credit.getAgreement().setActive(false);
@@ -107,11 +115,11 @@ public class PaymentProcessingService {
 
     private void handleImmediateFine(Account account, PaymentSchedule paymentSchedule) {
         int dayOfDelay = 1;
-        BigDecimal fine = util.calculateFine(account.getCredit().getInterestRate(), paymentSchedule.getMonthlyPayment(), dayOfDelay);
+        BigDecimal fine = util.calculateFine(getCredit(account).getInterestRate(), paymentSchedule.getMonthlyPayment(), dayOfDelay);
 
         paymentSchedule.setSurcharge(fine);
-        account.getCredit().setFine(fine);
-        creditService.saveCredit(account.getCredit());
+        getCredit(account).setFine(fine);
+        creditService.saveCredit(getCredit(account));
     }
 
     private void handleSuccessfulPayment(List<OperationResponseDTO> donePaymentsList, Account account, PaymentSchedule paymentSchedule) {
@@ -122,11 +130,11 @@ public class PaymentProcessingService {
 
     private void handleDelayedFine(PaymentSchedule paymentSchedule, Account account) {
         int dayOfDelay = (int) ChronoUnit.DAYS.between(paymentSchedule.getPaymentDate(), LocalDate.now());
-        BigDecimal fine = util.calculateFine(account.getCredit().getInterestRate(), paymentSchedule.getMonthlyPayment(), dayOfDelay);
+        BigDecimal fine = util.calculateFine(getCredit(account).getInterestRate(), paymentSchedule.getMonthlyPayment(), dayOfDelay);
 
         paymentSchedule.setSurcharge(paymentSchedule.getSurcharge().add(fine));
-        account.getCredit().setFine(fine);
-        creditService.saveCredit(account.getCredit());
+        getCredit(account).setFine(fine);
+        creditService.saveCredit(getCredit(account));
         saveService.save(paymentSchedule);
     }
 

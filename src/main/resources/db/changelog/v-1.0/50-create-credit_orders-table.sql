@@ -11,6 +11,7 @@ create table credit_orders (
     number varchar(20) not null,
     passive_income decimal(38, 2),
     product_id bigint,
+    client_email varchar(50) not null,
     primary key (id)
 ) engine = InnoDB;
 

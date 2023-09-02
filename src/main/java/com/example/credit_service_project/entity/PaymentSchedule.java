@@ -25,7 +25,7 @@ public class PaymentSchedule {
     private UUID id;
 
     @Column(name = "payment_date")
-    @NotBlank(message = "Payment date must not be null!")
+    @NotNull(message = "Payment date must not be null!")
     private LocalDate paymentDate;
 
     @Column(name = "actual_payment_date")
