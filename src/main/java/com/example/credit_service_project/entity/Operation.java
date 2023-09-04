@@ -3,6 +3,7 @@ package com.example.credit_service_project.entity;
 import com.example.credit_service_project.entity.enums.OperationType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -38,7 +39,7 @@ public class Operation {
     private OperationType type;
 
     @Column(name = "operation_end_mark")
-    @NotBlank(message = "Operation end mark must not be blank!")
+    @NotNull(message = "Operation end mark must not be null!")
     private LocalDateTime operationEndMark;
 
     @Column(name = "operation_details")

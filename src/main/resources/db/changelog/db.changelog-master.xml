@@ -19,5 +19,4 @@
     <changeSet id="12" author="latif">
         <tagDatabase tag="v.1.0"/>
     </changeSet>
-
 </databaseChangeLog>

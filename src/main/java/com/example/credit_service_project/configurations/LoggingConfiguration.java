@@ -51,11 +51,12 @@ public class LoggingConfiguration {
 
     @AfterReturning(returning = "returnObject", pointcut = "controllerLog()")
     public void doAfterReturn(Object returnObject) {
-        log.info("""
+        if(log.isInfoEnabled()){
+            log.info("""
                 Return value: {}
-                END OF REQUEST  
+                END OF REQUEST!  
                 """, returnObject);
-        // модет быстро забитсья
+        }
     }
 
     @AfterThrowing(throwing = "exception", pointcut = "controllerLog()")
