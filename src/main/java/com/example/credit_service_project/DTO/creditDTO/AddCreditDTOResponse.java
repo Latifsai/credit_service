@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Value;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +18,7 @@ public class AddCreditDTOResponse {
     UUID id;
     String creditType;
     BigDecimal creditSum;
+    BigDecimal interestRate;
     Integer periodMonth;
     BigDecimal fine;
     boolean needDeposit;

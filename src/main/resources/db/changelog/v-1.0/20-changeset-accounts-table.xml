@@ -47,12 +47,12 @@
             '2023-08-29', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('00aeba1a-b777-48a9-8928-9955b8e156e7', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('c6f3f18d-705b-4230-a200-925bfab7bf72', '-', '')), 'vKA3pN1',
-            '2500.00', '2027-07-25', 'UK', 'GBP', '0.00', '2022-10-19',
+            '2500.00', '2027-07-25', 'United Kingdom', 'GBP', '0.00', '2022-10-19',
             '2022-11-12', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('048882e0-6226-456f-ade3-508ed5d604e1', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('5343f0ca-2db4-43e0-83e2-168c28937c5e', '-', '')), 'yCVLTvt',
-            '10879.94', '2029-08-30', 'Italy', 'EUR', '0.00', '2023-08-30',
-            '2023-08-30', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('0984720e-b9ca-4038-b457-3c0aab3f78c8', '-', '')));
+            '10879.94', '2029-08-30', 'Italy', 'EUR', '32143.45', '2023-08-30',
+            '2023-08-30', '0.00', 'ACTIVE','32143.45', UNHEX(REPLACE('0984720e-b9ca-4038-b457-3c0aab3f78c8', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('d56b5706-f5ea-40ad-9cf6-35f63f44e861', '-', '')), 'ẞ1AüMürb65',
             '27780.50', '1999-08-30', 'United States', 'USD', '0.00', '1989-01-15',
@@ -75,7 +75,7 @@
             '2019-01-01', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('7095f6cf-1d3d-414f-800a-ba563b5ba6d5', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')), 'qrIc5vLgGr',
-            '80780.00', '2025-08-30', 'Turkey', 'TRY', '0.00', '2015-07-13',
+            '80780.00', '2025-08-30', 'Türkiye', 'TRY', '0.00', '2015-07-13',
             '2015-07-13', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('906141bf-dfd4-47d2-815e-e29a0ef660fe', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')), 'QZd9ltsMCkGIKCC',
@@ -83,12 +83,12 @@
             '2011-11-12', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('a3ca9f00-3886-46c9-b1c2-6af707c72c6c', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('f53ee69d-c79d-4e97-8d90-1b964ca6be95', '-', '')), 'wq8ldvIuZ',
-            '233800.00', '2027-03-30', 'Japan', 'JPY', '0.00', '2023-03-18',
-            '2023-08-30', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('ab2b2e5f-3fbd-47bb-bb2b-b30e998bec27', '-', '')));
+            '233800.00', '2027-03-30', 'Japan', 'JPY', '2207098.50', '2023-03-18',
+            '2023-08-30', '0.99', 'ACTIVE','2207098.50', UNHEX(REPLACE('ab2b2e5f-3fbd-47bb-bb2b-b30e998bec27', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('33c02962-82ce-4ece-9642-5efbd55ba6c2', '-', '')), 'Wlq4ZaD',
-            '33489.00', '2028-07-30', 'UK', 'GBP', '0.00', '2022-06-30',
-            '2022-09-14', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('c2c05179-806e-42a4-8f30-1cf4d7711952', '-', '')));
+            '33489.00', '2028-07-30', 'United Kingdom', 'GBP', '13504.31', '2022-06-30',
+            '2022-09-14', '0.00', 'ACTIVE','13504.31', UNHEX(REPLACE('c2c05179-806e-42a4-8f30-1cf4d7711952', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('5c644c79-b060-42b0-8c47-513e8e8e7535', '-', '')), 'IZCT0Tklm',
             '15890.00', '2027-09-30', 'Israil', 'ILS', '0.00', '2021-08-30',
@@ -103,8 +103,8 @@
             '2023-04-21', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('ec5499c8-9bc1-4e87-a4a4-ee4ace2e001d', '-', '')));
     INSERT INTO accounts
     VALUES (UNHEX(REPLACE('5b6e86c9-7f2e-437e-8a6b-a74b988fe72c', '-', '')), 'z050sröiKgNRvC3',
-            '12798.31', '2028-08-30', 'Romania', 'RON', '0.00', '2023-08-30',
-            '2023-08-30', '0.00', 'ACTIVE','0.00', UNHEX(REPLACE('eda11578-10ae-4ec6-a1a9-c0bbdfe0e4c6', '-', '')));
+            '12798.31', '2028-08-30', 'Romania', 'RON', '9231.20', '2023-08-30',
+            '2023-08-30', '0.00', 'ACTIVE','9231.20', UNHEX(REPLACE('eda11578-10ae-4ec6-a1a9-c0bbdfe0e4c6', '-', '')));
     </sql>
     </changeSet>
 

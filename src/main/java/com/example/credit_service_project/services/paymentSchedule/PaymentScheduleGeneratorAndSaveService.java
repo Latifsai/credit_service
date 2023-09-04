@@ -1,10 +1,7 @@
 package com.example.credit_service_project.services.paymentSchedule;
 
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
-import com.example.credit_service_project.entity.Account;
-import com.example.credit_service_project.entity.Credit;
-import com.example.credit_service_project.entity.PaymentSchedule;
-import com.example.credit_service_project.entity.Product;
+import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.repositories.PaymentScheduleRepository;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +21,10 @@ public class PaymentScheduleGeneratorAndSaveService {
     private final PaymentScheduleUtil util;
     private final PaymentScheduleRepository repository;
 
-    public List<PaymentResponseDTO> generatePaymentSchedule(Credit credit, Product product, Account account) {
+    public List<PaymentResponseDTO> generatePaymentSchedule(Credit credit, Product product, Account account, Agreement agreement) {
 
         List<PaymentResponseDTO> responses = new ArrayList<>();
-        LocalDate firstPaymentDate = LocalDate.now().plusMonths(credit.getCreditHolidayMonthsAmount());
+        LocalDate firstPaymentDate = agreement.getAgreementDate().plusMonths(credit.getCreditHolidayMonthsAmount());
         int monthsTemp = credit.getPeriodMonth();
 
         BigDecimal[] payments = util.calculatePayment(monthsTemp, credit.getInterestRate(), credit.getCreditSum(), product);

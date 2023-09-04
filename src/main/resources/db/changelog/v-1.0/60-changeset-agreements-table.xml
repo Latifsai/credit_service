@@ -28,48 +28,48 @@
     <changeSet id="insert" author="latif">
         <sql>
             INSERT INTO agreements
-            VALUES (UNHEX(REPLACE('077823ed-025a-497a-ba5a-1e48ecc3d574', '-', '')), true, '2010-02-20', 'ÜKSTVMR23W',
-                    NULL, 'LVBNXXEB8P');
+            VALUES (UNHEX(REPLACE('077823ed-025a-497a-ba5a-1e48ecc3d574', '-', '')), false, '2010-02-20', 'ÜKSTVMR23W',
+                    '2012-05-25', 'LVBNXXEB8P');
 
             INSERT INTO agreements
             VALUES (UNHEX(REPLACE('25eee765-9658-4883-a98e-9bf429dc691b', '-', '')), true, '2023-09-06', 'MQ1KSPQÖLÜ',
-                    NULL, 'ALQ8RTOAGC');
+                    '2024-09-06', 'ALQ8RTOAGC');
 
             INSERT INTO agreements
-            VALUES (UNHEX(REPLACE('57f5abb5-8224-40d8-b009-7313af186e99', '-', '')), true, '2023-09-07', '45W5JXSPS5',
-                    NULL, 'FMÄ6WHG3QB');
+            VALUES (UNHEX(REPLACE('57f5abb5-8224-40d8-b009-7313af186e99', '-', '')), TRUE, '2023-09-07', '45W5JXSPS5',
+                    '2028-09-07', 'FMÄ6WHG3QB');
 
             INSERT INTO agreements
-            VALUES (UNHEX(REPLACE('63d2709f-9c29-432b-a8a9-c90a805d2ecc', '-', '')), true, '2020-10-24', 'ZRAPYU600M',
-                    NULL, 'JÜ4T3JHK8W');
+            VALUES (UNHEX(REPLACE('63d2709f-9c29-432b-a8a9-c90a805d2ecc', '-', '')), false, '2020-10-24', 'ZRAPYU600M',
+                    '2021-10-24', 'JÜ4T3JHK8W');
 
             INSERT INTO agreements
-            VALUES (UNHEX(REPLACE('68134dfa-811c-4b79-a479-df574c05df9b', '-', '')), true, '2010-01-30', '9Y2HX98NHV',
-                    NULL, 'GDE1VOH0YH');
+            VALUES (UNHEX(REPLACE('68134dfa-811c-4b79-a479-df574c05df9b', '-', '')), false, '2010-01-30', '9Y2HX98NHV',
+                    '2012-01-30', 'GDE1VOH0YH');
 
             INSERT INTO agreements
-            VALUES (UNHEX(REPLACE('7bd9883b-78cf-4aa6-8ca7-5becfb9cecdd', '-', '')), true, '2022-04-28', 'YU13STDÖLO',
-                    NULL, 'JBXN7ZVDFT');
+            VALUES (UNHEX(REPLACE('7bd9883b-78cf-4aa6-8ca7-5becfb9cecdd', '-', '')), false, '2022-04-28', 'YU13STDÖLO',
+                    '2023-04-28', 'JBXN7ZVDFT');
 
             INSERT INTO agreements
-            VALUES (UNHEX(REPLACE('a141507c-11a9-4f36-bcf5-532f79604cbb', '-', '')), true, '2019-03-20', 'Z1CXBI1M8X',
-                    NULL, 'X31ÖPG0ÖS7');
+            VALUES (UNHEX(REPLACE('a141507c-11a9-4f36-bcf5-532f79604cbb', '-', '')), false, '2019-03-20', 'Z1CXBI1M8X',
+                    '2022-03-20', 'X31ÖPG0ÖS7');
 
             INSERT INTO agreements
             VALUES (UNHEX(REPLACE('a2210109-1372-4b40-82b3-81ce40c6df45', '-', '')), true, '2023-09-06', 'XREMJÖZTMÜ',
-                    NULL, 'PHNXJKÖXZ9');
+                    '2024-09-06', 'PHNXJKÖXZ9');
 
             INSERT INTO agreements
-            VALUES (UNHEX(REPLACE('b7c85f7c-bbfb-4002-a79a-afc5b227f44d', '-', '')), true, '2017-11-07', '0A5JEMKBA8',
-                    NULL, 'MF7QEA333G');
+            VALUES (UNHEX(REPLACE('b7c85f7c-bbfb-4002-a79a-afc5b227f44d', '-', '')), false, '2017-11-07', '0A5JEMKBA8',
+                    '2019-11-07', 'MF7QEA333G');
 
             INSERT INTO agreements
-            VALUES (UNHEX(REPLACE('e13b78a6-408d-4902-be4f-064fee121519', '-', '')), true, '1994-06-02', 'T36BYUOHW4',
-                    NULL, 'FXÜZ8YÄVVY');
+            VALUES (UNHEX(REPLACE('e13b78a6-408d-4902-be4f-064fee121519', '-', '')), false, '1994-06-02', 'T36BYUOHW4',
+                    '1996-06-02', 'FXÜZ8YÄVVY');
 
             INSERT INTO agreements
             VALUES (UNHEX(REPLACE('fc705fb8-226f-4a65-ab48-8f9280a41592', '-', '')), true, '2023-09-06', 'JF0ÖJ6IYHB',
-                    NULL, 'RO3H7IÜJBD');
+                    '2025-09-06', 'RO3H7IÜJBD');
 
         </sql>
     </changeSet>

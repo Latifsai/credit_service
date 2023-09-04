@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
 import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
@@ -12,6 +12,7 @@ import com.example.credit_service_project.services.utils.generator.CreditGenerat
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIVE;
@@ -26,10 +27,10 @@ public class CreditUtil {
         credit.setAgreement(agreement);
         credit.setCreditOrder(creditOrder);
         credit.setFine(BigDecimal.ZERO);
-        credit.setCreditType(request.getCreditType());
-        credit.setCreditSum(creditOrder.getAmount());
-        credit.setPeriodMonth(request.getPeriodMonth());
         credit.setInterestRate(CreditGenerator.getInterestRateByCountry(account.getCountry()));
+        credit.setCreditType(request.getCreditType());
+        credit.setCreditSum(getTotalCreditAmount(creditOrder.getAmount(), credit.getInterestRate(), request.getPeriodMonth()));
+        credit.setPeriodMonth(request.getPeriodMonth());
         credit.setNeedDeposit(creditOrder.getProduct().isNeedGuaranty());
         credit.setCreditStatus(ACTIVE);
         credit.setCurrency(account.getCurrency());
@@ -40,6 +41,17 @@ public class CreditUtil {
         //update account
         setDebtToAccount(account, credit);
         return credit;
+    }
+
+    private BigDecimal getTotalCreditAmount(BigDecimal loanAmount, BigDecimal interestRate, int numberOfMonths) {
+        // Преобразуем процентную ставку в месячную ставку
+        BigDecimal monthlyInterestRate = interestRate.divide(BigDecimal.valueOf(12 * 100), 6, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalInterestAmount = loanAmount.multiply(monthlyInterestRate).multiply(BigDecimal.valueOf(numberOfMonths));
+
+        BigDecimal totalLoanAmount = loanAmount.add(totalInterestAmount);
+
+        return totalLoanAmount.setScale(2, RoundingMode.HALF_UP);
     }
 
     private Account setDebtToAccount(Account account, Credit credit) {
@@ -54,6 +66,7 @@ public class CreditUtil {
                 .id(credit.getId())
                 .creditType(credit.getCreditType())
                 .creditSum(credit.getCreditSum())
+                .interestRate(credit.getInterestRate())
                 .periodMonth(credit.getPeriodMonth())
                 .fine(credit.getFine())
                 .needDeposit(credit.isNeedDeposit())

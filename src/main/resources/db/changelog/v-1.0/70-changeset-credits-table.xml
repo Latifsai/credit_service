@@ -57,4 +57,80 @@
     </changeSet>
 
 
+
+    <changeSet id="insert" author="latif">
+        <sql>
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('aa5b9c17-1213-425e-948a-5ab463b58dde', '-', '')),
+                    'CLOSED', 6201.42, 'consumer credit', 'BRL', 0.00, 13.25, false, 24, 4,
+                    UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')),
+                    UNHEX(REPLACE('077823ed-025a-497a-ba5a-1e48ecc3d574', '-', '')),
+                    UNHEX(REPLACE('1701da47-0bf3-4d69-b26d-201274c2e6ef', '-', '')));
+
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('bff10cdd-abea-4d19-b01b-2c4789f4a4cb', '-', '')),
+                    'ACTIVE', 8770.74, 'consumer credit', 'RON', 0.00, 5.25, false, 24, 0,
+                    UNHEX(REPLACE('5b6e86c9-7f2e-437e-8a6b-a74b988fe72c', '-', '')),
+                    UNHEX(REPLACE('fc705fb8-226f-4a65-ab48-8f9280a41592', '-', '')),
+                    UNHEX(REPLACE('11477b3a-420e-49e8-99ac-ec8126d7917c', '-', '')));
+
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('7b4da431-634f-43fc-ba68-4a3103b7abdf', '-', '')),
+                    'CLOSED', 1363.95, 'consumer credit', 'EUR', 0.00, 4.25, false, 12, 0,
+                    UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')),
+                    UNHEX(REPLACE('7bd9883b-78cf-4aa6-8ca7-5becfb9cecdd', '-', '')),
+                    UNHEX(REPLACE('8256b86f-9f66-4689-84e9-a14c2dcc097e', '-', '')));
+
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('97cd47b9-bf06-44e3-8356-fc250901b98a', '-', '')),
+                    'ACTIVE', 30832.93, 'consumer credit', 'EUR', 0.00, 4.25, true, 12, 2,
+                    UNHEX(REPLACE('5343f0ca-2db4-43e0-83e2-168c28937c5e', '-', '')),
+                    UNHEX(REPLACE('a2210109-1372-4b40-82b3-81ce40c6df45', '-', '')),
+                    UNHEX(REPLACE('cce4dd73-440d-47cc-a812-1a55bba83e49', '-', '')));
+
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('a9473f85-6e7f-45fd-a7a9-f32f1a2ad3a7', '-', '')),
+                    'ACTIVE', 12830.70, 'consumer credit', 'GBP', 0.00, 5.25, false, 12, 2,
+                    UNHEX(REPLACE('33c02962-82ce-4ece-9642-5efbd55ba6c2', '-', '')),
+                    UNHEX(REPLACE('25eee765-9658-4883-a98e-9bf429dc691b', '-', '')),
+                    UNHEX(REPLACE('8df047ef-5cbf-4bb5-9f01-d6b639817d48', '-', '')));
+
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('f66287d3-6a89-4a26-aaf9-3e36c38e2037', '-', '')),
+                    'CLOSED', 1071166.26, 'REAL ESTATE LOAN', 'NOK', 0.00, 4.00, true, 36, 2,
+                    UNHEX(REPLACE('bf6f91ea-28d0-4196-adc6-ab7c31d28b7e', '-', '')),
+                    UNHEX(REPLACE('a141507c-11a9-4f36-bcf5-532f79604cbb', '-', '')),
+                    UNHEX(REPLACE('586a52e1-66f1-42a5-a532-eacb3d44599a', '-', '')));
+
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('d3e08816-06e4-4838-b196-15fe7c4e3f9e', '-', '')),
+                    'CLOSED', 252013.10, 'car loan', 'TRY', 0.00, 26.50, false, 24, 4,
+                    UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')),
+                    UNHEX(REPLACE('b7c85f7c-bbfb-4002-a79a-afc5b227f44d', '-', '')),
+                    UNHEX(REPLACE('55367d55-be19-4fb8-8d92-613f77005a35', '-', '')));
+
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('6cd2743d-f6be-4192-9c75-f271abcdd439', '-', '')),
+                    'ACTIVE', 2207098.50, 'car loan', 'JPY', 0.00, 0.99, false, 60, 4,
+                    UNHEX(REPLACE('f53ee69d-c79d-4e97-8d90-1b964ca6be95', '-', '')),
+                    UNHEX(REPLACE('57f5abb5-8224-40d8-b009-7313af186e99', '-', '')),
+                    UNHEX(REPLACE('6e935276-e7f1-4ac2-8acf-8af9c42d78e4', '-', '')));
+
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('a50b6411-f696-4af4-87a6-1a737088c654', '-', '')),
+                    'CLOSED', 42948.21, 'car loan', 'USD', 0.00, 5.33, true, 24, 0,
+                    UNHEX(REPLACE('d56b5706-f5ea-40ad-9cf6-35f63f44e861', '-', '')),
+                    UNHEX(REPLACE('e13b78a6-408d-4902-be4f-064fee121519', '-', '')),
+                    UNHEX(REPLACE('33a4e92a-b962-4b6f-b04d-6b2adf4f1b88', '-', '')));
+
+            INSERT INTO credits
+            VALUES (UNHEX(REPLACE('43290a4d-82ed-43c5-9a9c-4bd15b0d2e3b', '-', '')),
+                    'CLOSED', 8924.70, 'consumer credit', 'PLN', 0.00, 6.75, false, 24, 0,
+                    UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')),
+                    UNHEX(REPLACE('68134dfa-811c-4b79-a479-df574c05df9b', '-', '')),
+                    UNHEX(REPLACE('451d0563-68b1-48a3-86cf-7618d0db9e28', '-', '')));
+
+
+        </sql>
+    </changeSet>
 </databaseChangeLog>

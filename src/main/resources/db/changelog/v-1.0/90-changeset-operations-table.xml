@@ -32,4 +32,329 @@
                                  referencedColumnNames="id" />
     </changeSet>
 
+    <changeSet id="insert" author="latif">
+        <sql>
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('daa75a64-4a2f-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2010-06-25 14:44:30', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('8c883af4-4a31-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2010-07-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('ae771838-4a31-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2010-08-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('b689234a-4a31-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2010-09-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('c99b9cc4-4a31-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2010-10-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('d8070a6e-4a31-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2010-11-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('dbb28756-4a31-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2010-12-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159da982-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-01-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159daee6-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-02-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159db328-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-03-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159db49a-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-04-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159db7ec-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-05-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159db8fa-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-06-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159db9fe-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-07-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159dbb0c-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-08-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159dbc10-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-09-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159dbd50-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-10-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('159dbec2-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-11-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('536d5e38-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2011-12-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('8ee6f71c-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2012-01-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('8ee6fa1e-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2012-02-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('8ee6fcda-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2012-03-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('8ee6fea6-4a32-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2012-04-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('208d6938-4a7b-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+                    '2012-05-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+
+
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('e4288a34-4a45-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2022-05-28 14:34:44', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('42f10172-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2022-06-28 14:21:12', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4821bf10-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2022-07-28 14:32:50', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4d9bd958-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2022-08-28 14:31:54', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('5119e34a-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2022-09-28 14:39:49', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('54308f34-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2022-10-28 14:34:47', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('5837e898-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2022-11-28 14:34:44', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('5bb664f4-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2022-12-28 14:34:44', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('6369e7f2-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2023-01-28 14:34:44', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('6a0d7c68-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2023-02-28 14:34:44', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('6f955a7a-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2023-03-28 14:34:44', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('73edaa64-4a46-11ee-be56-0242ac120002', '-', '')), 'EUR', true, 'Payment for the Credit',
+                    '2023-04-28 14:34:44', '116.30', 'MONTHLY_PAYMENT', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+
+
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('c8cf7188-4a47-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2020-11-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('9636c1b6-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2020-12-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('9636c4b8-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-01-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('9636c648-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-02-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('9636cc56-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-03-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('9636ce18-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-04-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('b30fe542-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-05-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('b30fea9c-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-06-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('b30febf0-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-07-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('c6399898-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-08-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('ca968220-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-09-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('b30fed26-4a7b-11ee-be56-0242ac120002', '-', '')), 'THB', true, 'Payment for the Credit',
+                    '2021-10-24 16:12:54', '3707.65', 'MONTHLY_PAYMENT', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+
+
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('e430cd7a-4a4f-11ee-be56-0242ac120002', '-', '')), 'NOK', true, 'EARLY REPAYMENT OF REAL ESTATE LOAN ',
+                    '2021-04-20 13:40:54', '1071166.26', 'EARLY_REPAYMENT', UNHEX(REPLACE('bf6f91ea-28d0-4196-adc6-ab7c31d28b7e', '-', '')));
+
+
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('d50fcab8-4a58-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-11-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('1683083e-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-02-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('16830ad2-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2018-12-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('16830bd6-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2018-09-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('16830cda-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-09-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('16830dde-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2018-04-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('30ea5ce0-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-01-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('30ea5ff6-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2018-05-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('30ea61d6-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-06-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('30ea6398-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2018-08-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('30ea651e-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2020-01-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4e1a96b8-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-12-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('637bdf26-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2018-07-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('637be264-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2018-06-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('79269e10-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-07-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('37be408-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2018-11-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4e1a99c4-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2018-10-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('637be552-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-08-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('88ddabaa-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-05-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4e1a9b4a-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2020-02-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('79269c4e-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-04-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('88ddb096-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2020-03-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4e1a9d02-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-03-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('792698e8-4a7c-11ee-be56-0242ac120002', '-', '')), 'TRY', true, 'Payment for the car credit',
+                    '2019-10-07 13:53:16', '13640.73', 'MONTHLY_PAYMENT', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('f8c38dd2-4a85-11ee-be56-0242ac120002', '-', '')), 'USD', true, 'EARLY REPAYMENT OF CAR CREDIT',
+                    '1994-07-02 13:53:16', '42948.21', 'EARLY_REPAYMENT', UNHEX(REPLACE('d56b5706-f5ea-40ad-9cf6-35f63f44e861', '-', '')));
+
+
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('2fdf11e4-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-04-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('6bd3ed8c-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-03-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('2fdf152c-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-05-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('6bd3f7a0-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-09-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('2fdf1a54-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-08-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('6bd3f980-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-01-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('85e1bc0e-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-12-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('2fdf1b94-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-06-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('85e1bf06-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-02-28 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('6bd3fac0-4a89-11ee-be56-0242ac12000', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-02-28 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4b5bdde4-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2012-01-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('85e1c078-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-04-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4b5bdca4-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-11-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('85e1c1a4-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-05-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('9cbb53b8-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-10-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4b5bdaa6-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-12-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('6bd3fbf6-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-11-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('9cbb56b0-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-06-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('2fdf1cc0-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-07-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4b5bd8bc-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-03-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('9cbb5a48-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-09-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4b5bd646-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-08-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('1509ab26-4a8a-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2011-07-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+            INSERT INTO operations
+            VALUES (UNHEX(REPLACE('4b5bd2d6-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
+                    '2010-10-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
