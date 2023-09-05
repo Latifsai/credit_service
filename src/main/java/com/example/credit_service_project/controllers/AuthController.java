@@ -3,8 +3,8 @@ package com.example.credit_service_project.controllers;
 import com.example.credit_service_project.DTO.auth.JwtResponse;
 import com.example.credit_service_project.DTO.auth.JwtRequest;
 import com.example.credit_service_project.DTO.auth.RegistrationRequest;
-import com.example.credit_service_project.entity.Client;
-import com.example.credit_service_project.services.client.ClientCreateService;
+import com.example.credit_service_project.entity.User;
+import com.example.credit_service_project.services.user.UserCreateService;
 import com.example.credit_service_project.services.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final ClientCreateService clientCreateService;
+    private final UserCreateService userCreateService;
     private final JwtTokenUtils jwtTokenUtils;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
@@ -36,7 +36,7 @@ public class AuthController {
             return ResponseEntity.ok(HttpStatus.UNAUTHORIZED);
         }
 
-        UserDetails userDetails = clientCreateService.loadUserByUsername(request.getUsername());
+        UserDetails userDetails = userCreateService.loadUserByUsername(request.getUsername());
         String token = jwtTokenUtils.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
@@ -48,9 +48,9 @@ public class AuthController {
             return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
         }
 
-        Client client = new Client();
-        client.setPassword(passwordEncoder.encode(request.getPassword()));
-        client.setName(request.getName());
+        User user = new User();
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setName(request.getName());
 
         return ResponseEntity.ok(HttpStatus.CREATED);
     }

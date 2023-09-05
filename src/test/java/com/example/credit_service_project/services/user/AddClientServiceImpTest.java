@@ -1,10 +1,10 @@
-package com.example.credit_service_project.services.client;
+package com.example.credit_service_project.services.user;
 
-import com.example.credit_service_project.DTO.client.AddClientRequest;
-import com.example.credit_service_project.repositories.ClientRepository;
+import com.example.credit_service_project.DTO.user.CreateUserRequest;
+import com.example.credit_service_project.repositories.UserRepository;
 import com.example.credit_service_project.services.generators.EntityCreator;
 import com.example.credit_service_project.services.manager.ManagerSearchService;
-import com.example.credit_service_project.services.utils.ClientUtil;
+import com.example.credit_service_project.services.utils.UserUtil;
 import com.example.credit_service_project.services.generators.DTOClientCreator;
 import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
@@ -24,17 +24,17 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class AddClientServiceImpTest {
     @Mock
-    private ClientRepository repository;
+    private UserRepository repository;
     @Mock
     private ManagerSearchService searchManagerService;
     @Mock
-    private ClientUtil util;
+    private UserUtil util;
     @InjectMocks
-    private ClientCreateService service;
+    private UserCreateService service;
 
     @Test
     public void testAddClientSuccess() {
-        var request = new AddClientRequest(UUID.randomUUID(), "Aziz", "Snow", new BigDecimal("2500"), new BigDecimal("1500"));
+        var request = new CreateUserRequest(UUID.randomUUID(), "Aziz", "Snow", new BigDecimal("2500"), new BigDecimal("1500"));
         var manager = EntityCreator.getManager();
         var client = EntityCreator.getClient();
 
@@ -47,14 +47,14 @@ class AddClientServiceImpTest {
 
     @Test
     public void testAddClientNotFoundException() {
-        var request = new AddClientRequest(UUID.randomUUID(), "Aziz", "Snow", new BigDecimal("2500"), new BigDecimal("1500"));
+        var request = new CreateUserRequest(UUID.randomUUID(), "Aziz", "Snow", new BigDecimal("2500"), new BigDecimal("1500"));
         when(searchManagerService.findManagerById(request.getManagerID())).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> service.createClient(request));
     }
 
     @Test
     public void testAddClientValidation() {
-        var request = new AddClientRequest(UUID.randomUUID(), "", null,
+        var request = new CreateUserRequest(UUID.randomUUID(), "", null,
                 new BigDecimal("0"), new BigDecimal("-13"));
         var validation = Validation.buildDefaultValidatorFactory().getValidator();
         var set = validation.validate(request);

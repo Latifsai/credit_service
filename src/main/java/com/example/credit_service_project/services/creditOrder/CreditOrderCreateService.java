@@ -2,11 +2,11 @@ package com.example.credit_service_project.services.creditOrder;
 
 import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderDTORequest;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderResponseDTO;
-import com.example.credit_service_project.entity.Client;
+import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.repositories.CreditOrderRepository;
-import com.example.credit_service_project.services.client.ClientSearchService;
+import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.product.ProductSearchService;
 import com.example.credit_service_project.services.utils.CreditOrderUtil;
 import lombok.RequiredArgsConstructor;
@@ -20,17 +20,17 @@ public class CreditOrderCreateService {
 
     private final CreditOrderRepository repository;
     private final ProductSearchService searchProductService;
-    private final ClientSearchService searchClientService;
+    private final AccountSearchService accountSearchService;
     private final CreditOrderUtil util;
 
     public CreateCreditOrderResponseDTO createCreditOrder(CreateCreditOrderDTORequest request) {
         Product product = searchProductService.findById(request.getProductID());
-        Client client = searchClientService.findClientById(request.getClientID());
+        Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 
-        CreditOrder creditOrder = util.convertAddRequestToEntity(request, product, client);
+        CreditOrder creditOrder = util.convertAddRequestToEntity(request, product, account);
         CreditOrder savedOrder = saveOrder(creditOrder);
         log.info("Create credit order with number: {}", savedOrder.getNumber());
-        return util.convertToAddResponse(savedOrder, product, client);
+        return util.convertToAddResponse(savedOrder, product, account);
     }
 
     public CreditOrder saveOrder(CreditOrder creditOrder) {

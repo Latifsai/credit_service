@@ -1,4 +1,4 @@
-package com.example.credit_service_project.DTO.client;
+package com.example.credit_service_project.DTO.user;
 
 import lombok.Value;
 
@@ -14,4 +14,5 @@ public class UpdateClientRequest {
     String address;
     String email;
     String phone;
+    String roleName;
 }

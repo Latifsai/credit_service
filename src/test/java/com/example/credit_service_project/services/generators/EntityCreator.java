@@ -28,7 +28,7 @@ public class EntityCreator {
         account.setUnpaidLoanDebt(new BigDecimal("1300"));
         account.setUnpaidPercentageLoanDebt(new BigDecimal("157"));
         account.setCurrency("$");
-        account.setClient(getClient());
+        account.setUser(getClient());
         return account;
     }
 
@@ -61,7 +61,7 @@ public class EntityCreator {
         account.setUnpaidLoanDebt(new BigDecimal("1300"));
         account.setUnpaidPercentageLoanDebt(new BigDecimal("157"));
         account.setCurrency("$");
-        account.setClient(getClient());
+        account.setUser(getClient());
         return account;
     }
 
@@ -157,26 +157,26 @@ public class EntityCreator {
         return manager;
     }
 
-    public static Client getClient() {
-        Client client = new Client();
-        client.setId(UUID.fromString("88882222-6666-4444-b491-426655440000"));
-        client.setName("Lew");
-        client.setSurname("Kim");
-        client.setIncome(new BigDecimal("2500"));
-        client.setExpenses(new BigDecimal("1500"));
-        client.setManager(getManager());
-        return client;
+    public static User getClient() {
+        User user = new User();
+        user.setId(UUID.fromString("88882222-6666-4444-b491-426655440000"));
+        user.setName("Lew");
+        user.setSurname("Kim");
+        user.setIncome(new BigDecimal("2500"));
+        user.setExpenses(new BigDecimal("1500"));
+        user.setManager(getManager());
+        return user;
     }
 
-    public static Client getUpdatedClient() {
-        Client client = new Client();
-        client.setId(UUID.fromString("88882222-6666-4444-b491-426655440000"));
-        client.setName("Lew");
-        client.setSurname("Kim");
-        client.setIncome(new BigDecimal("3500"));
-        client.setExpenses(new BigDecimal("2000"));
-        client.setManager(getManager());
-        return client;
+    public static User getUpdatedClient() {
+        User user = new User();
+        user.setId(UUID.fromString("88882222-6666-4444-b491-426655440000"));
+        user.setName("Lew");
+        user.setSurname("Kim");
+        user.setIncome(new BigDecimal("3500"));
+        user.setExpenses(new BigDecimal("2000"));
+        user.setManager(getManager());
+        return user;
     }
 
 

@@ -4,7 +4,6 @@ import com.example.credit_service_project.DTO.manager.AddManagerRequest;
 import com.example.credit_service_project.repositories.ManagerRepository;
 import com.example.credit_service_project.services.generators.DTOManagerCreator;
 import com.example.credit_service_project.services.generators.EntityCreator;
-import com.example.credit_service_project.services.utils.ManagerUtil;
 import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

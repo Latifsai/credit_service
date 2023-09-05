@@ -6,7 +6,9 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 import static jakarta.persistence.CascadeType.*;
@@ -16,8 +18,9 @@ import static jakarta.persistence.CascadeType.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Table(name = "clients")
-public class Client {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -68,30 +71,9 @@ public class Client {
     @NotNull(message = "registrationDate must not be null!")
     private LocalDate updateDate;
 
-    @OneToOne(mappedBy = "client", orphanRemoval = true,
-            cascade = {MERGE, PERSIST, REFRESH})
-    private Account account;
-
-    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id", referencedColumnName = "id")
-    private Manager manager;
-
-    @OneToOne(cascade = ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @Column(name = "role")
+    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.EAGER)
     private Role role;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-        return Objects.equals(account, client.account) && Objects.equals(manager, client.manager);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(account, manager);
-    }
 
     @Override
     public String toString() {
@@ -107,7 +89,6 @@ public class Client {
                 ", phone='" + phone + '\'' +
                 ", registrationDate=" + registrationDate +
                 ", updateDate=" + updateDate +
-                ", manager=" + manager +
                 '}';
     }
 

@@ -27,8 +27,8 @@
 
     <changeSet id="insert" author="latif">
         <sql>
-            INSERT INTO roles VALUES (1, 'CLIENT_ROLE');
-            INSERT INTO roles VALUES (2, 'MANAGER_ROLE');
+            INSERT INTO roles VALUES (1, 'ROLE_CLIENT');
+            INSERT INTO roles VALUES (2, 'ROLE_MANAGER');
         </sql>
     </changeSet>
 

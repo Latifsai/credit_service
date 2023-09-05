@@ -1,12 +1,12 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.client.AddClientRequest;
-import com.example.credit_service_project.DTO.client.ClientResponseDTO;
-import com.example.credit_service_project.DTO.client.UpdateClientRequest;
-import com.example.credit_service_project.services.client.ClientCreateService;
-import com.example.credit_service_project.services.client.GetAllClientsService;
-import com.example.credit_service_project.services.client.ClientSearchService;
-import com.example.credit_service_project.services.client.ClientUpdateService;
+import com.example.credit_service_project.DTO.user.CreateUserRequest;
+import com.example.credit_service_project.DTO.user.UserResponseDTO;
+import com.example.credit_service_project.DTO.user.UpdateClientRequest;
+import com.example.credit_service_project.services.user.UserCreateService;
+import com.example.credit_service_project.services.user.GetAllUsersService;
+import com.example.credit_service_project.services.user.UserSearchService;
+import com.example.credit_service_project.services.user.UserUpdateService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,33 +20,33 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ClientController {
 
-    private final ClientCreateService create;
-    private final GetAllClientsService get;
-    private final ClientSearchService search;
-    private final ClientUpdateService update;
+    private final UserCreateService create;
+    private final GetAllUsersService get;
+    private final UserSearchService search;
+    private final UserUpdateService update;
 
 
     @GetMapping()
     @ResponseStatus(HttpStatus.FOUND)
-    public List<ClientResponseDTO> getAllClients() {
+    public List<UserResponseDTO> getAllClients() {
         return get.getAllClients();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public ClientResponseDTO searchClient(@PathVariable("id") @NotNull UUID id) {
-        return search.searchClient(id);
+    public UserResponseDTO searchClient(@PathVariable("id") @NotNull UUID id) {
+        return search.searchUser(id);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientResponseDTO createClient (@RequestBody AddClientRequest request) {
+    public UserResponseDTO createClient (@RequestBody CreateUserRequest request) {
         return create.createClient(request);
     }
 
     @PutMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientResponseDTO updateClient(@RequestBody UpdateClientRequest request) {
+    public UserResponseDTO updateClient(@RequestBody UpdateClientRequest request) {
         return update.updateClient(request);
     }
 

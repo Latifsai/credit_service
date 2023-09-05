@@ -84,7 +84,7 @@ public class Account {
 
     @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, orphanRemoval = true)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
-    private Client client;
+    private User user;
 
     @OneToMany(mappedBy = "account", fetch = LAZY,
             cascade = ALL)
@@ -127,7 +127,7 @@ public class Account {
                 ", unpaidCreditSum=" + unpaidCreditSum +
                 ", currency='" + currency + '\'' +
                 ", credit=" + credits +
-                ", client=" + client +
+                ", client=" + user +
                 '}';
     }
 }

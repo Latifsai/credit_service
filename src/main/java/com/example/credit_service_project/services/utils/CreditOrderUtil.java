@@ -4,7 +4,8 @@ import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderDT
 import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderResponseDTO;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
 import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderDTORequest;
-import com.example.credit_service_project.entity.Client;
+import com.example.credit_service_project.entity.Account;
+import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.services.utils.calculators.CurrencyConverter;
@@ -20,24 +21,24 @@ import static java.math.RoundingMode.HALF_EVEN;
 @Service
 public class CreditOrderUtil {
 
-    public CreditOrder convertAddRequestToEntity(CreateCreditOrderDTORequest request, Product product, Client client) {
+    public CreditOrder convertAddRequestToEntity(CreateCreditOrderDTORequest request, Product product, Account account) {
         CreditOrder creditOrder = new CreditOrder();
         creditOrder.setProduct(product);
         creditOrder.setNumber(CreditOrderGenerator.createCreditOrderNumber(request.getNumberLength()));
-        creditOrder.setAmount(CurrencyConverter.convertCurrency(product, client.getAccount()));
+        creditOrder.setAmount(CurrencyConverter.convertCurrency(product, account));
         creditOrder.setCreationDate(LocalDate.now());
         creditOrder.setLastUpdateDate(creditOrder.getCreationDate());
-        creditOrder.setClientSalary(client.getSalary());
-        creditOrder.setPassiveIncome(client.getPassiveIncome());
-        creditOrder.setClientMonthlyExpenditure(client.getExpenses());
+        creditOrder.setClientSalary(account.getUser().getSalary());
+        creditOrder.setPassiveIncome(account.getUser().getPassiveIncome());
+        creditOrder.setClientMonthlyExpenditure(account.getUser().getExpenses());
         creditOrder.setMaxPeriodMonths(CreditOrderGenerator.maxPeriod);
         creditOrder.setMinPeriodMonths(CreditOrderGenerator.minPeriod);
         creditOrder.setCreditOrderStatus(IN_REVIEW);
-        creditOrder.setClientEmail(client.getEmail());
+        creditOrder.setClientEmail(account.getUser().getEmail());
         return creditOrder;
     }
 
-    public CreateCreditOrderResponseDTO convertToAddResponse(CreditOrder order, Product product, Client client) {
+    public CreateCreditOrderResponseDTO convertToAddResponse(CreditOrder order, Product product, Account account) {
         return  CreateCreditOrderResponseDTO.builder()
                 .productID(product.getId())
                 .productName(product.getName())
@@ -48,7 +49,7 @@ public class CreditOrderUtil {
                 .maxPeriodMonths(order.getMaxPeriodMonths())
                 .minPeriodMonths(order.getMinPeriodMonths())
                 .creditOrderStatus(order.getCreditOrderStatus())
-                .currency(client.getAccount().getCurrency())
+                .currency(account.getCurrency())
                 .build();
     }
 

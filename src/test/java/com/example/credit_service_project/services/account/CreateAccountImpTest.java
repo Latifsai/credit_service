@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.account;
 
 import com.example.credit_service_project.repositories.AccountRepository;
-import com.example.credit_service_project.services.client.ClientSearchService;
+import com.example.credit_service_project.services.user.UserSearchService;
 import com.example.credit_service_project.services.generators.DTOAccountCreator;
 import com.example.credit_service_project.services.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.AccountUtil;
@@ -25,7 +25,7 @@ public class CreateAccountImpTest {
     @Mock
     private AccountRepository repository;
     @Mock
-    private ClientSearchService searchClientService;
+    private UserSearchService searchClientService;
     @Mock
     private AccountUtil util;
     @InjectMocks
@@ -38,7 +38,7 @@ public class CreateAccountImpTest {
         var account = EntityCreator.getAccount();
         var client = EntityCreator.getClient();
 
-        when(searchClientService.findClientById(request.getClientId())).thenReturn(Optional.of(client));
+        when(searchClientService.findUserById(request.getClientId())).thenReturn(Optional.of(client));
 
         when(util.convertAddRequestToAccount(request, client)).thenReturn(account);
 

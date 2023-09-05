@@ -1,8 +1,8 @@
-package com.example.credit_service_project.services.client;
+package com.example.credit_service_project.services.user;
 
-import com.example.credit_service_project.repositories.ClientRepository;
+import com.example.credit_service_project.repositories.UserRepository;
 import com.example.credit_service_project.services.generators.EntityCreator;
-import com.example.credit_service_project.services.utils.ClientUtil;
+import com.example.credit_service_project.services.utils.UserUtil;
 import com.example.credit_service_project.services.generators.DTOClientCreator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,11 +20,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ClientSearchServiceTest {
     @Mock
-    private ClientRepository repository;
+    private UserRepository repository;
     @Mock
-    private ClientUtil util;
+    private UserUtil util;
     @InjectMocks
-    private ClientSearchService service;
+    private UserSearchService service;
 
     @Test
     public void testAddClientSuccess() {
@@ -34,14 +34,14 @@ class ClientSearchServiceTest {
         when(repository.findById(id)).thenReturn(Optional.of(client));
         when(util.convertClientToResponse(client)).thenReturn(DTOClientCreator.getResponse());
 
-        assertEquals(DTOClientCreator.getResponse(), service.searchClient(id));
+        assertEquals(DTOClientCreator.getResponse(), service.searchUser(id));
     }
 
     @Test
     public void testAddClientNotFoundException() {
         UUID id = UUID.randomUUID();
         when(repository.findById(id)).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> service.searchClient(id));
+        assertThrows(NotFoundException.class, () -> service.searchUser(id));
     }
 
 

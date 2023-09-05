@@ -1,4 +1,4 @@
-package com.example.credit_service_project.DTO.client;
+package com.example.credit_service_project.DTO.user;
 
 import lombok.Builder;
 import lombok.Value;
@@ -9,10 +9,8 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class ClientResponseDTO {
+public class UserResponseDTO {
     UUID id;
-    UUID managerId;
-    String managerEmail;
     String name;
     String surname;
     BigDecimal income;

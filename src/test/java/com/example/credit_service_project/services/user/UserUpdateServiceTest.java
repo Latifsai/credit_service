@@ -1,9 +1,9 @@
-package com.example.credit_service_project.services.client;
+package com.example.credit_service_project.services.user;
 
-import com.example.credit_service_project.DTO.client.UpdateClientRequest;
-import com.example.credit_service_project.repositories.ClientRepository;
+import com.example.credit_service_project.DTO.user.UpdateClientRequest;
+import com.example.credit_service_project.repositories.UserRepository;
 import com.example.credit_service_project.services.generators.EntityCreator;
-import com.example.credit_service_project.services.utils.ClientUtil;
+import com.example.credit_service_project.services.utils.UserUtil;
 import com.example.credit_service_project.services.generators.DTOClientCreator;
 import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
@@ -21,13 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ClientUpdateServiceTest {
+class UserUpdateServiceTest {
     @Mock
-    private ClientRepository repository;
+    private UserRepository repository;
     @Mock
-    private ClientUtil util;
+    private UserUtil util;
     @InjectMocks
-    private ClientUpdateService service;
+    private UserUpdateService service;
 
     @Test
     public void testAddClientSuccess() {

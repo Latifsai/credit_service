@@ -8,6 +8,7 @@ import java.util.UUID;
 @Value
 public class CreateCreditOrderDTORequest {
     BigInteger productID;
-    UUID clientID;
+    UUID accountID;
+    String accountNumber;
     Integer numberLength;
 }

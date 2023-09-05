@@ -18,12 +18,12 @@ public class CardUtil {
         Card card = new Card();
         card.setAccount(account);
         card.setCardNumber(CardGenerator.generateIBANAndCardCode(12));
-        card.setHolderName(account.getClient().getName() + " " + account.getClient().getSurname());
+        card.setHolderName(account.getUser().getName() + " " + account.getUser().getSurname());
         card.setIBAN(CardGenerator.getIBAN(account.getCountry()));
         card.setOpeningDate(LocalDate.now());
         card.setExpirationDate(CardGenerator.setExpirationDate(card.getOpeningDate(), request.getYearAccessibility()));
         card.setBalance(account.getBalance());
-        card.setDeliveryAddress(account.getClient().getAddress());
+        card.setDeliveryAddress(account.getUser().getAddress());
         card.setDigitalValet(request.isDigitalValet());
         card.setPaymentSystem(request.getPaymentSystem());
         card.setCardStatus(CardStatus.ACTIVE);

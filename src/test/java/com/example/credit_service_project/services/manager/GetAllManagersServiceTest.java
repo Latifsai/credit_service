@@ -3,7 +3,6 @@ package com.example.credit_service_project.services.manager;
 import com.example.credit_service_project.repositories.ManagerRepository;
 import com.example.credit_service_project.services.generators.DTOManagerCreator;
 import com.example.credit_service_project.services.generators.EntityCreator;
-import com.example.credit_service_project.services.utils.ManagerUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

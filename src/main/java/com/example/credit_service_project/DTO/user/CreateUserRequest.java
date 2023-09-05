@@ -1,4 +1,4 @@
-package com.example.credit_service_project.DTO.client;
+package com.example.credit_service_project.DTO.user;
 
 import lombok.Value;
 
@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Value
-public class AddClientRequest {
+public class CreateUserRequest {
     UUID managerID;
     String name;
     String surname;

@@ -11,6 +11,6 @@ create table accounts (
     percentage_debt decimal(38, 2),
     status enum ('ACTIVE','BLOCKED','DELETED') not null,
     unpaid_credit_sum decimal(38, 2),
-    client_id binary(16),
+    user_id binary(16),
     primary key (id)
 ) engine = InnoDB;

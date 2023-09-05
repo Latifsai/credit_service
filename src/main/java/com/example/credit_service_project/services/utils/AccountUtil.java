@@ -4,7 +4,7 @@ import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
 import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
-import com.example.credit_service_project.entity.Client;
+import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import com.example.credit_service_project.services.utils.generator.AccountGenerator;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +18,9 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class AccountUtil {
 
-    public Account convertAddRequestToAccount(CreateAccountDTORequest request, Client client) {
+    public Account convertAddRequestToAccount(CreateAccountDTORequest request, User user) {
         Account account = new Account();
-        account.setClient(client);
+        account.setUser(user);
         account.setCountry(request.getCountry());
         account.setAccountNumber(AccountGenerator.createRandomAccountNumber(request.getAccountNumberLength()));
         account.setLoanDebt(BigDecimal.ZERO);
@@ -39,7 +39,7 @@ public class AccountUtil {
         return AccountDTOResponse.builder()
                 .id(account.getId())
                 .accountNumber(account.getAccountNumber())
-                .clientInitial(account.getClient().getName() + " " + account.getClient().getSurname())
+                .clientInitial(account.getUser().getName() + " " + account.getUser().getSurname())
                 .loanDebt(account.getLoanDebt())
                 .percentageDebt(account.getPercentageDebt())
                 .status(account.getStatus())
