@@ -8,13 +8,20 @@ import com.example.credit_service_project.repositories.ClientRepository;
 import com.example.credit_service_project.repositories.RoleRepository;
 import com.example.credit_service_project.services.manager.ManagerSearchService;
 import com.example.credit_service_project.services.utils.ClientUtil;
+import com.example.credit_service_project.validation.ErrorsMessage;
+import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +35,10 @@ public class ClientCreateService implements UserDetailsService {
     public ClientResponseDTO createClient(AddClientRequest request) {
         Manager manager = searchManagerService.findManagerById(request.getManagerID());
         Client client = util.convertAddRequestToEntity(request, manager);
+
+        client.setRole(roleRepository.findByName("ROLE_USER")
+                .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_ROLE_MESSAGE)));
+
         Client savedClient = saveClient(client);
         log.info("Create and save client with ID: {}", savedClient.getId());
         return util.convertClientToResponse(savedClient);
@@ -38,7 +49,16 @@ public class ClientCreateService implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        Client client = repository.findByName(username)
+                .orElseThrow(() -> new  UsernameNotFoundException(ErrorsMessage.NOT_FOUND_CLIENT_MESSAGE + " with name: " + username));
+        return new User(
+                client.getName(),
+                client.getPassword(),
+                Collections.singleton(new SimpleGrantedAuthority(client.getRole().getName()))
+        );
     }
+
+
 }

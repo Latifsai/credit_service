@@ -13,6 +13,7 @@ public class ErrorsMessage {
     public static final String NOT_FOUND_PRODUCT_MESSAGE = "NO SUCH PRODUCT WAS FOUND!";
     public static final String NOT_FOUND_AGREEMENT_MESSAGE = "NO SUCH AGREEMENT WAS FOUND!";
     public static final String NOT_FOUND_CREDIT_MESSAGE = "NO SUCH CREDIT WAS FOUND!";
+    public static final String NOT_FOUND_ROLE_MESSAGE = "NO SUCH ROLE WAS FOUND!";
     public static final String UNKNOWN_TARGET_CURRENCY = "TARGET CURRENCY IS UNKNOWN!";
     public static final String UNKNOWN_SOURCE_CURRENCY = "SOURCE CURRENCY IS UNKNOWN!";
 

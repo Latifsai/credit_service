@@ -5032,3 +5032,98 @@ Caused by: java.sql.SQLSyntaxErrorException: Unknown database 'credit_service'
 05.09.2023 09:48:13.836 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 05.09.2023 09:48:13.852 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
 05.09.2023 09:48:13.862 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+05.09.2023 13:29:35.768 [restartedMain] INFO  c.e.c.CreditServiceProjectApplication - Starting CreditServiceProjectApplication using Java 20.0.2 with PID 17308 (D:\IdeaProjects\credit_service\target\classes started by User in D:\IdeaProjects\credit_service)
+05.09.2023 13:29:35.772 [restartedMain] INFO  c.e.c.CreditServiceProjectApplication - No active profile set, falling back to 1 default profile: "default"
+05.09.2023 13:29:35.902 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+05.09.2023 13:29:35.903 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+05.09.2023 13:29:39.670 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+05.09.2023 13:29:39.858 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 170 ms. Found 11 JPA repository interfaces.
+05.09.2023 13:29:41.616 [restartedMain] INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+05.09.2023 13:29:41.638 [restartedMain] INFO  o.a.c.c.StandardService - Starting service [Tomcat]
+05.09.2023 13:29:41.639 [restartedMain] INFO  o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.10]
+05.09.2023 13:29:41.769 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+05.09.2023 13:29:41.769 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5865 ms
+05.09.2023 13:29:42.179 [restartedMain] INFO  c.z.h.HikariDataSource - HikariPool-1 - Starting...
+05.09.2023 13:29:43.184 [restartedMain] INFO  c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@459220b2
+05.09.2023 13:29:43.190 [restartedMain] INFO  c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+05.09.2023 13:29:45.482 [restartedMain] INFO  liquibase.changelog - Reading from credit_service.DATABASECHANGELOG
+05.09.2023 13:29:45.808 [restartedMain] INFO  l.lockservice - Successfully acquired change log lock
+05.09.2023 13:29:45.837 [restartedMain] INFO  liquibase.command - Using deploymentId: 3913385836
+05.09.2023 13:29:45.843 [restartedMain] INFO  liquibase.changelog - Reading from credit_service.DATABASECHANGELOG
+05.09.2023 13:29:46.160 [restartedMain] INFO  liquibase.changelog - SQL in file 02-create-roles-table.sql executed
+05.09.2023 13:29:46.163 [restartedMain] INFO  liquibase.changelog - ChangeSet db/changelog/v-1.0/02-changeset-roles-table.xml::2.1::latif ran successfully in 276ms
+05.09.2023 13:29:46.213 [restartedMain] INFO  liquibase.changelog - Custom SQL executed
+05.09.2023 13:29:46.219 [restartedMain] INFO  liquibase.changelog - ChangeSet db/changelog/v-1.0/02-changeset-roles-table.xml::insert::latif ran successfully in 30ms
+05.09.2023 13:29:46.276 [restartedMain] INFO  liquibase.util - UPDATE SUMMARY
+05.09.2023 13:29:46.277 [restartedMain] INFO  liquibase.util - Run:                          2
+05.09.2023 13:29:46.277 [restartedMain] INFO  liquibase.util - Previously run:              33
+05.09.2023 13:29:46.278 [restartedMain] INFO  liquibase.util - Filtered out:                 0
+05.09.2023 13:29:46.278 [restartedMain] INFO  liquibase.util - -------------------------------
+05.09.2023 13:29:46.279 [restartedMain] INFO  liquibase.util - Total change sets:           35
+
+05.09.2023 13:29:46.282 [restartedMain] INFO  liquibase.util - Update summary generated
+05.09.2023 13:29:46.284 [restartedMain] INFO  liquibase.command - Update command completed successfully.
+05.09.2023 13:29:46.297 [restartedMain] INFO  l.lockservice - Successfully released change log lock
+05.09.2023 13:29:46.299 [restartedMain] INFO  liquibase.command - Command execution complete
+05.09.2023 13:29:46.582 [restartedMain] INFO  o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+05.09.2023 13:29:46.758 [restartedMain] INFO  o.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.5.Final
+05.09.2023 13:29:46.763 [restartedMain] INFO  o.h.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+05.09.2023 13:29:47.105 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+05.09.2023 13:29:47.432 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+05.09.2023 13:29:48.035 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+05.09.2023 13:29:49.808 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+05.09.2023 13:29:49.892 [restartedMain] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [password] in table [clients]
+05.09.2023 13:29:49.893 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [password] in table [clients]
+05.09.2023 13:29:49.895 [restartedMain] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+05.09.2023 13:29:49.908 [restartedMain] INFO  c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+05.09.2023 13:29:49.912 [restartedMain] INFO  o.a.c.c.StandardService - Stopping service [Tomcat]
+05.09.2023 13:29:49.934 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+05.09.2023 13:29:49.976 [restartedMain] ERROR o.s.b.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [password] in table [clients]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at com.example.credit_service_project.CreditServiceProjectApplication.main(CreditServiceProjectApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [password] in table [clients]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 19 common frames omitted
+Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [password] in table [clients]
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateTable(AbstractSchemaValidator.java:145)
+	at org.hibernate.tool.schema.internal.GroupedSchemaValidatorImpl.validateTables(GroupedSchemaValidatorImpl.java:46)
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.performValidation(AbstractSchemaValidator.java:97)
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.doValidation(AbstractSchemaValidator.java:75)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:293)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:292)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:431)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1455)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	... 23 common frames omitted
