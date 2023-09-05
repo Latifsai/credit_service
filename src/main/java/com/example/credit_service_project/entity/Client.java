@@ -31,6 +31,10 @@ public class Client {
     @NotBlank(message = "Surname must not be blank!")
     private String surname;
 
+    @Column(name = "password")
+    @NotBlank(message = "Password must not be blank!")
+    private String password;
+
     @Column(name = "salary")
     @PositiveOrZero(message = "Income must not be negative!")
     private BigDecimal salary;
@@ -47,7 +51,7 @@ public class Client {
     @NotBlank(message = "Address must not be blank!")
     private String address;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @NotBlank(message = "email must not be blank!")
     @Email(message = "Format must be email!")
     private String email;
@@ -71,6 +75,10 @@ public class Client {
     @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private Manager manager;
+
+    @OneToOne(cascade = ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 
     @Override
     public boolean equals(Object o) {

@@ -3,9 +3,10 @@ package com.example.credit_service_project.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
@@ -33,7 +34,11 @@ public class Manager {
     @NotBlank(message = "Surname must not be blank!")
     private String surname;
 
-    @Column(name = "e-mail")
+    @Column(name = "password")
+    @NotBlank(message = "Password must not be blank!")
+    private String password;
+
+    @Column(name = "e-mail", unique = true)
     @Email(message = "email must match the format of the email")
     @NotBlank(message = "Email must not be blank!")
     private String email;
@@ -41,6 +46,9 @@ public class Manager {
     @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY, cascade = {MERGE, PERSIST, REFRESH})
     private List<Client> clients;
 
+    @OneToOne(cascade = ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
