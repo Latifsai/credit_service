@@ -21,27 +21,12 @@ import java.util.UUID;
 public class ProductController {
     private final ProductCreateService create;
     private final ProductDeleteService delete;
-    private final GetAllProductsService get;
-    private final ProductSearchService search;
     private final ProductUpdateService update;
-    private final GetPreliminaryCalculationOfProduct getPreliminaryCalculationOfProduct;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductResponseDTO add(@RequestBody AddProductDTORequest request) {
         return create.createProduct(request);
-    }
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.FOUND) //permit all
-    public List<ProductResponseDTO> getAllProducts() {
-        return get.getAllProducts();
-    }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.FOUND) //permit all
-    public ProductResponseDTO search(@PathVariable(name = "id") BigInteger id) {
-        return search.searchProduct(id);
     }
 
     @PutMapping
@@ -54,18 +39,6 @@ public class ProductController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ProductResponseDTO delete(@PathVariable BigInteger id) {
         return delete.deleteProduct(id);
-    }
-
-    @GetMapping("/preview")
-    @ResponseStatus(HttpStatus.OK) // permit all
-    public List<PreliminaryCalculationResponse> showPreliminary(@RequestParam(name = "accountID") UUID accountID,
-                                                                @RequestParam(name = "accountNumber") String accountNumber,
-                                                                @RequestParam(name = "productID") BigInteger productID,
-                                                                @RequestParam(name = "monthTerm") Integer monthTerm,
-                                                                @RequestParam(name = "interestRate") BigDecimal interestRate) {
-
-        var request = new PreliminaryCalculationRequest(accountID, accountNumber, productID, monthTerm, interestRate);
-        return getPreliminaryCalculationOfProduct.getPreliminaryCalculation(request);
     }
 
 }

@@ -19,6 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/auth")
 public class SearchController {
 
     private final CardSearchService cardSearch;
@@ -37,13 +38,13 @@ public class SearchController {
         return cardSearch.searchCard(id);
     }
 
-    @GetMapping("/operations/")
+    @GetMapping("/operations")
     @ResponseStatus(HttpStatus.FOUND)
     public List<OperationResponseDTO> get(@RequestBody GetBelongsAccountOperationsRequest request) {
         return getAllOperations.getAllOperations(request);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("operations/{id}")
     @ResponseStatus(HttpStatus.FOUND) // админ и юзер
     public OperationResponseDTO search(@PathVariable("id") @NotNull UUID id) {
         return operationSearch.searchOperation(id);
