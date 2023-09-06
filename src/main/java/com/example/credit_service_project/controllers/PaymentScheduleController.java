@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/payment") // manager and user
 @RequiredArgsConstructor
 public class PaymentScheduleController {
 
@@ -25,7 +25,7 @@ public class PaymentScheduleController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
-    public GetBelongsPaymentsResponse get(@RequestBody PaymentsBelongsToAccountRequest request) {
+    public GetBelongsPaymentsResponse getBelongsPaymentsResponse(@RequestBody PaymentsBelongsToAccountRequest request) {
         return getBelongsToTheAccountPaymentsList.getBelongsToAccountPayments(request);
     }
 

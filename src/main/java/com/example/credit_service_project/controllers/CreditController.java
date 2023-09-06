@@ -36,7 +36,7 @@ public class CreditController {
         return create.createCredit(request);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // может юзер и админ
     @ResponseStatus(HttpStatus.FOUND)
     public List<PaymentResponseDTO> getUnpaidPayments(@PathVariable("id") UUID id) {
         return checkUnpaidPaymentsBelongsCreditService.checkUnpaidPaymentsBelongsCredit(id);

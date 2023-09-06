@@ -3,10 +3,7 @@ package com.example.credit_service_project.controllers;
 import com.example.credit_service_project.DTO.user.CreateUserRequest;
 import com.example.credit_service_project.DTO.user.UserResponseDTO;
 import com.example.credit_service_project.DTO.user.UpdateClientRequest;
-import com.example.credit_service_project.services.user.UserCreateService;
-import com.example.credit_service_project.services.user.GetAllUsersService;
-import com.example.credit_service_project.services.user.UserSearchService;
-import com.example.credit_service_project.services.user.UserUpdateService;
+import com.example.credit_service_project.services.user.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,14 +13,15 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping("/users") //manager
 @RequiredArgsConstructor
-public class ClientController {
+public class UserController {
 
     private final UserCreateService create;
     private final GetAllUsersService get;
     private final UserSearchService search;
     private final UserUpdateService update;
+    private final UserDeleteService delete;
 
 
     @GetMapping()
@@ -50,4 +48,9 @@ public class ClientController {
         return update.updateClient(request);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@PathVariable(name = "id") UUID id){
+        delete.delete(id);
+    }
 }

@@ -34,7 +34,7 @@ public class CreditOrderController {
         return getAllOrders.getAllCreditOrders();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") //админ и юзер
     @ResponseStatus(HttpStatus.FOUND)
     public CreditOrderResponseDTO find(@PathVariable("id") @NotNull UUID id) {
         return search.searchCreditOrder(id);
@@ -52,7 +52,7 @@ public class CreditOrderController {
         return decisionOrderService.acceptOrder();
     }
 
-    @GetMapping("/check/{id}")
+    @GetMapping("/check/{id}")// админ и юзер
     @ResponseStatus(HttpStatus.FOUND)
     public CheckCreditOrderStatusResponse checkStatus(@PathVariable("id") @NotNull UUID id) {
         return checkCreditOrderStatus.checkOrderStatus(id);

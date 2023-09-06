@@ -5,7 +5,7 @@ import com.example.credit_service_project.DTO.auth.JwtRequest;
 import com.example.credit_service_project.DTO.auth.RegistrationRequest;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.services.user.UserCreateService;
-import com.example.credit_service_project.services.utils.JwtTokenUtils;
+import com.example.credit_service_project.services.auth.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserCreateService userCreateService;
-    private final JwtTokenUtils jwtTokenUtils;
+    private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
 
@@ -37,7 +37,7 @@ public class AuthController {
         }
 
         UserDetails userDetails = userCreateService.loadUserByUsername(request.getUsername());
-        String token = jwtTokenUtils.generateToken(userDetails);
+        String token = jwtTokenProvider.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
     }

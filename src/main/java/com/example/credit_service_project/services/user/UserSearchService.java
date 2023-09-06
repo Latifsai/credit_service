@@ -29,7 +29,7 @@ public class UserSearchService {
     }
 
     public User findUserById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_CLIENT_MESSAGE));
+        return repository.findById(id).orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_USER_MESSAGE));
     }
 
 }

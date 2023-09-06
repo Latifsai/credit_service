@@ -33,13 +33,13 @@ public class ProductController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.FOUND) //permit all
     public List<ProductResponseDTO> getAllProducts() {
         return get.getAllProducts();
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.FOUND) //permit all
     public ProductResponseDTO search(@PathVariable(name = "id") BigInteger id) {
         return search.searchProduct(id);
     }
@@ -57,7 +57,7 @@ public class ProductController {
     }
 
     @GetMapping("/preview")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK) // permit all
     public List<PreliminaryCalculationResponse> showPreliminary(@RequestParam(name = "accountID") UUID accountID,
                                                                 @RequestParam(name = "accountNumber") String accountNumber,
                                                                 @RequestParam(name = "productID") BigInteger productID,

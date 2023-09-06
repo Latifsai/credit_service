@@ -19,9 +19,7 @@ import java.util.UUID;
 public class OperationController {
 
     private final PaymentProcessingService createPaymentOperation;
-    private final GetOperationsService get;
     private final ReplenishmentAndEarlyPaymentOperationService replenishmentAndEarlyPaymentOperation;
-    private final OperationSearchService search;
     private final OperationUpdateService update;
 
     @PostMapping
@@ -36,26 +34,10 @@ public class OperationController {
         return replenishmentAndEarlyPaymentOperation.performOperation(request);
     }
 
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<OperationResponseDTO> get(@RequestBody GetBelongsAccountOperationsRequest request) {
-        return get.getAllOperations(request);
-
-    }
-
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OperationResponseDTO update(@RequestBody UpdateOperationsRequest request) {
         return update.updateOperation(request);
     }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public OperationResponseDTO search(@PathVariable("id") @NotNull UUID id) {
-        return search.searchOperation(id);
-    }
-
-
 
 }

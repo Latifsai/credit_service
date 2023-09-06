@@ -6,6 +6,7 @@ import com.example.credit_service_project.validation.exceptions.*;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -80,4 +81,19 @@ public class GlobalExceptionHandler {
         ExceptionResponse response = new ExceptionResponse(errorExceptions);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(InvalidJwtException.class)
+    public ResponseEntity<?> handleInvalidJetException(InvalidJwtException e) {
+        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
+        ExceptionResponse response = new ExceptionResponse(errorExceptions);
+        return new ResponseEntity<>(response, HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<?> handleUsernameNotFoundException(UsernameNotFoundException e) {
+        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
+        ExceptionResponse response = new ExceptionResponse(errorExceptions);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 }

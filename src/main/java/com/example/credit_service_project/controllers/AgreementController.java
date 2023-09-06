@@ -28,7 +28,7 @@ public class AgreementController {
         return get.getAllAgreements();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // модет юзер и админ
     @ResponseStatus(HttpStatus.FOUND)
     public AgreementResponse findAll(@PathVariable(name = "id") UUID id) {
         return search.searchAgreement(id);
