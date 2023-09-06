@@ -3,17 +3,14 @@ package com.example.credit_service_project.controllers;
 import com.example.credit_service_project.DTO.ProductDTO.AddProductDTORequest;
 import com.example.credit_service_project.DTO.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.DTO.ProductDTO.UpdateProductDTORequest;
-import com.example.credit_service_project.DTO.operationDTO.PreliminaryCalculationRequest;
-import com.example.credit_service_project.DTO.paymentDTO.PreliminaryCalculationResponse;
-import com.example.credit_service_project.services.product.*;
+import com.example.credit_service_project.services.product.ProductCreateService;
+import com.example.credit_service_project.services.product.ProductDeleteService;
+import com.example.credit_service_project.services.product.ProductUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/product")

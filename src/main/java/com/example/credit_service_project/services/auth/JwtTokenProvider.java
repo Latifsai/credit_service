@@ -21,18 +21,12 @@ public class JwtTokenProvider {
     @Value("${jwt.lifetime}")
     private Duration jwtLifetime;
 
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        List<String> roleList = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .toList();
-
-        claims.put("roles", roleList);
+    public String generateToken(String username) {
         Date issudeDate = new Date();
         Date expiredDate = new Date(issudeDate.getTime() + jwtLifetime.toMillis());
+
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(username)
                 .setIssuedAt(issudeDate)
                 .setExpiration(expiredDate)
                 .signWith(SignatureAlgorithm.HS256, secret)

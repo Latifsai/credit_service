@@ -1,7 +1,6 @@
 package com.example.credit_service_project.services.manager;
 
 import com.example.credit_service_project.DTO.manager.AddManagerRequest;
-import com.example.credit_service_project.repositories.ManagerRepository;
 import com.example.credit_service_project.services.generators.DTOManagerCreator;
 import com.example.credit_service_project.services.generators.EntityCreator;
 import jakarta.validation.Validation;

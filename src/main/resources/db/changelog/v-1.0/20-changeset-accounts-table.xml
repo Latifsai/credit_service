@@ -26,16 +26,16 @@
 
     <changeSet id="addForeignKeyAccounts" author="latif">
         <addForeignKeyConstraint baseTableName="accounts"
-                                 baseColumnNames="client_id"
-                                 constraintName="FK_accounts_clients"
-                                 referencedTableName="clients"
+                                 baseColumnNames="user_id"
+                                 constraintName="FK_accounts_users"
+                                 referencedTableName="users"
                                  referencedColumnNames="id"/>
     </changeSet>
 
 
     <changeSet id="addUniqueConstraint" author="latif">
         <addUniqueConstraint tableName="accounts"
-                             columnNames="client_id"
+                             columnNames="user_id"
                              constraintName="UK_d4jd6sehy1h0pudduahn0ntbe"/>
     </changeSet>
 

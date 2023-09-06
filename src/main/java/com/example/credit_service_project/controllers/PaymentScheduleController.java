@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/payment") // manager and user
+@RequestMapping("/payments") // manager and user
 @RequiredArgsConstructor
 public class PaymentScheduleController {
 

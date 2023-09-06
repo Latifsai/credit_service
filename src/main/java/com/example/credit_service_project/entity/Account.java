@@ -83,7 +83,7 @@ public class Account {
     //-> владеющая сторона
 
     @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, orphanRemoval = true)
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @OneToMany(mappedBy = "account", fetch = LAZY,

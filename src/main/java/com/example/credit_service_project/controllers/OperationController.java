@@ -27,7 +27,7 @@ public class OperationController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public List<OperationResponseDTO> add() {
+    public List<OperationResponseDTO> handlePayments() {
         return createPaymentOperation.handlePayments();
     }
 
@@ -37,7 +37,7 @@ public class OperationController {
      */
     @PostMapping("/elective")
     @ResponseStatus(HttpStatus.CREATED)
-    public OperationResponseDTO add(@RequestBody PaymentsOperationRequest request) {
+    public OperationResponseDTO addNewOperation(@RequestBody PaymentsOperationRequest request) {
         return replenishmentAndEarlyPaymentOperation.performOperation(request);
     }
 

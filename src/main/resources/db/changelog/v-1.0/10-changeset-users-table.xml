@@ -29,49 +29,49 @@
     <changeSet id="insert" author="latif">
         <sql>
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('00aeba1a-b777-48a9-8928-9955b8e156e7', '-', '')), 'Lera Odos 21', 'pro_eilley@gmail.com', '1390.00', 'Eilley', '0.00', '+30 133 438 9087', '2023-08-29', '2870.00', 'Prodocous', '2023-08-29', 1);
+            VALUES (UNHEX(REPLACE('00aeba1a-b777-48a9-8928-9955b8e156e7', '-', '')), 'Lera Odos 21', 'pro_eilley@gmail.com', '1390.00', 'Eilley', '0.00', '+30 133 438 9087', '2023-08-29', '2870.00', 'Prodocous', '2023-08-29', 2125, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('048882e0-6226-456f-ade3-508ed5d604e1', '-', '')), 'Wormwood street A65', 'alice@gmail.com', '687.56', 'Alisa', '89.00', '+44 880 857 9353', '2022-10-17', '1800.00', 'Wellhouse', '2022-10-17', 1);
+            VALUES (UNHEX(REPLACE('048882e0-6226-456f-ade3-508ed5d604e1', '-', '')), 'Wormwood street A65', 'alice@gmail.com', '687.56', 'Alisa', '89.00', '+44 880 857 9353', '2022-10-17', '1800.00', 'Wellhouse', '2022-10-17', 4444, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('0984720e-b9ca-4038-b457-3c0aab3f78c8', '-', '')), 'Via Casillina 65', 'raiden@iCloud.com', '2560.00', 'Raiden', '2250.00', '+39 333 546 8700', '2023-08-29', '4680.00', 'Thorson', '2023-08-29', 1);
+            VALUES (UNHEX(REPLACE('0984720e-b9ca-4038-b457-3c0aab3f78c8', '-', '')), 'Via Casillina 65', 'raiden@iCloud.com', '2560.00', 'Raiden', '2250.00', '+39 333 546 8700', '2023-08-29', '4680.00', 'Thorson', '2023-08-29', 5555, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('160720d4-423a-4a57-8363-e05b6cdb1e6e', '-', '')), '39th Ave', 'oliver@iCloud.com', '6000.00', 'Oliver', '35000.00', '+1 880 454 4981', '1989-01-12', '9800.00', 'Bisquit', '2012-09-17', 1);
+            VALUES (UNHEX(REPLACE('160720d4-423a-4a57-8363-e05b6cdb1e6e', '-', '')), '39th Ave', 'oliver@iCloud.com', '6000.00', 'Oliver', '35000.00', '+1 880 454 4981', '1989-01-12', '9800.00', 'Bisquit', '2012-09-17', 6666, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('3e5facea-c6eb-4d9f-acbe-6d1d1769b834', '-', '')), 'Karl Johans Street 12', 'svangar@iCloud.com', '10000.00', 'Sven', '10000.00', '+47 987 65 432', '2019-04-30', '35000.00', 'Jägnar', '2021-06-25', 1);
+            VALUES (UNHEX(REPLACE('3e5facea-c6eb-4d9f-acbe-6d1d1769b834', '-', '')), 'Karl Johans Street 12', 'svangar@iCloud.com', '10000.00', 'Sven', '10000.00', '+47 987 65 432', '2019-04-30', '35000.00', 'Jägnar', '2021-06-25', 7777, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('4a4a540c-1e62-4026-a742-b402ebdd4214', '-', '')), 'Storgata pedestrian street 99', 'konung_ragnar@iCloud.com', '19600.00', 'Ragnar', '20000.00', '+47 880 85 935', '2017-06-29', '500000.00', 'Lothbrok', '2022-11-17', 1);
+            VALUES (UNHEX(REPLACE('4a4a540c-1e62-4026-a742-b402ebdd4214', '-', '')), 'Storgata pedestrian street 99', 'konung_ragnar@iCloud.com', '19600.00', 'Ragnar', '20000.00', '+47 880 85 935', '2017-06-29', '500000.00', 'Lothbrok', '2022-11-17', 8888, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('5388f283-47b0-4a7e-a698-bd7150c35ab7', '-', '')), 'Argyle street 15', 'li_bruce@iCloud.com', '20000.00', 'Bruce', '22000.00', '+1 453 919 4321', '2013-10-11', '44000.00', 'Li', '2018-05-19', 1);
+            VALUES (UNHEX(REPLACE('5388f283-47b0-4a7e-a698-bd7150c35ab7', '-', '')), 'Argyle street 15', 'li_bruce@iCloud.com', '20000.00', 'Bruce', '22000.00', '+1 453 919 4321', '2013-10-11', '44000.00', 'Li', '2018-05-19', 9999, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('7095f6cf-1d3d-414f-800a-ba563b5ba6d5', '-', '')), 'Mendji street 34', 'brandon@mail.com', '2000.00', 'Brandon', '230.00', '+48 453 777 215', '2018-12-15', '6346.00', 'Mcgregor', '2022-07-28', 1);
+            VALUES (UNHEX(REPLACE('7095f6cf-1d3d-414f-800a-ba563b5ba6d5', '-', '')), 'Mendji street 34', 'brandon@mail.com', '2000.00', 'Brandon', '230.00', '+48 453 777 215', '2018-12-15', '6346.00', 'Mcgregor', '2022-07-28', 0000, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('906141bf-dfd4-47d2-815e-e29a0ef660fe', '-', '')), 'Gülveren Sk. 6', 'volodya@gmail.com', '30000.00', 'Vladimir', '10000.00', '+90 222 658 4328', '2015-07-01', '100000.00', 'Karpov', '2019-10-10', 1);
+            VALUES (UNHEX(REPLACE('906141bf-dfd4-47d2-815e-e29a0ef660fe', '-', '')), 'Gülveren Sk. 6', 'volodya@gmail.com', '30000.00', 'Vladimir', '10000.00', '+90 222 658 4328', '2015-07-01', '100000.00', 'Karpov', '2019-10-10', 1111, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('a3ca9f00-3886-46c9-b1c2-6af707c72c6c', '-', '')), '23th Street', 'hoch_luna@yahoo.org', '1979.00', 'Luna', '330.00', '+55 88 4548 6633', '2009-03-04', '4780.00', 'Hochberg', '2018-08-02', 1);
+            VALUES (UNHEX(REPLACE('a3ca9f00-3886-46c9-b1c2-6af707c72c6c', '-', '')), '23th Street', 'hoch_luna@yahoo.org', '1979.00', 'Luna', '330.00', '+55 88 4548 6633', '2009-03-04', '4780.00', 'Hochberg', '2018-08-02', 2222, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('ab2b2e5f-3fbd-47bb-bb2b-b30e998bec27', '-', '')), 'Via Aversa 32', 'lalan@hushmail.com', '159760.00', 'Lalan', '1500.00', '+81 810 120 920', '2023-03-07', '342000.00', 'Andrellton', '2023-08-29', 1);
+            VALUES (UNHEX(REPLACE('ab2b2e5f-3fbd-47bb-bb2b-b30e998bec27', '-', '')), 'Via Aversa 32', 'lalan@hushmail.com', '159760.00', 'Lalan', '1500.00', '+81 810 120 920', '2023-03-07', '342000.00', 'Andrellton', '2023-08-29', 2233, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('c2c05179-806e-42a4-8f30-1cf4d7711952', '-', '')), 'Winterfell street 245', 'j_snow@gmail.com', '1330.00', 'John', '300.00', '+44 880 857 9353', '2022-06-15', '2800.00', 'Stark', '2022-06-15',1 );
+            VALUES (UNHEX(REPLACE('c2c05179-806e-42a4-8f30-1cf4d7711952', '-', '')), 'Winterfell street 245', 'j_snow@gmail.com', '1330.00', 'John', '300.00', '+44 880 857 9353', '2022-06-15', '2800.00', 'Stark', '2022-06-15', 1212, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('caf07bfc-9de3-4b0b-800f-8d76fc332266', '-', '')), 'Mendji street 34', 'melli@gmail.com', '2760.00', 'Mellisa', '0.00', '+972 2 7772125', '2021-08-15', '12853.00', 'Greyshoe', '2022-03-29', 1);
+            VALUES (UNHEX(REPLACE('caf07bfc-9de3-4b0b-800f-8d76fc332266', '-', '')), 'Mendji street 34', 'melli@gmail.com', '2760.00', 'Mellisa', '0.00', '+972 2 7772125', '2021-08-15', '12853.00', 'Greyshoe', '2022-03-29', 2888, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('e5b763ff-ee88-462a-94c6-4302bb6e8d99', '-', '')), 'Mosin Str 76','lev_lanister@mail.com', '1400.00', 'Lev', '100.00', '+49 167 31105233', '2019-10-18','2450.00', 'Lanister', '2019-10-18', 1);
+            VALUES (UNHEX(REPLACE('e5b763ff-ee88-462a-94c6-4302bb6e8d99', '-', '')), 'Mosin Str 76','lev_lanister@mail.com', '1400.00', 'Lev', '100.00', '+49 167 31105233', '2019-10-18','2450.00', 'Lanister', '2019-10-18', 0505, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('ec5499c8-9bc1-4e87-a4a4-ee4ace2e001d', '-', '')), 'Mans Avenu 32', 'vitka@yahoo.org','12000.00', 'Vita', '0.00', '+66 800 020600', '2017-09-19', '25000.00', 'Kravchenko', '2023-08-29', 1);
+            VALUES (UNHEX(REPLACE('ec5499c8-9bc1-4e87-a4a4-ee4ace2e001d', '-', '')), 'Mans Avenu 32', 'vitka@yahoo.org','12000.00', 'Vita', '0.00', '+66 800 020600', '2017-09-19', '25000.00', 'Kravchenko', '2023-08-29', 3030, 1);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('eda11578-10ae-4ec6-a1a9-c0bbdfe0e4c6', '-', '')), 'Lera Odos', 'eanna@mail.com','3076.00', 'Eanna', '1549.00', '+40 43 234 7648', '2023-01-01', '6572.00', 'Prodocous', '2023-01-01', 1);
+            VALUES (UNHEX(REPLACE('eda11578-10ae-4ec6-a1a9-c0bbdfe0e4c6', '-', '')), 'Lera Odos', 'eanna@mail.com','3076.00', 'Eanna', '1549.00', '+40 43 234 7648', '2023-01-01', '6572.00', 'Prodocous', '2023-01-01', 8090, 1);
 
             -- managers
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('1adf0e65-73e5-4be2-86b4-92ca651aceb4', '-', '')), 'Wolf Street 32', 'beliy_manager@gmail.com', '1239.00' 'Oleg','0.00', '+30 133 465 8080','2022-01-12','3000.00' 'Belov', '2022-01-12', 2);
+            VALUES (UNHEX(REPLACE('1adf0e65-73e5-4be2-86b4-92ca651aceb4', '-', '')), 'Wolf Street 32', 'beliy_manager@gmail.com', '1239.00', 'Oleg', '0.00', '+30 133 465 8080','2022-01-12','3000.00', 'Belov', '2022-01-12', 4242, 2);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('35c3fe62-4279-4c21-a586-9ab31ee8348b','-','')), 'Longwater Street 43A', 'pol_Nikole_man@codopoliz.com', '1500.00', 'Nikole', '0.00', '+44 880 950 3333', '2019-05-17', '2870.00', 'Polenko', '2019-05-17', 2);
+            VALUES (UNHEX(REPLACE('35c3fe62-4279-4c21-a586-9ab31ee8348b','-','')), 'Longwater Street 43A', 'pol_Nikole_man@codopoliz.com', '1500.00', 'Nikole', '0.00', '+44 880 950 3333', '2019-05-17', '2870.00', 'Polenko', '2019-05-17', 5454, 2);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('56ada824-6e9b-4b6e-9054-e318639e232e','-','')), 'Ironside Street 100', 'thor_bjorn@iCloud.com', '40000.00', 'Bjorn', '0.00',  '+47 987 44 090', '2018-08-19', '2870.00', 'Halfthorsonn', '2018-08-19', 2);
+            VALUES (UNHEX(REPLACE('56ada824-6e9b-4b6e-9054-e318639e232e','-','')), 'Ironside Street 100', 'thor_bjorn@iCloud.com', '40000.00', 'Bjorn', '0.00',  '+47 987 44 090', '2018-08-19', '2870.00', 'Halfthorsonn', '2018-08-19', 0099, 2);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('59f85267-0e1d-4d2b-b9f9-cf61592ff186','-','')), 'La Avia 44', 'k_k@mail.com', '1000.00', 'Kirill', '0.00', '+39 333 404 7007', '2019-11-08', '2870.00', 'Krabzov', '2019-11-08', 2);
+            VALUES (UNHEX(REPLACE('59f85267-0e1d-4d2b-b9f9-cf61592ff186','-','')), 'La Avia 44', 'k_k@mail.com', '1000.00', 'Kirill', '0.00', '+39 333 404 7007', '2019-11-08', '2870.00', 'Krabzov', '2019-11-08', 1234, 2);
             INSERT INTO users
-            VALUES (UNHEX(REPLACE('60c46888-ed68-4925-a743-fae589a5c8ab','-','')),'7th Ave', 'nedd_snow_manager@mail.com', '2500.00', 'Nedd', '0.00', '+1 880 404 54803', '2020-03-12', '6890.00', 'Stark', '2020-03-12', 2);
+            VALUES (UNHEX(REPLACE('60c46888-ed68-4925-a743-fae589a5c8ab','-','')),'7th Ave', 'nedd_snow_manager@mail.com', '2500.00', 'Nedd', '0.00', '+1 880 404 54803', '2020-03-12', '6890.00', 'Stark', '2020-03-12', 4567, 2);
         </sql>
     </changeSet>
 

@@ -11,6 +11,7 @@ create table users
     salary            decimal(38, 2),
     surname           varchar(255) not null,
     update_date       date         not null,
+    password          varchar(255) not null,
     role_id           int          not null,
     primary key (id)
 ) engine = InnoDB;
