@@ -27,7 +27,7 @@ public class UserUtil {
         return user;
     }
 
-    public UserResponseDTO convertClientToResponse(User user) {
+    public UserResponseDTO convertUserToResponse(User user) {
         return UserResponseDTO.builder()
                 .id(user.getId())
                 .name(user.getName())

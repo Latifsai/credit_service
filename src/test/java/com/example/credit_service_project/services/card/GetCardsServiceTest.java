@@ -1,5 +1,7 @@
 package com.example.credit_service_project.services.card;
 
+import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
+import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.repositories.CardRepository;
 import com.example.credit_service_project.services.generators.DTOCardCreator;
 import com.example.credit_service_project.services.generators.EntityCreator;
@@ -8,37 +10,35 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GetCardsServiceTest {
 
-    @Spy
+    @Mock
     private CardRepository repository;
 
     @Mock
     private CardUtil utils;
 
     @InjectMocks
-    private GetAllCardsService serviceImp;
+    private GetAllCardsService getAllCardsService;
 
     @Test
     public void testGetCardsSuccess() {
-        var cards = List.of(EntityCreator.getCard());
-        var expected = DTOCardCreator.getListResponse();
+        List<Card> cards = List.of(EntityCreator.getCard());
+        List<CardResponseDTO> expected = List.of(DTOCardCreator.getCardResponse());
 
         when(repository.findAll()).thenReturn(cards);
-
         when(utils.convertCardToAddDTOResponse(cards.get(0))).thenReturn(expected.get(0));
 
-        var response = serviceImp.getAllCards();
+        var response = getAllCardsService.getAllCards();
 
         assertEquals(expected, response);
     }
@@ -46,7 +46,7 @@ class GetCardsServiceTest {
     @Test
     public void testGetCardsEmptyListException() {
         when(repository.findAll()).thenReturn(Collections.emptyList());
-        assertEquals(Collections.emptyList(),serviceImp.getAllCards());
+        assertEquals(Collections.emptyList(),getAllCardsService.getAllCards());
     }
 
 }

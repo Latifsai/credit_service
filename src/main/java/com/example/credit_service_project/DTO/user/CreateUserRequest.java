@@ -7,7 +7,6 @@ import java.util.UUID;
 
 @Value
 public class CreateUserRequest {
-    UUID managerID;
     String name;
     String surname;
     BigDecimal salary;

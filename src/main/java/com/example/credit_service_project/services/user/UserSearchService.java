@@ -25,11 +25,12 @@ public class UserSearchService {
     public UserResponseDTO searchUser(UUID id) {
         User user = findUserById(id);
         log.info("Search client with ID: {}", user.getId());
-        return util.convertClientToResponse(user);
+        return util.convertUserToResponse(user);
     }
 
     public User findUserById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_USER_MESSAGE));
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_USER_MESSAGE));
     }
 
 }

@@ -1,5 +1,9 @@
 package com.example.credit_service_project.services.account;
 
+import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
+import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
+import com.example.credit_service_project.entity.Account;
+import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.repositories.AccountRepository;
 import com.example.credit_service_project.services.user.UserSearchService;
 import com.example.credit_service_project.services.generators.DTOAccountCreator;
@@ -14,7 +18,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -34,29 +39,28 @@ public class CreateAccountImpTest {
     @Test
     @DisplayName("Test when input is correct")
     public void testCreateAccountImp() {
-        var request = DTOAccountCreator.createRequest();
-        var account = EntityCreator.getAccount();
-        var client = EntityCreator.getClient();
+        CreateAccountDTORequest request = new CreateAccountDTORequest(UUID.randomUUID(), "United States",
+                BigDecimal.valueOf(3000), "USD", 10, 7);
 
-        when(searchClientService.findUserById(request.getClientId())).thenReturn(Optional.of(client));
+        Account account = EntityCreator.getAccount();
+        User client = EntityCreator.getUser();
 
+        when(searchClientService.findUserById(request.getClientId())).thenReturn(client);
         when(util.convertAddRequestToAccount(request, client)).thenReturn(account);
-
         when(repository.save(account)).thenReturn(account);
-
         when(util.convertAccountToAddResponse(account)).thenReturn(DTOAccountCreator.createDTOResponse());
 
-        var actual = service.createAccount(DTOAccountCreator.createRequest());
-        var expected = DTOAccountCreator.createDTOResponse();
+        AccountResponseDTO actual = service.createAccount(request);
+        AccountResponseDTO expected = DTOAccountCreator.createDTOResponse();
         assertEquals(expected, actual);
     }
 
     @Test
     @DisplayName("Test when input contains null")
     public void testCreateAccountImpWithException() {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Account account = EntityCreator.getAccountForValidation();
 
-        var account = DTOAccountCreator.getRequestWithExceptions();
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         var violations = validator.validate(account);
 
         assertEquals(4, violations.size());

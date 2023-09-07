@@ -1,19 +1,20 @@
 package com.example.credit_service_project.services.user;
 
 import com.example.credit_service_project.DTO.user.UpdateClientRequest;
-import com.example.credit_service_project.repositories.UserRepository;
+import com.example.credit_service_project.entity.User;
+import com.example.credit_service_project.services.generators.DTOUserCreator;
 import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.services.role.RoleService;
 import com.example.credit_service_project.services.utils.UserUtil;
-import com.example.credit_service_project.services.generators.DTOClientCreator;
-import jakarta.validation.Validation;
+import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,38 +24,55 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class UserUpdateServiceTest {
     @Mock
-    private UserRepository repository;
-    @Mock
     private UserUtil util;
+    @Mock
+    private PasswordEncoder passwordEncoder;
+    @Mock
+    private UserSearchService searchService;
+    @Mock
+    private UserCreateService createService;
+    @Mock
+    private RoleService roleService;
     @InjectMocks
     private UserUpdateService service;
 
     @Test
-    public void testAddClientSuccess() {
-        var request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"), new BigDecimal("2000"));
-        var client = EntityCreator.getClient();
-        var updatedClient = EntityCreator.getUpdatedClient();
+    public void testUpdateUserService() {
+        UpdateClientRequest request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"),
+                null, new BigDecimal("2000"), null, null, null, null, null);
+        User user = EntityCreator.getUser();
+        User updatedUser = EntityCreator.getUpdatedUser();
 
-        when(repository.findById(request.getId())).thenReturn(Optional.of(client));
-        when(util.updateClient(client, request)).thenReturn(updatedClient);
-        when(util.convertClientToResponse(updatedClient)).thenReturn(DTOClientCreator.getUpdateResponse());
+        when(searchService.findUserById(request.getId())).thenReturn(user);
+        when(util.updateClient(user, request)).thenReturn(updatedUser);
+        when(createService.saveClient(updatedUser)).thenReturn(updatedUser);
+        when(util.convertUserToResponse(updatedUser)).thenReturn(DTOUserCreator.getUpdateResponse());
 
-        assertEquals(DTOClientCreator.getUpdateResponse(), service.updateClient(request));
+        assertEquals(DTOUserCreator.getUpdateResponse(), service.updateClient(request));
+    }
+
+    @Test
+    public void testUpdateUserServiceChangeRole() {
+        UpdateClientRequest request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"),
+                null, new BigDecimal("2000"), null, null, null, "MANAGER", null);
+        User user = EntityCreator.getUser();
+        User updatedUser = EntityCreator.getUpdatedUser();
+
+        when(searchService.findUserById(request.getId())).thenReturn(user);
+        when(util.updateClient(user, request)).thenReturn(updatedUser);
+        when(roleService.findByRoleName(request.getRoleName())).thenReturn(EntityCreator.getManagerRole());
+        when(createService.saveClient(updatedUser)).thenReturn(updatedUser);
+        when(util.convertUserToResponse(updatedUser)).thenReturn(DTOUserCreator.getUpdateResponse());
+
+        assertEquals(DTOUserCreator.getUpdateResponse(), service.updateClient(request));
     }
 
     @Test
     public void testAddClientNotFoundException() {
-        var request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"), new BigDecimal("2000"));
-        when(repository.findById(request.getId())).thenReturn(Optional.empty());
+        UpdateClientRequest request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"), null,
+                new BigDecimal("2000"), null, null, null, null, null);
+        when(searchService.findUserById(request.getId())).thenThrow(NotFoundException.class);
         assertThrows(NotFoundException.class, () -> service.updateClient(request));
     }
 
-    @Test
-    public void testClientValidation() {
-        var request = new UpdateClientRequest(null,
-                new BigDecimal("0"), new BigDecimal("-2000"));
-        var validation = Validation.buildDefaultValidatorFactory().getValidator();
-        var set = validation.validate(request);
-        assertEquals(3, set.size());
-    }
 }

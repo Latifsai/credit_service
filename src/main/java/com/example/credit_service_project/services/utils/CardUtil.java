@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
-import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.CreateCardRequestDTO;
+import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Service
 public class CardUtil {
 
-    public Card convertAddRequestToEntity(AddCardDTORequest request, Account account) {
+    public Card convertCreateRequestToEntity(CreateCardRequestDTO request, Account account) {
         Card card = new Card();
         card.setAccount(account);
         card.setCardNumber(CardGenerator.generateIBANAndCardCode(12));
@@ -30,8 +30,8 @@ public class CardUtil {
         return card;
     }
 
-    public CardDTOResponse convertCardToAddDTOResponse(Card card) {
-        return CardDTOResponse.builder()
+    public CardResponseDTO convertCardToAddDTOResponse(Card card) {
+        return CardResponseDTO.builder()
                 .id(card.getId())
                 .cardNumber(card.getCardNumber())
                 .holderName(card.getHolderName())

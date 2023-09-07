@@ -4,6 +4,7 @@ import com.example.credit_service_project.repositories.AccountRepository;
 import com.example.credit_service_project.services.generators.DTOAccountCreator;
 import com.example.credit_service_project.services.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.AccountUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,6 +30,7 @@ public class GetAllAccountsServiceTest {
     private GetAllAccountsService service;
 
     @Test
+    @DisplayName(value = "Get all Accounts test")
     public void getAccountsListTest() {
         var accounts = List.of(EntityCreator.getAccount());
         var responses = List.of(DTOAccountCreator.createDTOResponse());
@@ -39,7 +41,9 @@ public class GetAllAccountsServiceTest {
 
         assertEquals(responses, service.getAllAccounts());
     }
+
     @Test
+    @DisplayName(value = "Get all Accounts test if empty")
     public void testAccountListEmpty() {
         when(repository.findAll()).thenReturn(Collections.emptyList());
         assertEquals(Collections.emptyList(), service.getAllAccounts());

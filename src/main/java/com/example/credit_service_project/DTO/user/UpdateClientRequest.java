@@ -15,4 +15,5 @@ public class UpdateClientRequest {
     String email;
     String phone;
     String roleName;
+    String password;
 }

@@ -22,7 +22,7 @@ public class GetAllUsersService {
     public List<UserResponseDTO> getAllClients() {
         log.info("Get a list of users");
         return repository.findAll().stream()
-                .map(util::convertClientToResponse)
+                .map(util::convertUserToResponse)
                 .toList();
     }
 }

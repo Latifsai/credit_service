@@ -1,7 +1,7 @@
 package com.example.credit_service_project.controllers;
 
 
-import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.services.account.AccountCreationService;
@@ -24,20 +24,20 @@ public class AccountController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AccountDTOResponse createNewAccount(@RequestBody CreateAccountDTORequest request) {
+    public AccountResponseDTO createNewAccount(@RequestBody CreateAccountDTORequest request) {
         return create.createAccount(request);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
-    public List<AccountDTOResponse> getAccountList() {
+    public List<AccountResponseDTO> getAccountList() {
         return get.getAllAccounts();
 
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public AccountDTOResponse updateAccount(@RequestBody UpdateAccountRequest request) {
+    public AccountResponseDTO updateAccount(@RequestBody UpdateAccountRequest request) {
         return update.updateAccount(request);
     }
 

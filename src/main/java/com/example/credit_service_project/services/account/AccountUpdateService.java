@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.account;
 
-import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.enums.AccountStatus;
@@ -20,7 +20,7 @@ public class AccountUpdateService {
     private final AccountCreationService accountCreationService;
     private final AccountUtil util;
 
-    public AccountDTOResponse updateAccount(UpdateAccountRequest request) {
+    public AccountResponseDTO updateAccount(UpdateAccountRequest request) {
         Account accountToFind = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         if (accountToFind.getStatus().equals(AccountStatus.ACTIVE)) {
             Account updatedAccount = util.updateAccount(accountToFind, request);

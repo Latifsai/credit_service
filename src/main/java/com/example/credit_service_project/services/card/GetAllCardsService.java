@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.card;
 
-import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.repositories.CardRepository;
 import com.example.credit_service_project.services.utils.CardUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class GetAllCardsService {
     private final CardUtil util;
 
     @Transactional(readOnly = true)
-    public List<CardDTOResponse> getAllCards() {
+    public List<CardResponseDTO> getAllCards() {
         log.info("Get a list of cards");
         return repository.findAll().stream()
                 .map(util::convertCardToAddDTOResponse)

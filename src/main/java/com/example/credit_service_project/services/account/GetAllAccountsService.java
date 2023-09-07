@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.account;
 
-import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repositories.AccountRepository;
 import com.example.credit_service_project.services.utils.AccountUtil;
@@ -20,7 +20,7 @@ public class GetAllAccountsService {
     private final AccountUtil util;
 
     @Transactional(readOnly = true)
-    public List<AccountDTOResponse> getAllAccounts() {
+    public List<AccountResponseDTO> getAllAccounts() {
         log.info("Get a list of accounts");
         return repository.findAll().stream()
                 .map(util::convertAccountToAddResponse)

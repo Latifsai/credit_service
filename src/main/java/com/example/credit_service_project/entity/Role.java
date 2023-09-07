@@ -1,9 +1,7 @@
 package com.example.credit_service_project.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
@@ -11,6 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 @Setter
 @EqualsAndHashCode
 @Table(name = "roles")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role implements GrantedAuthority {
 
     @Id

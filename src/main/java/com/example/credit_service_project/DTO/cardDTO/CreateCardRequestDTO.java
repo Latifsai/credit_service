@@ -6,7 +6,7 @@ import lombok.Value;
 import java.util.UUID;
 
 @Value
-public class AddCardDTORequest {
+public class CreateCardRequestDTO {
     UUID accountID;
     String accountNumber;
     Integer yearAccessibility;

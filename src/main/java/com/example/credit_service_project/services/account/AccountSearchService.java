@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.account;
 
-import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repositories.AccountRepository;
@@ -23,7 +23,7 @@ public class AccountSearchService {
     private final AccountUtil util;
 
     @Transactional(readOnly = true)
-    public AccountDTOResponse searchAccount(SearchAccountRequest request) {
+    public AccountResponseDTO searchAccount(SearchAccountRequest request) {
         Account account = findAccountByIdOrNumber(request.getId(), request.getAccountNumber());
         log.info("Search account with ID {} and with number {}",account.getId(), account.getAccountNumber());
         return util.convertAccountToAddResponse(account);

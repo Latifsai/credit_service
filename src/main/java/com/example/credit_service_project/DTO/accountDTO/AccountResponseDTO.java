@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class AccountDTOResponse {
+public class AccountResponseDTO {
      UUID id;
      String accountNumber;
      String clientInitial;

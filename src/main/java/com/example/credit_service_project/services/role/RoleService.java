@@ -28,16 +28,16 @@ public class RoleService {
         return repository.findByName("ROLE_" + roleName)
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_ROLE_MESSAGE));
     }
-//    // get default
+//     get default
 //    public Role getClientRole() {
 //        return findByRoleName("CLIENT");
 //    }
-//    // get manger role
+//     get manger role
 //    public Role getManagerRole() {
 //        return findByRoleName("MANAGER");
 //    }
 //
-//    //get all roles
+//    get all roles
 //    public List<Role> getAllRoles() {
 //        return repository.findAll();
 //    }

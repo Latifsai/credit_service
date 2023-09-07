@@ -1,9 +1,9 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.DTO.agreementDTO.AgreementResponse;
-import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.DTO.creditOrderDTO.CheckCreditOrderStatusResponse;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
 import com.example.credit_service_project.DTO.operationDTO.GetBelongsAccountOperationsRequest;
@@ -49,13 +49,13 @@ public class SearchController {
 
     @GetMapping("/account/search")
     @ResponseStatus(HttpStatus.FOUND)
-    public AccountDTOResponse searchAccount(@RequestBody SearchAccountRequest request) {
+    public AccountResponseDTO searchAccount(@RequestBody SearchAccountRequest request) {
         return accountSearch.searchAccount(request);
     }
 
     @GetMapping("/card/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public CardDTOResponse searchCard(@PathVariable("id") @NotNull UUID id) {
+    public CardResponseDTO searchCard(@PathVariable("id") @NotNull UUID id) {
         return cardSearch.searchCard(id);
     }
 

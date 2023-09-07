@@ -3,7 +3,7 @@ package com.example.credit_service_project.services.user;
 import com.example.credit_service_project.repositories.UserRepository;
 import com.example.credit_service_project.services.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.UserUtil;
-import com.example.credit_service_project.services.generators.DTOClientCreator;
+import com.example.credit_service_project.services.generators.DTOUserCreator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,16 +23,15 @@ class GetAllUsersServiceTest {
     private UserRepository repository;
     @Mock
     private UserUtil util;
-
     @InjectMocks
     GetAllUsersService service;
 
     @Test
     public void testGetAllClientsSuccess() {
-        when(repository.findAll()).thenReturn(List.of(EntityCreator.getClient()));
-        when(util.convertClientToResponse(EntityCreator.getClient())).thenReturn(DTOClientCreator.getResponse());
+        when(repository.findAll()).thenReturn(List.of(EntityCreator.getUser()));
+        when(util.convertUserToResponse(EntityCreator.getUser())).thenReturn(DTOUserCreator.getResponse());
 
-        assertEquals(List.of(DTOClientCreator.getResponse()), service.getAllClients());
+        assertEquals(List.of(DTOUserCreator.getResponse()), service.getAllClients());
     }
 
     @Test

@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.card;
 
-import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.enums.CardStatus;
@@ -24,7 +24,7 @@ public class CardSearchService {
     private final CardUtil utils;
 
     @Transactional(readOnly = true)
-    public CardDTOResponse searchCard(UUID id) {
+    public CardResponseDTO searchCard(UUID id) {
         Card card = findCardById(id);
         log.info("Search card with ID: {}", card.getId());
         return utils.convertCardToAddDTOResponse(card);

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class CardDTOResponse {
+public class CardResponseDTO {
     UUID id;
     String cardNumber;
     String holderName;

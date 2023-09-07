@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.card;
 
-import com.example.credit_service_project.DTO.cardDTO.AddCardDTORequest;
-import com.example.credit_service_project.DTO.cardDTO.CardDTOResponse;
+import com.example.credit_service_project.DTO.cardDTO.CreateCardRequestDTO;
+import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.repositories.CardRepository;
@@ -20,9 +20,9 @@ public class CardCreateService {
     private final AccountSearchService accountSearchService;
     private final CardUtil util;
 
-    public CardDTOResponse createService(AddCardDTORequest request) {
+    public CardResponseDTO createCard(CreateCardRequestDTO request) {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
-        Card card = util.convertAddRequestToEntity(request, account);
+        Card card = util.convertCreateRequestToEntity(request, account);
         Card savedCard = saveCard(card);
         log.info("Create and save card with IBAN: {}", savedCard.getIBAN());
         return util.convertCardToAddDTOResponse(savedCard);

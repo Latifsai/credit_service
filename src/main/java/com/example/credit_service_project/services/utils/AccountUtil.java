@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.accountDTO.AccountDTOResponse;
+import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
@@ -35,8 +35,8 @@ public class AccountUtil {
         return account;
     }
 
-    public AccountDTOResponse convertAccountToAddResponse(Account account) {
-        return AccountDTOResponse.builder()
+    public AccountResponseDTO convertAccountToAddResponse(Account account) {
+        return AccountResponseDTO.builder()
                 .id(account.getId())
                 .accountNumber(account.getAccountNumber())
                 .clientInitial(account.getUser().getName() + " " + account.getUser().getSurname())

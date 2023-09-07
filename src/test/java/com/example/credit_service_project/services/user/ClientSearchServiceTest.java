@@ -3,7 +3,8 @@ package com.example.credit_service_project.services.user;
 import com.example.credit_service_project.repositories.UserRepository;
 import com.example.credit_service_project.services.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.UserUtil;
-import com.example.credit_service_project.services.generators.DTOClientCreator;
+import com.example.credit_service_project.services.generators.DTOUserCreator;
+import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,12 +30,12 @@ class ClientSearchServiceTest {
     @Test
     public void testAddClientSuccess() {
         UUID id = UUID.randomUUID();
-        var client = EntityCreator.getClient();
+        var client = EntityCreator.getUser();
 
         when(repository.findById(id)).thenReturn(Optional.of(client));
-        when(util.convertClientToResponse(client)).thenReturn(DTOClientCreator.getResponse());
+        when(util.convertUserToResponse(client)).thenReturn(DTOUserCreator.getResponse());
 
-        assertEquals(DTOClientCreator.getResponse(), service.searchUser(id));
+        assertEquals(DTOUserCreator.getResponse(), service.searchUser(id));
     }
 
     @Test
