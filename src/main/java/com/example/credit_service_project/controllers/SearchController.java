@@ -89,7 +89,7 @@ public class SearchController {
         return checkCreditOrderStatus.checkOrderStatus(id);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/agreement/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public AgreementResponse findAgreement(@PathVariable(name = "id") UUID id) {
         return searchAgreement.searchAgreement(id);
@@ -97,7 +97,7 @@ public class SearchController {
 
     @GetMapping("/credit_preview")
     @ResponseStatus(HttpStatus.OK)
-    public List<PreliminaryCalculationResponse> showPreliminary(PreliminaryCalculationRequest request) {
+    public List<PreliminaryCalculationResponse> showPreliminary(@RequestBody PreliminaryCalculationRequest request) {
         return getPreliminaryCalculationOfProduct.getPreliminaryCalculation(request);
     }
 }

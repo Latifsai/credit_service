@@ -8,7 +8,7 @@ public class ErrorsMessage {
     public static final String NOT_FOUND_ORDER_MESSAGE = "NO SUCH ORDERS WAS FOUND!";
     public static final String NOT_FOUND_OPERATION_MESSAGE = "NO SUCH OPERATION WAS FOUND!";
     public static final String NOT_FOUND_USER_MESSAGE = "NO SUCH USER WAS FOUND!";
-    public static final String NOT_FOUND_NEAREST_PAYMENT_MESSAGE = "NEAREST PAYMENTS WAS FOUND!";
+    public static final String NOT_FOUND_NEAREST_PAYMENT_MESSAGE = "NEAREST PAYMENTS WAS NOT FOUND!";
     public static final String NOT_FOUND_PRODUCT_MESSAGE = "NO SUCH PRODUCT WAS FOUND!";
     public static final String NOT_FOUND_AGREEMENT_MESSAGE = "NO SUCH AGREEMENT WAS FOUND!";
     public static final String NOT_FOUND_CREDIT_MESSAGE = "NO SUCH CREDIT WAS FOUND!";

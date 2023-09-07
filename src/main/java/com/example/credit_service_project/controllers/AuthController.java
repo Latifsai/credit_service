@@ -1,7 +1,7 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.auth.AuthRequest;
-import com.example.credit_service_project.DTO.auth.JwtResponse;
+import com.example.credit_service_project.DTO.auth.LoginRequest;
+import com.example.credit_service_project.DTO.auth.LoginResponse;
 import com.example.credit_service_project.services.auth.JwtTokenProvider;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,8 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping()
-    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody AuthRequest request) {
+    public ResponseEntity<LoginResponse> authenticateUser(@Valid// how is it working
+                                                               @RequestBody LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -34,6 +35,6 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtTokenProvider.generateToken(authentication.getName());
-        return new ResponseEntity<>(new JwtResponse(jwt), HttpStatus.CREATED);
+        return new ResponseEntity<>(new LoginResponse(jwt), HttpStatus.ACCEPTED);
     }
 }

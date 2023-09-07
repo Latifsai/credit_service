@@ -10,4 +10,5 @@ public class PreliminaryCalculationResponse {
     Integer paymentNumber;
     LocalDate paymentDate;
     BigDecimal monthlyPayment;
+    String currency;
 }
