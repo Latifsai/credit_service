@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class SearchCardServiceImpTest {
+class SearchCardServiceTest {
 
     @Mock
     private CardRepository repository;
