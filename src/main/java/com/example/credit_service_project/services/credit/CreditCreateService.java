@@ -13,7 +13,7 @@ import com.example.credit_service_project.services.account.AccountUpdateService;
 import com.example.credit_service_project.services.agreement.AgreementCreateService;
 import com.example.credit_service_project.services.agreement.SearchAgreementServiceImp;
 import com.example.credit_service_project.services.creditOrder.CreditOrderSearchService;
-import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
+import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.services.utils.CreditUtil;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.IsAlreadyExistException;
@@ -37,7 +37,7 @@ public class CreditCreateService {
     private final CreditOrderSearchService searchCreditOrderService;
     private final AccountUpdateService updateAccountService;
     private final AgreementCreateService updateAgreementService;
-    private final PaymentScheduleGeneratorAndSaveService paymentScheduleGeneratorService;
+    private final PaymentScheduleGeneratorService paymentScheduleGeneratorService;
 
     public AddCreditDTOResponse createCredit(CreateCreditDTORequest request) {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());

@@ -35,7 +35,7 @@ public class Operation {
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "Type must not be blank!")
+    @NotNull(message = "Type must not be null!")
     private OperationType type;
 
     @Column(name = "operation_end_mark")

@@ -15,7 +15,7 @@ import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBelongsCreditService;
 import com.example.credit_service_project.services.credit.CreditSearchService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
-import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
+import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.EarlyPaymentException;
@@ -42,7 +42,7 @@ public class ReplenishmentAndEarlyPaymentOperationService {
     private final AccountUpdateService updateAccountService;
     private final CardCreateService updateCardService;
     private final CheckUnpaidPaymentsBelongsCreditService checkUnpaidPaymentsBelongsCreditService;
-    private final PaymentScheduleGeneratorAndSaveService saveService;
+    private final PaymentScheduleGeneratorService saveService;
     private final CreditCreateService addCreditService;
     private final CreditOrderCreateService addCreditOrderService;
     private final AgreementCreateService addAgreementService;

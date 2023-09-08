@@ -14,7 +14,7 @@ import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBelongsCreditService;
 import com.example.credit_service_project.services.credit.CreditSearchService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
-import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorAndSaveService;
+import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
@@ -41,7 +41,7 @@ public class PaymentProcessingService {
     private final OperationUtils util;
     private final CheckUnpaidPaymentsBelongsCreditService getUnpaidPaymentsService;
     private final AccountUpdateService updateAccountService;
-    private final PaymentScheduleGeneratorAndSaveService saveService;
+    private final PaymentScheduleGeneratorService saveService;
     private final CardSearchService searchCardService;
     private final CardCreateService createCardService;
     private final GetAllAccountsService getAllAccountsService;

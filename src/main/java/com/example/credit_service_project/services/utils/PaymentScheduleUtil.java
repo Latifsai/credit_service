@@ -1,7 +1,5 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.paymentDTO.AddPaymentRequestDTO;
-import com.example.credit_service_project.DTO.paymentDTO.AddPaymentScheduleDTOResponse;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.PaymentSchedule;
@@ -22,33 +20,6 @@ import static java.math.BigDecimal.ZERO;
 
 @Service
 public class PaymentScheduleUtil {
-
-    public PaymentSchedule convertPaymentDTORequestToPayment(AddPaymentRequestDTO request, Account account) {
-        PaymentSchedule paymentSchedule = new PaymentSchedule();
-        paymentSchedule.setAccount(account);
-
-        paymentSchedule.setPaymentDate(request.getPaymentDate());
-        paymentSchedule.setSurcharge(ZERO);
-        paymentSchedule.setMonthlyPayment(request.getMonthlyPayment());
-        paymentSchedule.setPaid(false);
-        return paymentSchedule;
-    }
-
-    public AddPaymentScheduleDTOResponse convertEntityToAddResponse(PaymentSchedule paymentSchedule) {
-        return new AddPaymentScheduleDTOResponse(
-                paymentSchedule.getAccount().getAccountNumber(),
-                paymentSchedule.getPaymentDate(),
-                paymentSchedule.getMonthlyPayment(),
-                paymentSchedule.getSurcharge(),
-                getSum(paymentSchedule),
-                false
-        );
-    }
-
-    private BigDecimal getSum(PaymentSchedule p) {
-        return p.getMonthlyPayment().add(p.getSurcharge());
-    }
-
     public PaymentResponseDTO convertEntityToPaymentResponse(PaymentSchedule paymentSchedule) {
         return new PaymentResponseDTO(
                 paymentSchedule.getId(),
@@ -69,7 +40,7 @@ public class PaymentScheduleUtil {
     }
 
 
-    public PaymentSchedule convertFromCreditAndProduct(Account account) {
+    public PaymentSchedule convertToPayment(Account account) {
         PaymentSchedule paymentSchedule = new PaymentSchedule();
         paymentSchedule.setAccount(account);
         paymentSchedule.setSurcharge(ZERO);

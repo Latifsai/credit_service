@@ -1,18 +1,15 @@
 package com.example.credit_service_project.services.generators;
 
 import com.example.credit_service_project.entity.*;
-import com.example.credit_service_project.entity.enums.AccountStatus;
-import com.example.credit_service_project.entity.enums.CardStatus;
-import com.example.credit_service_project.entity.enums.OperationType;
-import com.example.credit_service_project.entity.enums.PaymentSystem;
+import com.example.credit_service_project.entity.enums.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static java.math.BigDecimal.ZERO;
-import static java.time.Month.*;
+import static java.time.Month.APRIL;
+import static java.time.Month.SEPTEMBER;
 
 public class EntityCreator {
 
@@ -245,19 +242,78 @@ public class EntityCreator {
         return user;
     }
 
+    public static PaymentSchedule getPayment() {
+        PaymentSchedule payment = new PaymentSchedule();
+        payment.setId(UUID.fromString("79a8b4d5-8e2c-4107-b171-f64b04e086dc"));
+        payment.setActualPaymentDate(LocalDate.of(2023, SEPTEMBER, 18));
+        payment.setActualPaymentDate(null);
+        payment.setSurcharge(ZERO);
+        payment.setMonthlyPayment(new BigDecimal("300.54"));
+        payment.setPaid(false);
+        return payment;
+    }
 
-//    public static PaymentSchedule getPayment() {
-//        return new PaymentSchedule(
-//                UUID.fromString("22228888-4444-9999-a456-426655440000"),
-//                LocalDate.of(2023, AUGUST, 30),
-//                null,
-//                new BigDecimal("0"),
-//                new BigDecimal("300"),
-//                new BigDecimal("57"),
-//                false,
-//                getAccount()
-//        );
-//
-//    }
-//
+
+    //credit
+    public static Credit getCredit() {
+        return new Credit(
+                UUID.fromString("16bc026b-3a31-4927-b242-e5daabec82ad"),
+                "consumer credit",
+                new BigDecimal("14580.65"),
+                12,
+                BigDecimal.valueOf(5),
+                ZERO,
+                false,
+                CreditStatus.ACTIVE,
+                "USD",
+                0,
+                getAccount(),
+                getAgreement(),
+                getCreditOrder()
+        );
+    }
+
+    //agreemnt
+    public static Agreement getAgreement() {
+        Agreement agreement = new Agreement();
+        agreement.setId(UUID.fromString("34d824ef-da02-4845-af3d-2aba7f6336ca"));
+        agreement.setNumber("123456789");
+        agreement.setAgreementDate(LocalDate.of(2023, SEPTEMBER, 1));
+        agreement.setTerminationDate(LocalDate.of(2024, SEPTEMBER, 1));
+        agreement.setActive(true);
+        agreement.setCreditOrderNumber("AAAAA");
+        return agreement;
+    }
+
+    //prodcut
+    public static Product getProduct() {
+        return new Product(
+                1L,
+                "BMW X5",
+                BigDecimal.valueOf(14580.65),
+                false,
+                true,
+                false,
+                "X5",
+                "USD",
+                CalculationType.DIFFERENTIATED
+        );
+    }
+
+    public static CreditOrder getCreditOrder() {
+        CreditOrder order = new CreditOrder();
+        order.setId(UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"));
+        order.setNumber("BBBBBB10");
+        order.setAmount(BigDecimal.valueOf(14580.65));
+        order.setCreationDate(LocalDate.of(2023, SEPTEMBER, 1));
+        order.setLastUpdateDate(LocalDate.of(2023, SEPTEMBER, 1));
+        order.setClientSalary(BigDecimal.valueOf(4000));
+        order.setClientMonthlyExpenditure(BigDecimal.valueOf(2000));
+        order.setPassiveIncome(ZERO);
+        order.setMinPeriodMonths(12);
+        order.setMaxPeriodMonths(120);
+        order.setCreditOrderStatus(CreditOrderStatus.APPROVED);
+        order.setClientEmail("john_manager@gmail.com");
+        return order;
+    }
 }

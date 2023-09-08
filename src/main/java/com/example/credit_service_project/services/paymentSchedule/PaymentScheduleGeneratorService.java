@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PaymentScheduleGeneratorAndSaveService {
+public class PaymentScheduleGeneratorService {
 
     private final PaymentScheduleUtil util;
     private final PaymentScheduleRepository repository;
@@ -29,7 +29,7 @@ public class PaymentScheduleGeneratorAndSaveService {
 
         BigDecimal[] payments = util.calculatePayment(monthsTemp, credit.getInterestRate(), credit.getCreditSum(), product);
         for (int month = 0; month < monthsTemp; month++) {
-            PaymentSchedule paymentSchedule = util.convertFromCreditAndProduct(account);
+            PaymentSchedule paymentSchedule = util.convertToPayment(account);
             paymentSchedule.setMonthlyPayment(payments[month]);
 
             paymentSchedule.setPaymentDate(firstPaymentDate.plusMonths((month + 1)));

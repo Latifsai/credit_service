@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="11" author="latif">
+<changeSet id="11" author="latif">
         <sqlFile dbms="mysql"
                  encoding="utf8"
                  endDelimiter="\nGO"
@@ -35,10 +35,10 @@
     <changeSet id="insert" author="latif">
         <sql>
             INSERT INTO operations
-            VALUES (UNHEX(REPLACE('daa75a64-4a2f-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+            VALUES (UNHEX(REPLACE('cba51529-4c4d-4932-a36b-4b7f823d65e7', '-', '')), 'BRL', true, 'Payment for the Credit',
                     '2010-06-25 14:44:30', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
             INSERT INTO operations
-            VALUES (UNHEX(REPLACE('8c883af4-4a31-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
+            VALUES (UNHEX(REPLACE('b5022583-adf5-465b-8162-00924b508437', '-', '')), 'BRL', true, 'Payment for the Credit',
                     '2010-07-25 11:30:21', '295.56', 'MONTHLY_PAYMENT', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
             INSERT INTO operations
             VALUES (UNHEX(REPLACE('ae771838-4a31-11ee-be56-0242ac120002', '-', '')), 'BRL', true, 'Payment for the Credit',
@@ -340,21 +340,6 @@
             INSERT INTO operations
             VALUES (UNHEX(REPLACE('4b5bd2d6-4a89-11ee-be56-0242ac120002', '-', '')), 'PLN', true, 'Payment for consumer credit',
                     '2010-10-30 16:12:15', '398.57', 'MONTHLY_PAYMENT', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </sql>
     </changeSet>
-
 </databaseChangeLog>
