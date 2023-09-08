@@ -32,7 +32,7 @@ public class AccountUpdateService {
         }
     }
 
-    public void saveUpdatedAccount(Account updatedAccount) {
-        accountCreationService.saveAccount(updatedAccount);
+    public Account saveUpdatedAccount(Account updatedAccount) {
+        return accountCreationService.saveAccount(updatedAccount);
     }
 }

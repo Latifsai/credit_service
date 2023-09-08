@@ -10,8 +10,8 @@ import com.example.credit_service_project.services.account.GetAllAccountsService
 import com.example.credit_service_project.services.agreement.AgreementCreateService;
 import com.example.credit_service_project.services.card.CardCreateService;
 import com.example.credit_service_project.services.card.CardSearchService;
-import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.CreditSearchService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorService;
@@ -27,7 +27,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIVE;
@@ -66,12 +65,13 @@ public class PaymentProcessingService {
             List<PaymentSchedule> paymentSchedules = getUnpaidPaymentsService.findUnpaidPaymentByAccount(account);
 
             for (PaymentSchedule paymentSchedule : paymentSchedules) {
+                assert paymentSchedule != null;
 
-                if (paymentSchedule != null && paymentSchedule.getPaymentDate().equals(currentDate)) {
+                if (paymentSchedule.getPaymentDate().equals(currentDate)) {
                     Card card = searchCardService.findByAccount(account);
                     Account accountAfterOperation = util.payBill(account, paymentSchedule, card);
 
-                    if (account.getBalance().compareTo(paymentSchedule.getMonthlyPayment()) < 0) {
+                    if (checkIfAccountBalanceLessThanPayment(account, paymentSchedule)) {
                         handleImmediateFine(account, paymentSchedule);
                     } else {
                         handleSuccessfulPayment(donePaymentsList, accountAfterOperation, paymentSchedule);
@@ -79,31 +79,36 @@ public class PaymentProcessingService {
                     updateAccountService.saveUpdatedAccount(accountAfterOperation);
                     saveService.save(paymentSchedule);
                     createCardService.saveCard(card);
-
-                } else if (paymentSchedule != null && !paymentSchedule.getPaymentDate().equals(currentDate)) {
-                    return Collections.emptyList();
                 }
 
-                if (paymentSchedule != null && !paymentSchedule.getSurcharge().equals(BigDecimal.ZERO)) {
+                if (!getCredit(account).getFine().equals(BigDecimal.ZERO) && checkIfAccountBalanceLessThanPayment(account, paymentSchedule)) {
                     handleDelayedFine(paymentSchedule, account);
+                } else if (account.getBalance().compareTo(paymentSchedule.getMonthlyPayment()) >= 0) {
+                    handleSuccessfulPayment(donePaymentsList, account, paymentSchedule);
                 }
+
             }
 
             if (account.getUnpaidCreditSum().compareTo(BigDecimal.ZERO) == 0) {
                 closePaidCredit(account);
             }
-
         }
+
         log.info("Get all the execution of the operation today:{}", donePaymentsList);
         return donePaymentsList;
     }
 
-    private Credit getCredit (Account account) {
+    private boolean checkIfAccountBalanceLessThanPayment(Account account, PaymentSchedule payment) {
+        return account.getBalance().compareTo(payment.getMonthlyPayment()) < 0;
+    }
+
+    private Credit getCredit(Account account) {
         return creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE);
     }
 
     private void closePaidCredit(Account account) {
         Credit credit = getCredit(account);
+
         credit.setCreditStatus(CreditStatus.CLOSED);
         credit.getCreditOrder().setCreditOrderStatus(CreditOrderStatus.CLOSED);
         credit.getAgreement().setActive(false);
@@ -132,7 +137,7 @@ public class PaymentProcessingService {
         int dayOfDelay = (int) ChronoUnit.DAYS.between(paymentSchedule.getPaymentDate(), LocalDate.now());
         BigDecimal fine = util.calculateFine(getCredit(account).getInterestRate(), paymentSchedule.getMonthlyPayment(), dayOfDelay);
 
-        paymentSchedule.setSurcharge(paymentSchedule.getSurcharge().add(fine));
+        paymentSchedule.setSurcharge(fine);
         getCredit(account).setFine(fine);
         creditService.saveCredit(getCredit(account));
         saveService.save(paymentSchedule);

@@ -49,22 +49,21 @@ public class ReplenishmentAndEarlyPaymentOperationService {
     private final CreditSearchService creditSearchService;
 
     public OperationResponseDTO performOperation(PaymentsOperationRequest request) {
+        if (request.getSum().intValueExact() < 0) {
+            throw new OperationException(ErrorsMessage.NEGATIVE_SUM_EXCEPTION);
+        }
 
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getNumber());
         Card card = cardSearchService.findByAccount(account);
 
         if (request.getType().equals(REPLENISHMENT)) {
 
-            if (request.getSum().intValueExact() < 0) {
-                throw new OperationException(ErrorsMessage.NEGATIVE_SUM_EXCEPTION);
-            }
-
             BigDecimal newBalance = account.getBalance().add(request.getSum());
             account.setBalance(newBalance);
             card = util.changerCardBalance(account, card);
 
         } else if (request.getType().equals(EARLY_REPAYMENT)) {
-            Credit credit = creditSearchService.searchCreditByAccountAndStatus(account,ACTIVE);
+            Credit credit = creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE);
             if (credit.getCreditOrder().getProduct().isEarlyRepayment()) {
                 account = util.payEarlyPayment(request, account, card);
                 List<PaymentSchedule> unpaidPayments = checkUnpaidPaymentsBelongsCreditService.findUnpaidPaymentByAccount(account);

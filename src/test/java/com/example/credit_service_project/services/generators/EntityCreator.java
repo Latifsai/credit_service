@@ -5,8 +5,11 @@ import com.example.credit_service_project.entity.enums.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
+import static java.math.BigDecimal.TEN;
 import static java.math.BigDecimal.ZERO;
 import static java.time.Month.APRIL;
 import static java.time.Month.SEPTEMBER;
@@ -22,6 +25,45 @@ public class EntityCreator {
         account.setCountry("United States");
         account.setStatus(AccountStatus.ACTIVE);
         account.setBalance(new BigDecimal("3000"));
+        account.setOpeningDate(LocalDate.of(2020, APRIL, 21));
+        account.setLastUpdateDate(LocalDate.of(2020, APRIL, 21));
+        account.setClosingDate(LocalDate.of(2027, APRIL, 30));
+        account.setUnpaidCreditSum(ZERO);
+        account.setCurrency("USD");
+        account.setUser(getUser());
+        account.setCards(List.of(getCard()));
+        account.setPaymentSchedules(List.of(getPayment()));
+        account.setOperations(List.of(getOperation()));
+        return account;
+    }
+
+    public static Account getAccountForHandleFine() {
+        Account account = new Account();
+        account.setId(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"));
+        account.setAccountNumber("A10B3U3OI9");
+        account.setLoanDebt(ZERO);
+        account.setPercentageDebt(ZERO);
+        account.setCountry("United States");
+        account.setStatus(AccountStatus.ACTIVE);
+        account.setBalance(new BigDecimal("100"));
+        account.setOpeningDate(LocalDate.of(2020, APRIL, 21));
+        account.setLastUpdateDate(LocalDate.of(2020, APRIL, 21));
+        account.setClosingDate(LocalDate.of(2027, APRIL, 30));
+        account.setUnpaidCreditSum(ZERO);
+        account.setCurrency("USD");
+        account.setUser(getUser());
+        return account;
+    }
+
+    public static Account getAccountForClosePaidCredit() {
+        Account account = new Account();
+        account.setId(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"));
+        account.setAccountNumber("A10B3U3OI9");
+        account.setLoanDebt(ZERO);
+        account.setPercentageDebt(ZERO);
+        account.setCountry("United States");
+        account.setStatus(AccountStatus.ACTIVE);
+        account.setBalance(new BigDecimal("500"));
         account.setOpeningDate(LocalDate.of(2020, APRIL, 21));
         account.setLastUpdateDate(LocalDate.of(2020, APRIL, 21));
         account.setClosingDate(LocalDate.of(2027, APRIL, 30));
@@ -64,23 +106,22 @@ public class EntityCreator {
         account.setCurrency("USD");
         return account;
     }
-//
-//    public static Account getAccountAfterOperation() {
-//        Account account = new Account();
-//        account.setId(UUID.fromString("00009999-2222-1111-a456-426655440000"));
-//        account.setAccountNumber("A10B3U3OI9");
-//        account.setLoanDebt(new BigDecimal("2500"));
-//        account.setPercentageDebt(new BigDecimal("250"));
-//        account.setStatus(AccountStatus.ACTIVE);
-//        account.setBalance(new BigDecimal("2900"));
-//        account.setOpeningDate(LocalDate.of(2020, APRIL, 21));
-//        account.setClosingDate(LocalDate.of(2027, APRIL, 30));
-//        account.setUnpaidLoanDebt(new BigDecimal("1300"));
-//        account.setUnpaidPercentageLoanDebt(new BigDecimal("157"));
-//        account.setCurrency("$");
-//        account.setUser(getUser());
-//        return account;
-//    }
+
+    public static Account getAccountAfterOperation() {
+        Account account = new Account();
+        account.setId(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"));
+        account.setAccountNumber("A10B3U3OI9");
+        account.setLoanDebt(ZERO);
+        account.setPercentageDebt(ZERO);
+        account.setStatus(AccountStatus.ACTIVE);
+        account.setBalance(new BigDecimal("3600"));
+        account.setOpeningDate(LocalDate.of(2020, APRIL, 21));
+        account.setLastUpdateDate(LocalDate.of(2023, SEPTEMBER, 7));
+        account.setClosingDate(LocalDate.of(2027, APRIL, 30));
+        account.setUnpaidCreditSum(ZERO);
+        account.setCurrency("USD");
+        return account;
+    }
 
     public static Card getCard() {
         Card card = new Card();
@@ -95,7 +136,6 @@ public class EntityCreator {
         card.setDigitalValet(true);
         card.setPaymentSystem(PaymentSystem.VISA);
         card.setCardStatus(CardStatus.ACTIVE);
-        card.setAccount(getAccount());
         return card;
     }
 
@@ -133,47 +173,60 @@ public class EntityCreator {
         return card;
     }
 
-//    public static Card getCardAfterOperation() {
-//        Card card = new Card();
-//        card.setId(UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061"));
-//        card.setCardNumber("A10B3U3OI9");
-//        card.setHolderName("Oleg Kirilov");
-//        card.setOpeningDate(LocalDate.of(2020, APRIL, 21));
-//        card.setExpirationDate(LocalDate.of(2023, APRIL, 21));
-//        card.setBalance(new BigDecimal("2900"));
-//        card.setDeliveryAddress("Wertach Strasse 34");
-//        card.setDigitalValet(true);
-//        card.setPaymentSystem(PaymentSystem.VISA);
-//        card.setCardStatus(CardStatus.ACTIVE);
-//        card.setAccount(getAccount());
-//        return card;
-//    }
-//
-//    public static Operation getOperation() {
-//        Operation operation = new Operation();
-//        operation.setId(UUID.fromString("11117777-9999-1111-b491-426655440000"));
-//        operation.setSum(new BigDecimal("100"));
-//        operation.setType(OperationType.SPENDING);
-//        operation.setOperationEndMark(LocalDateTime.of(2023, 8, 1, 17, 32, 49));
-//        operation.setOperationDetails("Bought a products in shop.");
-//        operation.setDebit(true);
-//        operation.setCurrency("$");
+    public static Card getCardAfterOperationReplenishment() {
+        Card card = new Card();
+        card.setId(UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061"));
+        card.setCardNumber("A10B3U3OI9");
+        card.setHolderName("Oleg Kirilov");
+        card.setOpeningDate(LocalDate.of(2020, APRIL, 21));
+        card.setExpirationDate(LocalDate.of(2023, APRIL, 21));
+        card.setBalance(new BigDecimal("4000"));
+        card.setDeliveryAddress("Wertach Strasse 34");
+        card.setDigitalValet(true);
+        card.setPaymentSystem(PaymentSystem.VISA);
+        card.setCardStatus(CardStatus.ACTIVE);
+        card.setAccount(getAccount());
+        return card;
+    }
+
+    public static Operation getOperation() {
+        Operation operation = new Operation();
+        operation.setId(UUID.fromString("11117777-9999-1111-b491-426655440000"));
+        operation.setSum(new BigDecimal("300"));
+        operation.setType(OperationType.MONTHLY_PAYMENT);
+        operation.setOperationEndMark(LocalDateTime.of(2023, 9, 9, 17, 32, 49));
+        operation.setOperationDetails("MONTHLY_PAYMENT");
+        operation.setDebit(true);
+        operation.setCurrency("USD");
 //        operation.setAccount(getAccount());
-//        return operation;
-//    }
-//
-//    public static Operation getUpdatedOperation() {
-//        Operation operation = new Operation();
-//        operation.setId(UUID.fromString("11117777-9999-1111-b491-426655440000"));
-//        operation.setSum(new BigDecimal("100"));
-//        operation.setType(OperationType.MONTHLY_PAYMENT);
-//        operation.setOperationEndMark(LocalDateTime.of(2023, 8, 1, 17, 32, 49));
-//        operation.setOperationDetails("Mortgage payment");
-//        operation.setDebit(true);
-//        operation.setCurrency("$");
-//        operation.setAccount(getAccount());
-//        return operation;
-//    }
+        return operation;
+    }
+
+    public static Operation getOperationREPLENISHMENT() {
+        Operation operation = new Operation();
+        operation.setId(UUID.fromString("11117777-9999-1111-b491-426655440000"));
+        operation.setSum(new BigDecimal("1000"));
+        operation.setType(OperationType.REPLENISHMENT);
+        operation.setOperationEndMark(LocalDateTime.of(2023, 9, 9, 17, 32, 49));
+        operation.setOperationDetails("REPLENISHMENT");
+        operation.setDebit(false);
+        operation.setCurrency("USD");
+        operation.setAccount(getAccount());
+        return operation;
+    }
+
+    public static Operation getUpdatedOperation() {
+        Operation operation = new Operation();
+        operation.setId(UUID.fromString("11117777-9999-1111-b491-426655440000"));
+        operation.setSum(new BigDecimal("100"));
+        operation.setType(OperationType.EARLY_REPAYMENT);
+        operation.setOperationEndMark(LocalDateTime.of(2023, 8, 1, 17, 32, 49));
+        operation.setOperationDetails("EARLY_REPAYMENT");
+        operation.setDebit(true);
+        operation.setCurrency("$");
+        operation.setAccount(getAccount());
+        return operation;
+    }
 
     public static Role getManagerRole() {
         return new Role(
@@ -245,14 +298,25 @@ public class EntityCreator {
     public static PaymentSchedule getPayment() {
         PaymentSchedule payment = new PaymentSchedule();
         payment.setId(UUID.fromString("79a8b4d5-8e2c-4107-b171-f64b04e086dc"));
-        payment.setActualPaymentDate(LocalDate.of(2023, SEPTEMBER, 18));
+        payment.setPaymentDate(LocalDate.of(2023, SEPTEMBER, 8));
         payment.setActualPaymentDate(null);
         payment.setSurcharge(ZERO);
-        payment.setMonthlyPayment(new BigDecimal("300.54"));
+        payment.setMonthlyPayment(new BigDecimal("300"));
         payment.setPaid(false);
         return payment;
     }
 
+    public static PaymentSchedule getPaymentForHandleDelayedFine() {
+        PaymentSchedule payment = new PaymentSchedule();
+        payment.setId(UUID.fromString("79a8b4d5-8e2c-4107-b171-f64b04e086dc"));
+        payment.setPaymentDate(LocalDate.of(2023, SEPTEMBER, 6));
+        payment.setActualPaymentDate(null);
+        payment.setSurcharge(ZERO);
+        payment.setMonthlyPayment(new BigDecimal("300"));
+        payment.setPaid(false);
+        payment.setAccount(getAccountForHandleFine());
+        return payment;
+    }
 
     //credit
     public static Credit getCredit() {
@@ -263,6 +327,24 @@ public class EntityCreator {
                 12,
                 BigDecimal.valueOf(5),
                 ZERO,
+                false,
+                CreditStatus.ACTIVE,
+                "USD",
+                0,
+                getAccount(),
+                getAgreement(),
+                getCreditOrder()
+        );
+    }
+
+    public static Credit getCreditForHandleDelayedFine() {
+        return new Credit(
+                UUID.fromString("16bc026b-3a31-4927-b242-e5daabec82ad"),
+                "consumer credit",
+                new BigDecimal("14580.65"),
+                12,
+                BigDecimal.valueOf(5),
+                TEN,
                 false,
                 CreditStatus.ACTIVE,
                 "USD",
@@ -300,6 +382,19 @@ public class EntityCreator {
         );
     }
 
+    public static Product getProductFalseEP() {
+        return new Product(
+                2L,
+                "BMW X5",
+                BigDecimal.valueOf(14580.65),
+                false,
+                false,
+                false,
+                "X5",
+                "USD",
+                CalculationType.DIFFERENTIATED
+        );
+    }
     public static CreditOrder getCreditOrder() {
         CreditOrder order = new CreditOrder();
         order.setId(UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"));
@@ -314,6 +409,7 @@ public class EntityCreator {
         order.setMaxPeriodMonths(120);
         order.setCreditOrderStatus(CreditOrderStatus.APPROVED);
         order.setClientEmail("john_manager@gmail.com");
+        order.setProduct(getProduct());
         return order;
     }
 }
