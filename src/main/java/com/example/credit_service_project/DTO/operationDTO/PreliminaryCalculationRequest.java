@@ -10,7 +10,7 @@ import java.util.UUID;
 public class PreliminaryCalculationRequest {
     UUID accountID;
     String accountNumber;
-    BigInteger productID;
+    Long productID;
     Integer monthTerm;
     BigDecimal interestRate;
 }

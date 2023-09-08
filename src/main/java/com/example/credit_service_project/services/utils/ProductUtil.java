@@ -1,12 +1,10 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.ProductDTO.AddProductDTORequest;
+import com.example.credit_service_project.DTO.ProductDTO.CreateProductDTORequest;
 import com.example.credit_service_project.DTO.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.DTO.ProductDTO.UpdateProductDTORequest;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.services.utils.generator.EURToAnyGenerator;
-import com.example.credit_service_project.validation.ErrorsMessage;
-import com.example.credit_service_project.validation.exceptions.CurrencyException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,7 +18,7 @@ public class ProductUtil {
     private final Integer maxAmountCriterionForDeposit = 25_000;
     private final Integer minAmountCriterionForDeposit = 10_000;
 
-    public Product convertFromAddRequestToResponse(AddProductDTORequest request) {
+    public Product convertFromAddRequestToResponse(CreateProductDTORequest request) {
         Product product = new Product();
         product.setName(request.getName());
         product.setSum(request.getSum());

@@ -27,7 +27,7 @@ public class AccessibleController {
 
     @GetMapping("/products/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public ProductResponseDTO searchProduct(@PathVariable(name = "id") BigInteger id) {
+    public ProductResponseDTO searchProduct(@PathVariable(name = "id") Long id) {
         return search.searchProduct(id);
     }
 

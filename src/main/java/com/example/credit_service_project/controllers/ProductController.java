@@ -1,6 +1,6 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.ProductDTO.AddProductDTORequest;
+import com.example.credit_service_project.DTO.ProductDTO.CreateProductDTORequest;
 import com.example.credit_service_project.DTO.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.DTO.ProductDTO.UpdateProductDTORequest;
 import com.example.credit_service_project.services.product.ProductCreateService;
@@ -9,8 +9,6 @@ import com.example.credit_service_project.services.product.ProductUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigInteger;
 
 @RestController
 @RequestMapping("/product")
@@ -22,7 +20,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponseDTO add(@RequestBody AddProductDTORequest request) {
+    public ProductResponseDTO add(@RequestBody CreateProductDTORequest request) {
         return create.createProduct(request);
     }
 
@@ -34,7 +32,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ProductResponseDTO delete(@PathVariable BigInteger id) {
+    public ProductResponseDTO delete(@PathVariable Long id) {
         return delete.deleteProduct(id);
     }
 

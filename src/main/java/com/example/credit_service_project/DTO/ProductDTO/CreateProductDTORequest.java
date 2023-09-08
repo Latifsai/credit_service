@@ -6,7 +6,7 @@ import lombok.Value;
 import java.math.BigDecimal;
 
 @Value
-public class AddProductDTORequest {
+public class CreateProductDTORequest {
      String name;
      BigDecimal sum;
      String details;

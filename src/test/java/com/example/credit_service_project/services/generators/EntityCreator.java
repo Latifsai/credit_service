@@ -382,6 +382,20 @@ public class EntityCreator {
         );
     }
 
+    public static Product getProductUpdated() {
+        return new Product(
+                1L,
+                "BMW X5",
+                BigDecimal.valueOf(14580.65),
+                false,
+                true,
+                false,
+                "X5",
+                "USD",
+                CalculationType.ANNUITY
+        );
+    }
+
     public static Product getProductFalseEP() {
         return new Product(
                 2L,

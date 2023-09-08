@@ -4,11 +4,10 @@ import com.example.credit_service_project.entity.enums.CalculationType;
 import lombok.Value;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 @Value
 public class UpdateProductDTORequest {
-    BigInteger id;
+    Long id;
 
     BigDecimal sum;
     Boolean needGuaranty;
