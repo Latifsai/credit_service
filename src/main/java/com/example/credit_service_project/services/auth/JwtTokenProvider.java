@@ -2,24 +2,23 @@ package com.example.credit_service_project.services.auth;
 
 import com.example.credit_service_project.validation.exceptions.InvalidJwtException;
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class JwtTokenProvider {
-    @Value("${jwt.secret}")
-    private String secret;
+    private final String secret;
+    private final Duration jwtLifetime;
 
-    @Value("${jwt.lifetime}")
-    private Duration jwtLifetime;
+    @Autowired
+    public JwtTokenProvider(@Value("${jwt.secret}")String secret, @Value("${jwt.lifetime}") Duration jwtLifetime) {
+        this.secret = secret;
+        this.jwtLifetime = jwtLifetime;
+    }
 
     public String generateToken(String username) {
         Date issudeDate = new Date();
@@ -42,10 +41,6 @@ public class JwtTokenProvider {
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
                 .getBody();
-    }
-
-    public List<String> getRoles(String token) {
-        return getAllClaimsFromToken(token).get("roles", List.class);
     }
 
     public boolean validateToken(String authToken) {
