@@ -3,7 +3,7 @@ package com.example.credit_service_project.controllers;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderDTORequest;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderResponseDTO;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
-import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderDTORequest;
+import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderRequestDTO;
 import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderUpdateService;
 import com.example.credit_service_project.services.creditOrder.DecisionOrderService;
@@ -38,7 +38,7 @@ public class CreditOrderController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreditOrderResponseDTO update(@RequestBody UpdateCreditOrderDTORequest request) {
+    public CreditOrderResponseDTO update(@RequestBody UpdateCreditOrderRequestDTO request) {
         return update.updateCreditOrder(request);
     }
 

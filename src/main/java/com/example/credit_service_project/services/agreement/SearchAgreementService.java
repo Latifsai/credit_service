@@ -16,7 +16,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SearchAgreementServiceImp {
+public class SearchAgreementService {
 
     private final AgreementRepository repository;
     private final AgreementUtil util;

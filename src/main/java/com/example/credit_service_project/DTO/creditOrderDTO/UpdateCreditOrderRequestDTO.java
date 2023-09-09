@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Value
-public class UpdateCreditOrderDTORequest {
+public class UpdateCreditOrderRequestDTO {
     UUID id;
     BigDecimal clientSalary;
     BigDecimal passiveIncome;

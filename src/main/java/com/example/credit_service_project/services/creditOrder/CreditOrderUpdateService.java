@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.creditOrder;
 
 import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
-import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderDTORequest;
+import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderRequestDTO;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.services.utils.CreditOrderUtil;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class CreditOrderUpdateService {
     private final CreditOrderSearchService searchCreditOrderService;
     private final CreditOrderUtil util;
 
-    public CreditOrderResponseDTO updateCreditOrder(UpdateCreditOrderDTORequest request) {
+    public CreditOrderResponseDTO updateCreditOrder(UpdateCreditOrderRequestDTO request) {
         CreditOrder creditOrder = searchCreditOrderService.findById(request.getId());
         CreditOrder updated = util.update(request, creditOrder);
         addCreditOrderService.saveOrder(updated);

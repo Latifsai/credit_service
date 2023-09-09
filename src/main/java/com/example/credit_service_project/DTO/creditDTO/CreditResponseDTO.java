@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class CreditDTOResponse {
+public class CreditResponseDTO {
     UUID id;
     String creditType;
     BigDecimal creditSum;

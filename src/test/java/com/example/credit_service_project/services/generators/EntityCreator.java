@@ -34,6 +34,7 @@ public class EntityCreator {
         account.setCards(List.of(getCard()));
         account.setPaymentSchedules(List.of(getPayment()));
         account.setOperations(List.of(getOperation()));
+        account.setCredits(List.of(getCredit()));
         return account;
     }
 
@@ -70,6 +71,7 @@ public class EntityCreator {
         account.setUnpaidCreditSum(ZERO);
         account.setCurrency("USD");
         account.setUser(getUser());
+        account.setPaymentSchedules(List.of(getPayment()));
         return account;
     }
 
@@ -298,7 +300,7 @@ public class EntityCreator {
     public static PaymentSchedule getPayment() {
         PaymentSchedule payment = new PaymentSchedule();
         payment.setId(UUID.fromString("79a8b4d5-8e2c-4107-b171-f64b04e086dc"));
-        payment.setPaymentDate(LocalDate.of(2023, SEPTEMBER, 8));
+        payment.setPaymentDate(LocalDate.of(2023, SEPTEMBER, 10));
         payment.setActualPaymentDate(null);
         payment.setSurcharge(ZERO);
         payment.setMonthlyPayment(new BigDecimal("300"));
@@ -320,21 +322,21 @@ public class EntityCreator {
 
     //credit
     public static Credit getCredit() {
-        return new Credit(
-                UUID.fromString("16bc026b-3a31-4927-b242-e5daabec82ad"),
-                "consumer credit",
-                new BigDecimal("14580.65"),
-                12,
-                BigDecimal.valueOf(5),
-                ZERO,
-                false,
-                CreditStatus.ACTIVE,
-                "USD",
-                0,
-                getAccount(),
-                getAgreement(),
-                getCreditOrder()
-        );
+        Credit credit = new Credit();
+        credit.setId(UUID.fromString("16bc026b-3a31-4927-b242-e5daabec82ad"));
+        credit.setCreditType("consumer credit");
+        credit.setCreditSum(new BigDecimal("14580.65"));
+        credit.setPeriodMonth(12);
+        credit.setInterestRate(BigDecimal.valueOf(5));
+        credit.setFine(ZERO);
+        credit.setNeedDeposit(false);
+        credit.setCreditStatus(CreditStatus.ACTIVE);
+        credit.setCurrency("USD");
+        credit.setCreditHolidayMonthsAmount(0);
+        credit.setAgreement(getAgreement());
+        credit.setCreditOrder(getCreditOrder());
+        credit.setAccount(getAccountForClosePaidCredit());
+        return credit;
     }
 
     public static Credit getCreditForHandleDelayedFine() {
@@ -409,6 +411,7 @@ public class EntityCreator {
                 CalculationType.DIFFERENTIATED
         );
     }
+
     public static CreditOrder getCreditOrder() {
         CreditOrder order = new CreditOrder();
         order.setId(UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"));
@@ -416,6 +419,41 @@ public class EntityCreator {
         order.setAmount(BigDecimal.valueOf(14580.65));
         order.setCreationDate(LocalDate.of(2023, SEPTEMBER, 1));
         order.setLastUpdateDate(LocalDate.of(2023, SEPTEMBER, 1));
+        order.setClientSalary(BigDecimal.valueOf(4000));
+        order.setClientMonthlyExpenditure(BigDecimal.valueOf(2000));
+        order.setPassiveIncome(ZERO);
+        order.setMinPeriodMonths(12);
+        order.setMaxPeriodMonths(120);
+        order.setCreditOrderStatus(CreditOrderStatus.APPROVED);
+        order.setClientEmail("john_manager@gmail.com");
+        order.setProduct(getProduct());
+        return order;
+    }
+
+    public static CreditOrder getUpdatedCreditOrder() {
+        CreditOrder order = new CreditOrder();
+        order.setId(UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"));
+        order.setNumber("BBBBBB10");
+        order.setAmount(BigDecimal.valueOf(14580.65));
+        order.setCreationDate(LocalDate.of(2023, SEPTEMBER, 1));
+        order.setLastUpdateDate(LocalDate.of(2023, SEPTEMBER, 1));
+        order.setClientSalary(BigDecimal.valueOf(4000));
+        order.setClientMonthlyExpenditure(BigDecimal.valueOf(2000));
+        order.setPassiveIncome(ZERO);
+        order.setMinPeriodMonths(12);
+        order.setMaxPeriodMonths(120);
+        order.setCreditOrderStatus(CreditOrderStatus.CLOSED);
+        order.setClientEmail("john_manager@gmail.com");
+        order.setProduct(getProduct());
+        return order;
+    }
+    public static CreditOrder getCreditOrderNotAllowed() {
+        CreditOrder order = new CreditOrder();
+        order.setId(UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"));
+        order.setNumber("BBBBBB10");
+        order.setAmount(BigDecimal.valueOf(14580.65));
+        order.setCreationDate(LocalDate.of(2023, SEPTEMBER, 9));
+        order.setLastUpdateDate(LocalDate.of(2023, SEPTEMBER, 9));
         order.setClientSalary(BigDecimal.valueOf(4000));
         order.setClientMonthlyExpenditure(BigDecimal.valueOf(2000));
         order.setPassiveIncome(ZERO);

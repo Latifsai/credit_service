@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class AddCreditDTOResponse {
+public class CreateCreditDTOResponse {
     UUID id;
     String creditType;
     BigDecimal creditSum;

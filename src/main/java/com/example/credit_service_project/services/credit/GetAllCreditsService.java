@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.credit;
 
-import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
+import com.example.credit_service_project.DTO.creditDTO.CreditResponseDTO;
 import com.example.credit_service_project.repositories.CreditRepository;
 import com.example.credit_service_project.services.utils.CreditUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class GetAllCreditsService {
     private final CreditUtil util;
 
     @Transactional(readOnly = true)
-    public List<CreditDTOResponse> getAllCredits() {
+    public List<CreditResponseDTO> getAllCredits() {
         log.info("Get a list of credits");
         return repository.findAll().stream()
                 .map(util::convertToCreditResponse)

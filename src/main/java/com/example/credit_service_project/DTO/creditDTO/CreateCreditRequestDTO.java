@@ -6,7 +6,7 @@ import java.util.UUID;
 
 
 @Value
-public class CreateCreditDTORequest {
+public class CreateCreditRequestDTO {
     UUID accountID;
     String accountNumber;
     UUID agreementID;

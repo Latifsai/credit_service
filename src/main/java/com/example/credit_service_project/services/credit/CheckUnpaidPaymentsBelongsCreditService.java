@@ -20,7 +20,6 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-// can be used by client and admin
 public class CheckUnpaidPaymentsBelongsCreditService {
     private final CreditRepository repository;
     private final GetBelongsToAccountPaymentsService belongsToTheAccountPaymentsListService;

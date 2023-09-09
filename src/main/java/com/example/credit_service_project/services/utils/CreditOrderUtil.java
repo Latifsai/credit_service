@@ -3,9 +3,8 @@ package com.example.credit_service_project.services.utils;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderDTORequest;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderResponseDTO;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
-import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderDTORequest;
+import com.example.credit_service_project.DTO.creditOrderDTO.UpdateCreditOrderRequestDTO;
 import com.example.credit_service_project.entity.Account;
-import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.services.utils.calculators.CurrencyConverter;
@@ -39,7 +38,7 @@ public class CreditOrderUtil {
     }
 
     public CreateCreditOrderResponseDTO convertToAddResponse(CreditOrder order, Product product, Account account) {
-        return  CreateCreditOrderResponseDTO.builder()
+        return CreateCreditOrderResponseDTO.builder()
                 .productID(product.getId())
                 .productName(product.getName())
                 .id(order.getId())
@@ -65,7 +64,7 @@ public class CreditOrderUtil {
         );
     }
 
-    public CreditOrder update(UpdateCreditOrderDTORequest request, CreditOrder creditOrder) {
+    public CreditOrder update(UpdateCreditOrderRequestDTO request, CreditOrder creditOrder) {
 
         if (request.getCreditOrderStatus() != null) creditOrder.setCreditOrderStatus(request.getCreditOrderStatus());
         if (request.getClientSalary() != null) creditOrder.setClientSalary(request.getClientSalary());
@@ -74,13 +73,13 @@ public class CreditOrderUtil {
             creditOrder.setClientMonthlyExpenditure(request.getClientMonthlyExpenditure());
         }
         creditOrder.setLastUpdateDate(LocalDate.now());
-            return creditOrder;
+        return creditOrder;
 
     }
 
     public CreditOrder considerationOfApplication(CreditOrder order) {
         if (getMountPayment(order).compareTo(get30PercentFromIncome(order)) >= 0
-            || order.getPassiveIncome().compareTo(new BigDecimal("1000")) >= 0) {
+                || order.getPassiveIncome().compareTo(new BigDecimal("1000")) >= 0) {
             order.setCreditOrderStatus(APPROVED);
         } else {
             order.setCreditOrderStatus(DECLINED);

@@ -1,8 +1,8 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
-import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTOResponse;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditRequestDTO;
+import com.example.credit_service_project.DTO.creditDTO.CreditResponseDTO;
 import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.GetAllCreditsService;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +21,13 @@ public class CreditController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
-    public List<CreditDTOResponse> get() {
+    public List<CreditResponseDTO> get() {
         return getAllCredits.getAllCredits();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AddCreditDTOResponse create(@RequestBody CreateCreditDTORequest request) {
+    public CreateCreditDTOResponse create(@RequestBody CreateCreditRequestDTO request) {
         return create.createCredit(request);
     }
 

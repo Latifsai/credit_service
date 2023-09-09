@@ -12,7 +12,7 @@ import com.example.credit_service_project.DTO.operationDTO.PreliminaryCalculatio
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.DTO.paymentDTO.PreliminaryCalculationResponse;
 import com.example.credit_service_project.services.account.AccountSearchService;
-import com.example.credit_service_project.services.agreement.SearchAgreementServiceImp;
+import com.example.credit_service_project.services.agreement.SearchAgreementService;
 import com.example.credit_service_project.services.card.CardSearchService;
 import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBelongsCreditService;
 import com.example.credit_service_project.services.creditOrder.CheckCreditOrderStatusService;
@@ -43,7 +43,7 @@ public class SearchController {
     private final CheckUnpaidPaymentsBelongsCreditService checkUnpaidPaymentsBelongsCreditService;
     private final CheckCreditOrderStatusService checkCreditOrderStatus;
     private final CreditOrderSearchService searchOrder;
-    private final SearchAgreementServiceImp searchAgreement;
+    private final SearchAgreementService searchAgreement;
     private final GetPreliminaryCalculationOfProduct getPreliminaryCalculationOfProduct;
 
 

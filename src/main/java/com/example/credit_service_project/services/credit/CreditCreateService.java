@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.credit;
 
-import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTOResponse;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditRequestDTO;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Agreement;
@@ -11,7 +11,7 @@ import com.example.credit_service_project.repositories.CreditRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.account.AccountUpdateService;
 import com.example.credit_service_project.services.agreement.AgreementCreateService;
-import com.example.credit_service_project.services.agreement.SearchAgreementServiceImp;
+import com.example.credit_service_project.services.agreement.SearchAgreementService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderSearchService;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.services.utils.CreditUtil;
@@ -33,13 +33,13 @@ public class CreditCreateService {
     private final CreditRepository repository;
     private final CreditUtil util;
     private final AccountSearchService accountSearchService;
-    private final SearchAgreementServiceImp searchAgreementService;
+    private final SearchAgreementService searchAgreementService;
     private final CreditOrderSearchService searchCreditOrderService;
     private final AccountUpdateService updateAccountService;
     private final AgreementCreateService updateAgreementService;
     private final PaymentScheduleGeneratorService paymentScheduleGeneratorService;
 
-    public AddCreditDTOResponse createCredit(CreateCreditDTORequest request) {
+    public CreateCreditDTOResponse createCredit(CreateCreditRequestDTO request) {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 
         checkActiveCredit(account);

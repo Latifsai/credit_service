@@ -1,8 +1,8 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.creditDTO.AddCreditDTOResponse;
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTORequest;
-import com.example.credit_service_project.DTO.creditDTO.CreditDTOResponse;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTOResponse;
+import com.example.credit_service_project.DTO.creditDTO.CreateCreditRequestDTO;
+import com.example.credit_service_project.DTO.creditDTO.CreditResponseDTO;
 import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Agreement;
@@ -20,7 +20,7 @@ import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIV
 @Service
 public class CreditUtil {
 
-    public Credit createCreditFromData(CreateCreditDTORequest request, Account account, Agreement agreement, CreditOrder creditOrder) {
+    public Credit createCreditFromData(CreateCreditRequestDTO request, Account account, Agreement agreement, CreditOrder creditOrder) {
         Credit credit = new Credit();
 
         credit.setAccount(account);
@@ -61,8 +61,8 @@ public class CreditUtil {
         return account;
     }
 
-    public AddCreditDTOResponse convertResponse(Credit credit, List<PaymentResponseDTO> list) {
-        return AddCreditDTOResponse.builder()
+    public CreateCreditDTOResponse convertResponse(Credit credit, List<PaymentResponseDTO> list) {
+        return CreateCreditDTOResponse.builder()
                 .id(credit.getId())
                 .creditType(credit.getCreditType())
                 .creditSum(credit.getCreditSum())
@@ -83,8 +83,8 @@ public class CreditUtil {
                 .build();
     }
 
-    public CreditDTOResponse convertToCreditResponse(Credit credit) {
-        return CreditDTOResponse
+    public CreditResponseDTO convertToCreditResponse(Credit credit) {
+        return CreditResponseDTO
                 .builder()
                 .id(credit.getId())
                 .creditType(credit.getCreditType())

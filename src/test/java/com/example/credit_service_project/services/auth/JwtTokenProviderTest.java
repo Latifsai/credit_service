@@ -1,7 +1,9 @@
 package com.example.credit_service_project.services.auth;
 
+import com.example.credit_service_project.validation.exceptions.InvalidJwtException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,10 +22,8 @@ class JwtTokenProviderTest {
 
     @Value("${jwt.secret}")
     private String secret;
-
     @Value("${jwt.lifetime}")
     private Duration jwtLifetime;
-
     private JwtTokenProvider provider;
 
     @BeforeEach
@@ -50,10 +50,37 @@ class JwtTokenProviderTest {
     }
 
     @Test
-    void getUsername() {
+    void testGetUsername() {
+        String username = "Olga";
+
+        String token = Jwts.builder()
+                .setSubject(username)
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
+
+        String resultUsername = provider.getUsername(token);
+
+        assertEquals(username, resultUsername);
     }
 
     @Test
     void validateToken() {
+        String username = "Olga";
+
+        String token = Jwts.builder()
+                .setSubject(username)
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
+
+        assertTrue(provider.validateToken(token));
     }
+
+    @Test
+    void validateTokenException() {
+        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIiLCJuYW1lIjoiT2xnYSIsImlhdCI6IiJ9.2RDCdv7SK4sOGCr04oN2efITl6sPv0h2SDU0rv0LQgU";
+
+        assertThrows(InvalidJwtException.class, () -> provider.validateToken(token));
+    }
+
+
 }
