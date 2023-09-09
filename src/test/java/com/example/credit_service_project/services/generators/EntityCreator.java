@@ -138,6 +138,7 @@ public class EntityCreator {
         card.setDigitalValet(true);
         card.setPaymentSystem(PaymentSystem.VISA);
         card.setCardStatus(CardStatus.ACTIVE);
+
         return card;
     }
 
