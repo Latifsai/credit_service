@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Value
 public class UpdateProductDTORequest {
     Long id;
-
     BigDecimal sum;
     Boolean needGuaranty;
     Boolean earlyRepayment;

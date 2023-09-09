@@ -2,7 +2,7 @@ package com.example.credit_service_project.controllers;
 
 import com.example.credit_service_project.DTO.cardDTO.CreateCardRequestDTO;
 import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
-import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
+import com.example.credit_service_project.DTO.cardDTO.UpdateCardRequest;
 import com.example.credit_service_project.services.card.CardCreateService;
 import com.example.credit_service_project.services.card.CardUpdateService;
 import com.example.credit_service_project.services.card.GetAllCardsService;
@@ -35,7 +35,7 @@ public class CardController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CardResponseDTO updateCard(@RequestBody UpdateCardDTORequest request) {
+    public CardResponseDTO updateCard(@RequestBody UpdateCardRequest request) {
         return update.updateCard(request);
     }
 

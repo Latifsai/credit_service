@@ -1,12 +1,12 @@
 package com.example.credit_service_project.services.utils;
 
 import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
-import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
+import com.example.credit_service_project.DTO.accountDTO.CreateAccountRequestDTO;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.entity.enums.AccountStatus;
-import com.example.credit_service_project.services.utils.generator.AccountGenerator;
+import com.example.credit_service_project.services.utils.generator.FieldsGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +18,17 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class AccountUtil {
 
-    public Account convertAddRequestToAccount(CreateAccountDTORequest request, User user) {
+    public Account convertAddRequestToAccount(CreateAccountRequestDTO request, User user) {
         Account account = new Account();
         account.setUser(user);
         account.setCountry(request.getCountry());
-        account.setAccountNumber(AccountGenerator.createRandomAccountNumber(request.getAccountNumberLength()));
+        account.setAccountNumber(FieldsGenerator.generateRandomNumber(request.getAccountNumberLength()));
         account.setLoanDebt(BigDecimal.ZERO);
         account.setPercentageDebt(BigDecimal.ZERO);
         account.setStatus(AccountStatus.ACTIVE);
         account.setBalance(request.getBalance());
-        account.setOpeningDate(AccountGenerator.createOpeningDay());
-        account.setClosingDate(AccountGenerator.LocalDateCreateClosingDate(request.getYearsAmountForClosingDate()));
+        account.setOpeningDate(FieldsGenerator.createOpeningDay());
+        account.setClosingDate(FieldsGenerator.LocalDateCreateClosingDate(request.getYearsAmountForClosingDate()));
         account.setUnpaidCreditSum(BigDecimal.ZERO);
         account.setCurrency(request.getCurrency());
         account.setLastUpdateDate(LocalDate.now());

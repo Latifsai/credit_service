@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.creditOrder;
 
-import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderDTORequest;
+import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderRequestDTO;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.CreditOrder;
@@ -38,7 +38,7 @@ class CreditOrderCreateServiceTest {
 
     @Test
     void createCreditOrder() {
-        CreateCreditOrderDTORequest request = new CreateCreditOrderDTORequest(1L, UUID.randomUUID(), null, 10);
+        CreateCreditOrderRequestDTO request = new CreateCreditOrderRequestDTO(1L, UUID.randomUUID(), null, 10);
         Product product = EntityCreator.getProduct();
         Account account = EntityCreator.getAccount();
         CreditOrder order = EntityCreator.getCreditOrder();

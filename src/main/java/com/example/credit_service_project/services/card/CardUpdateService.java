@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.card;
 
 import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
-import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
+import com.example.credit_service_project.DTO.cardDTO.UpdateCardRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.services.account.AccountUpdateService;
@@ -20,7 +20,7 @@ public class CardUpdateService {
     private final AccountUpdateService updateAccountService;
     private final CardUtil utils;
 
-    public CardResponseDTO updateCard(UpdateCardDTORequest request) {
+    public CardResponseDTO updateCard(UpdateCardRequest request) {
         Card card = searchCardService.findCardById(request.getId());
         Account account = card.getAccount();
 

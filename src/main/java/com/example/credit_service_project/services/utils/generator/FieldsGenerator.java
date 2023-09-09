@@ -1,17 +1,13 @@
 package com.example.credit_service_project.services.utils.generator;
 
 import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.util.Random;
 
-public class CreditOrderGenerator {
+public class FieldsGenerator {
+    private static final String CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-
-    public static Integer minPeriod = 12;
-    public static Integer maxPeriod = 120;
-
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ0123456789";
-
-    public static String createCreditOrderNumber(Integer length) {
+    public static String generateRandomNumber(Integer length) {
         StringBuilder stringBuilder = new StringBuilder(length);
         Random random = new SecureRandom();
 
@@ -22,8 +18,11 @@ public class CreditOrderGenerator {
         return stringBuilder.toString();
     }
 
+    public static LocalDate createOpeningDay() {
+        return LocalDate.now();
+    }
 
-
-
-
+    public static LocalDate LocalDateCreateClosingDate(Integer yearsAmount) {
+        return createOpeningDay().plusYears(yearsAmount);
+    }
 }

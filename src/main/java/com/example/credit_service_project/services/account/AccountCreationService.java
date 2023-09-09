@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.account;
 
 import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
-import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
+import com.example.credit_service_project.DTO.accountDTO.CreateAccountRequestDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.repositories.AccountRepository;
@@ -24,7 +24,7 @@ public class AccountCreationService {
     private final UserSearchService searchClientService;
     private final AccountUtil util;
 
-    public AccountResponseDTO createAccount(CreateAccountDTORequest request) {
+    public AccountResponseDTO createAccount(CreateAccountRequestDTO request) {
         User user = searchClientService.findUserById(request.getClientId());
         Account account = util.convertAddRequestToAccount(request, user);
         Account savedAccount = saveAccount(account);

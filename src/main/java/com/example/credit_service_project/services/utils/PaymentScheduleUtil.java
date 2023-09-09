@@ -48,29 +48,19 @@ public class PaymentScheduleUtil {
         return paymentSchedule;
     }
 
-
     public BigDecimal[] calculatePayment(Integer monthsAmount, BigDecimal interestRate, BigDecimal creditSum, Product product) {
-        int monthsTemp = monthsAmount;
-        BigDecimal[] payments = new BigDecimal[monthsTemp];
+        BigDecimal[] payments = new BigDecimal[monthsAmount];
+        BigDecimal monthlyInterestRate = interestRate.divide(BigDecimal.valueOf(12 * 100), 10, RoundingMode.HALF_UP);
 
         if (product.getCalculationType().equals(ANNUITY)) {
-
-            BigDecimal monthlyInterestRate = interestRate.divide(BigDecimal.valueOf(12 * 100), 10, RoundingMode.HALF_UP);
-
-            for (int month = 0; month < monthsTemp; month++) {
-                payments[month] = AnnuityCalculator.calculate(creditSum, monthlyInterestRate, monthsTemp);
+            for (int month = 0; month < monthsAmount; month++) {
+                payments[month] = AnnuityCalculator.calculate(creditSum, monthlyInterestRate, monthsAmount);
             }
-
         } else {
-
-            BigDecimal convertedInterestRate = interestRate.divide(BigDecimal.valueOf(100), 5, RoundingMode.HALF_UP);
-            BigDecimal monthlyInterestRate = convertedInterestRate.divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_UP);
-
-            for (int month = 0; month < monthsTemp; month++) {
-                payments[month] = DifferentiatedPaymentCalculator.calculateEMI(creditSum,
-                        monthlyInterestRate, monthsTemp, month + 1);
+            for (int month = 0; month < monthsAmount; month++) {
+                payments[month] = DifferentiatedPaymentCalculator.calculateEMI(creditSum, monthlyInterestRate,
+                        monthsAmount, month + 1);
             }
-
         }
         return payments;
     }

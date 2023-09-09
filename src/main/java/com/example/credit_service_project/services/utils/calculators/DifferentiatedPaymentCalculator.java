@@ -5,14 +5,21 @@ import java.math.RoundingMode;
 
 public class DifferentiatedPaymentCalculator {
 
-    public static BigDecimal calculateEMI(BigDecimal principal, BigDecimal monthlyInterestRate, int monthsTerm, int currentMonth) {
-        BigDecimal principalPayment = principal.divide(BigDecimal.valueOf(monthsTerm), 2, RoundingMode.HALF_UP);
-        BigDecimal remainingPrincipal = principal.subtract(principalPayment.multiply(BigDecimal.valueOf(currentMonth)));
-        BigDecimal interestPayment = remainingPrincipal.multiply(monthlyInterestRate);
-        BigDecimal payment = principalPayment.add(interestPayment);
+    public static BigDecimal calculateEMI(BigDecimal loanAmount, BigDecimal monthlyInterestRate, int loanTermMonths, int currentMonth) {
+        BigDecimal basicallyPayment = calculateMonthlyPayment(loanAmount, loanTermMonths);
+        BigDecimal interestPayment = calculateInterestPayment(loanAmount, basicallyPayment, currentMonth, monthlyInterestRate);
+
+        BigDecimal payment = basicallyPayment.add(interestPayment);
 
         return payment.setScale(2, RoundingMode.HALF_UP);
     }
 
+    private static BigDecimal calculateMonthlyPayment(BigDecimal loanAmount, int loanTermMonths) {
+        return loanAmount.divide(BigDecimal.valueOf(loanTermMonths), 10, RoundingMode.HALF_UP);
+    }
+    private static BigDecimal calculateInterestPayment(BigDecimal loanAmount, BigDecimal basicallyPayment,int currentMonth,BigDecimal interestRate) {
 
+        return (loanAmount.subtract((basicallyPayment.multiply(BigDecimal.valueOf(currentMonth)))))
+                .multiply((interestRate.divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_UP))).setScale(2, RoundingMode.HALF_UP);
+    }
 }

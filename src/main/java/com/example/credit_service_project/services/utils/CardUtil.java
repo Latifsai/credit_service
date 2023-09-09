@@ -2,7 +2,7 @@ package com.example.credit_service_project.services.utils;
 
 import com.example.credit_service_project.DTO.cardDTO.CreateCardRequestDTO;
 import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
-import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
+import com.example.credit_service_project.DTO.cardDTO.UpdateCardRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.enums.CardStatus;
@@ -45,7 +45,7 @@ public class CardUtil {
                 .build();
     }
 
-    public Card updateCard(Card card, UpdateCardDTORequest request) {
+    public Card updateCard(Card card, UpdateCardRequest request) {
         if (request.getBalance() != null) card.setBalance(request.getBalance());
         if (request.getDeliveryAddress() != null && !request.getDeliveryAddress().trim().isEmpty())
             card.setDeliveryAddress(request.getDeliveryAddress());

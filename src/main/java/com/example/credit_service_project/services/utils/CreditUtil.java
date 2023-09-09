@@ -36,15 +36,14 @@ public class CreditUtil {
         credit.setCurrency(account.getCurrency());
         credit.setCreditHolidayMonthsAmount(request.getCreditHolidaysMonth());
 
-        //save agrememt
         agreement.setTerminationDate(agreement.getAgreementDate().plusMonths(credit.getPeriodMonth()));
-        //update account
+
         setDebtToAccount(account, credit);
         return credit;
     }
 
     private BigDecimal getTotalCreditAmount(BigDecimal loanAmount, BigDecimal interestRate, int numberOfMonths) {
-        // Преобразуем процентную ставку в месячную ставку
+
         BigDecimal monthlyInterestRate = interestRate.divide(BigDecimal.valueOf(12 * 100), 6, RoundingMode.HALF_EVEN);
 
         BigDecimal totalInterestAmount = loanAmount.multiply(monthlyInterestRate).multiply(BigDecimal.valueOf(numberOfMonths));
@@ -54,11 +53,10 @@ public class CreditUtil {
         return totalLoanAmount.setScale(2, RoundingMode.HALF_UP);
     }
 
-    private Account setDebtToAccount(Account account, Credit credit) {
+    private void setDebtToAccount(Account account, Credit credit) {
         account.setLoanDebt(credit.getCreditSum());
         account.setPercentageDebt(credit.getInterestRate());
         account.setUnpaidCreditSum(credit.getCreditSum().add(credit.getFine()));
-        return account;
     }
 
     public CreateCreditDTOResponse convertResponse(Credit credit, List<PaymentResponseDTO> list) {

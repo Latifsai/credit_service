@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.account;
 
 import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
-import com.example.credit_service_project.DTO.accountDTO.CreateAccountDTORequest;
+import com.example.credit_service_project.DTO.accountDTO.CreateAccountRequestDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.repositories.AccountRepository;
@@ -39,7 +39,7 @@ public class CreateAccountImpTest {
     @Test
     @DisplayName("Test when input is correct")
     public void testCreateAccountImp() {
-        CreateAccountDTORequest request = new CreateAccountDTORequest(UUID.randomUUID(), "United States",
+        CreateAccountRequestDTO request = new CreateAccountRequestDTO(UUID.randomUUID(), "United States",
                 BigDecimal.valueOf(3000), "USD", 10, 7);
 
         Account account = EntityCreator.getAccount();

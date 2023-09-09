@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.card;
 
 import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
-import com.example.credit_service_project.DTO.cardDTO.UpdateCardDTORequest;
+import com.example.credit_service_project.DTO.cardDTO.UpdateCardRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.services.account.AccountUpdateService;
@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UpdateCardServiceTest {
@@ -37,24 +37,31 @@ class UpdateCardServiceTest {
 
     @Test
     public void testUpdateSuccess() {
+        Account account = EntityCreator.getAccount();
         Card card = EntityCreator.getCard();
-        Account account = card.getAccount();
-        UpdateCardDTORequest request = new UpdateCardDTORequest(UUID.randomUUID(), new BigDecimal("5000"),
+        card.setAccount(account);
+        Card updatedCard = EntityCreator.getUpdatedCard();
+
+        UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"),
                 "", null);
+
+        var response = DTOCardCreator.getUpdatedCardResponse();
 
         when(searchCardService.findCardById(request.getId())).thenReturn(card);
         when(utils.updateCard(card, request)).thenReturn(EntityCreator.getUpdatedCard());
-        when(utils.convertCardToAddDTOResponse(EntityCreator.getUpdatedCard()))
-                .thenReturn(DTOCardCreator.getUpdatedCardResponse());
+        when(cardCreateService.saveCard(card)).thenReturn(card);
+        when(utils.convertCardToAddDTOResponse(updatedCard)).thenReturn(response);
         when(utils.updateAccountBalance(account, card)).thenReturn(account);
+        when(updateAccountService.saveUpdatedAccount(account)).thenReturn(account);
+
         CardResponseDTO actual = updateService.updateCard(request);
         assertNotNull(actual);
-        assertEquals(DTOCardCreator.getUpdatedCardResponse(), actual);
+        assertEquals(response, actual);
     }
 
     @Test
     public void testUpdateNotFoundException() {
-        UpdateCardDTORequest request = new UpdateCardDTORequest(UUID.randomUUID(), new BigDecimal("5000"),
+        UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"),
                 "", null);
 
         when(searchCardService.findCardById(request.getId())).thenThrow(NotFoundException.class);

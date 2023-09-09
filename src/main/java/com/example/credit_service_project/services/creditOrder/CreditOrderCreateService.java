@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.creditOrder;
 
-import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderDTORequest;
+import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderRequestDTO;
 import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.CreditOrder;
@@ -23,7 +23,7 @@ public class CreditOrderCreateService {
     private final AccountSearchService accountSearchService;
     private final CreditOrderUtil util;
 
-    public CreateCreditOrderResponseDTO createCreditOrder(CreateCreditOrderDTORequest request) {
+    public CreateCreditOrderResponseDTO createCreditOrder(CreateCreditOrderRequestDTO request) {
         Product product = searchProductService.findById(request.getProductID());
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 

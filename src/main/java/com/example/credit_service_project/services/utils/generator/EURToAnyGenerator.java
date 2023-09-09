@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class EURToAnyGenerator {
 
-    public static Map<String, Double> generatCurrencyMap() { // евро к отстальным
+    public static Map<String, Double> generatCurrencyMap() {
         Map<String, Double> currencyMap = new HashMap<>();
         String url = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html";
 

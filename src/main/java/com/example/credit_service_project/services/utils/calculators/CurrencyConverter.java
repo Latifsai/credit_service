@@ -7,7 +7,6 @@ import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.OperationException;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Map;
 
 import static java.math.RoundingMode.HALF_UP;
@@ -26,17 +25,16 @@ public class CurrencyConverter {
         if (exchangeRates.containsKey(productCurrency)) {
             BigDecimal exchangeRate = BigDecimal.valueOf(exchangeRates.get(productCurrency));
 
-            if (accountCurrency.equals("EUR") ) {
-                return sum.divide(exchangeRate,2, HALF_UP); // 1 000 JPY * 150
+            if (accountCurrency.equals("EUR")) {
+                return sum.divide(exchangeRate, 2, HALF_UP);
             } else if (exchangeRates.containsKey(accountCurrency)) {
                 BigDecimal targetExchangeRate = BigDecimal.valueOf(exchangeRates.get(accountCurrency));
-                BigDecimal convertedSum = sum.multiply(targetExchangeRate).divide(exchangeRate, 2, HALF_UP);
-                return convertedSum;
+                return sum.multiply(targetExchangeRate).divide(exchangeRate, 2, HALF_UP);
             } else {
-                throw new OperationException(ErrorsMessage.UNKNOWN_TARGET_CURRENCY);
+                throw new OperationException(ErrorsMessage.UNKNOWN_TARGET_CURRENCY + ": " + accountCurrency);
             }
         } else {
-            throw new OperationException(ErrorsMessage.UNKNOWN_SOURCE_CURRENCY);
+            throw new OperationException(ErrorsMessage.UNKNOWN_SOURCE_CURRENCY + ": " + productCurrency);
         }
     }
 }

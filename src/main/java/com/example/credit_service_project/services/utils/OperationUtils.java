@@ -65,7 +65,7 @@ public class OperationUtils {
 
             account.setBalance(balance);
             account.setUnpaidCreditSum(account.getUnpaidCreditSum().subtract(getSumToPayForPayment(paymentSchedule)));
-            //substract and set new setUnpaidCreditSum
+
             paymentSchedule.setActualPaymentDate(LocalDate.now());
             paymentSchedule.setPaid(true);
             paymentSchedule.setSurcharge(BigDecimal.ZERO);
@@ -75,8 +75,9 @@ public class OperationUtils {
     }
 
     public BigDecimal calculateFine(BigDecimal interestRate, BigDecimal payment, int dayOfDelay) {
-        return payment.multiply((interestRate.divide(BigDecimal.valueOf(100), 5, RoundingMode.HALF_UP)))
+        BigDecimal fine = payment.multiply((interestRate.divide(BigDecimal.valueOf(100), 5, RoundingMode.HALF_UP)))
                 .multiply(BigDecimal.valueOf(dayOfDelay / 365));
+        return fine.setScale(2, RoundingMode.HALF_UP);
     }
 
 
@@ -109,13 +110,12 @@ public class OperationUtils {
 
         BigDecimal balanceAfterOperation = account.getBalance().subtract(request.getSum());
 
-        //updated
         account.setBalance(balanceAfterOperation);
         account.setUnpaidCreditSum(BigDecimal.ZERO);
         account.setPercentageDebt(BigDecimal.ZERO);
         account.setLoanDebt(BigDecimal.ZERO);
         changerCardBalance(account, card);
-        // change Credit datas, terminate credit and all credit`s element
+
         return account;
     }
 
