@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -23,6 +22,7 @@ public class AccessibleController {
     @ResponseStatus(HttpStatus.FOUND)
     public List<ProductResponseDTO> getAllProducts() {
         return get.getAllProducts();
+
     }
 
     @GetMapping("/products/{id}")
