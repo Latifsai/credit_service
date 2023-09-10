@@ -39,8 +39,7 @@ class PaymentScheduleGeneratorServiceTest {
         Agreement agreement = EntityCreator.getAgreement();
 
         BigDecimal[] mockPayments = new BigDecimal[12];
-        when(util.calculatePayment(12, credit.getInterestRate(), credit.getCreditSum(), product))
-                .thenReturn(mockPayments);
+        when(util.calculatePayment(12, credit.getInterestRate(), credit.getCreditSum(), product)).thenReturn(mockPayments);
 
         PaymentSchedule mockPaymentSchedule = EntityCreator.getPayment();
         when(util.convertToPayment(account)).thenReturn(mockPaymentSchedule);

@@ -58,8 +58,7 @@ public class UpdateServiceImpTest {
         UpdateAccountRequest request = new UpdateAccountRequest(UUID.randomUUID(), null, null,
                 null, null, BigDecimal.valueOf(5000), null, null);
 
-        when(searchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
-                .thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
+        when(searchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
         assertThrows(NotFoundException.class, () -> service.updateAccount(request));
     }

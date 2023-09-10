@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateAccountImpTest {
+public class CreateAccountTest {
 
     @Mock
     private AccountRepository repository;

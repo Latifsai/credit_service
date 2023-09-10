@@ -49,8 +49,7 @@ class GetNearestPaymentServiceTest {
     public void testGetBelongsPaymentsNotFoundException() {
         PaymentsBelongsToAccountRequest request = new PaymentsBelongsToAccountRequest(UUID.randomUUID(), null);
 
-        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
-                .thenThrow(NotFoundException.class);
+        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenThrow(NotFoundException.class);
 
         assertThrows(NotFoundException.class, () -> service.getNearestPayment(request));
     }

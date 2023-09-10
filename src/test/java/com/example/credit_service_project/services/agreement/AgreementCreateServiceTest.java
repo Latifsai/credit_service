@@ -54,9 +54,11 @@ class AgreementCreateServiceTest {
     @Test
     void saveAgreement() {
         Agreement agreement = EntityCreator.getAgreement();
+
         when(repository.save(agreement)).thenReturn(agreement);
 
         Agreement result = agreementCreateService.saveAgreement(agreement);
+
         verify(repository, times(1)).save(agreement);
         assertEquals(agreement, result);
     }

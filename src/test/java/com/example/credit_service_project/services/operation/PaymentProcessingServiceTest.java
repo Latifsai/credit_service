@@ -26,6 +26,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,17 +69,19 @@ class PaymentProcessingServiceTest {
         Credit credit = EntityCreator.getCredit();
         Card card = EntityCreator.getCard();
         PaymentSchedule paymentSchedule = EntityCreator.getPayment();
+        paymentSchedule.setPaymentDate(LocalDate.now());
 
         when(getAllAccountsService.findAllAccounts()).thenReturn(Collections.singletonList(account));
         when(creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE)).thenReturn(credit);
         when(getUnpaidPaymentsService.findUnpaidPaymentByAccount(account)).thenReturn(Collections.singletonList(paymentSchedule));
         when(searchCardService.findByAccount(account)).thenReturn(card);
         when(util.payBill(account, paymentSchedule, card)).thenReturn(EntityCreator.getAccountAfterOperation());
+        when(updateAccountService.saveUpdatedAccount(account)).thenReturn(account);
 
         List<OperationResponseDTO> result = paymentProcessingService.handlePayments();
 
         assertEquals(2, result.size());
-        verify(updateAccountService, times(1)).saveUpdatedAccount(any());
+        verify(updateAccountService, times(1)).saveUpdatedAccount(account);
         verify(saveService, times(1)).save(paymentSchedule);
         verify(createCardService, times(1)).saveCard(card);
     }
@@ -89,6 +92,7 @@ class PaymentProcessingServiceTest {
         Credit credit = EntityCreator.getCredit();
         Card card = EntityCreator.getCard();
         PaymentSchedule paymentSchedule = EntityCreator.getPayment();
+        paymentSchedule.setPaymentDate(LocalDate.now());
 
         when(getAllAccountsService.findAllAccounts()).thenReturn(Collections.singletonList(account));
         when(creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE)).thenReturn(credit);
@@ -101,7 +105,7 @@ class PaymentProcessingServiceTest {
         List<OperationResponseDTO> result = paymentProcessingService.handlePayments();
 
         assertEquals(0, result.size()); // No payments were made
-        verify(updateAccountService, times(1)).saveUpdatedAccount(any());
+        verify(updateAccountService, times(1)).saveUpdatedAccount(account);
         verify(saveService, times(2)).save(paymentSchedule);
         verify(createCardService, times(1)).saveCard(card);
     }
@@ -112,12 +116,11 @@ class PaymentProcessingServiceTest {
         Credit credit = EntityCreator.getCreditForHandleDelayedFine();
         PaymentSchedule paymentSchedule = EntityCreator.getPaymentForHandleDelayedFine();
 
+
         when(getAllAccountsService.findAllAccounts()).thenReturn(Collections.singletonList(account));
         when(creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE)).thenReturn(credit);
-        when(getUnpaidPaymentsService.findUnpaidPaymentByAccount(account))
-                .thenReturn(Collections.singletonList(paymentSchedule));
-        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 2))
-                .thenReturn(BigDecimal.valueOf(15));
+        when(getUnpaidPaymentsService.findUnpaidPaymentByAccount(account)).thenReturn(Collections.singletonList(paymentSchedule));
+        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 3)).thenReturn(BigDecimal.valueOf(15));
 
         List<OperationResponseDTO> result = paymentProcessingService.handlePayments();
 
@@ -131,6 +134,7 @@ class PaymentProcessingServiceTest {
         Credit credit = EntityCreator.getCredit();
         Card card = EntityCreator.getCard();
         PaymentSchedule paymentSchedule = EntityCreator.getPayment();
+        paymentSchedule.setPaymentDate(LocalDate.now());
 
         when(getAllAccountsService.findAllAccounts()).thenReturn(Collections.singletonList(account));
         when(creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE)).thenReturn(credit);
@@ -142,7 +146,7 @@ class PaymentProcessingServiceTest {
         List<OperationResponseDTO> result = paymentProcessingService.handlePayments();
 
         assertEquals(2, result.size());
-        verify(updateAccountService, times(1)).saveUpdatedAccount(any());
+        verify(updateAccountService, times(1)).saveUpdatedAccount(account);
         verify(saveService, times(1)).save(paymentSchedule);
         verify(createCardService, times(1)).saveCard(card);
         verify(creditService, times(1)).saveCredit(credit);

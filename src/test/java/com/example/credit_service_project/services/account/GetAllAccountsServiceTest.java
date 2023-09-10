@@ -36,7 +36,6 @@ public class GetAllAccountsServiceTest {
         var responses = List.of(DTOAccountCreator.createDTOResponse());
 
         when(repository.findAll()).thenReturn(accounts);
-
         when(util.convertAccountToAddResponse(accounts.get(0))).thenReturn(responses.get(0));
 
         assertEquals(responses, service.getAllAccounts());

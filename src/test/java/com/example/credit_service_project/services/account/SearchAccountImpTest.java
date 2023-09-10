@@ -39,9 +39,7 @@ public class SearchAccountImpTest {
         SearchAccountRequest request = new SearchAccountRequest(UUID.randomUUID(), "A10B3U3OI9");
         Account account = EntityCreator.getAccount();
 
-        when(repository.findByIdOrAccountNumber(request.getId(), request.getAccountNumber()))
-                .thenReturn(Optional.of(account));
-
+        when(repository.findByIdOrAccountNumber(request.getId(), request.getAccountNumber())).thenReturn(Optional.of(account));
         when(util.convertAccountToAddResponse(account)).thenReturn(DTOAccountCreator.createDTOResponse());
 
         assertEquals(DTOAccountCreator.createDTOResponse(), service.searchAccount(request));
@@ -52,8 +50,7 @@ public class SearchAccountImpTest {
     public void testSearchAccountNotFoundException() {
         SearchAccountRequest request = new SearchAccountRequest(UUID.randomUUID(), null);
 
-        when(repository.findByIdOrAccountNumber(request.getId(), request.getAccountNumber()))
-                .thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
+        when(repository.findByIdOrAccountNumber(request.getId(), request.getAccountNumber())).thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
         assertThrows(NotFoundException.class, () -> service.searchAccount(request));
     }

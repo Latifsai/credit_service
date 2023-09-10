@@ -78,7 +78,6 @@ class JwtTokenProviderTest {
     @Test
     void validateTokenException() {
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIiLCJuYW1lIjoiT2xnYSIsImlhdCI6IiJ9.2RDCdv7SK4sOGCr04oN2efITl6sPv0h2SDU0rv0LQgU";
-
         assertThrows(InvalidJwtException.class, () -> provider.validateToken(token));
     }
 
