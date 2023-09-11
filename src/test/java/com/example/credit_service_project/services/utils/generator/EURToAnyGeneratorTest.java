@@ -4,18 +4,21 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EURToAnyGenerator {
+import static org.junit.jupiter.api.Assertions.*;
 
-    public static Map<String, Double> generateCurrencyMap() {
+class EURToAnyGeneratorTest {
+
+    @Test
+    void generateCurrencyMap() throws IOException {
         Map<String, Double> currencyMap = new HashMap<>();
         String url = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html";
 
-        try {
             Document document = Jsoup.connect(url).get();
 
             Elements rows = document.select("tbody tr");
@@ -27,12 +30,8 @@ public class EURToAnyGenerator {
                     currencyMap.put(currencyCode, exchangeRate);
                 }
             }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
         currencyMap.put("EUR", 1.0);
 
-        return currencyMap;
+            assertEquals(currencyMap, EURToAnyGenerator.generateCurrencyMap());
     }
 }

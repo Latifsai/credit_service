@@ -17,7 +17,7 @@ public class CardUtil {
     public Card convertCreateRequestToEntity(CreateCardRequestDTO request, Account account) {
         Card card = new Card();
         card.setAccount(account);
-        card.setCardNumber(CardGenerator.generateIBANAndCardCode(12));
+        card.setCardNumber(CardGenerator.generateCardData(12, false));
         card.setHolderName(account.getUser().getName() + " " + account.getUser().getSurname());
         card.setIBAN(CardGenerator.getIBAN(account.getCountry()));
         card.setOpeningDate(LocalDate.now());

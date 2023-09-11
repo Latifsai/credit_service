@@ -1,5 +1,8 @@
 package com.example.credit_service_project.services.utils.generator;
 
+import com.example.credit_service_project.validation.ErrorsMessage;
+import com.example.credit_service_project.validation.exceptions.NotFoundException;
+
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -7,8 +10,8 @@ import java.util.Map;
 import java.util.Random;
 
 public class CardGenerator {
-    private static final String material = "0123456789";
-    private static final String bankCode = "QWERTYUIOPASDFGHJKLMNBVCXZ";
+    private static final String NUMBERS = "0123456789";
+    private static final String CODE = "QWERTYUIOPASDFGHJKLMNBVCXZ";
 
     private static final Map<String, Integer> COUNTRY_IBAN_LENGTHS = new HashMap<>();
     private static final Map<String, String> COUNTRY_CODES = new HashMap<>();
@@ -77,31 +80,31 @@ public class CardGenerator {
     }
 
     public static String getIBAN(String country) {
+        if (!COUNTRY_CODES.containsKey(country) || !COUNTRY_IBAN_LENGTHS.containsKey(country)) {
+            throw new NotFoundException(ErrorsMessage.UNKNOWN_COUNTRY_MESSAGE + " Country: " + country);
+        }
         int length = COUNTRY_IBAN_LENGTHS.get(country);
 
-        if (country.equals("UK") || country.equals("Romania") ) {
-            return COUNTRY_CODES.get(country) + generateIBANAndCardCode(2) + generateBankCode(4) + generateIBANAndCardCode(length);
+        if (country.equals("UK") || country.equals("Romania")) {
+            return COUNTRY_CODES.get(country) + generateCardData(2, false) + generateCardData(4, true)
+                    + generateCardData(length, false);
         }
 
-        return COUNTRY_CODES.get(country) + generateIBANAndCardCode(length);
+        return COUNTRY_CODES.get(country) + generateCardData(length, false);
     }
 
-    public static String generateIBANAndCardCode(Integer length) {
+    public static String generateCardData(Integer length, boolean isCode) {
         StringBuilder stringBuilder = new StringBuilder(length);
         Random random = new SecureRandom();
         for (int i = 0; i < length; i++) {
-            int index = random.nextInt(material.length());
-            stringBuilder.append(material.charAt(index));
-        }
-        return stringBuilder.toString();
-    }
-
-    private static String generateBankCode(Integer length) {
-        StringBuilder stringBuilder = new StringBuilder(length);
-        Random random = new SecureRandom();
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(bankCode.length());
-            stringBuilder.append(bankCode.charAt(index));
+            int index;
+            if (!isCode) {
+                index = random.nextInt(NUMBERS.length());
+                stringBuilder.append(NUMBERS.charAt(index));
+            } else {
+                index = random.nextInt(CODE.length());
+                stringBuilder.append(CODE.charAt(index));
+            }
         }
         return stringBuilder.toString();
     }

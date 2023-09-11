@@ -13,7 +13,7 @@ import static java.math.RoundingMode.HALF_UP;
 
 public class CurrencyConverter {
     public static BigDecimal convertCurrency(Product product, Account account) {
-        Map<String, Double> exchangeRates = EURToAnyGenerator.generatCurrencyMap();
+        Map<String, Double> exchangeRates = EURToAnyGenerator.generateCurrencyMap();
         BigDecimal sum = product.getSum();
         String productCurrency = product.getCurrencyCode();
         String accountCurrency = account.getCurrency();

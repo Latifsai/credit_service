@@ -1,5 +1,7 @@
 package com.example.credit_service_project.services.utils.generator;
 
+import com.example.credit_service_project.validation.ErrorsMessage;
+import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,6 +17,7 @@ public class CreditGenerator {
     private final static Map<String, Double> rateBaseMap = new HashMap<>();
 
     public static BigDecimal getInterestRateByCountry(String country) {
+
         String url = "https://www.economy.com/indicators/lending-rate";
         try {
             Document document = Jsoup.connect(url).get();
@@ -34,6 +37,10 @@ public class CreditGenerator {
             }
         } catch (IOException e) {
             throw new RuntimeException();
+        }
+
+        if (!rateBaseMap.containsKey(country)){
+            throw new NotFoundException(ErrorsMessage.UNKNOWN_COUNTRY_MESSAGE + " Country: " + country);
         }
         return BigDecimal.valueOf(rateBaseMap.get(country));
     }

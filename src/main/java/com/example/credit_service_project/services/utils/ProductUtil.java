@@ -13,7 +13,7 @@ import java.util.Map;
 @Service
 public class ProductUtil {
 
-    private final Map<String, Double> currencyMap = EURToAnyGenerator.generatCurrencyMap();
+    private final Map<String, Double> currencyMap = EURToAnyGenerator.generateCurrencyMap();
 
     private final Integer maxAmountCriterionForDeposit = 25_000;
     private final Integer minAmountCriterionForDeposit = 10_000;
