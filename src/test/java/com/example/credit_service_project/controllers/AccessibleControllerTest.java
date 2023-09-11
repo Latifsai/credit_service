@@ -67,4 +67,7 @@ class AccessibleControllerTest {
         ;
     }
 
+    @Test
+    void searchProduct() {
+    }
 }
