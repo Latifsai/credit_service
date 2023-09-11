@@ -18,11 +18,11 @@ import java.util.List;
 public class AccessibleController {
     private final GetAllProductsService get;
     private final ProductSearchService search;
+
     @GetMapping("/products")
     @ResponseStatus(HttpStatus.FOUND)
     public List<ProductResponseDTO> getAllProducts() {
         return get.getAllProducts();
-
     }
 
     @GetMapping("/products/{id}")
