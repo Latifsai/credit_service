@@ -68,7 +68,7 @@ public class CreditOrderUtil {
 
     public CreditOrder update(UpdateCreditOrderRequestDTO request, CreditOrder creditOrder) {
 
-        if (request.getCreditOrderStatus() != null) creditOrder.setCreditOrderStatus(request.getCreditOrderStatus());
+        if (request.getStatus() != null) creditOrder.setCreditOrderStatus(request.getStatus());
         if (request.getClientSalary() != null) creditOrder.setClientSalary(request.getClientSalary());
         if (request.getPassiveIncome() != null) creditOrder.setPassiveIncome(request.getPassiveIncome());
         if (request.getClientMonthlyExpenditure() != null) {

@@ -21,7 +21,7 @@ public class RoleService {
      * @return ROLE
      */
     public Role findByRoleName(String roleName) {
-        return repository.findByName("ROLE_" + roleName.toUpperCase())
+        return repository.findByName(roleName.toUpperCase())
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_ROLE_MESSAGE));
     }
 

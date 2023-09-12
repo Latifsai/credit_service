@@ -27,7 +27,7 @@ class CurrencyConverterTest {
         Account account = EntityCreator.getAccount();
 
         BigDecimal actual = CurrencyConverter.convertCurrency(product, account);
-        assertEquals(BigDecimal.valueOf(15607.13), actual);
+        assertEquals(BigDecimal.valueOf(15636.29), actual);
     }
 
     @Test

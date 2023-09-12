@@ -9,7 +9,7 @@ import java.util.UUID;
 @Value
 public class PaymentsOperationRequest {
     UUID accountID;
-    String number;
+    String accountNumber;
     BigDecimal sum;
     OperationType type;
     String operationDetails;

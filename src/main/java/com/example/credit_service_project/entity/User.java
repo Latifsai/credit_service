@@ -59,7 +59,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "phone")
-    @Pattern(regexp = "^(?:\\+\\d{1,3}\\s?)?\\d{1,4}\\s?\\d{2,3}\\s?\\d{3,9}$", message = "Number is not supported!")
+    @Pattern(regexp = "^(?:\\+\\d{1,3}\\s?)?\\d{1,4}\\s?(\\d{2,3}\\s?)?\\d{3,9}$", message = "Number is not supported!")
     private String phone;
 
     @Column(name = "registration_date")

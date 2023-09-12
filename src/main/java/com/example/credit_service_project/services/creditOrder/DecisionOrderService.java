@@ -22,13 +22,13 @@ import java.util.List;
 @Slf4j
 public class DecisionOrderService {
 
-    private final GetAllCreditOrdersService getAllCreditService;
+    private final GetAllCreditOrdersService getAllOrdersService;
     private final CreditOrderRepository repository;
     private final CreditOrderUtil util;
 
     @Scheduled(cron = "0 0 15 * * *")
-    public List<CreditOrderResponseDTO> acceptOrder() {
-        List<CreditOrder> orders = getAllCreditService.getOrders();
+    public List<CreditOrderResponseDTO> acceptOrder() { // remake
+        List<CreditOrder> orders = getAllOrdersService.getOrdersIn_Review();
         List<CreditOrderResponseDTO> responsesList = new ArrayList<>();
 
         LocalDate today = LocalDate.now();

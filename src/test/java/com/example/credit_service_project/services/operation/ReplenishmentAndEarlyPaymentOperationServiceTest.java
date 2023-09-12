@@ -73,7 +73,7 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
         Card cardAfter = EntityCreator.getCardAfterOperationReplenishment();
         Operation operation = EntityCreator.getOperationREPLENISHMENT();
 
-        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getNumber())).thenReturn(account);
+        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenReturn(account);
         when(cardSearchService.findByAccount(account)).thenReturn(card);
         when(util.changerCardBalance(account, card)).thenReturn(cardAfter); //??
         when(updateAccountService.saveUpdatedAccount(account)).thenReturn(account);
@@ -105,7 +105,7 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
         CreditOrder order = EntityCreator.getCreditOrder();
         Agreement agreement = EntityCreator.getAgreement();
 
-        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getNumber())).thenReturn(account);
+        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenReturn(account);
         when(cardSearchService.findByAccount(account)).thenReturn(card);
         when(creditSearchService.searchCreditByAccountAndStatus(account, CreditStatus.ACTIVE)).thenReturn(credit);
         when(util.payEarlyPayment(request, account, card)).thenReturn(account);
@@ -143,7 +143,7 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
         Credit credit = EntityCreator.getCredit();
         credit.getCreditOrder().setProduct(EntityCreator.getProductFalseEP());
 
-        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getNumber())).thenReturn(account);
+        when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenReturn(account);
         when(cardSearchService.findByAccount(account)).thenReturn(card);
         when(creditSearchService.searchCreditByAccountAndStatus(account, CreditStatus.ACTIVE)).thenReturn(credit);
 

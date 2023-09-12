@@ -53,7 +53,7 @@ public class ReplenishmentAndEarlyPaymentOperationService {
             throw new OperationException(ErrorsMessage.NEGATIVE_SUM_EXCEPTION);
         }
 
-        Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getNumber());
+        Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         Card card = cardSearchService.findByAccount(account);
 
         if (request.getType().equals(REPLENISHMENT)) {

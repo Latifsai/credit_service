@@ -1,6 +1,5 @@
 package com.example.credit_service_project.controllers;
 
-
 import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.DTO.accountDTO.CreateAccountRequestDTO;
 import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
@@ -32,7 +31,6 @@ public class AccountController {
     @ResponseStatus(HttpStatus.FOUND)
     public List<AccountResponseDTO> getAccountList() {
         return get.getAllAccounts();
-
     }
 
     @PutMapping

@@ -12,6 +12,6 @@ public class UpdateCreditOrderRequestDTO {
     BigDecimal clientSalary;
     BigDecimal passiveIncome;
     BigDecimal clientMonthlyExpenditure;
-    CreditOrderStatus creditOrderStatus;
+    CreditOrderStatus status;
 
 }
