@@ -61,7 +61,7 @@ public class SearchController {
 
     @GetMapping("/operations")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<OperationResponseDTO> get(@RequestBody GetBelongsAccountOperationsRequest request) {
+    public List<OperationResponseDTO> getBelongsAccountOperations(@RequestBody GetBelongsAccountOperationsRequest request) {
         return getAllOperations.getAllOperations(request);
     }
 
@@ -79,7 +79,7 @@ public class SearchController {
 
     @GetMapping("/order/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public CreditOrderResponseDTO find(@PathVariable("id") @NotNull UUID id) {
+    public CreditOrderResponseDTO findCreditOrder(@PathVariable("id") @NotNull UUID id) {
         return searchOrder.searchCreditOrder(id);
     }
 

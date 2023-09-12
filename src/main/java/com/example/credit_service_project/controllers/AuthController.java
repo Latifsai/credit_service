@@ -24,8 +24,7 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping()
-    public ResponseEntity<LoginResponse> authenticateUser(@Valid// how is it working
-                                                               @RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponse> authenticateUser(@Valid @RequestBody LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),

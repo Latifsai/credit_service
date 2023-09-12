@@ -18,7 +18,6 @@ public class AgreementController {
     private final AgreementCreateService create;
     private final GetAllAgreementsService get;
 
-
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
     public List<AgreementResponse> findAll() {
