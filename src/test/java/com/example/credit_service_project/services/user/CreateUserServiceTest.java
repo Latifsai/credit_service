@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.user;
 
-import com.example.credit_service_project.DTO.user.CreateUserRequest;
+import com.example.credit_service_project.dto.user.CreateUserRequest;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.repositories.UserRepository;
 import com.example.credit_service_project.services.generators.DTOUserCreator;

@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.product;
 
-import com.example.credit_service_project.DTO.operationDTO.PreliminaryCalculationRequest;
-import com.example.credit_service_project.DTO.paymentDTO.PreliminaryCalculationResponse;
+import com.example.credit_service_project.dto.operationDTO.PreliminaryCalculationRequest;
+import com.example.credit_service_project.dto.paymentDTO.PreliminaryCalculationResponse;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.services.account.AccountSearchService;

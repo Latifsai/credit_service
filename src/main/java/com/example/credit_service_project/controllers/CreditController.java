@@ -1,8 +1,8 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTOResponse;
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditRequestDTO;
-import com.example.credit_service_project.DTO.creditDTO.CreditResponseDTO;
+import com.example.credit_service_project.dto.creditDTO.CreateCreditDTOResponse;
+import com.example.credit_service_project.dto.creditDTO.CreateCreditRequestDTO;
+import com.example.credit_service_project.dto.creditDTO.CreditResponseDTO;
 import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.GetAllCreditsService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.agreement;
 
-import com.example.credit_service_project.DTO.agreementDTO.AgreementResponse;
+import com.example.credit_service_project.dto.agreementDTO.AgreementResponse;
 import com.example.credit_service_project.repositories.AgreementRepository;
 import com.example.credit_service_project.services.utils.AgreementUtil;
 import lombok.RequiredArgsConstructor;

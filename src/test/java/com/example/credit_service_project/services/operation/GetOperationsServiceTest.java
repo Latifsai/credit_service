@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.operation;
 
-import com.example.credit_service_project.DTO.operationDTO.GetBelongsAccountOperationsRequest;
+import com.example.credit_service_project.dto.operationDTO.GetBelongsAccountOperationsRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repositories.OperationRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;

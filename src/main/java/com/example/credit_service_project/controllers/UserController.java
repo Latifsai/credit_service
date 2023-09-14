@@ -1,8 +1,8 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.user.CreateUserRequest;
-import com.example.credit_service_project.DTO.user.UserResponseDTO;
-import com.example.credit_service_project.DTO.user.UpdateClientRequest;
+import com.example.credit_service_project.dto.user.CreateUserRequest;
+import com.example.credit_service_project.dto.user.UserResponseDTO;
+import com.example.credit_service_project.dto.user.UpdateClientRequest;
 import com.example.credit_service_project.services.user.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;

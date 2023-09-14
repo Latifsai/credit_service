@@ -1,8 +1,8 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.ProductDTO.CreateProductDTORequest;
-import com.example.credit_service_project.DTO.ProductDTO.ProductResponseDTO;
-import com.example.credit_service_project.DTO.ProductDTO.UpdateProductDTORequest;
+import com.example.credit_service_project.dto.ProductDTO.CreateProductDTORequest;
+import com.example.credit_service_project.dto.ProductDTO.ProductResponseDTO;
+import com.example.credit_service_project.dto.ProductDTO.UpdateProductDTORequest;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.entity.enums.CalculationType;
 import com.example.credit_service_project.services.generators.EntityCreator;

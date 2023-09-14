@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.generators;
 
-import com.example.credit_service_project.DTO.ProductDTO.ProductResponseDTO;
+import com.example.credit_service_project.dto.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.entity.enums.CalculationType;
 
 import java.math.BigDecimal;
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class ProductCreatorDTO {
 
     public static ProductResponseDTO getResponse() {
-       return ProductResponseDTO.builder()
+        return ProductResponseDTO.builder()
                 .id(1L)
                 .name("BMW")
                 .sum(BigDecimal.valueOf(10000))
@@ -17,7 +17,7 @@ public class ProductCreatorDTO {
                 .needIncomeDetails(false)
                 .details("BMW")
                 .currencyCode("USD")
-                .calculationType(CalculationType.DIFFERENTIATED).
-                build();
+                .calculationType(CalculationType.DIFFERENTIATED)
+                .build();
     }
 }

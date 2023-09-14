@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.generators;
 
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTOResponse;
-import com.example.credit_service_project.DTO.creditDTO.CreditResponseDTO;
+import com.example.credit_service_project.dto.creditDTO.CreateCreditDTOResponse;
+import com.example.credit_service_project.dto.creditDTO.CreditResponseDTO;
 import com.example.credit_service_project.entity.enums.CalculationType;
 import com.example.credit_service_project.entity.enums.CreditStatus;
 

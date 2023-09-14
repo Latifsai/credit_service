@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.generators;
 
-import com.example.credit_service_project.DTO.agreementDTO.AgreementResponse;
+import com.example.credit_service_project.dto.agreementDTO.AgreementResponse;
 
 import java.time.LocalDate;
 import java.util.UUID;

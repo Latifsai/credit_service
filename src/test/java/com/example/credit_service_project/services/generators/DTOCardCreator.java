@@ -1,13 +1,12 @@
 package com.example.credit_service_project.services.generators;
 
 
-import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
+import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.entity.enums.CardStatus;
 import com.example.credit_service_project.entity.enums.PaymentSystem;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 import static java.time.Month.APRIL;

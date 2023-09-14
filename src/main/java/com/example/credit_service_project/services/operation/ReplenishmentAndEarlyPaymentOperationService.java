@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.operation;
 
-import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
-import com.example.credit_service_project.DTO.operationDTO.PaymentsOperationRequest;
+import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.dto.operationDTO.PaymentsOperationRequest;
 import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
 import com.example.credit_service_project.entity.enums.CreditStatus;

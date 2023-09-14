@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.paymentSchedule;
 
-import com.example.credit_service_project.DTO.paymentDTO.PaymentsBelongsToAccountRequest;
+import com.example.credit_service_project.dto.paymentDTO.PaymentsBelongsToAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.services.account.AccountSearchService;

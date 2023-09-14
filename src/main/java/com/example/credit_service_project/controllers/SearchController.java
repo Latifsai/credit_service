@@ -1,16 +1,16 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
-import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
-import com.example.credit_service_project.DTO.agreementDTO.AgreementResponse;
-import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
-import com.example.credit_service_project.DTO.creditOrderDTO.CheckCreditOrderStatusResponse;
-import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
-import com.example.credit_service_project.DTO.operationDTO.GetBelongsAccountOperationsRequest;
-import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
-import com.example.credit_service_project.DTO.operationDTO.PreliminaryCalculationRequest;
-import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
-import com.example.credit_service_project.DTO.paymentDTO.PreliminaryCalculationResponse;
+import com.example.credit_service_project.dto.accountDTO.AccountResponseDTO;
+import com.example.credit_service_project.dto.accountDTO.SearchAccountRequest;
+import com.example.credit_service_project.dto.agreementDTO.AgreementResponse;
+import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
+import com.example.credit_service_project.dto.creditOrderDTO.CheckCreditOrderStatusResponse;
+import com.example.credit_service_project.dto.creditOrderDTO.CreditOrderResponseDTO;
+import com.example.credit_service_project.dto.operationDTO.GetBelongsAccountOperationsRequest;
+import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.dto.operationDTO.PreliminaryCalculationRequest;
+import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
+import com.example.credit_service_project.dto.paymentDTO.PreliminaryCalculationResponse;
 import com.example.credit_service_project.services.account.AccountSearchService;
 import com.example.credit_service_project.services.agreement.SearchAgreementService;
 import com.example.credit_service_project.services.card.CardSearchService;

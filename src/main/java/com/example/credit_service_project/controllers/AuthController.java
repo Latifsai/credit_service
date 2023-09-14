@@ -1,7 +1,7 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.auth.LoginRequest;
-import com.example.credit_service_project.DTO.auth.LoginResponse;
+import com.example.credit_service_project.dto.auth.LoginRequest;
+import com.example.credit_service_project.dto.auth.LoginResponse;
 import com.example.credit_service_project.services.auth.JwtTokenProvider;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

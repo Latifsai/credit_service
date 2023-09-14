@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.user;
 
-import com.example.credit_service_project.DTO.user.UserResponseDTO;
-import com.example.credit_service_project.DTO.user.UpdateClientRequest;
+import com.example.credit_service_project.dto.user.UserResponseDTO;
+import com.example.credit_service_project.dto.user.UpdateClientRequest;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.services.role.RoleService;
 import com.example.credit_service_project.services.utils.UserUtil;

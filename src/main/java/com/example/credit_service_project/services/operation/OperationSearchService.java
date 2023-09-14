@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.operation;
 
-import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.repositories.OperationRepository;
 import com.example.credit_service_project.services.utils.OperationUtils;

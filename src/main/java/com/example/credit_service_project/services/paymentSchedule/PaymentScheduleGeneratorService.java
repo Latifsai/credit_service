@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.paymentSchedule;
 
-import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
+import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.repositories.PaymentScheduleRepository;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;

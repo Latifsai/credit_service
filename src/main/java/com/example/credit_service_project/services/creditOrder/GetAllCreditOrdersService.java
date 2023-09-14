@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.creditOrder;
 
-import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
+import com.example.credit_service_project.dto.creditOrderDTO.CreditOrderResponseDTO;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
 import com.example.credit_service_project.repositories.CreditOrderRepository;

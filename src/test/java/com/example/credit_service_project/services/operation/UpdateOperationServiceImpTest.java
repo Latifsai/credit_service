@@ -1,21 +1,17 @@
 package com.example.credit_service_project.services.operation;
 
-import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
+import com.example.credit_service_project.dto.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.entity.enums.OperationType;
-import com.example.credit_service_project.repositories.OperationRepository;
 import com.example.credit_service_project.services.generators.DTOOperationCreator;
 import com.example.credit_service_project.services.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.OperationUtils;
-import com.example.credit_service_project.validation.exceptions.OperationException;
-import jakarta.validation.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

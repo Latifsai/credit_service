@@ -1,8 +1,8 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.cardDTO.CreateCardRequestDTO;
-import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
-import com.example.credit_service_project.DTO.cardDTO.UpdateCardRequest;
+import com.example.credit_service_project.dto.cardDTO.CreateCardRequestDTO;
+import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
+import com.example.credit_service_project.dto.cardDTO.UpdateCardRequest;
 import com.example.credit_service_project.services.card.CardCreateService;
 import com.example.credit_service_project.services.card.CardUpdateService;
 import com.example.credit_service_project.services.card.GetAllCardsService;

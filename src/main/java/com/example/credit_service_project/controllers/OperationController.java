@@ -1,8 +1,8 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
-import com.example.credit_service_project.DTO.operationDTO.PaymentsOperationRequest;
-import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
+import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.dto.operationDTO.PaymentsOperationRequest;
+import com.example.credit_service_project.dto.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.services.operation.OperationUpdateService;
 import com.example.credit_service_project.services.operation.PaymentProcessingService;
 import com.example.credit_service_project.services.operation.ReplenishmentAndEarlyPaymentOperationService;

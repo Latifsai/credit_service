@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.generators;
 
-import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.entity.enums.OperationType;
 
 import java.math.BigDecimal;

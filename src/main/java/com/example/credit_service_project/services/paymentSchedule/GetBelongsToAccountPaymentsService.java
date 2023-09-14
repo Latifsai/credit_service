@@ -1,8 +1,8 @@
 package com.example.credit_service_project.services.paymentSchedule;
 
-import com.example.credit_service_project.DTO.paymentDTO.GetBelongsPaymentsResponse;
-import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
-import com.example.credit_service_project.DTO.paymentDTO.PaymentsBelongsToAccountRequest;
+import com.example.credit_service_project.dto.paymentDTO.GetBelongsPaymentsResponse;
+import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
+import com.example.credit_service_project.dto.paymentDTO.PaymentsBelongsToAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.repositories.PaymentScheduleRepository;

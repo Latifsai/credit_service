@@ -1,8 +1,8 @@
 package com.example.credit_service_project.services.credit;
 
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditDTOResponse;
-import com.example.credit_service_project.DTO.creditDTO.CreateCreditRequestDTO;
-import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
+import com.example.credit_service_project.dto.creditDTO.CreateCreditDTOResponse;
+import com.example.credit_service_project.dto.creditDTO.CreateCreditRequestDTO;
+import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.repositories.CreditRepository;

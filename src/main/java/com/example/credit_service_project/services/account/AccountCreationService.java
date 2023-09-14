@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.account;
 
-import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
-import com.example.credit_service_project.DTO.accountDTO.CreateAccountRequestDTO;
+import com.example.credit_service_project.dto.accountDTO.AccountResponseDTO;
+import com.example.credit_service_project.dto.accountDTO.CreateAccountRequestDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.repositories.AccountRepository;

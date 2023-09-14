@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.generators;
 
-import com.example.credit_service_project.DTO.user.UserResponseDTO;
+import com.example.credit_service_project.dto.user.UserResponseDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,8 +1,8 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.accountDTO.AccountResponseDTO;
-import com.example.credit_service_project.DTO.accountDTO.CreateAccountRequestDTO;
-import com.example.credit_service_project.DTO.accountDTO.UpdateAccountRequest;
+import com.example.credit_service_project.dto.accountDTO.AccountResponseDTO;
+import com.example.credit_service_project.dto.accountDTO.CreateAccountRequestDTO;
+import com.example.credit_service_project.dto.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.services.account.AccountCreationService;
 import com.example.credit_service_project.services.account.AccountUpdateService;
 import com.example.credit_service_project.services.account.GetAllAccountsService;

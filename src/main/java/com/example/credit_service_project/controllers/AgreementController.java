@@ -1,7 +1,7 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.agreementDTO.AgreementResponse;
-import com.example.credit_service_project.DTO.agreementDTO.CreateAgreementRequest;
+import com.example.credit_service_project.dto.agreementDTO.AgreementResponse;
+import com.example.credit_service_project.dto.agreementDTO.CreateAgreementRequest;
 import com.example.credit_service_project.services.agreement.AgreementCreateService;
 import com.example.credit_service_project.services.agreement.GetAllAgreementsService;
 import lombok.RequiredArgsConstructor;

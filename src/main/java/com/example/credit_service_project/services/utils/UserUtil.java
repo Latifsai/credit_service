@@ -1,8 +1,8 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.user.CreateUserRequest;
-import com.example.credit_service_project.DTO.user.UserResponseDTO;
-import com.example.credit_service_project.DTO.user.UpdateClientRequest;
+import com.example.credit_service_project.dto.user.CreateUserRequest;
+import com.example.credit_service_project.dto.user.UserResponseDTO;
+import com.example.credit_service_project.dto.user.UpdateClientRequest;
 import com.example.credit_service_project.entity.User;
 import org.springframework.stereotype.Service;
 

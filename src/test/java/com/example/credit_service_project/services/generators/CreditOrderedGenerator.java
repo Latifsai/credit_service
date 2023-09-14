@@ -1,7 +1,7 @@
 package com.example.credit_service_project.services.generators;
 
-import com.example.credit_service_project.DTO.creditOrderDTO.CreateCreditOrderResponseDTO;
-import com.example.credit_service_project.DTO.creditOrderDTO.CreditOrderResponseDTO;
+import com.example.credit_service_project.dto.creditOrderDTO.CreateCreditOrderResponseDTO;
+import com.example.credit_service_project.dto.creditOrderDTO.CreditOrderResponseDTO;
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
 
 import java.math.BigDecimal;

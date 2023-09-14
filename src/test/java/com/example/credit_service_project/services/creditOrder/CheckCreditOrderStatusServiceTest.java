@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.creditOrder;
 
-import com.example.credit_service_project.DTO.creditOrderDTO.CheckCreditOrderStatusResponse;
+import com.example.credit_service_project.dto.creditOrderDTO.CheckCreditOrderStatusResponse;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.services.generators.EntityCreator;
 import org.junit.jupiter.api.Test;

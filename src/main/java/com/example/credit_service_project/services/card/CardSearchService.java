@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.card;
 
-import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
+import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.enums.CardStatus;

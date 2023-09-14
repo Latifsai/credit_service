@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.account;
 
-import com.example.credit_service_project.DTO.accountDTO.SearchAccountRequest;
+import com.example.credit_service_project.dto.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repositories.AccountRepository;
 import com.example.credit_service_project.services.generators.DTOAccountCreator;

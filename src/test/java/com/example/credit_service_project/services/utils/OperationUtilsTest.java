@@ -1,8 +1,8 @@
 package com.example.credit_service_project.services.utils;
 
-import com.example.credit_service_project.DTO.operationDTO.OperationResponseDTO;
-import com.example.credit_service_project.DTO.operationDTO.PaymentsOperationRequest;
-import com.example.credit_service_project.DTO.operationDTO.UpdateOperationsRequest;
+import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.dto.operationDTO.PaymentsOperationRequest;
+import com.example.credit_service_project.dto.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.Operation;

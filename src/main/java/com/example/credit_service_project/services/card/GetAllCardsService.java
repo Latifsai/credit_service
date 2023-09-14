@@ -1,6 +1,6 @@
 package com.example.credit_service_project.services.card;
 
-import com.example.credit_service_project.DTO.cardDTO.CardResponseDTO;
+import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.repositories.CardRepository;
 import com.example.credit_service_project.services.utils.CardUtil;
 import lombok.RequiredArgsConstructor;

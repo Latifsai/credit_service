@@ -1,8 +1,8 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.DTO.paymentDTO.GetBelongsPaymentsResponse;
-import com.example.credit_service_project.DTO.paymentDTO.PaymentResponseDTO;
-import com.example.credit_service_project.DTO.paymentDTO.PaymentsBelongsToAccountRequest;
+import com.example.credit_service_project.dto.paymentDTO.GetBelongsPaymentsResponse;
+import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
+import com.example.credit_service_project.dto.paymentDTO.PaymentsBelongsToAccountRequest;
 import com.example.credit_service_project.services.paymentSchedule.GetBelongsToAccountPaymentsService;
 import com.example.credit_service_project.services.paymentSchedule.GetNearestPaymentService;
 import lombok.RequiredArgsConstructor;
