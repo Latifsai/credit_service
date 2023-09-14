@@ -1,30 +1,28 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.configurations.JwtRequestFilter;
-import com.example.credit_service_project.configurations.SecurityConfiguration;
+import com.example.credit_service_project.generators.CreditDTOGenerator;
 import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.GetAllCreditsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Collections;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Import(SecurityConfiguration.class)
-@WebMvcTest(CreditController.class)
+@SpringBootTest
 @AutoConfigureMockMvc
 class CreditControllerTest {
 
-    @MockBean
-    private JwtRequestFilter filter;
     @MockBean
     private CreditCreateService create;
     @MockBean
@@ -32,12 +30,18 @@ class CreditControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @WithMockUser(roles = "MANAGER")
+
     @Test
-    void tesGet() throws Exception {
+    @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    void testGetAllCredits() throws Exception {
+        var response = CreditDTOGenerator.getResponse();
+        when(getAllCredits.getAllCredits()).thenReturn(Collections.singletonList(response));
+
         mockMvc.perform(get("/credit"))
-                .andExpect(status().isOk());
+                .andExpect(status().isFound())
+                .andExpect(jsonPath("$[0].creditType").value(response.getCreditType()));
     }
+
 
     @Test
     void create() throws Exception {
