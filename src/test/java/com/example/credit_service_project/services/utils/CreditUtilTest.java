@@ -8,9 +8,9 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.CreditOrder;
-import com.example.credit_service_project.services.generators.CreditDTOGenerator;
-import com.example.credit_service_project.services.generators.DTOPaymentCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.CreditDTOGenerator;
+import com.example.credit_service_project.generators.PaymentDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -53,7 +53,7 @@ class CreditUtilTest {
     @Test
     void convertResponse() {
         CreateCreditDTOResponse response = CreditDTOGenerator.getCreationResponse();
-        List<PaymentResponseDTO> list = List.of(DTOPaymentCreator.getPaymentResponseDTO());
+        List<PaymentResponseDTO> list = List.of(PaymentDTOGenerator.getPaymentResponseDTO());
 
         when(util.convertResponse(credit, list)).thenReturn(response);
 

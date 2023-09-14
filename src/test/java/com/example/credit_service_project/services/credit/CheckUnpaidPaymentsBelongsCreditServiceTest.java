@@ -5,8 +5,8 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.repositories.CreditRepository;
-import com.example.credit_service_project.services.generators.DTOPaymentCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.PaymentDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.paymentSchedule.GetBelongsToAccountPaymentsService;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
@@ -46,7 +46,7 @@ class CheckUnpaidPaymentsBelongsCreditServiceTest {
 
         when(repository.findById(creditID)).thenReturn(Optional.of(credit));
         when(belongsToTheAccountPaymentsListService.findAllByAccount(account)).thenReturn(unpaidPayments);
-        when(util.convertEntityToPaymentResponse(any(PaymentSchedule.class))).thenReturn(DTOPaymentCreator.getPaymentResponseDTO());
+        when(util.convertEntityToPaymentResponse(any(PaymentSchedule.class))).thenReturn(PaymentDTOGenerator.getPaymentResponseDTO());
         List<PaymentResponseDTO> result = checkUnpaidPaymentsBelongsCreditService.checkUnpaidPaymentsBelongsCredit(creditID);
 
         assertEquals(1, result.size());

@@ -4,8 +4,8 @@ import com.example.credit_service_project.dto.paymentDTO.PaymentsBelongsToAccoun
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.services.account.AccountSearchService;
-import com.example.credit_service_project.services.generators.DTOPaymentCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.PaymentDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.DisplayName;
@@ -40,9 +40,9 @@ class GetNearestPaymentServiceTest {
 
         when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenReturn(account);
         when(util.getNearestPaymentSchedule(account)).thenReturn(payment);
-        when(util.convertEntityToPaymentResponse(payment)).thenReturn(DTOPaymentCreator.getPaymentResponseDTO());
+        when(util.convertEntityToPaymentResponse(payment)).thenReturn(PaymentDTOGenerator.getPaymentResponseDTO());
 
-        assertEquals(DTOPaymentCreator.getPaymentResponseDTO(), service.getNearestPayment(request));
+        assertEquals(PaymentDTOGenerator.getPaymentResponseDTO(), service.getNearestPayment(request));
     }
 
     @Test

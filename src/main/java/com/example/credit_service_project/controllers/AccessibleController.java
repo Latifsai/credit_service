@@ -5,12 +5,9 @@ import com.example.credit_service_project.services.product.GetAllProductsService
 import com.example.credit_service_project.services.product.ProductSearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 /**
  * This request can be used by all Users without authorisation
@@ -31,11 +28,9 @@ public class AccessibleController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<ProductResponseDTO> searchProduct(@PathVariable(name = "id") Long id) {
-        ProductResponseDTO result = search.searchProduct(id);
-        return ResponseEntity.ok()
-                .contentType(APPLICATION_JSON)
-                .body(result);
+    @ResponseStatus(HttpStatus.FOUND)
+    public ProductResponseDTO searchProduct(@PathVariable(name = "id") Long id) {
+        return search.searchProduct(id);
     }
 
 }

@@ -3,8 +3,8 @@ package com.example.credit_service_project.services.user;
 import com.example.credit_service_project.dto.user.CreateUserRequest;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.repositories.UserRepository;
-import com.example.credit_service_project.services.generators.DTOUserCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.UserDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.role.RoleService;
 import com.example.credit_service_project.services.utils.UserUtil;
 import jakarta.validation.Validation;
@@ -44,11 +44,11 @@ class CreateUserServiceTest {
 
         when(util.convertAddRequestToEntity(request)).thenReturn(user);
         when(roleService.findByRoleName("MANAGER")).thenReturn(EntityCreator.getManagerRole());
-        when(util.convertUserToResponse(user)).thenReturn(DTOUserCreator.getResponse());
+        when(util.convertUserToResponse(user)).thenReturn(UserDTOGenerator.getResponse());
         when(passwordEncoder.encode(request.getPassword())).thenReturn("$2a$10$ruSCjhXF8i30nqNtvAeS0OSyzfF3vOR3Oiq6keZN.XLRgRw9ZvPCC");
         when(repository.save(user)).thenReturn(user);
 
-        assertEquals(DTOUserCreator.getResponse(), service.createClient(request));
+        assertEquals(UserDTOGenerator.getResponse(), service.createClient(request));
     }
 
     @Test

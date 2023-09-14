@@ -2,8 +2,8 @@ package com.example.credit_service_project.services.user;
 
 import com.example.credit_service_project.dto.user.UpdateClientRequest;
 import com.example.credit_service_project.entity.User;
-import com.example.credit_service_project.services.generators.DTOUserCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.UserDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.role.RoleService;
 import com.example.credit_service_project.services.utils.UserUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
@@ -46,9 +46,9 @@ class UserUpdateServiceTest {
         when(searchService.findUserById(request.getId())).thenReturn(user);
         when(util.updateClient(user, request)).thenReturn(updatedUser);
         when(createService.saveClient(updatedUser)).thenReturn(updatedUser);
-        when(util.convertUserToResponse(updatedUser)).thenReturn(DTOUserCreator.getUpdateResponse());
+        when(util.convertUserToResponse(updatedUser)).thenReturn(UserDTOGenerator.getUpdateResponse());
 
-        assertEquals(DTOUserCreator.getUpdateResponse(), service.updateClient(request));
+        assertEquals(UserDTOGenerator.getUpdateResponse(), service.updateClient(request));
     }
 
     @Test
@@ -62,9 +62,9 @@ class UserUpdateServiceTest {
         when(util.updateClient(user, request)).thenReturn(updatedUser);
         when(roleService.findByRoleName(request.getRoleName())).thenReturn(EntityCreator.getManagerRole());
         when(createService.saveClient(updatedUser)).thenReturn(updatedUser);
-        when(util.convertUserToResponse(updatedUser)).thenReturn(DTOUserCreator.getUpdateResponse());
+        when(util.convertUserToResponse(updatedUser)).thenReturn(UserDTOGenerator.getUpdateResponse());
 
-        assertEquals(DTOUserCreator.getUpdateResponse(), service.updateClient(request));
+        assertEquals(UserDTOGenerator.getUpdateResponse(), service.updateClient(request));
     }
 
     @Test

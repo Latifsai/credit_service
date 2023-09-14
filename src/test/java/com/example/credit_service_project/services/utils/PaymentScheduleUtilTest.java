@@ -4,8 +4,8 @@ import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.entity.Product;
-import com.example.credit_service_project.services.generators.DTOPaymentCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.PaymentDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.calculators.AnnuityCalculator;
 import com.example.credit_service_project.services.utils.calculators.DifferentiatedPaymentCalculator;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,7 +38,7 @@ class PaymentScheduleUtilTest {
 
     @Test
     void convertEntityToPaymentResponse() {
-        PaymentResponseDTO response = DTOPaymentCreator.getPaymentResponseDTO();
+        PaymentResponseDTO response = PaymentDTOGenerator.getPaymentResponseDTO();
 
         when(util.convertEntityToPaymentResponse(payment)).thenReturn(response);
         assertEquals(response, util.convertEntityToPaymentResponse(payment));

@@ -6,8 +6,8 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.repositories.PaymentScheduleRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
-import com.example.credit_service_project.services.generators.DTOPaymentCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.PaymentDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
@@ -43,10 +43,10 @@ class GetBelongsToAccountPaymentsServiceTest {
 
         when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenReturn(account);
         when(repository.findAllByAccount(account)).thenReturn(List.of(payment));
-        when(util.convertEntityToPaymentResponse(payment)).thenReturn(DTOPaymentCreator.getPaymentResponseDTO());
+        when(util.convertEntityToPaymentResponse(payment)).thenReturn(PaymentDTOGenerator.getPaymentResponseDTO());
 
         assertEquals(new GetBelongsPaymentsResponse(account.getId(), account.getAccountNumber(),
-                List.of(DTOPaymentCreator.getPaymentResponseDTO())), service.getBelongsToAccountPayments(request));
+                List.of(PaymentDTOGenerator.getPaymentResponseDTO())), service.getBelongsToAccountPayments(request));
     }
 
     @Test

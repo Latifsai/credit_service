@@ -3,8 +3,8 @@ package com.example.credit_service_project.services.product;
 import com.example.credit_service_project.dto.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.repositories.ProductRepository;
-import com.example.credit_service_project.services.generators.EntityCreator;
-import com.example.credit_service_project.services.generators.ProductCreatorDTO;
+import com.example.credit_service_project.generators.EntityCreator;
+import com.example.credit_service_project.generators.ProductCreatorDTO;
 import com.example.credit_service_project.services.utils.ProductUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
@@ -59,7 +59,6 @@ class ProductSearchServiceTest {
     @Test
     void findByIdNotFoundException() {
         Long id = 1L;
-        Product product = EntityCreator.getProduct();
 
         when(repository.findById(id)).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> productSearchService.findById(id));

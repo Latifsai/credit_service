@@ -1,8 +1,8 @@
 package com.example.credit_service_project.services.product;
 
 import com.example.credit_service_project.entity.Product;
-import com.example.credit_service_project.services.generators.EntityCreator;
-import com.example.credit_service_project.services.generators.ProductCreatorDTO;
+import com.example.credit_service_project.generators.EntityCreator;
+import com.example.credit_service_project.generators.ProductCreatorDTO;
 import com.example.credit_service_project.services.utils.ProductUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

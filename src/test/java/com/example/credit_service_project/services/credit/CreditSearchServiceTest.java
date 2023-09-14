@@ -4,7 +4,7 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.repositories.CreditRepository;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

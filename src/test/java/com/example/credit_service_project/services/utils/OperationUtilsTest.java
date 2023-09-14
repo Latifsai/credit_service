@@ -8,8 +8,8 @@ import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.entity.enums.OperationType;
-import com.example.credit_service_project.services.generators.DTOOperationCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.OperationDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -111,7 +111,7 @@ class OperationUtilsTest {
 
     @Test
     void convertOperationToResponseDTO() {
-        OperationResponseDTO response = DTOOperationCreator.getOperationResponseDTO();
+        OperationResponseDTO response = OperationDTOGenerator.getOperationResponseDTO();
         when(utils.convertOperationToResponseDTO(operation)).thenReturn(response);
         assertEquals(response, utils.convertOperationToResponseDTO(operation));
     }

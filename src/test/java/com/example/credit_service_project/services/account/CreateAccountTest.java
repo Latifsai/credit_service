@@ -6,8 +6,8 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.repositories.AccountRepository;
 import com.example.credit_service_project.services.user.UserSearchService;
-import com.example.credit_service_project.services.generators.DTOAccountCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.AccountDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.AccountUtil;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -48,10 +48,10 @@ public class CreateAccountTest {
         when(searchClientService.findUserById(request.getClientId())).thenReturn(client);
         when(util.convertAddRequestToAccount(request, client)).thenReturn(account);
         when(repository.save(account)).thenReturn(account);
-        when(util.convertAccountToAddResponse(account)).thenReturn(DTOAccountCreator.createDTOResponse());
+        when(util.convertAccountToAddResponse(account)).thenReturn(AccountDTOGenerator.getResponse());
 
         AccountResponseDTO actual = service.createAccount(request);
-        AccountResponseDTO expected = DTOAccountCreator.createDTOResponse();
+        AccountResponseDTO expected = AccountDTOGenerator.getResponse();
         assertEquals(expected, actual);
     }
 

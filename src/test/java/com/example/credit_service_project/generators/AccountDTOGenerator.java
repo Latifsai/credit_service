@@ -1,4 +1,4 @@
-package com.example.credit_service_project.services.generators;
+package com.example.credit_service_project.generators;
 
 import com.example.credit_service_project.dto.accountDTO.AccountResponseDTO;
 
@@ -10,9 +10,9 @@ import static com.example.credit_service_project.entity.enums.AccountStatus.ACTI
 import static java.math.BigDecimal.ZERO;
 import static java.time.Month.APRIL;
 
-public class DTOAccountCreator {
+public class AccountDTOGenerator {
 
-    public static AccountResponseDTO createDTOResponse() {
+    public static AccountResponseDTO getResponse() {
         return AccountResponseDTO.builder()
                 .id(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"))
                 .accountNumber("A10B3U3OI9")

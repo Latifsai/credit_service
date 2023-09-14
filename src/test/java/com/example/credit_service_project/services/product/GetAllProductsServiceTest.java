@@ -2,9 +2,9 @@ package com.example.credit_service_project.services.product;
 
 import com.example.credit_service_project.dto.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.entity.Product;
+import com.example.credit_service_project.generators.EntityCreator;
+import com.example.credit_service_project.generators.ProductCreatorDTO;
 import com.example.credit_service_project.repositories.ProductRepository;
-import com.example.credit_service_project.services.generators.EntityCreator;
-import com.example.credit_service_project.services.generators.ProductCreatorDTO;
 import com.example.credit_service_project.services.utils.ProductUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,8 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

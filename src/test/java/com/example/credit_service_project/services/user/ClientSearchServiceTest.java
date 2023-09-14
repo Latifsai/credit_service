@@ -1,9 +1,9 @@
 package com.example.credit_service_project.services.user;
 
 import com.example.credit_service_project.repositories.UserRepository;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.UserUtil;
-import com.example.credit_service_project.services.generators.DTOUserCreator;
+import com.example.credit_service_project.generators.UserDTOGenerator;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,9 +33,9 @@ class ClientSearchServiceTest {
         var client = EntityCreator.getUser();
 
         when(repository.findById(id)).thenReturn(Optional.of(client));
-        when(util.convertUserToResponse(client)).thenReturn(DTOUserCreator.getResponse());
+        when(util.convertUserToResponse(client)).thenReturn(UserDTOGenerator.getResponse());
 
-        assertEquals(DTOUserCreator.getResponse(), service.searchUser(id));
+        assertEquals(UserDTOGenerator.getResponse(), service.searchUser(id));
     }
 
     @Test

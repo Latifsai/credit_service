@@ -3,8 +3,8 @@ package com.example.credit_service_project.services.paymentSchedule;
 import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.*;
 import com.example.credit_service_project.repositories.PaymentScheduleRepository;
-import com.example.credit_service_project.services.generators.DTOPaymentCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.PaymentDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,7 +44,7 @@ class PaymentScheduleGeneratorServiceTest {
         PaymentSchedule mockPaymentSchedule = EntityCreator.getPayment();
         when(util.convertToPayment(account)).thenReturn(mockPaymentSchedule);
 
-        PaymentResponseDTO mockResponseDTO = DTOPaymentCreator.getPaymentResponseDTO();
+        PaymentResponseDTO mockResponseDTO = PaymentDTOGenerator.getPaymentResponseDTO();
         when(util.convertEntityToPaymentResponse(mockPaymentSchedule)).thenReturn(mockResponseDTO);
 
         List<PaymentResponseDTO> responses = paymentScheduleGeneratorService.generatePaymentSchedule(credit, product, account, agreement);

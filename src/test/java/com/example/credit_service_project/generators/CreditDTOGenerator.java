@@ -1,4 +1,4 @@
-package com.example.credit_service_project.services.generators;
+package com.example.credit_service_project.generators;
 
 import com.example.credit_service_project.dto.creditDTO.CreateCreditDTOResponse;
 import com.example.credit_service_project.dto.creditDTO.CreditResponseDTO;

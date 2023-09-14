@@ -15,7 +15,7 @@ import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBel
 import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.CreditSearchService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;

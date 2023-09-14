@@ -3,8 +3,8 @@ package com.example.credit_service_project.services.account;
 import com.example.credit_service_project.dto.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.enums.AccountStatus;
-import com.example.credit_service_project.services.generators.DTOAccountCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.AccountDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.AccountUtil;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.AccountStatusException;
@@ -47,9 +47,9 @@ public class UpdateServiceImpTest {
         when(searchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenReturn(account);
         when(util.updateAccount(account, request)).thenReturn(EntityCreator.getUpgratedAccount());
         when(creationService.saveAccount(updatedAccount)).thenReturn(updatedAccount);
-        when(util.convertAccountToAddResponse(updatedAccount)).thenReturn(DTOAccountCreator.getUpdatedDTOResponse());
+        when(util.convertAccountToAddResponse(updatedAccount)).thenReturn(AccountDTOGenerator.getUpdatedDTOResponse());
 
-        assertEquals(DTOAccountCreator.getUpdatedDTOResponse(), service.updateAccount(request));
+        assertEquals(AccountDTOGenerator.getUpdatedDTOResponse(), service.updateAccount(request));
     }
 
     @Test

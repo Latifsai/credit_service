@@ -1,8 +1,8 @@
 package com.example.credit_service_project.services.account;
 
 import com.example.credit_service_project.repositories.AccountRepository;
-import com.example.credit_service_project.services.generators.DTOAccountCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.AccountDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.AccountUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class GetAllAccountsServiceTest {
     @DisplayName(value = "Get all Accounts test")
     public void getAccountsListTest() {
         var accounts = List.of(EntityCreator.getAccount());
-        var responses = List.of(DTOAccountCreator.createDTOResponse());
+        var responses = List.of(AccountDTOGenerator.getResponse());
 
         when(repository.findAll()).thenReturn(accounts);
         when(util.convertAccountToAddResponse(accounts.get(0))).thenReturn(responses.get(0));

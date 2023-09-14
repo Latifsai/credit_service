@@ -4,8 +4,8 @@ import com.example.credit_service_project.dto.user.CreateUserRequest;
 import com.example.credit_service_project.dto.user.UpdateClientRequest;
 import com.example.credit_service_project.dto.user.UserResponseDTO;
 import com.example.credit_service_project.entity.User;
-import com.example.credit_service_project.services.generators.DTOUserCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.UserDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +30,7 @@ class UserUtilTest {
     @BeforeEach
     public void init() {
         user = EntityCreator.getUser();
-        response = DTOUserCreator.getResponse();
+        response = UserDTOGenerator.getResponse();
     }
 
     @Test

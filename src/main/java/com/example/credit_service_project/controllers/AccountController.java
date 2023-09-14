@@ -23,6 +23,7 @@ public class AccountController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
     public AccountResponseDTO createNewAccount(@RequestBody CreateAccountRequestDTO request) {
         return create.createAccount(request);
     }

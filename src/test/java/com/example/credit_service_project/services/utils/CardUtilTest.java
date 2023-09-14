@@ -6,8 +6,8 @@ import com.example.credit_service_project.dto.cardDTO.UpdateCardRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.enums.PaymentSystem;
-import com.example.credit_service_project.services.generators.DTOCardCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.CardDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -37,7 +37,7 @@ class CardUtilTest {
 
     @Test
     void convertCardToAddDTOResponse() {
-        CardResponseDTO responseDTO = DTOCardCreator.getCardResponse();
+        CardResponseDTO responseDTO = CardDTOGenerator.getCardResponse();
         Card card = EntityCreator.getCard();
 
         when(util.convertCardToAddDTOResponse(card)).thenReturn(responseDTO);

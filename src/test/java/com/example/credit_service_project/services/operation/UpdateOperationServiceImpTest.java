@@ -3,8 +3,8 @@ package com.example.credit_service_project.services.operation;
 import com.example.credit_service_project.dto.operationDTO.UpdateOperationsRequest;
 import com.example.credit_service_project.entity.Operation;
 import com.example.credit_service_project.entity.enums.OperationType;
-import com.example.credit_service_project.services.generators.DTOOperationCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.EntityCreator;
+import com.example.credit_service_project.generators.OperationDTOGenerator;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,9 +44,9 @@ class UpdateOperationServiceImpTest {
         when(searchOperationService.findById(request.getId())).thenReturn(operation);
         when(util.updateOperation(operation, request)).thenReturn(updatedOperation);
         when(addOperationService.saveOperation(updatedOperation)).thenReturn(updatedOperation);
-        when(util.convertOperationToResponseDTO(updatedOperation)).thenReturn(DTOOperationCreator.getUpdateOperationResponseDTO());
+        when(util.convertOperationToResponseDTO(updatedOperation)).thenReturn(OperationDTOGenerator.getUpdateOperationResponseDTO());
 
-        assertEquals(DTOOperationCreator.getUpdateOperationResponseDTO(), service.updateOperation(request));
+        assertEquals(OperationDTOGenerator.getUpdateOperationResponseDTO(), service.updateOperation(request));
         verify(addOperationService, times(1)).saveOperation(updatedOperation);
     }
 }

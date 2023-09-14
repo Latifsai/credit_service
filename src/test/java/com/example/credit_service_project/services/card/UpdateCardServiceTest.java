@@ -5,8 +5,8 @@ import com.example.credit_service_project.dto.cardDTO.UpdateCardRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.services.account.AccountUpdateService;
-import com.example.credit_service_project.services.generators.DTOCardCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.CardDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.CardUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
@@ -45,7 +45,7 @@ class UpdateCardServiceTest {
         UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"),
                 "", null);
 
-        var response = DTOCardCreator.getUpdatedCardResponse();
+        var response = CardDTOGenerator.getUpdatedCardResponse();
 
         when(searchCardService.findCardById(request.getId())).thenReturn(card);
         when(utils.updateCard(card, request)).thenReturn(EntityCreator.getUpdatedCard());

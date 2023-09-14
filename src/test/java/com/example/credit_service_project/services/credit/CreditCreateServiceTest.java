@@ -11,9 +11,9 @@ import com.example.credit_service_project.services.account.AccountUpdateService;
 import com.example.credit_service_project.services.agreement.AgreementCreateService;
 import com.example.credit_service_project.services.agreement.SearchAgreementService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderSearchService;
-import com.example.credit_service_project.services.generators.CreditDTOGenerator;
-import com.example.credit_service_project.services.generators.DTOPaymentCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.CreditDTOGenerator;
+import com.example.credit_service_project.generators.PaymentDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.services.utils.CreditUtil;
 import com.example.credit_service_project.validation.exceptions.IsAlreadyExistException;
@@ -61,7 +61,7 @@ class CreditCreateServiceTest {
         CreditOrder creditOrder = EntityCreator.getCreditOrder();
         Credit credit = EntityCreator.getCredit();
         Product product = EntityCreator.getProduct();
-        List<PaymentResponseDTO> list = List.of(DTOPaymentCreator.getPaymentResponseDTO());
+        List<PaymentResponseDTO> list = List.of(PaymentDTOGenerator.getPaymentResponseDTO());
 
         when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenReturn(account);
         when(repository.findByAccountAndCreditStatus(account, CreditStatus.ACTIVE)).thenReturn(Collections.emptyList());

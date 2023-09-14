@@ -15,8 +15,8 @@ import com.example.credit_service_project.services.credit.CheckUnpaidPaymentsBel
 import com.example.credit_service_project.services.credit.CreditCreateService;
 import com.example.credit_service_project.services.credit.CreditSearchService;
 import com.example.credit_service_project.services.creditOrder.CreditOrderCreateService;
-import com.example.credit_service_project.services.generators.DTOOperationCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.OperationDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import com.example.credit_service_project.validation.exceptions.EarlyPaymentException;
@@ -80,7 +80,7 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
         when(updateCardService.saveCard(cardAfter)).thenReturn(cardAfter);
         when(util.convertPaymentsOperationRequestToOperation(request, account)).thenReturn(operation);
         when(repository.save(operation)).thenReturn(operation);
-        when(util.convertOperationToResponseDTO(operation)).thenReturn(DTOOperationCreator.getOperationResponseREPLENISHMENT());
+        when(util.convertOperationToResponseDTO(operation)).thenReturn(OperationDTOGenerator.getOperationResponseREPLENISHMENT());
 
         OperationResponseDTO operationResponseDTO = replenishmentAndEarlyPaymentOperationService.performOperation(request);
 
@@ -118,7 +118,7 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
         when(updateCardService.saveCard(card)).thenReturn(card);
         when(util.convertPaymentsOperationRequestToOperation(request, account)).thenReturn(operation);
         when(repository.save(operation)).thenReturn(operation);
-        when(util.convertOperationToResponseDTO(operation)).thenReturn(DTOOperationCreator.getOperationResponseDTO());
+        when(util.convertOperationToResponseDTO(operation)).thenReturn(OperationDTOGenerator.getOperationResponseDTO());
 
         OperationResponseDTO operationResponseDTO = replenishmentAndEarlyPaymentOperationService.performOperation(request);
         verify(updateAccountService, times(1)).saveUpdatedAccount(account);

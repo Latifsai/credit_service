@@ -5,8 +5,8 @@ import com.example.credit_service_project.dto.accountDTO.CreateAccountRequestDTO
 import com.example.credit_service_project.dto.accountDTO.UpdateAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.User;
-import com.example.credit_service_project.services.generators.DTOAccountCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.AccountDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -39,7 +39,7 @@ class AccountUtilTest {
     @Test
     void convertAccountToAddResponse() {
         Account account = EntityCreator.getAccount();
-        AccountResponseDTO response = DTOAccountCreator.createDTOResponse();
+        AccountResponseDTO response = AccountDTOGenerator.getResponse();
 
         when(accountUtil.convertAccountToAddResponse(account)).thenReturn(response);
 

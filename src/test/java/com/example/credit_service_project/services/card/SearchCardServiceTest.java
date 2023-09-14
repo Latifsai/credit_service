@@ -3,8 +3,8 @@ package com.example.credit_service_project.services.card;
 import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.repositories.CardRepository;
-import com.example.credit_service_project.services.generators.DTOCardCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.CardDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.CardUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
@@ -35,12 +35,12 @@ class SearchCardServiceTest {
         Card card = EntityCreator.getCard();
 
         when(repository.findById(id)).thenReturn(Optional.of(card));
-        when(utils.convertCardToAddDTOResponse(card)).thenReturn(DTOCardCreator.getCardResponse());
+        when(utils.convertCardToAddDTOResponse(card)).thenReturn(CardDTOGenerator.getCardResponse());
 
         CardResponseDTO response = service.searchCard(id);
 
         assertNotNull(response);
-        assertEquals(DTOCardCreator.getCardResponse(), response);
+        assertEquals(CardDTOGenerator.getCardResponse(), response);
     }
 
     @Test

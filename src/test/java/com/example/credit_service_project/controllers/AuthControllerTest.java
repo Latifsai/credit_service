@@ -1,29 +1,29 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.configurations.JwtRequestFilter;
-import com.example.credit_service_project.configurations.SecurityConfiguration;
+import com.example.credit_service_project.dto.auth.LoginRequest;
+import com.example.credit_service_project.dto.auth.LoginResponse;
 import com.example.credit_service_project.services.auth.JwtTokenProvider;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@Import(SecurityConfiguration.class)
-@WebMvcTest(AuthController.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 class AuthControllerTest {
-    @MockBean
-    private JwtRequestFilter filter;
     @MockBean
     private JwtTokenProvider jwtTokenProvider;
     @MockBean
@@ -31,10 +31,20 @@ class AuthControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @WithAnonymousUser
+
     @Test
     void authenticateUser() throws Exception {
-        mockMvc.perform(post("/auth"))
-                .andExpect(status().isOk());
+        LoginRequest request = new LoginRequest("Oleg", "2122");
+        LoginResponse response = new LoginResponse("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
+        Authentication authentication = mock(Authentication.class);
+
+        when(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())))
+                .thenReturn(authentication);
+        when(jwtTokenProvider.generateToken(request.getUsername())).thenReturn(response.getToken());
+
+        mockMvc.perform(post("/auth")
+                        .content(new ObjectMapper().writeValueAsString(request))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted());
     }
 }

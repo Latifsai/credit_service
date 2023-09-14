@@ -1,4 +1,4 @@
-package com.example.credit_service_project.services.generators;
+package com.example.credit_service_project.generators;
 
 import com.example.credit_service_project.dto.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.entity.enums.CalculationType;

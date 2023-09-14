@@ -6,8 +6,8 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.repositories.CardRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
-import com.example.credit_service_project.services.generators.DTOCardCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.CardDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.CardUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import jakarta.validation.Validation;
@@ -49,9 +49,9 @@ class CardCreateServiceTest {
                 .thenReturn(account);
         when(util.convertCreateRequestToEntity(request, account)).thenReturn(card);
         when(repository.save(card)).thenReturn(card).thenReturn(card);
-        when(util.convertCardToAddDTOResponse(card)).thenReturn(DTOCardCreator.getCardResponse());
+        when(util.convertCardToAddDTOResponse(card)).thenReturn(CardDTOGenerator.getCardResponse());
         CardResponseDTO actual = createCardService.createCard(request);
-        assertEquals(DTOCardCreator.getCardResponse(), actual);
+        assertEquals(CardDTOGenerator.getCardResponse(), actual);
     }
 
     @DisplayName(value = "Test card create throw NotFoundException")

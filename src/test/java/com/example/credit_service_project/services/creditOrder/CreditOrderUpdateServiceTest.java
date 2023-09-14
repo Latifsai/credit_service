@@ -4,8 +4,8 @@ import com.example.credit_service_project.dto.creditOrderDTO.CreditOrderResponse
 import com.example.credit_service_project.dto.creditOrderDTO.UpdateCreditOrderRequestDTO;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
-import com.example.credit_service_project.services.generators.CreditOrderedGenerator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.CreditOrderedGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.CreditOrderUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

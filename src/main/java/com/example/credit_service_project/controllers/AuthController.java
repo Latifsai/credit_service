@@ -23,7 +23,7 @@ public class AuthController {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<LoginResponse> authenticateUser(@Valid @RequestBody LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

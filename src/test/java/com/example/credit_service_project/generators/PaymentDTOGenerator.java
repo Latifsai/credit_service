@@ -1,4 +1,4 @@
-package com.example.credit_service_project.services.generators;
+package com.example.credit_service_project.generators;
 
 import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
 
@@ -8,7 +8,7 @@ import java.util.UUID;
 
 import static java.time.Month.SEPTEMBER;
 
-public class DTOPaymentCreator {
+public class PaymentDTOGenerator {
 
     public static PaymentResponseDTO getPaymentResponseDTO() {
         return new PaymentResponseDTO(

@@ -7,8 +7,8 @@ import com.example.credit_service_project.dto.creditOrderDTO.UpdateCreditOrderRe
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.Product;
-import com.example.credit_service_project.services.generators.CreditOrderedGenerator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.CreditOrderedGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

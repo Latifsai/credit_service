@@ -5,7 +5,7 @@ import com.example.credit_service_project.dto.paymentDTO.PreliminaryCalculationR
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.services.account.AccountSearchService;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.PaymentScheduleUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

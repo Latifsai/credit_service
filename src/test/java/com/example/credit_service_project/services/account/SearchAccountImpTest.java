@@ -3,8 +3,8 @@ package com.example.credit_service_project.services.account;
 import com.example.credit_service_project.dto.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repositories.AccountRepository;
-import com.example.credit_service_project.services.generators.DTOAccountCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.AccountDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.AccountUtil;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
@@ -40,9 +40,9 @@ public class SearchAccountImpTest {
         Account account = EntityCreator.getAccount();
 
         when(repository.findByIdOrAccountNumber(request.getId(), request.getAccountNumber())).thenReturn(Optional.of(account));
-        when(util.convertAccountToAddResponse(account)).thenReturn(DTOAccountCreator.createDTOResponse());
+        when(util.convertAccountToAddResponse(account)).thenReturn(AccountDTOGenerator.getResponse());
 
-        assertEquals(DTOAccountCreator.createDTOResponse(), service.searchAccount(request));
+        assertEquals(AccountDTOGenerator.getResponse(), service.searchAccount(request));
     }
 
     @DisplayName(value = "Test search account NotFoundException")

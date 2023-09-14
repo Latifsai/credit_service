@@ -34,7 +34,7 @@ public class CardController {
     }
 
     @PutMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public CardResponseDTO updateCard(@RequestBody UpdateCardRequest request) {
         return update.updateCard(request);
     }

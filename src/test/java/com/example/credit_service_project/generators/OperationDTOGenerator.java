@@ -1,4 +1,4 @@
-package com.example.credit_service_project.services.generators;
+package com.example.credit_service_project.generators;
 
 import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.entity.enums.OperationType;
@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class DTOOperationCreator {
+public class OperationDTOGenerator {
 
     public static OperationResponseDTO getOperationResponseDTO() {
         return  OperationResponseDTO.builder()

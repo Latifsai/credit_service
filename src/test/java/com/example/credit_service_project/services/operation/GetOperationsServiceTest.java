@@ -4,8 +4,8 @@ import com.example.credit_service_project.dto.operationDTO.GetBelongsAccountOper
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.repositories.OperationRepository;
 import com.example.credit_service_project.services.account.AccountSearchService;
-import com.example.credit_service_project.services.generators.DTOOperationCreator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.OperationDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.services.utils.OperationUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +35,7 @@ class GetOperationsServiceTest {
     public void testGetServiceSuccess() {
         GetBelongsAccountOperationsRequest request = new GetBelongsAccountOperationsRequest(UUID.randomUUID(), null);
         var operationList = List.of(EntityCreator.getOperation());
-        var response = List.of(DTOOperationCreator.getOperationResponseDTO());
+        var response = List.of(OperationDTOGenerator.getOperationResponseDTO());
         Account account = EntityCreator.getAccount();
 
         when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenReturn(account);

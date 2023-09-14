@@ -5,8 +5,8 @@ import com.example.credit_service_project.dto.agreementDTO.CreateAgreementReques
 import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.entity.enums.CreditOrderStatus;
-import com.example.credit_service_project.services.generators.AgreementDTOGenerator;
-import com.example.credit_service_project.services.generators.EntityCreator;
+import com.example.credit_service_project.generators.AgreementDTOGenerator;
+import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.validation.exceptions.AgreementException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
