@@ -1,31 +1,39 @@
 package com.example.credit_service_project.controllers;
 
-import com.example.credit_service_project.configurations.JwtRequestFilter;
-import com.example.credit_service_project.configurations.SecurityConfiguration;
+import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
+import com.example.credit_service_project.dto.operationDTO.PaymentsOperationRequest;
+import com.example.credit_service_project.dto.operationDTO.UpdateOperationsRequest;
+import com.example.credit_service_project.entity.enums.OperationType;
+import com.example.credit_service_project.generators.OperationDTOGenerator;
 import com.example.credit_service_project.services.operation.OperationUpdateService;
 import com.example.credit_service_project.services.operation.PaymentProcessingService;
 import com.example.credit_service_project.services.operation.ReplenishmentAndEarlyPaymentOperationService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.UUID;
+
+import static com.example.credit_service_project.entity.enums.OperationType.EARLY_REPAYMENT;
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.when;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(OperationController.class)
-@Import(SecurityConfiguration.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class OperationControllerTest {
-    @MockBean
-    private JwtRequestFilter filter;
+
     @MockBean
     private PaymentProcessingService createPaymentOperation;
     @MockBean
@@ -35,24 +43,90 @@ class OperationControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @WithMockUser(roles = "MANAGER")
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final OperationResponseDTO response = OperationDTOGenerator.getOperationResponseDTO();
+    private final OperationResponseDTO replenishmentResponse = OperationDTOGenerator.getOperationResponseREPLENISHMENT();
+    private final OperationResponseDTO updateResponse = OperationDTOGenerator.getUpdateOperationResponseDTO();
+
     @Test
+    @WithMockUser(value = "Oleg", roles = "MANAGER")
     void handlePayments() throws Exception {
+
+        when(createPaymentOperation.handlePayments()).thenReturn(Collections.singletonList(response));
+
         mockMvc.perform(post("/operation"))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].accountNumber").exists());
     }
 
-    @WithMockUser(roles = "MANAGER")
     @Test
+    void handlePaymentsForbidden() throws Exception {
+
+        when(createPaymentOperation.handlePayments()).thenReturn(Collections.singletonList(response));
+
+        mockMvc.perform(post("/operation"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(value = "Oleg", roles = "MANAGER")
     void addNewOperation() throws Exception {
-        mockMvc.perform(post("/operation/elective"))
-                .andExpect(status().isOk());
+        PaymentsOperationRequest request = new PaymentsOperationRequest(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
+                null, BigDecimal.valueOf(1000), OperationType.REPLENISHMENT, "REPLENISHMENT");
+
+        when(replenishmentAndEarlyPaymentOperation.performOperation(request)).thenReturn(replenishmentResponse);
+
+        mockMvc.perform(post("/operation/elective")
+                        .content(mapper.writeValueAsString(request))
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.accountNumber").value(response.getAccountNumber()))
+                .andExpect(jsonPath("$.balance").value(response.getBalance()));
     }
 
-    @WithMockUser(roles = "MANAGER")
     @Test
-    void update() throws Exception {
-        mockMvc.perform(put("/operation"))
-                .andExpect(status().isOk());
+    void addNewOperationForbidden() throws Exception {
+        PaymentsOperationRequest request = new PaymentsOperationRequest(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
+                null, BigDecimal.valueOf(1000), OperationType.REPLENISHMENT, "REPLENISHMENT");
+
+        when(replenishmentAndEarlyPaymentOperation.performOperation(request)).thenReturn(replenishmentResponse);
+
+        mockMvc.perform(post("/operation/elective")
+                        .content(mapper.writeValueAsString(request))
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isForbidden());
     }
+
+    @Test
+    @WithMockUser(value = "Oleg", roles = "MANAGER")
+    void update() throws Exception {
+        UpdateOperationsRequest request = new UpdateOperationsRequest(
+                UUID.fromString("11117777-9999-1111-b491-426655440000"), EARLY_REPAYMENT, "EARLY_REPAYMENT");
+
+        when(update.updateOperation(request)).thenReturn(updateResponse);
+
+        mockMvc.perform(put("/operation")
+                        .content(mapper.writeValueAsString(request))
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.accountNumber").value(updateResponse.getAccountNumber()))
+                .andExpect(jsonPath("$.balance").value(updateResponse.getBalance()))
+                .andExpect(jsonPath("$.sum").value(updateResponse.getSum()))
+                .andExpect(jsonPath("$.type").exists());
+    }
+
+    @Test
+    void updateForbidden() throws Exception {
+        UpdateOperationsRequest request = new UpdateOperationsRequest(
+                UUID.fromString("11117777-9999-1111-b491-426655440000"), EARLY_REPAYMENT, "EARLY_REPAYMENT");
+
+        when(update.updateOperation(request)).thenReturn(updateResponse);
+
+        mockMvc.perform(put("/operation")
+                        .content(mapper.writeValueAsString(request))
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isForbidden());
+    }
+
 }

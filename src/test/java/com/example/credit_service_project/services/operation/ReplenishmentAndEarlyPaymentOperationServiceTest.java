@@ -68,6 +68,7 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
     void performOperationReplenishment() {
         PaymentsOperationRequest request = new PaymentsOperationRequest(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 null, BigDecimal.valueOf(1000), OperationType.REPLENISHMENT, "REPLENISHMENT");
+
         Account account = EntityCreator.getAccount();
         Card card = EntityCreator.getCard();
         Card cardAfter = EntityCreator.getCardAfterOperationReplenishment();

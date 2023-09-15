@@ -12,10 +12,9 @@ import com.example.credit_service_project.services.utils.CreditOrderUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class CreditOrderCreateService {
 
     private final CreditOrderRepository repository;

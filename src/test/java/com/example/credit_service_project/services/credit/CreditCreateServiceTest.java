@@ -56,6 +56,7 @@ class CreditCreateServiceTest {
         CreateCreditRequestDTO request = new CreateCreditRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 "A10B3U3OI9", UUID.fromString("34d824ef-da02-4845-af3d-2aba7f6336ca"),
                 UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"), 12, 0, "Consumer credit");
+
         Account account = EntityCreator.getAccount();
         Agreement agreement = EntityCreator.getAgreement();
         CreditOrder creditOrder = EntityCreator.getCreditOrder();
