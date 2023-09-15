@@ -86,8 +86,7 @@ public class Account {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "account", fetch = LAZY,
-            cascade = ALL)
+    @OneToMany(mappedBy = "account", fetch = LAZY, cascade = ALL)
     private List<Operation> operations;
     //указывает, что связь между таблицами будет установлена через поле account
 

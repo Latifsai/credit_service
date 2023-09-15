@@ -24,4 +24,70 @@
                      path="21-drop-credit_histories-table.sql"/>
         </rollback>
     </changeSet>
+
+    <changeSet id="addForeignKey" author="latif">
+        <addForeignKeyConstraint baseTableName="credit_histories"
+                                 baseColumnNames="account_id"
+                                 constraintName="FK_credit_histories_accounts"
+                                 referencedTableName="accounts"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="4.2" author="latif">
+        <sql>
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('f3ad54a8-f9aa-4b72-a8ad-c4856c272e90','-', '')), 'WELL', UNHEX(REPLACE('0b8a9af4-9893-435d-a379-e18862324b91', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('452873d5-d043-4785-8a89-0c71593dd32f','-', '')), 'WELL', UNHEX(REPLACE('c6f3f18d-705b-4230-a200-925bfab7bf72', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('4dfd183a-91b2-4c10-ba03-53f3c05b0c0c','-', '')), 'WELL', UNHEX(REPLACE('5343f0ca-2db4-43e0-83e2-168c28937c5e', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('2845d823-d0cc-4308-8b62-bf6f123e7f26','-', '')), 'WELL', UNHEX(REPLACE('d56b5706-f5ea-40ad-9cf6-35f63f44e861', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('c8251aee-4b47-49c2-9c69-c8515b91b033','-', '')), 'WELL', UNHEX(REPLACE('d965437f-893f-422c-bbf4-ce7b3b7a7cd1', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('1b634d7f-93b6-4719-aca6-3c4e3b1fca99','-', '')), 'WELL', UNHEX(REPLACE('bf6f91ea-28d0-4196-adc6-ab7c31d28b7e', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('cf81af72-4e11-452d-8e43-660f93842538','-', '')), 'WELL', UNHEX(REPLACE('21a93546-aacb-4182-b65e-e52867e359bb', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('112db565-5d24-432d-bfd9-8835a1c56b6b','-', '')), 'WELL', UNHEX(REPLACE('dd389062-99fa-444d-b08a-00013906a51e', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('da2021fe-7ef9-40bf-afe4-97d52db3a65f','-', '')), 'WELL', UNHEX(REPLACE('1fa2e55d-72ab-4546-b683-97079c1e1729', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('318039d4-b6ed-4816-b847-9fbe5a78f01b','-', '')), 'WELL', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('a7776a10-48b0-431e-afc3-a512d0a88df3','-', '')), 'WELL', UNHEX(REPLACE('f53ee69d-c79d-4e97-8d90-1b964ca6be95', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('eeecc8a5-346c-4361-9aec-6346f21c35c1','-', '')), 'WELL', UNHEX(REPLACE('33c02962-82ce-4ece-9642-5efbd55ba6c2', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('a5081cb1-21f9-4118-9f1b-ba23f720d114','-', '')), 'WELL', UNHEX(REPLACE('5c644c79-b060-42b0-8c47-513e8e8e7535', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('c9e34f00-31e2-4f7e-92ca-18443f6aceeb','-', '')), 'WELL', UNHEX(REPLACE('2d045a56-ea36-43e9-8b45-a1ea44c47044', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('5e27b0b1-756f-470b-bc73-e74240eaf9b9','-', '')), 'WELL', UNHEX(REPLACE('7ec83125-7463-45bf-962e-58cb84ac2589', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('ce84de6f-689b-4c6d-bdf1-d4be229d8597','-', '')), 'WELL', UNHEX(REPLACE('5b6e86c9-7f2e-437e-8a6b-a74b988fe72c', '-', '')));
+
+            INSERT INTO credit_histories
+            VALUES (UNHEX(REPLACE('ff7b6c33-bbfc-4e6f-83c5-68f9a676cfb5','-', '')), 'WELL', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
+
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

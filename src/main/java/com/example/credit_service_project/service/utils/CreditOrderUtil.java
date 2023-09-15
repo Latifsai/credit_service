@@ -80,8 +80,8 @@ public class CreditOrderUtil {
     }
 
     public CreditOrder considerationOfApplication(CreditOrder order) {
-        if (getMountPayment(order).compareTo(get30PercentFromIncome(order)) >= 0
-                || order.getPassiveIncome().compareTo(new BigDecimal("1000")) >= 0) {
+        if ((getMountPayment(order).compareTo(get30PercentFromIncome(order)) >= 0
+                || order.getPassiveIncome().compareTo(new BigDecimal("1000")) >= 0)) {
             order.setCreditOrderStatus(APPROVED);
         } else {
             order.setCreditOrderStatus(DECLINED);

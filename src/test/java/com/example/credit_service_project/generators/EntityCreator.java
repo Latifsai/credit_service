@@ -465,4 +465,22 @@ public class EntityCreator {
         order.setProduct(getProduct());
         return order;
     }
+
+    public static Delay getDelay() {
+        Delay delay = new Delay();
+        delay.setId(UUID.fromString("212bc33c-68ed-4390-9b6d-2089e7b10a53"));
+        delay.setCreditHistory(getCreditHistory());
+        delay.setSumOfDelay(TEN);
+        delay.setTimeOfDelay(LocalDateTime.of(2023, 3,12,14,23,32));
+        return delay;
+    }
+
+    public static CreditHistory getCreditHistory() {
+        CreditHistory history = new CreditHistory();
+        history.setId(UUID.fromString("ee915b27-a4d5-4d69-b395-5755a01a6b24"));
+        history.setStatus(CreditHistoryStatus.WELL);
+        return history;
+    }
+
+
 }

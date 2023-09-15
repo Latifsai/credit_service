@@ -5,6 +5,7 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.PaymentSchedule;
+import com.example.credit_service_project.generators.DelayDTOGenerator;
 import com.example.credit_service_project.repository.OperationRepository;
 import com.example.credit_service_project.service.account.AccountUpdateService;
 import com.example.credit_service_project.service.account.GetAllAccountsService;
@@ -16,6 +17,7 @@ import com.example.credit_service_project.service.credit.CreditCreateService;
 import com.example.credit_service_project.service.credit.CreditSearchService;
 import com.example.credit_service_project.service.creditOrder.CreditOrderCreateService;
 import com.example.credit_service_project.generators.EntityCreator;
+import com.example.credit_service_project.service.delay.DelayService;
 import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
@@ -61,6 +63,8 @@ class PaymentProcessingServiceTest {
     private AgreementCreateService createAgreementService;
     @Mock
     private CreditSearchService creditSearchService;
+    @Mock
+    private DelayService delayService;
     @InjectMocks
     private PaymentProcessingService paymentProcessingService;
     @Test
@@ -99,8 +103,8 @@ class PaymentProcessingServiceTest {
         when(getUnpaidPaymentsService.findUnpaidPaymentByAccount(account)).thenReturn(Collections.singletonList(paymentSchedule));
         when(searchCardService.findByAccount(account)).thenReturn(card);
         when(util.payBill(account, paymentSchedule, card)).thenReturn(EntityCreator.getAccountAfterOperation());
-        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 1))
-                .thenReturn(BigDecimal.valueOf(5));
+        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 1)).thenReturn(BigDecimal.valueOf(5));
+        when(delayService.addNewDelay(BigDecimal.valueOf(5), account)).thenReturn(DelayDTOGenerator.getResponse());
 
         List<OperationResponseDTO> result = paymentProcessingService.handlePayments();
 
@@ -120,7 +124,7 @@ class PaymentProcessingServiceTest {
         when(getAllAccountsService.findAllAccounts()).thenReturn(Collections.singletonList(account));
         when(creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE)).thenReturn(credit);
         when(getUnpaidPaymentsService.findUnpaidPaymentByAccount(account)).thenReturn(Collections.singletonList(paymentSchedule));
-        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 3)).thenReturn(BigDecimal.valueOf(15));
+        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 9)).thenReturn(BigDecimal.valueOf(15));
 
         List<OperationResponseDTO> result = paymentProcessingService.handlePayments();
 

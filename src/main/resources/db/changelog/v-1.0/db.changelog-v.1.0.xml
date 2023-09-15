@@ -10,6 +10,7 @@
     <include file="10-changeset-users-table.xml" relativeToChangelogFile="true" />
     <include file="20-changeset-accounts-table.xml" relativeToChangelogFile="true" />
     <include file="21-changeset-credit_histories-table.xml" relativeToChangelogFile="true" />
+    <include file="22-changeset-delays-table.xml" relativeToChangelogFile="true" />
     <include file="30-changeset-cards-table.xml" relativeToChangelogFile="true" />
     <include file="40-changeset-products-table.xml" relativeToChangelogFile="true" />
     <include file="41-changeset-products_seq-table.xml" relativeToChangelogFile="true" />
