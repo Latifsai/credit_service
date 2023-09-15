@@ -39,5 +39,4 @@ public class AccountController {
     public AccountResponseDTO updateAccount(@RequestBody UpdateAccountRequest request) {
         return update.updateAccount(request);
     }
-
 }

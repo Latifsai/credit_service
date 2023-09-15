@@ -1,5 +1,6 @@
 package com.example.credit_service_project.controller;
 
+import com.example.credit_service_project.dto.CreditHistoryResponse;
 import com.example.credit_service_project.dto.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.dto.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.dto.agreementDTO.AgreementResponse;
@@ -15,6 +16,7 @@ import com.example.credit_service_project.service.account.AccountSearchService;
 import com.example.credit_service_project.service.agreement.SearchAgreementService;
 import com.example.credit_service_project.service.card.CardSearchService;
 import com.example.credit_service_project.service.credit.CheckUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.service.creditHistory.CreditHistoryService;
 import com.example.credit_service_project.service.creditOrder.CheckCreditOrderStatusService;
 import com.example.credit_service_project.service.creditOrder.CreditOrderSearchService;
 import com.example.credit_service_project.service.operation.GetOperationsService;
@@ -29,7 +31,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * All request here can be used be Client and Manager
+ * All request here can be used by Client and Manager
  */
 @RestController
 @RequiredArgsConstructor
@@ -45,6 +47,7 @@ public class SearchController {
     private final CreditOrderSearchService searchOrder;
     private final SearchAgreementService searchAgreement;
     private final GetPreliminaryCalculationOfProduct getPreliminaryCalculationOfProduct;
+    private final CreditHistoryService creditHistoryService;
 
 
     @GetMapping("/account/search")
@@ -99,5 +102,11 @@ public class SearchController {
     @ResponseStatus(HttpStatus.OK)
     public List<PreliminaryCalculationResponse> showPreliminary(@RequestBody PreliminaryCalculationRequest request) {
         return getPreliminaryCalculationOfProduct.getPreliminaryCalculation(request);
+    }
+
+    @GetMapping("/credit_history/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public CreditHistoryResponse findCreditHistoryByID(@PathVariable(name = "id") UUID id) {
+        return creditHistoryService.findByID(id);
     }
 }

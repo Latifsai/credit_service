@@ -14,6 +14,7 @@ import com.example.credit_service_project.service.credit.CheckUnpaidPaymentsBelo
 import com.example.credit_service_project.service.credit.CreditCreateService;
 import com.example.credit_service_project.service.credit.CreditSearchService;
 import com.example.credit_service_project.service.creditOrder.CreditOrderCreateService;
+import com.example.credit_service_project.service.delay.DelayService;
 import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.validation.ErrorsMessage;
@@ -48,6 +49,7 @@ public class PaymentProcessingService {
     private final CreditOrderCreateService addCreditOrderService;
     private final AgreementCreateService createAgreementService;
     private final CreditSearchService creditSearchService;
+    private final DelayService delayService;
 
     @Scheduled(cron = "0 0 23 * * *")
     public List<OperationResponseDTO> handlePayments() {
@@ -122,6 +124,8 @@ public class PaymentProcessingService {
         int dayOfDelay = 1;
         BigDecimal fine = util.calculateFine(getCredit(account).getInterestRate(), paymentSchedule.getMonthlyPayment(), dayOfDelay);
 
+        delayService.addNewDelay(fine, account);
+
         paymentSchedule.setSurcharge(fine);
         getCredit(account).setFine(fine);
         creditService.saveCredit(getCredit(account));
@@ -136,6 +140,8 @@ public class PaymentProcessingService {
     private void handleDelayedFine(PaymentSchedule paymentSchedule, Account account) {
         int dayOfDelay = (int) ChronoUnit.DAYS.between(paymentSchedule.getPaymentDate(), LocalDate.now());
         BigDecimal fine = util.calculateFine(getCredit(account).getInterestRate(), paymentSchedule.getMonthlyPayment(), dayOfDelay);
+
+        delayService.addNewDelay(fine, account);
 
         paymentSchedule.setSurcharge(fine);
         getCredit(account).setFine(fine);

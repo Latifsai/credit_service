@@ -91,12 +91,14 @@ public class Account {
     private List<Operation> operations;
     //указывает, что связь между таблицами будет установлена через поле account
 
-    @OneToMany(mappedBy = "account", fetch = LAZY,
-            orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+    @OneToMany(mappedBy = "account", fetch = LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
     private List<PaymentSchedule> paymentSchedules;
 
     @OneToMany(mappedBy = "account", cascade = ALL, fetch = LAZY)
     private List<Card> cards;
+
+    @OneToOne(mappedBy = "account", cascade = {MERGE, PERSIST, REFRESH}, fetch = LAZY, orphanRemoval = true)
+    private CreditHistory creditHistory;
 
     @Override
     public boolean equals(Object o) {
@@ -128,6 +130,7 @@ public class Account {
                 ", currency='" + currency + '\'' +
                 ", credit=" + credits +
                 ", client=" + user +
+                ", creditHistory=" + creditHistory +
                 '}';
     }
 }
