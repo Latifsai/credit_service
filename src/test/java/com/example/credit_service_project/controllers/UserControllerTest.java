@@ -77,6 +77,17 @@ class UserControllerTest {
     }
 
     @Test
+    void searchClientForbidden() throws Exception {
+        UUID id = UUID.randomUUID();
+
+        when(search.searchUser(id)).thenReturn(response);
+
+        mockMvc.perform(get("/users/{id}", id))
+                .andExpect(status().isForbidden());
+    }
+
+
+    @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
     void createClient() throws Exception {
         CreateUserRequest request = new CreateUserRequest("Aziz", "Snow", BigDecimal.valueOf(2500),
@@ -85,7 +96,7 @@ class UserControllerTest {
 
         when(create.createClient(request)).thenReturn(response);
 
-        mockMvc.perform(get("/users")
+        mockMvc.perform(post("/users")
                         .content(mapper.writeValueAsString(request))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -102,12 +113,14 @@ class UserControllerTest {
 
         when(create.createClient(request)).thenReturn(response);
 
-        mockMvc.perform(get("/users")
+        mockMvc.perform(post("/users")
                         .content(mapper.writeValueAsString(request))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isForbidden());
     }
+
     @Test
+    @WithMockUser(value = "Oleg", roles = {"MANAGER"})
     void updateClient() throws Exception {
         UpdateClientRequest request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"),
                 null, new BigDecimal("2000"), null, null, null, null, null);
@@ -117,9 +130,9 @@ class UserControllerTest {
         mockMvc.perform(put("/users")
                         .contentType(APPLICATION_JSON)
                         .content(mapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.name").isNumber())
+                .andExpect(jsonPath("$.name").value(response.getName()))
                 .andExpect(jsonPath("$.surname").isString())
                 .andExpect(jsonPath("$.income").value(response.getIncome()));
     }
