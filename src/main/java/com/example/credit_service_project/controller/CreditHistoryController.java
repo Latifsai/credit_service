@@ -1,15 +1,15 @@
 package com.example.credit_service_project.controller;
 
 import com.example.credit_service_project.dto.CreditHistoryResponse;
-import com.example.credit_service_project.dto.delayDTO.DelayResponse;
 import com.example.credit_service_project.service.creditHistory.CreditHistoryService;
-import com.example.credit_service_project.service.delay.DelayService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("credit_history")
@@ -17,7 +17,6 @@ import java.util.UUID;
 public class CreditHistoryController {
 
     private final CreditHistoryService creditHistoryService;
-    private final DelayService delayService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
@@ -25,9 +24,4 @@ public class CreditHistoryController {
         return creditHistoryService.findAllHistories();
     }
 
-    @GetMapping("/delays/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<DelayResponse> findAllDelaysBelongsCreditHistory(@PathVariable(name = "id") UUID historyId) {
-        return delayService.findAllDelaysBelongsToCreditHistory(historyId);
-    }
 }

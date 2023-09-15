@@ -7,6 +7,7 @@ import com.example.credit_service_project.dto.agreementDTO.AgreementResponse;
 import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.dto.creditOrderDTO.CheckCreditOrderStatusResponse;
 import com.example.credit_service_project.dto.creditOrderDTO.CreditOrderResponseDTO;
+import com.example.credit_service_project.dto.delayDTO.DelayResponse;
 import com.example.credit_service_project.dto.operationDTO.GetBelongsAccountOperationsRequest;
 import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.dto.operationDTO.PreliminaryCalculationRequest;
@@ -19,6 +20,7 @@ import com.example.credit_service_project.service.credit.CheckUnpaidPaymentsBelo
 import com.example.credit_service_project.service.creditHistory.CreditHistoryService;
 import com.example.credit_service_project.service.creditOrder.CheckCreditOrderStatusService;
 import com.example.credit_service_project.service.creditOrder.CreditOrderSearchService;
+import com.example.credit_service_project.service.delay.DelayService;
 import com.example.credit_service_project.service.operation.GetOperationsService;
 import com.example.credit_service_project.service.operation.OperationSearchService;
 import com.example.credit_service_project.service.product.GetPreliminaryCalculationOfProduct;
@@ -48,7 +50,7 @@ public class SearchController {
     private final SearchAgreementService searchAgreement;
     private final GetPreliminaryCalculationOfProduct getPreliminaryCalculationOfProduct;
     private final CreditHistoryService creditHistoryService;
-
+    private final DelayService delayService;
 
     @GetMapping("/account/search")
     @ResponseStatus(HttpStatus.FOUND)
@@ -108,5 +110,11 @@ public class SearchController {
     @ResponseStatus(HttpStatus.FOUND)
     public CreditHistoryResponse findCreditHistoryByID(@PathVariable(name = "id") UUID id) {
         return creditHistoryService.findByID(id);
+    }
+
+    @GetMapping("/delays/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<DelayResponse> findAllDelaysBelongsCreditHistory(@PathVariable(name = "id") UUID historyId) {
+        return delayService.findAllDelaysBelongsToCreditHistory(historyId);
     }
 }

@@ -7,7 +7,6 @@ import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.repository.DelayRepository;
 import com.example.credit_service_project.service.creditHistory.CreditHistoryService;
 import com.example.credit_service_project.service.utils.DelayUtil;
-import org.hibernate.sql.ast.tree.expression.Collation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +17,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

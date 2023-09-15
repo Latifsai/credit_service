@@ -61,7 +61,6 @@ class CreditHistoryServiceTest {
 
     @Test
     void findByIDForService() {
-
         when(repository.findById(id)).thenReturn(Optional.of(history));
         assertEquals(history, historyService.findByIDForService(id));
     }
@@ -69,14 +68,12 @@ class CreditHistoryServiceTest {
 
     @Test
     void findByIDForServiceNotFound() {
-
         when(repository.findById(id)).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> historyService.findByIDForService(id));
     }
 
     @Test
     void findAllHistories() {
-        var responses = Collections.singletonList(response);
         var list = Collections.singletonList(history);
         var result = CreditHistoryDTOGenerator.getResponse();
 

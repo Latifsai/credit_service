@@ -1,10 +1,12 @@
 package com.example.credit_service_project.controller;
 
+import com.example.credit_service_project.dto.CreditHistoryResponse;
 import com.example.credit_service_project.dto.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.dto.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.dto.agreementDTO.AgreementResponse;
 import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.dto.creditOrderDTO.CheckCreditOrderStatusResponse;
+import com.example.credit_service_project.dto.delayDTO.DelayResponse;
 import com.example.credit_service_project.dto.operationDTO.GetBelongsAccountOperationsRequest;
 import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.dto.operationDTO.PreliminaryCalculationRequest;
@@ -16,8 +18,10 @@ import com.example.credit_service_project.service.account.AccountSearchService;
 import com.example.credit_service_project.service.agreement.SearchAgreementService;
 import com.example.credit_service_project.service.card.CardSearchService;
 import com.example.credit_service_project.service.credit.CheckUnpaidPaymentsBelongsCreditService;
+import com.example.credit_service_project.service.creditHistory.CreditHistoryService;
 import com.example.credit_service_project.service.creditOrder.CheckCreditOrderStatusService;
 import com.example.credit_service_project.service.creditOrder.CreditOrderSearchService;
+import com.example.credit_service_project.service.delay.DelayService;
 import com.example.credit_service_project.service.operation.GetOperationsService;
 import com.example.credit_service_project.service.operation.OperationSearchService;
 import com.example.credit_service_project.service.product.GetPreliminaryCalculationOfProduct;
@@ -66,6 +70,10 @@ class SearchControllerTest {
     private SearchAgreementService searchAgreement;
     @MockBean
     private GetPreliminaryCalculationOfProduct getPreliminaryCalculationOfProduct;
+    @MockBean
+    private CreditHistoryService creditHistoryService;
+    @MockBean
+    private DelayService delayService;
     @Autowired
     private MockMvc mockMvc;
 
@@ -300,6 +308,56 @@ class SearchControllerTest {
 
         mockMvc.perform(get("/entered/credit_preview")
                         .content(mapper.writeValueAsString(request))
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(value = "Oleg", roles = {"CLIENT"})
+    void findCreditHistoryByID() throws Exception {
+        UUID id = UUID.fromString("c076896f-f0da-43ca-a10d-a9287fd95d5f");
+        CreditHistoryResponse response = CreditHistoryDTOGenerator.getResponse();
+
+        when(creditHistoryService.findByID(id)).thenReturn(response);
+
+        mockMvc.perform(get("/entered/credit_history/{id}", id)
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isFound());
+    }
+
+    @Test
+    void findCreditHistoryByIDForBidden() throws Exception {
+        UUID id = UUID.fromString("c076896f-f0da-43ca-a10d-a9287fd95d5f");
+        CreditHistoryResponse response = CreditHistoryDTOGenerator.getResponse();
+
+        when(creditHistoryService.findByID(id)).thenReturn(response);
+
+        mockMvc.perform(get("/entered/credit_history/{id}", id)
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(value = "Oleg", roles = {"CLIENT"})
+    void findAllDelaysBelongsCreditHistory() throws Exception {
+        UUID id = UUID.fromString("c076896f-f0da-43ca-a10d-a9287fd95d5f");
+        List<DelayResponse> response = Collections.singletonList(DelayDTOGenerator.getResponse());
+
+        when(delayService.findAllDelaysBelongsToCreditHistory(id)).thenReturn(response);
+
+        mockMvc.perform(get("/entered//delays/{id}", id)
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isFound());
+    }
+
+    @Test
+    void findAllDelaysBelongsCreditHistoryForBidden() throws Exception {
+        UUID id = UUID.fromString("c076896f-f0da-43ca-a10d-a9287fd95d5f");
+        List<DelayResponse> response = Collections.singletonList(DelayDTOGenerator.getResponse());
+
+        when(delayService.findAllDelaysBelongsToCreditHistory(id)).thenReturn(response);
+
+        mockMvc.perform(get("/entered//delays/{id}", id)
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isForbidden());
     }

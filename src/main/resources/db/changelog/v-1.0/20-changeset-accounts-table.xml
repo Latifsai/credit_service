@@ -27,7 +27,7 @@
     <changeSet id="addForeignKeyAccounts" author="latif">
         <addForeignKeyConstraint baseTableName="accounts"
                                  baseColumnNames="user_id"
-                                 constraintName="FK_accounts_users"
+                                 constraintName="FK_account00s_users"
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
     </changeSet>
