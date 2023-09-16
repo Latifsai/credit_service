@@ -7,6 +7,7 @@ import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.generators.ProductCreatorDTO;
 import com.example.credit_service_project.service.utils.ProductUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,6 +30,7 @@ class ProductSearchServiceTest {
     private ProductSearchService productSearchService;
 
     @Test
+    @DisplayName("Test searchProduct method")
     void searchProduct() {
         Long id = 1L;
         Product product = EntityCreator.getProduct();
@@ -45,6 +47,7 @@ class ProductSearchServiceTest {
     }
 
     @Test
+    @DisplayName("Test findById method")
     void findById() {
         Long id = 1L;
         Product product = EntityCreator.getProduct();
@@ -57,11 +60,11 @@ class ProductSearchServiceTest {
     }
 
     @Test
+    @DisplayName("Test findById method throws NotFoundException")
     void findByIdNotFoundException() {
         Long id = 1L;
 
         when(repository.findById(id)).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> productSearchService.findById(id));
-
     }
 }

@@ -7,6 +7,7 @@ import com.example.credit_service_project.generators.OperationDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,7 +33,8 @@ class OperationSearchServiceTest {
     private OperationSearchService service;
 
     @Test
-    public void testSearchServiceSuccess() {
+    @DisplayName("Test searchOperation method")
+    public void searchOperation() {
         UUID id = UUID.fromString("11117777-9999-1111-b491-426655440000");
 
         Operation operation = EntityCreator.getOperation();
@@ -45,7 +47,8 @@ class OperationSearchServiceTest {
     }
 
     @Test
-    public void testSearchServiceNotFoundException() {
+    @DisplayName("Test searchOperation method throws NotFoundException")
+    public void searchOperationNotFoundException() {
         UUID id = UUID.fromString("11117777-9999-1111-b491-426655440000");
         when(repository.findById(id)).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> service.searchOperation(id));

@@ -7,6 +7,7 @@ import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.role.RoleService;
 import com.example.credit_service_project.service.utils.UserUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,7 +20,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserUpdateServiceTest {
@@ -37,7 +38,8 @@ class UserUpdateServiceTest {
     private UserUpdateService service;
 
     @Test
-    public void testUpdateUserService() {
+    @DisplayName("Test updateUser method")
+    public void updateUser() {
         UpdateClientRequest request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"),
                 null, new BigDecimal("2000"), null, null, null, null, null);
         User user = EntityCreator.getUser();
@@ -49,10 +51,13 @@ class UserUpdateServiceTest {
         when(util.convertUserToResponse(updatedUser)).thenReturn(UserDTOGenerator.getUpdateResponse());
 
         assertEquals(UserDTOGenerator.getUpdateResponse(), service.updateClient(request));
+        verify(searchService, times(1)).findUserById(request.getId());
+        verify(createService, times(1)).saveClient(updatedUser);
     }
 
     @Test
-    public void testUpdateUserServiceChangeRole() {
+    @DisplayName("Test updateUserChangeRole method")
+    public void updateUserChangeRole() {
         UpdateClientRequest request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"),
                 null, new BigDecimal("2000"), null, null, null, "MANAGER", null);
         User user = EntityCreator.getUser();
@@ -65,10 +70,14 @@ class UserUpdateServiceTest {
         when(util.convertUserToResponse(updatedUser)).thenReturn(UserDTOGenerator.getUpdateResponse());
 
         assertEquals(UserDTOGenerator.getUpdateResponse(), service.updateClient(request));
+        verify(searchService, times(1)).findUserById(request.getId());
+        verify(roleService, times(1)).findByRoleName(request.getRoleName());
+        verify(createService, times(1)).saveClient(updatedUser);
     }
 
     @Test
-    public void testAddClientNotFoundException() {
+    @DisplayName("Test findClientNotFoundException method")
+    public void findClientNotFoundException() {
         UpdateClientRequest request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"), null,
                 new BigDecimal("2000"), null, null, null, null, null);
         when(searchService.findUserById(request.getId())).thenThrow(NotFoundException.class);

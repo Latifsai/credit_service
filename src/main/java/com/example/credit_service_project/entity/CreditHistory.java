@@ -2,6 +2,7 @@ package com.example.credit_service_project.entity;
 
 import com.example.credit_service_project.entity.enums.CreditHistoryStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class CreditHistory {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Status must not be null!")
     private CreditHistoryStatus status;
 
     @OneToMany(mappedBy = "creditHistory",cascade = {MERGE, PERSIST, REFRESH}, fetch = LAZY)

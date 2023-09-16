@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -32,6 +33,7 @@ class JwtTokenProviderTest {
     }
 
     @Test
+    @DisplayName(value = "Test generate token")
     void generateToken() {
         String username = "Olga";
         String token = provider.generateToken(username);
@@ -46,10 +48,10 @@ class JwtTokenProviderTest {
         assertNotNull(expiration);
         assertEquals(username, claims.getSubject());
         assertNotNull(token);
-
     }
 
     @Test
+    @DisplayName(value = "Test get username")
     void testGetUsername() {
         String username = "Olga";
 
@@ -64,6 +66,7 @@ class JwtTokenProviderTest {
     }
 
     @Test
+    @DisplayName(value = "Test validate token")
     void validateToken() {
         String username = "Olga";
 
@@ -76,6 +79,7 @@ class JwtTokenProviderTest {
     }
 
     @Test
+    @DisplayName(value = "Test validateTokenException")
     void validateTokenException() {
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIiLCJuYW1lIjoiT2xnYSIsImlhdCI6IiJ9.2RDCdv7SK4sOGCr04oN2efITl6sPv0h2SDU0rv0LQgU";
         assertThrows(InvalidJwtException.class, () -> provider.validateToken(token));

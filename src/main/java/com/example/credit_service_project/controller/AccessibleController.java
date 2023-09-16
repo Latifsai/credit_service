@@ -21,13 +21,11 @@ public class AccessibleController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
-    @ResponseBody
     public List<ProductResponseDTO> getAllProducts() {
         return get.getAllProducts();
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.FOUND)
     public ProductResponseDTO searchProduct(@PathVariable(name = "id") Long id) {
         return search.searchProduct(id);

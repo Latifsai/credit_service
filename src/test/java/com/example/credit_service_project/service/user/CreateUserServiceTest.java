@@ -8,6 +8,7 @@ import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.role.RoleService;
 import com.example.credit_service_project.service.utils.UserUtil;
 import jakarta.validation.Validation;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CreateUserServiceTest {
@@ -35,7 +36,8 @@ class CreateUserServiceTest {
 
 
     @Test
-    public void testCreateUserService() {
+    @DisplayName("Test createUser method")
+    public void createUser() {
         CreateUserRequest request = new CreateUserRequest("Aziz", "Snow", BigDecimal.valueOf(2500),
                 BigDecimal.ZERO, new BigDecimal("1500"), "Johan's Str 34", "john_manager@loewen.de",
                 "+49 176 28835002", "MANAGER", "2125");
@@ -49,10 +51,14 @@ class CreateUserServiceTest {
         when(repository.save(user)).thenReturn(user);
 
         assertEquals(UserDTOGenerator.getResponse(), service.createClient(request));
+        verify(roleService, times(1)).findByRoleName("MANAGER");
+        verify(passwordEncoder, times(1)).encode(request.getPassword());
+        verify(repository, times(1)).save(user);
     }
 
     @Test
-    public void testAddClientValidation() {
+    @DisplayName("Test createUser method")
+    public void createClientValidation() {
         User user = EntityCreator.getUserForValidation();
         var validation = Validation.buildDefaultValidatorFactory().getValidator();
         var set = validation.validate(user);

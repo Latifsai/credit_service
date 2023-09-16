@@ -6,6 +6,7 @@ import com.example.credit_service_project.repository.CreditRepository;
 import com.example.credit_service_project.generators.CreditDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.CreditUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,6 +28,7 @@ class GetAllCreditsServiceTest {
     private GetAllCreditsService getAllCreditsService;
 
     @Test
+    @DisplayName("Test get all credits method")
     void getAllCredits() {
         List<Credit> credits = List.of(EntityCreator.getCredit());
 
@@ -37,5 +39,6 @@ class GetAllCreditsServiceTest {
 
         assertEquals(1, result.size());
         verify(repository, times(1)).findAll();
+        verify(util, times(1)).convertToCreditResponse(credits.get(0));
     }
 }

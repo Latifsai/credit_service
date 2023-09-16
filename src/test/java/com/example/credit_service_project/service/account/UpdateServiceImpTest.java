@@ -21,7 +21,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @DisplayName(value = "Test Account Update Service")
 @ExtendWith(MockitoExtension.class)
@@ -50,6 +50,10 @@ public class UpdateServiceImpTest {
         when(util.convertAccountToAddResponse(updatedAccount)).thenReturn(AccountDTOGenerator.getUpdatedDTOResponse());
 
         assertEquals(AccountDTOGenerator.getUpdatedDTOResponse(), service.updateAccount(request));
+        verify(searchService, times(1)).findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
+        verify(util, times(1)).updateAccount(account, request);
+        verify(creationService, times(1)).saveAccount(updatedAccount);
+        verify(util, times(1)).convertAccountToAddResponse(account);
     }
 
     @Test

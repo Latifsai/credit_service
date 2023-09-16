@@ -7,6 +7,9 @@ import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.repository.DelayRepository;
 import com.example.credit_service_project.service.creditHistory.CreditHistoryService;
 import com.example.credit_service_project.service.utils.DelayUtil;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,6 +37,7 @@ class DelayServiceTest {
     private final Account account = EntityCreator.getAccount();
     private final Delay delay = EntityCreator.getDelay();
     @Test
+    @DisplayName("Test addNewDelay method")
     void addNewDelay() {
         var response = DelayDTOGenerator.getResponse();
 
@@ -49,6 +53,20 @@ class DelayServiceTest {
     }
 
     @Test
+    @DisplayName("Test addNewDelay method validation")
+    void addNewDelayValidation() {
+        delay.setCreditHistory(null);
+        delay.setSumOfDelay(new BigDecimal("-10"));
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(delay);
+
+        assertEquals(1, set.size());
+    }
+
+
+    @Test
+    @DisplayName("Test findAllDelaysBelongsToCreditHistory method")
     void findAllDelaysBelongsToCreditHistory() {
         var history = EntityCreator.getCreditHistory();
         var delays = Collections.singletonList(delay);

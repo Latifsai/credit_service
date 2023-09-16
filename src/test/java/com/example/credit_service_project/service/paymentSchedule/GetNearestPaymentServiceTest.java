@@ -31,8 +31,8 @@ class GetNearestPaymentServiceTest {
     private GetNearestPaymentService service;
 
 
-    @DisplayName(value = "Test get Nearest Payment")
     @Test
+    @DisplayName(value = "Test get Nearest Payment method")
     public void testGetNearestPayments() {
         PaymentsBelongsToAccountRequest request = new PaymentsBelongsToAccountRequest(UUID.randomUUID(), null);
         Account account = EntityCreator.getAccount();
@@ -46,7 +46,8 @@ class GetNearestPaymentServiceTest {
     }
 
     @Test
-    public void testGetBelongsPaymentsNotFoundException() {
+    @DisplayName("Test getBelongsPayments method throws NotFoundException")
+    public void getBelongsPaymentsNotFoundException() {
         PaymentsBelongsToAccountRequest request = new PaymentsBelongsToAccountRequest(UUID.randomUUID(), null);
 
         when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenThrow(NotFoundException.class);

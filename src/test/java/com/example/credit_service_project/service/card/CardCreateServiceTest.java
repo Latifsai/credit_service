@@ -23,7 +23,7 @@ import java.util.UUID;
 import static com.example.credit_service_project.entity.enums.PaymentSystem.VISA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @DisplayName(value = "Test card create service")
 @ExtendWith(MockitoExtension.class)
@@ -51,7 +51,13 @@ class CardCreateServiceTest {
         when(repository.save(card)).thenReturn(card).thenReturn(card);
         when(util.convertCardToAddDTOResponse(card)).thenReturn(CardDTOGenerator.getCardResponse());
         CardResponseDTO actual = createCardService.createCard(request);
+
         assertEquals(CardDTOGenerator.getCardResponse(), actual);
+        verify(accountSearchService,times(1)).findAccountByIdOrNumber(account.getId(), account.getAccountNumber());
+        verify(util,times(1)).convertCreateRequestToEntity(request, account);
+        verify(repository,times(1)).save(card);
+        verify(util,times(1)).convertCardToAddDTOResponse(card);
+
     }
 
     @DisplayName(value = "Test card create throw NotFoundException")

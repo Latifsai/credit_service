@@ -4,6 +4,7 @@ import com.example.credit_service_project.dto.ProductDTO.ProductResponseDTO;
 import com.example.credit_service_project.generators.ProductCreatorDTO;
 import com.example.credit_service_project.service.product.GetAllProductsService;
 import com.example.credit_service_project.service.product.ProductSearchService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -32,6 +33,7 @@ class AccessibleControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @DisplayName(value = "Test get all products")
     @Test
     public void getAllProducts() throws Exception {
         ProductResponseDTO response = ProductCreatorDTO.getResponse();
@@ -45,6 +47,7 @@ class AccessibleControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)));
     }
 
+    @DisplayName(value = "test search product")
     @Test
     void searchProduct() throws Exception {
         ProductResponseDTO response = ProductCreatorDTO.getResponse();

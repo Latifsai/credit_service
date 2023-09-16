@@ -9,6 +9,7 @@ import com.example.credit_service_project.generators.CardDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,14 +37,14 @@ class UpdateCardServiceTest {
     private CardUpdateService updateService;
 
     @Test
-    public void testUpdateSuccess() {
+    @DisplayName("Test update card method")
+    public void updateCard() {
         Account account = EntityCreator.getAccount();
         Card card = EntityCreator.getCard();
         card.setAccount(account);
         Card updatedCard = EntityCreator.getUpdatedCard();
 
-        UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"),
-                "", null);
+        UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"),"", null);
 
         var response = CardDTOGenerator.getUpdatedCardResponse();
 
@@ -54,17 +55,36 @@ class UpdateCardServiceTest {
         when(utils.updateAccountBalance(account, card)).thenReturn(account);
         when(updateAccountService.saveUpdatedAccount(account)).thenReturn(account);
 
-        CardResponseDTO actual = updateService.updateCard(request);
+        CardResponseDTO actual = updateService.saveUpdateCard(request);
+
         assertNotNull(actual);
         assertEquals(response, actual);
+        verify(searchCardService, times(1)).findCardById(request.getId());
+        verify(utils, times(1)).updateCard(card, request);
+        verify(cardCreateService, times(1)).saveCard(card);
+        verify(utils, times(1)).convertCardToAddDTOResponse(updatedCard);
+        verify(utils, times(1)).updateAccountBalance(account, card);
+        verify(updateAccountService, times(1)).saveUpdatedAccount(account);
+
     }
 
     @Test
-    public void testUpdateNotFoundException() {
-        UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"),
-                "", null);
+    @DisplayName("Test update card method throws NotFoundException")
+    public void updateNotFoundException() {
+        UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"), "", null);
 
         when(searchCardService.findCardById(request.getId())).thenThrow(NotFoundException.class);
-        assertThrows(NotFoundException.class, () -> updateService.updateCard(request));
+        assertThrows(NotFoundException.class, () -> updateService.saveUpdateCard(request));
+    }
+
+
+    @Test
+    @DisplayName("Test save updated card method")
+    public void saveUpdateCard() {
+        Card card = EntityCreator.getCard();
+
+        when(cardCreateService.saveCard(card)).thenReturn(card);
+        assertEquals(card, cardCreateService.saveCard(card));
+        verify(cardCreateService, times(1)).saveCard(card);
     }
 }

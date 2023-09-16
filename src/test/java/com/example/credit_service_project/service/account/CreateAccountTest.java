@@ -4,7 +4,9 @@ import com.example.credit_service_project.dto.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.dto.accountDTO.CreateAccountRequestDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.User;
+import com.example.credit_service_project.generators.CreditHistoryDTOGenerator;
 import com.example.credit_service_project.repository.AccountRepository;
+import com.example.credit_service_project.service.creditHistory.CreditHistoryService;
 import com.example.credit_service_project.service.user.UserSearchService;
 import com.example.credit_service_project.generators.AccountDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
@@ -33,12 +35,14 @@ public class CreateAccountTest {
     private UserSearchService searchClientService;
     @Mock
     private AccountUtil util;
+    @Mock
+    private CreditHistoryService creditHistoryService;
     @InjectMocks
     private AccountCreationService service;
 
     @Test
-    @DisplayName("Test when input is correct")
-    public void testCreateAccountImp() {
+    @DisplayName("Test test create account")
+    public void testCreateAccount() {
         CreateAccountRequestDTO request = new CreateAccountRequestDTO(UUID.randomUUID(), "United States",
                 BigDecimal.valueOf(3000), "USD", 10, 7);
 
@@ -48,11 +52,19 @@ public class CreateAccountTest {
         when(searchClientService.findUserById(request.getClientId())).thenReturn(client);
         when(util.convertAddRequestToAccount(request, client)).thenReturn(account);
         when(repository.save(account)).thenReturn(account);
+        when(creditHistoryService.createHistory(account)).thenReturn(CreditHistoryDTOGenerator.getResponse());
         when(util.convertAccountToAddResponse(account)).thenReturn(AccountDTOGenerator.getResponse());
+
 
         AccountResponseDTO actual = service.createAccount(request);
         AccountResponseDTO expected = AccountDTOGenerator.getResponse();
+
         assertEquals(expected, actual);
+        verify(searchClientService, times(1)).findUserById(request.getClientId());
+        verify(util, times(1)).convertAddRequestToAccount(request, client);
+        verify(repository, times(1)).save(account);
+        verify(creditHistoryService, times(1)).createHistory(account);
+        verify(util, times(1)).convertAccountToAddResponse(account);
     }
 
     @Test
@@ -65,4 +77,16 @@ public class CreateAccountTest {
 
         assertEquals(4, violations.size());
     }
+
+    @Test
+    @DisplayName(value = "Test save account")
+    public void saveAccount() {
+        Account account = EntityCreator.getAccount();
+
+        when(repository.save(account)).thenReturn(account);
+
+        assertEquals(account, repository.save(account));
+        verify(repository, times(1)).save(account);
+    }
+
 }

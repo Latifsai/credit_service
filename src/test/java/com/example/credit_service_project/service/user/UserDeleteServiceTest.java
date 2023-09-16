@@ -5,6 +5,7 @@ import com.example.credit_service_project.repository.UserRepository;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,7 +26,8 @@ class UserDeleteServiceTest {
     private UserDeleteService deleteService;
 
     @Test
-    public void testDeleteUser() {
+    @DisplayName("Test deleteUser method")
+    public void deleteUser() {
         User user = EntityCreator.getUser();
         when(searchService.findUserById(EntityCreator.getUser().getId())).thenReturn(user);
 
@@ -36,7 +38,8 @@ class UserDeleteServiceTest {
     }
 
     @Test
-    public void testDeleteUserNotFoundException() {
+    @DisplayName("Test deleteUser method throws NotFoundException")
+    public void deleteUserNotFoundException() {
         UUID id = UUID.randomUUID();
 
         when(searchService.findUserById(id)).thenThrow(NotFoundException.class);

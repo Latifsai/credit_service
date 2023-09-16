@@ -7,6 +7,7 @@ import com.example.credit_service_project.generators.CreditOrderedGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.CreditOrderUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,10 +29,13 @@ class CreditOrderSearchServiceTest {
     private  CreditOrderUtil util;
     @InjectMocks
     private CreditOrderSearchService creditOrderSearchService;
+
+    private final UUID id = UUID.randomUUID();
+    private final CreditOrder order = EntityCreator.getCreditOrder();
+
     @Test
+    @DisplayName("Test search credit order method")
     void searchCreditOrder() {
-        UUID id = UUID.randomUUID();
-        CreditOrder order = EntityCreator.getCreditOrder();
         CreditOrderResponseDTO dto = CreditOrderedGenerator.getResponse();
 
         when(repository.findById(id)).thenReturn(Optional.of(order));
@@ -41,13 +45,12 @@ class CreditOrderSearchServiceTest {
 
         assertEquals(dto, result);
         verify(repository, times(1)).findById(id);
+        verify(util, times(1)).convertToResponse(order);
     }
 
     @Test
+    @DisplayName("Test find by ID method")
     void findById() {
-        UUID id = UUID.randomUUID();
-        CreditOrder order = EntityCreator.getCreditOrder();
-
         when(repository.findById(id)).thenReturn(Optional.of(order));
         CreditOrder result = creditOrderSearchService.findById(id);
 
@@ -56,9 +59,8 @@ class CreditOrderSearchServiceTest {
     }
 
     @Test
+    @DisplayName("Test find by ID method throws NotFoundException")
     void findByIdNotFoundException() {
-        UUID id = UUID.randomUUID();
-
         when(repository.findById(id)).thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> creditOrderSearchService.searchCreditOrder(id));

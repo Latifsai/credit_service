@@ -6,6 +6,7 @@ import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.generators.CardDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.CardUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,22 +17,21 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class GetCardsServiceTest {
 
     @Mock
     private CardRepository repository;
-
     @Mock
     private CardUtil utils;
-
     @InjectMocks
     private GetAllCardsService getAllCardsService;
 
     @Test
-    public void testGetCardsSuccess() {
+    @DisplayName(value = "Test get cards")
+    public void getCards() {
         List<Card> cards = List.of(EntityCreator.getCard());
         List<CardResponseDTO> expected = List.of(CardDTOGenerator.getCardResponse());
 
@@ -41,12 +41,17 @@ class GetCardsServiceTest {
         var response = getAllCardsService.getAllCards();
 
         assertEquals(expected, response);
+        verify(repository, times(1)).findAll();
+        verify(utils, times(1)).convertCardToAddDTOResponse(cards.get(0));
     }
 
     @Test
-    public void testGetCardsEmptyListException() {
+    @DisplayName("Test get cards emptyList")
+    public void testGetCardsEmptyList() {
         when(repository.findAll()).thenReturn(Collections.emptyList());
+
         assertEquals(Collections.emptyList(),getAllCardsService.getAllCards());
+        verify(repository, times(1)).findAll();
     }
 
 }

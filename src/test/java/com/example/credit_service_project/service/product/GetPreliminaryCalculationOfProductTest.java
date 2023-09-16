@@ -7,6 +7,7 @@ import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.service.account.AccountSearchService;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -33,6 +34,7 @@ class GetPreliminaryCalculationOfProductTest {
     private GetPreliminaryCalculationOfProduct getPreliminaryCalculationOfProduct;
 
     @Test
+    @DisplayName("Test getPreliminaryCalculation method")
     void getPreliminaryCalculation() {
         PreliminaryCalculationRequest request = new PreliminaryCalculationRequest(UUID.randomUUID(), null,
                 1L, 12, BigDecimal.TEN);

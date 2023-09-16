@@ -20,7 +20,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @DisplayName(value = "Test account search service")
 @ExtendWith(MockitoExtension.class)
@@ -43,6 +43,8 @@ public class SearchAccountImpTest {
         when(util.convertAccountToAddResponse(account)).thenReturn(AccountDTOGenerator.getResponse());
 
         assertEquals(AccountDTOGenerator.getResponse(), service.searchAccount(request));
+        verify(repository, times(1)).findByIdOrAccountNumber(request.getId(), request.getAccountNumber());
+        verify(util, times(1)).convertAccountToAddResponse(account);
     }
 
     @DisplayName(value = "Test search account NotFoundException")
@@ -50,7 +52,8 @@ public class SearchAccountImpTest {
     public void testSearchAccountNotFoundException() {
         SearchAccountRequest request = new SearchAccountRequest(UUID.randomUUID(), null);
 
-        when(repository.findByIdOrAccountNumber(request.getId(), request.getAccountNumber())).thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
+        when(repository.findByIdOrAccountNumber(request.getId(), request.getAccountNumber()))
+                .thenThrow(new NotFoundException(ErrorsMessage.NOT_FOUND_ACCOUNT_MESSAGE));
 
         assertThrows(NotFoundException.class, () -> service.searchAccount(request));
     }

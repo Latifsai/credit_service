@@ -6,6 +6,7 @@ import com.example.credit_service_project.repository.CreditOrderRepository;
 import com.example.credit_service_project.generators.CreditOrderedGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.CreditOrderUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,6 +28,7 @@ class GetAllCreditOrdersServiceTest {
     private GetAllCreditOrdersService getAllCreditOrdersService;
 
     @Test
+    @DisplayName("Test get all credit orders method")
     void getAllCreditOrders() {
         CreditOrder order = EntityCreator.getCreditOrder();
         List<CreditOrder> creditOrders = List.of(order);
@@ -44,6 +46,7 @@ class GetAllCreditOrdersServiceTest {
     }
 
     @Test
+    @DisplayName("Test get orders method")
     void getOrders() {
         CreditOrder order = EntityCreator.getCreditOrder();
         List<CreditOrder> creditOrders = List.of(order);

@@ -27,7 +27,7 @@ public class DecisionOrderService {
     private final CreditOrderUtil util;
 
     @Scheduled(cron = "0 0 15 * * *")
-    public List<CreditOrderResponseDTO> acceptOrder() { // remake
+    public List<CreditOrderResponseDTO> acceptOrder() {
         List<CreditOrder> orders = getAllOrdersService.getOrdersIn_Review();
         List<CreditOrderResponseDTO> responsesList = new ArrayList<>();
 
@@ -45,5 +45,4 @@ public class DecisionOrderService {
         log.info("Consider the order");
         return responsesList;
     }
-
 }

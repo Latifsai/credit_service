@@ -6,6 +6,7 @@ import com.example.credit_service_project.entity.enums.CreditStatus;
 import com.example.credit_service_project.repository.CreditRepository;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,9 +28,11 @@ class CreditSearchServiceTest {
     @InjectMocks
     private CreditSearchService creditSearchService;
 
+    private final Account account = EntityCreator.getAccount();
+
     @Test
+    @DisplayName("Test search credit by account and status method")
     void searchCreditByAccountAndStatus() {
-        Account account = EntityCreator.getAccount();
         Credit credit = EntityCreator.getCredit();
 
         when(repository.findByAccountAndCreditStatus(account, CreditStatus.ACTIVE)).thenReturn(List.of(credit));
@@ -40,9 +43,8 @@ class CreditSearchServiceTest {
     }
 
     @Test
+    @DisplayName("Test search credit by account and status method throws NotFoundException")
     void searchCreditByAccountAndStatusNotFoundException() {
-        Account account = EntityCreator.getAccount();
-
         when(repository.findByAccountAndCreditStatus(account, CreditStatus.ACTIVE)).thenReturn(Collections.emptyList());
 
         assertThrows(NotFoundException.class, () -> creditSearchService.searchCreditByAccountAndStatus(account, CreditStatus.ACTIVE));

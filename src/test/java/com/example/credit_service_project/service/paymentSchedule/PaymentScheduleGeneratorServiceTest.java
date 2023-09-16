@@ -6,6 +6,7 @@ import com.example.credit_service_project.repository.PaymentScheduleRepository;
 import com.example.credit_service_project.generators.PaymentDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,11 +27,11 @@ class PaymentScheduleGeneratorServiceTest {
     private PaymentScheduleUtil util;
     @Mock
     private PaymentScheduleRepository repository;
-
     @InjectMocks
     private PaymentScheduleGeneratorService paymentScheduleGeneratorService;
 
     @Test
+    @DisplayName("Test generatePaymentSchedule method")
     void generatePaymentSchedule() {
 
         Account account = EntityCreator.getAccount();

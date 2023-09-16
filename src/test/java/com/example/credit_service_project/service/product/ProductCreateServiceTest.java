@@ -8,6 +8,9 @@ import com.example.credit_service_project.repository.ProductRepository;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.generators.ProductCreatorDTO;
 import com.example.credit_service_project.service.utils.ProductUtil;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,12 +32,13 @@ class ProductCreateServiceTest {
     private ProductUtil util;
     @InjectMocks
     private ProductCreateService productCreateService;
+    private final Product product = EntityCreator.getProduct();
 
     @Test
+    @DisplayName("Test createProduct method")
     void createProduct() {
         CreateProductDTORequest request = new CreateProductDTORequest("BMW", BigDecimal.valueOf(14500), "BMW",
                 "USD", CalculationType.DIFFERENTIATED);
-        Product product = EntityCreator.getProduct();
 
         when(util.convertFromAddRequestToResponse(request)).thenReturn(product);
         when(repository.save(product)).thenReturn(product);
@@ -49,12 +53,26 @@ class ProductCreateServiceTest {
     }
 
     @Test
+    @DisplayName("Test saveProduct method")
     void saveProduct() {
-        Product product = EntityCreator.getProduct();
         when(repository.save(product)).thenReturn(product);
 
         Product saved = productCreateService.saveProduct(product);
         verify(repository, times(1)).save(product);
         assertEquals(product, saved);
     }
+
+    @Test
+    @DisplayName("Test saveProduct method validation")
+    void saveProductValidation() {
+        product.setName(" ");
+        product.setDetails(" ");
+        product.setCurrencyCode(null);
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(product);
+
+        assertEquals(3, set.size());
+    }
+
 }

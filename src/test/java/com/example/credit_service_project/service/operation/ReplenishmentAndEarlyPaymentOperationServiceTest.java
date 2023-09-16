@@ -21,6 +21,7 @@ import com.example.credit_service_project.service.paymentSchedule.PaymentSchedul
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.validation.exceptions.EarlyPaymentException;
 import com.example.credit_service_project.validation.exceptions.OperationException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -64,13 +65,16 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
     @InjectMocks
     private ReplenishmentAndEarlyPaymentOperationService replenishmentAndEarlyPaymentOperationService;
 
+
+    private final Account account = EntityCreator.getAccount();
+    private final Card card = EntityCreator.getCard();
+
     @Test
+    @DisplayName("Test performOperationReplenishment method")
     void performOperationReplenishment() {
         PaymentsOperationRequest request = new PaymentsOperationRequest(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 null, BigDecimal.valueOf(1000), OperationType.REPLENISHMENT, "REPLENISHMENT");
 
-        Account account = EntityCreator.getAccount();
-        Card card = EntityCreator.getCard();
         Card cardAfter = EntityCreator.getCardAfterOperationReplenishment();
         Operation operation = EntityCreator.getOperationREPLENISHMENT();
 
@@ -94,12 +98,11 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
 
 
     @Test
+    @DisplayName("Test performOperationEARLY_REPAYMENT method")
     void performOperationEARLY_REPAYMENT() {
         PaymentsOperationRequest request = new PaymentsOperationRequest(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 null, BigDecimal.valueOf(1000), OperationType.EARLY_REPAYMENT, "EARLY_REPAYMENT");
 
-        Account account = EntityCreator.getAccount();
-        Card card = EntityCreator.getCard();
         Credit credit = EntityCreator.getCredit();
         Operation operation = EntityCreator.getOperation();
         PaymentSchedule payment = EntityCreator.getPayment();
@@ -129,6 +132,7 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
     }
 
     @Test
+    @DisplayName("Test performOperation method throws OperationException")
     void performOperation_OperationException() {
         PaymentsOperationRequest request = new PaymentsOperationRequest(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 null, BigDecimal.valueOf(-1000), OperationType.EARLY_REPAYMENT, "EARLY_REPAYMENT");
@@ -136,11 +140,10 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
     }
 
     @Test
+    @DisplayName("Test performOperation method throws OperationException")
     void performOperationEarlyPaymentException() {
         PaymentsOperationRequest request = new PaymentsOperationRequest(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 null, BigDecimal.valueOf(1000), OperationType.EARLY_REPAYMENT, "EARLY_REPAYMENT");
-        Account account = EntityCreator.getAccount();
-        Card card = EntityCreator.getCard();
         Credit credit = EntityCreator.getCredit();
         credit.getCreditOrder().setProduct(EntityCreator.getProductFalseEP());
 
@@ -149,7 +152,6 @@ class ReplenishmentAndEarlyPaymentOperationServiceTest {
         when(creditSearchService.searchCreditByAccountAndStatus(account, CreditStatus.ACTIVE)).thenReturn(credit);
 
         assertThrows(EarlyPaymentException.class, () -> replenishmentAndEarlyPaymentOperationService.performOperation(request));
-
     }
 
 }

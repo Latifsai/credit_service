@@ -6,6 +6,7 @@ import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.generators.ProductCreatorDTO;
 import com.example.credit_service_project.repository.ProductRepository;
 import com.example.credit_service_project.service.utils.ProductUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,6 +29,7 @@ class GetAllProductsServiceTest {
     private GetAllProductsService getAllProductsService;
 
     @Test
+    @DisplayName("Test getAllProducts method")
     void getAllProducts() {
         Product product = EntityCreator.getProduct();
         ProductResponseDTO responseDTO = ProductCreatorDTO.getResponse();

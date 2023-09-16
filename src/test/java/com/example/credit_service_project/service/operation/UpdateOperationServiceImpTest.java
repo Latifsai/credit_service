@@ -6,6 +6,7 @@ import com.example.credit_service_project.entity.enums.OperationType;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.generators.OperationDTOGenerator;
 import com.example.credit_service_project.service.utils.OperationUtils;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,7 +23,6 @@ class UpdateOperationServiceImpTest {
 
     @Mock
     private PaymentProcessingService addOperationService;
-
     @Mock
     private OperationSearchService searchOperationService;
     @Mock
@@ -31,7 +31,8 @@ class UpdateOperationServiceImpTest {
     private OperationUpdateService service;
 
     @Test
-    public void testUpdateServiceSuccess() {
+    @DisplayName("Test updateOperation method")
+    public void updateOperation() {
         UpdateOperationsRequest request = new UpdateOperationsRequest(
                 UUID.fromString("11117777-9999-1111-b491-426655440000"),
                 OperationType.EARLY_REPAYMENT,
@@ -47,6 +48,8 @@ class UpdateOperationServiceImpTest {
         when(util.convertOperationToResponseDTO(updatedOperation)).thenReturn(OperationDTOGenerator.getUpdateOperationResponseDTO());
 
         assertEquals(OperationDTOGenerator.getUpdateOperationResponseDTO(), service.updateOperation(request));
+        verify(searchOperationService, times(1)).findById(request.getId());
+        verify(util, times(1)).updateOperation(operation, request);
         verify(addOperationService, times(1)).saveOperation(updatedOperation);
     }
 }

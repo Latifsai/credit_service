@@ -7,6 +7,7 @@ import com.example.credit_service_project.entity.enums.CalculationType;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.generators.ProductCreatorDTO;
 import com.example.credit_service_project.service.utils.ProductUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,6 +29,7 @@ class ProductUpdateServiceTest {
     ProductUpdateService productUpdateService;
 
     @Test
+    @DisplayName("Test updateProduct method")
     void updateProduct() {
         UpdateProductDTORequest request = new UpdateProductDTORequest(1L, null, null,null,
                 null,null, CalculationType.ANNUITY);

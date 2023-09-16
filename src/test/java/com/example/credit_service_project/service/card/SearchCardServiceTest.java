@@ -1,23 +1,27 @@
 package com.example.credit_service_project.service.card;
 
 import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
+import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
 import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.generators.CardDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SearchCardServiceTest {
@@ -29,11 +33,12 @@ class SearchCardServiceTest {
     @InjectMocks
     private CardSearchService service;
 
-    @Test
-    public void testSearchCard() {
-        UUID id = UUID.randomUUID();
-        Card card = EntityCreator.getCard();
+    private final UUID id = UUID.randomUUID();
+    private final Card card = EntityCreator.getCard();
 
+    @Test
+    @DisplayName("Test search card method")
+    public void searchCard() {
         when(repository.findById(id)).thenReturn(Optional.of(card));
         when(utils.convertCardToAddDTOResponse(card)).thenReturn(CardDTOGenerator.getCardResponse());
 
@@ -41,14 +46,43 @@ class SearchCardServiceTest {
 
         assertNotNull(response);
         assertEquals(CardDTOGenerator.getCardResponse(), response);
+        verify(repository, times(1)).findById(id);
+        verify(utils, times(1)).convertCardToAddDTOResponse(card);
     }
 
     @Test
-    public void testSearchNotFoundException() {
-        UUID id = UUID.randomUUID();
-
+    @DisplayName("Test search card method throws NotFoundException")
+    public void searchCardNotFoundException() {
         when(repository.findById(id)).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> service.searchCard(id));
+    }
+
+    @Test
+    @DisplayName("Test find card by ID method")
+    public void findCardById() {
+        when(repository.findById(id)).thenReturn(Optional.of(card));
+        assertEquals(Optional.of(card), repository.findById(id));
+        verify(repository, times(1)).findById(id);
+    }
+
+    @Test
+    @DisplayName("Test find by account method")
+    public void findByAccount() {
+        Account account = EntityCreator.getAccount();
+
+        when(repository.findByAccount(account)).thenReturn(List.of(card));
+
+        assertEquals(List.of(card), repository.findByAccount(account));
+        verify(repository, times(1)).findByAccount(account);
+    }
+
+    @Test
+    @DisplayName("Test find by account method throws NotFoundException ")
+    public void findByAccountNotFound() {
+        Account account = EntityCreator.getAccount();
+
+        when(repository.findByAccount(account)).thenThrow(NotFoundException.class);
+        assertThrows(NotFoundException.class, () -> repository.findByAccount(account));
     }
 
 }

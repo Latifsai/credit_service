@@ -17,6 +17,9 @@ import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.service.utils.CreditUtil;
 import com.example.credit_service_project.validation.exceptions.IsAlreadyExistException;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -51,16 +54,18 @@ class CreditCreateServiceTest {
     @InjectMocks
     private CreditCreateService createService;
 
-    @Test
-    void createCredit() {
-        CreateCreditRequestDTO request = new CreateCreditRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
-                "A10B3U3OI9", UUID.fromString("34d824ef-da02-4845-af3d-2aba7f6336ca"),
-                UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"), 12, 0, "Consumer credit");
+    private final CreateCreditRequestDTO request = new CreateCreditRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
+            "A10B3U3OI9", UUID.fromString("34d824ef-da02-4845-af3d-2aba7f6336ca"),
+            UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"), 12, 0, "Consumer credit");
+    private final Account account = EntityCreator.getAccount();
+    private final Credit credit = EntityCreator.getCredit();
 
-        Account account = EntityCreator.getAccount();
+
+    @Test
+    @DisplayName("Test create credit method")
+    void createCredit() {
         Agreement agreement = EntityCreator.getAgreement();
         CreditOrder creditOrder = EntityCreator.getCreditOrder();
-        Credit credit = EntityCreator.getCredit();
         Product product = EntityCreator.getProduct();
         List<PaymentResponseDTO> list = List.of(PaymentDTOGenerator.getPaymentResponseDTO());
 
@@ -78,35 +83,45 @@ class CreditCreateServiceTest {
         CreateCreditDTOResponse result = createService.createCredit(request);
 
         assertNotNull(result);
+        verify(accountSearchService, times(1)).findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
+        verify(repository, times(1)).findByAccountAndCreditStatus(account, CreditStatus.ACTIVE);
         verify(updateAccountService, times(1)).saveUpdatedAccount(account);
         verify(updateAgreementService, times(1)).saveAgreement(agreement);
         verify(repository, times(1)).save(credit);
-
     }
 
     @Test
+    @DisplayName("Test create credit method throws AlreadyExistException")
     void createCreditIsAlreadyExistException() {
-        CreateCreditRequestDTO request = new CreateCreditRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
-                "A10B3U3OI9", UUID.fromString("34d824ef-da02-4845-af3d-2aba7f6336ca"),
-                UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"), 12, 0, "Consumer credit");
-        Account account = EntityCreator.getAccount();
-        Credit credit = EntityCreator.getCredit();
-
-
         when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber())).thenReturn(account);
         when(repository.findByAccountAndCreditStatus(account, CreditStatus.ACTIVE)).thenReturn(List.of(credit));
 
-        assertThrows(IsAlreadyExistException.class, ()-> createService.createCredit(request));
+        assertThrows(IsAlreadyExistException.class, () -> createService.createCredit(request));
 
     }
 
     @Test
+    @DisplayName("Test save credit method")
     void saveCredit() {
-        Credit credit = EntityCreator.getCredit();
         when(repository.save(credit)).thenReturn(credit);
-
         Credit result = createService.saveCredit(credit);
+
         verify(repository, times(1)).save(credit);
         assertEquals(credit, result);
     }
+
+    @Test
+    @DisplayName("Test save credit method validation")
+    void saveCreditValidation() {
+        credit.setCreditHolidayMonthsAmount(15);
+        credit.setCurrency("");
+        credit.setCreditStatus(null);
+        credit.setCreditType("  ");
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(credit);
+
+        assertEquals(5, set.size());
+    }
+
 }

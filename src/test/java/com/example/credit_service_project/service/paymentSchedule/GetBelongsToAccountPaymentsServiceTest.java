@@ -10,6 +10,7 @@ import com.example.credit_service_project.generators.PaymentDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,7 +37,8 @@ class GetBelongsToAccountPaymentsServiceTest {
     private GetBelongsToAccountPaymentsService service;
 
     @Test
-    public void testGetBelongsPaymentsSuccess() {
+    @DisplayName("Test getBelongsPayments methods")
+    public void getBelongsPayments() {
         PaymentsBelongsToAccountRequest request = new PaymentsBelongsToAccountRequest(UUID.randomUUID(), null);
         Account account = EntityCreator.getAccount();
         PaymentSchedule payment = EntityCreator.getPayment();
@@ -50,12 +52,12 @@ class GetBelongsToAccountPaymentsServiceTest {
     }
 
     @Test
+    @DisplayName("Test getBelongsPayments methods throws NotFoundException")
     public void testGetBelongsPaymentsNotFoundException() {
         PaymentsBelongsToAccountRequest request = new PaymentsBelongsToAccountRequest(UUID.randomUUID(), null);
         when(accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber()))
                 .thenThrow(NotFoundException.class);
 
         assertThrows(NotFoundException.class, () -> service.getBelongsToAccountPayments(request));
-
     }
 }

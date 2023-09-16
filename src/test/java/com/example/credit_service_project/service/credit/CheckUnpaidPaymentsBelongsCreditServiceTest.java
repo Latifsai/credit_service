@@ -10,6 +10,7 @@ import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.paymentSchedule.GetBelongsToAccountPaymentsService;
 import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,9 +37,11 @@ class CheckUnpaidPaymentsBelongsCreditServiceTest {
     @InjectMocks
     private CheckUnpaidPaymentsBelongsCreditService checkUnpaidPaymentsBelongsCreditService;
 
+    private final UUID creditID = UUID.randomUUID();
+
     @Test
+    @DisplayName("Test check unpaid payments belongs credit method")
     void checkUnpaidPaymentsBelongsCredit() {
-        UUID creditID = UUID.randomUUID();
         Credit credit = EntityCreator.getCredit();
         Account account = EntityCreator.getAccountForClosePaidCredit();
 
@@ -51,20 +54,21 @@ class CheckUnpaidPaymentsBelongsCreditServiceTest {
 
         assertEquals(1, result.size());
         verify(repository, times(1)).findById(creditID);
+        verify(belongsToTheAccountPaymentsListService, times(1)).findAllByAccount(account);
         verify(util, times(unpaidPayments.size())).convertEntityToPaymentResponse(any(PaymentSchedule.class));
     }
 
     @Test
+    @DisplayName("Test check unpaid payments belongs credit method throws NotFoundException")
     void checkUnpaidPaymentsBelongsCreditNotFoundException() {
-        UUID creditID = UUID.randomUUID();
-
         when(repository.findById(creditID)).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () ->  checkUnpaidPaymentsBelongsCreditService.checkUnpaidPaymentsBelongsCredit(creditID));
 
+        assertThrows(NotFoundException.class, () -> checkUnpaidPaymentsBelongsCreditService.checkUnpaidPaymentsBelongsCredit(creditID));
         verify(repository, times(1)).findById(creditID);
     }
 
     @Test
+    @DisplayName("Test find unpaid payment by account method")
     void findUnpaidPaymentByAccount() {
         List<PaymentSchedule> list = List.of(EntityCreator.getPayment());
         Account account = EntityCreator.getAccount();
@@ -74,6 +78,6 @@ class CheckUnpaidPaymentsBelongsCreditServiceTest {
         List<PaymentSchedule> result = checkUnpaidPaymentsBelongsCreditService.findUnpaidPaymentByAccount(account);
 
         assertEquals(list.size(), result.size());
-        verify(belongsToTheAccountPaymentsListService,times(1)).findAllByAccount(account);
+        verify(belongsToTheAccountPaymentsListService, times(1)).findAllByAccount(account);
     }
 }

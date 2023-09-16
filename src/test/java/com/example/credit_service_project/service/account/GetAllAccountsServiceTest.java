@@ -15,17 +15,15 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class GetAllAccountsServiceTest {
 
     @Mock
     private AccountRepository repository;
-
     @Mock
     private AccountUtil util;
-
     @InjectMocks
     private GetAllAccountsService service;
 
@@ -39,6 +37,8 @@ public class GetAllAccountsServiceTest {
         when(util.convertAccountToAddResponse(accounts.get(0))).thenReturn(responses.get(0));
 
         assertEquals(responses, service.getAllAccounts());
+        verify(repository, times(1)).findAll();
+        verify(util, times(1)).convertAccountToAddResponse(accounts.get(0));
     }
 
     @Test
@@ -46,5 +46,6 @@ public class GetAllAccountsServiceTest {
     public void testAccountListEmpty() {
         when(repository.findAll()).thenReturn(Collections.emptyList());
         assertEquals(Collections.emptyList(), service.getAllAccounts());
+        verify(repository, times(1)).findAll();
     }
 }

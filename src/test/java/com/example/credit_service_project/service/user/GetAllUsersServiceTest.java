@@ -4,6 +4,7 @@ import com.example.credit_service_project.repository.UserRepository;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.UserUtil;
 import com.example.credit_service_project.generators.UserDTOGenerator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +28,8 @@ class GetAllUsersServiceTest {
     GetAllUsersService service;
 
     @Test
-    public void testGetAllClientsSuccess() {
+    @DisplayName("Test getAllClients method")
+    public void getAllClients() {
         when(repository.findAll()).thenReturn(List.of(EntityCreator.getUser()));
         when(util.convertUserToResponse(EntityCreator.getUser())).thenReturn(UserDTOGenerator.getResponse());
 
@@ -35,9 +37,9 @@ class GetAllUsersServiceTest {
     }
 
     @Test
+    @DisplayName("Test getAllClientsEmpty method")
     public void testGetAllClientsEmpty() {
         when(repository.findAll()).thenReturn(Collections.emptyList());
-
         assertEquals(Collections.emptyList(), service.getAllClients());
     }
 

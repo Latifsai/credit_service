@@ -11,6 +11,9 @@ import com.example.credit_service_project.generators.CreditOrderedGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.product.ProductSearchService;
 import com.example.credit_service_project.service.utils.CreditOrderUtil;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -37,6 +40,7 @@ class CreditOrderCreateServiceTest {
     private CreditOrderCreateService createService;
 
     @Test
+    @DisplayName("Test create credit order method")
     void createCreditOrder() {
         CreateCreditOrderRequestDTO request = new CreateCreditOrderRequestDTO(1L, UUID.randomUUID(), null, 10);
         Product product = EntityCreator.getProduct();
@@ -58,6 +62,7 @@ class CreditOrderCreateServiceTest {
     }
 
     @Test
+    @DisplayName("Test save order method")
     void saveOrder() {
         CreditOrder order = EntityCreator.getCreditOrder();
 
@@ -66,5 +71,21 @@ class CreditOrderCreateServiceTest {
 
         assertEquals(order, result);
         verify(repository, times(1)).save(order);
+    }
+
+    @Test
+    @DisplayName("Test save order method validation")
+    void saveOrderValidation() {
+        CreditOrder order = EntityCreator.getCreditOrder();
+
+        order.setNumber(" ");
+        order.setCreationDate(null);
+        order.setMaxPeriodMonths(-1);
+        order.setCreditOrderStatus(null);
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var set = validator.validate(order);
+
+        assertEquals(5, set.size());
     }
 }

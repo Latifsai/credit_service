@@ -21,6 +21,7 @@ import com.example.credit_service_project.service.delay.DelayService;
 import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorService;
 import com.example.credit_service_project.service.utils.OperationUtils;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -68,7 +69,8 @@ class PaymentProcessingServiceTest {
     @InjectMocks
     private PaymentProcessingService paymentProcessingService;
     @Test
-    void handlePaymentsSuccessfulPayment() {
+    @DisplayName("Test handlePayments method")
+    void handlePayments() {
         Account account = EntityCreator.getAccount();
         Credit credit = EntityCreator.getCredit();
         Card card = EntityCreator.getCard();
@@ -91,6 +93,7 @@ class PaymentProcessingServiceTest {
     }
 
     @Test
+    @DisplayName("Test handlePaymentsImmediateFine method")
     void handlePaymentsImmediateFine() {
         Account account = EntityCreator.getAccountForHandleFine();
         Credit credit = EntityCreator.getCredit();
@@ -115,6 +118,7 @@ class PaymentProcessingServiceTest {
     }
 
     @Test
+    @DisplayName("Test handlePaymentsDelayedFine method")
     void handlePaymentsDelayedFine() {
         Account account = EntityCreator.getAccountForHandleFine();
         Credit credit = EntityCreator.getCreditForHandleDelayedFine();
@@ -124,15 +128,20 @@ class PaymentProcessingServiceTest {
         when(getAllAccountsService.findAllAccounts()).thenReturn(Collections.singletonList(account));
         when(creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE)).thenReturn(credit);
         when(getUnpaidPaymentsService.findUnpaidPaymentByAccount(account)).thenReturn(Collections.singletonList(paymentSchedule));
-        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 9)).thenReturn(BigDecimal.valueOf(15));
+        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 10)).thenReturn(BigDecimal.valueOf(15));
 
         List<OperationResponseDTO> result = paymentProcessingService.handlePayments();
 
         assertEquals(0, result.size());
         verify(saveService, times(1)).save(paymentSchedule);
+        verify(getAllAccountsService, times(1)).findAllAccounts();
+        verify(creditSearchService, times(5)).searchCreditByAccountAndStatus(account, ACTIVE);
+        verify(util, times(1)).calculateFine(credit.getInterestRate(),
+                paymentSchedule.getMonthlyPayment(), 10);
     }
 
     @Test
+    @DisplayName("Test handlePaymentsClosePaidCredit method")
     void handlePaymentsClosePaidCredit() {
         Account account = EntityCreator.getAccountForClosePaidCredit();
         Credit credit = EntityCreator.getCredit();
@@ -159,7 +168,8 @@ class PaymentProcessingServiceTest {
     }
 
     @Test
-    public void testGetAllAccountsServiceNotFoundException() {
+    @DisplayName("Test getAllAccountsService method throws NotFoundException")
+    public void getAllAccountsServiceNotFoundException() {
         when(getAllAccountsService.findAllAccounts()).thenReturn(Collections.emptyList());
         assertThrows(NotFoundException.class, () -> paymentProcessingService.handlePayments());
     }

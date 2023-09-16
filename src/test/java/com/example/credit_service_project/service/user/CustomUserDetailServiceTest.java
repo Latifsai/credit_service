@@ -3,6 +3,7 @@ package com.example.credit_service_project.service.user;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.repository.UserRepository;
 import com.example.credit_service_project.generators.EntityCreator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,19 +22,20 @@ class CustomUserDetailServiceTest {
 
     @Mock
     private UserRepository repository;
-
     @InjectMocks
     private CustomUserDetailService customUserDetailService;
 
     @Test
-    public void testLoadUserByUsername() {
+    @DisplayName("Test loadUserByUsername method")
+    public void loadUserByUsername() {
         User user = EntityCreator.getUser();
         when(repository.findByName(anyString())).thenReturn(Optional.of(user));
         assertEquals(user, customUserDetailService.loadUserByUsername(anyString()));
     }
 
     @Test
-    public void testLoadUserByUsernameUsernameNotFoundException() {
+    @DisplayName("Test loadUserByUsername method throws UsernameNotFoundException")
+    public void loadUserByUsernameUsernameNotFoundException() {
         when(repository.findByName(anyString())).thenReturn(Optional.empty());
         assertThrows(UsernameNotFoundException.class, () -> customUserDetailService.loadUserByUsername(anyString()));
     }

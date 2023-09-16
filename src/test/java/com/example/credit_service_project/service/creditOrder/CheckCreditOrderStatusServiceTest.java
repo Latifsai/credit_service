@@ -3,6 +3,7 @@ package com.example.credit_service_project.service.creditOrder;
 import com.example.credit_service_project.dto.creditOrderDTO.CheckCreditOrderStatusResponse;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.generators.EntityCreator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,7 @@ class CheckCreditOrderStatusServiceTest {
     private CheckCreditOrderStatusService checkCreditOrderStatusService;
 
     @Test
+    @DisplayName("Test check order status method")
     void checkOrderStatus() {
         UUID id = UUID.randomUUID();
         CreditOrder order = EntityCreator.getCreditOrder();

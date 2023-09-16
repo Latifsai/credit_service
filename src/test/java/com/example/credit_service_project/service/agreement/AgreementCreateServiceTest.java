@@ -9,6 +9,7 @@ import com.example.credit_service_project.service.creditOrder.CreditOrderSearchS
 import com.example.credit_service_project.generators.AgreementDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.AgreementUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,7 +32,9 @@ class AgreementCreateServiceTest {
     private AgreementUtil util;
     @InjectMocks
     private AgreementCreateService agreementCreateService;
+
     @Test
+    @DisplayName(value = "Test create agreement")
     void createAgreement() {
         CreateAgreementRequest request = new CreateAgreementRequest(UUID.fromString("3d542864-dbdb-431c-bf64-059898c4cfa9"),
                 10);
@@ -46,12 +49,17 @@ class AgreementCreateServiceTest {
 
         AgreementResponse result = agreementCreateService.createAgreement(request);
 
+
+        verify(searchCreditOrderService, times(1)).findById(request.getCreditOrderID());
+        verify(util, times(1)).convertCreateRequestToEntity(request, creditOrder);
         verify(repository, times(1)).save(agreement);
+        verify(util, times(1)).convertToResponse(agreement);
         assertEquals(response, result);
 
     }
 
     @Test
+    @DisplayName(value = "Test save agreement")
     void saveAgreement() {
         Agreement agreement = EntityCreator.getAgreement();
 

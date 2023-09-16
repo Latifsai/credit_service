@@ -20,12 +20,12 @@ public class CardUpdateService {
     private final AccountUpdateService updateAccountService;
     private final CardUtil utils;
 
-    public CardResponseDTO updateCard(UpdateCardRequest request) {
+    public CardResponseDTO saveUpdateCard(UpdateCardRequest request) {
         Card card = searchCardService.findCardById(request.getId());
         Account account = card.getAccount();
 
         Card updatedCard = utils.updateCard(card, request);
-        updateCard(updatedCard);
+        saveUpdateCard(updatedCard);
 
         Account updatedAccount = utils.updateAccountBalance(account, card);
         updateAccountService.saveUpdatedAccount(updatedAccount);
@@ -34,7 +34,7 @@ public class CardUpdateService {
         return utils.convertCardToAddDTOResponse(updatedCard);
     }
 
-    public void updateCard(Card updatedCard) {
+    public void saveUpdateCard(Card updatedCard) {
         cardCreateService.saveCard(updatedCard);
     }
 }

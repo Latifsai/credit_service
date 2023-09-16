@@ -4,6 +4,7 @@ import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.generators.ProductCreatorDTO;
 import com.example.credit_service_project.service.utils.ProductUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,8 +25,10 @@ class ProductDeleteServiceTest {
     ProductDeleteService deleteService;
 
     @Test
+    @DisplayName("Test deleteProduct method")
     void deleteProduct() {
         Product product = EntityCreator.getProduct();
+
         when(searchProductService.findById(1L)).thenReturn(product);
         when(util.toResponse(product)).thenReturn(ProductCreatorDTO.getResponse());
 
@@ -34,6 +37,5 @@ class ProductDeleteServiceTest {
         verify(searchProductService, times(1)).findById(1L);
         verify(util, times(1)).toResponse(product);
         assertNotNull(result);
-
     }
 }

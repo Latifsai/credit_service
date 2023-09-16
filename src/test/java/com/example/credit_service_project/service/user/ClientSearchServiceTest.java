@@ -5,6 +5,7 @@ import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.UserUtil;
 import com.example.credit_service_project.generators.UserDTOGenerator;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,7 +29,8 @@ class ClientSearchServiceTest {
     private UserSearchService service;
 
     @Test
-    public void testAddClientSuccess() {
+    @DisplayName("Test createClient method")
+    public void createClient() {
         UUID id = UUID.randomUUID();
         var client = EntityCreator.getUser();
 
@@ -39,7 +41,8 @@ class ClientSearchServiceTest {
     }
 
     @Test
-    public void testAddClientNotFoundException() {
+    @DisplayName("Test createClient method throws NotFoundException")
+    public void createClientNotFoundException() {
         UUID id = UUID.randomUUID();
         when(repository.findById(id)).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class, () -> service.searchUser(id));

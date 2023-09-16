@@ -97,7 +97,7 @@ class CardControllerTest {
     void updateCard() throws Exception {
         UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"), "", null);
 
-        when(update.updateCard(request)).thenReturn(updatedResponse);
+        when(update.saveUpdateCard(request)).thenReturn(updatedResponse);
 
         mockMvc.perform(put("/card")
                         .content(mapper.writeValueAsString(request))
@@ -112,7 +112,7 @@ class CardControllerTest {
     void updateCardForbidden() throws Exception {
         UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"), "", null);
 
-        when(update.updateCard(request)).thenReturn(updatedResponse);
+        when(update.saveUpdateCard(request)).thenReturn(updatedResponse);
 
         mockMvc.perform(put("/card")
                         .content(mapper.writeValueAsString(request))

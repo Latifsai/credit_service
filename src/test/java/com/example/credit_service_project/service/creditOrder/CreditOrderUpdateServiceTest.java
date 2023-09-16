@@ -8,6 +8,7 @@ import com.example.credit_service_project.generators.CreditOrderedGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.service.utils.CreditOrderUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,6 +31,7 @@ class CreditOrderUpdateServiceTest {
     @InjectMocks
     private CreditOrderUpdateService creditOrderUpdateService;
     @Test
+    @DisplayName("Test update credit order method")
     void updateCreditOrder() {
         UpdateCreditOrderRequestDTO request = new UpdateCreditOrderRequestDTO(UUID.fromString("c3009377-3b57-4965-8540-69d56fce34f4"), null,
                 null, null, CreditOrderStatus.CLOSED);

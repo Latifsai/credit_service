@@ -2,6 +2,7 @@ package com.example.credit_service_project.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -31,6 +32,7 @@ public class Delay {
 
     @Column(name = "sum_of_delay")
     @NotNull(message = "sumOfDelay must no be null!")
+    @Positive(message = "sumOfDelay must not be zero or positive")
     private BigDecimal sumOfDelay;
 
     @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = LAZY)
