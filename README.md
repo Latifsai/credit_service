@@ -86,7 +86,7 @@ I use MySQL to store data about clients, their applications, decisions, and so o
 jdbc:mysql://localhost:3306/credit_service_database
 ```
 #### Database stucture
-![] (https://github.com/Latifsai/credit_service/blob/main/database.png)
+[erd] (https://github.com/Latifsai/credit_service/blob/main/database.png)
 
 ### Links and Project Description
 
