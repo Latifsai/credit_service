@@ -6,9 +6,16 @@ Welcome to the Loan Service README! This project aims to tell about how the cred
 ---------------------------------
 
 ## Requirements
-* CRUD operations for customers and accounts.
-* Support for payments, top-ups and early repayments
-* Loan payment preview
+* CRUD operations for all entities.
+* Possibility of opening a loan for a given product in the database.
+* Current conversion of product currency into account currency.
+* Opening bank cards.
+* Taking out loans.
+* Preliminary review of loan payments.
+* Automatic write-off of credit payments on time, taking into account credit holidays.
+* Penalties will be charged in case of non-payment.
+* Possibility of early repayment.
+* Balance replenishment.
 ------------------------------------
 
 ## Getting Started
@@ -24,58 +31,31 @@ git clone https://github.com/Latifsai/credit_service
 - If using STS, Run As Spring Boot App
 ```
 ----------------
-### Microservices Description
+### SECURITY
 
-* ##### Authentication and Authorization Service: 
-This service is responsible for authenticating users and managing their access to the functionality of the credit service.(not ready)!!!
-
-* ##### Create Account Service: 
-Here, managers can create new accounts based on data from clients, an account is a necessary part for all systems to work, a user without an account cannot get credit.
-
-* ##### Create Product Service: 
-Here managers can create and add new products and services to the database for which you can get a loan.
-
-* ##### Create Order Service: 
-Here, authorized users through the account can apply for a loan by providing the necessary information. This service processes applications, conducts preliminary analysis and sends data to the decision service.
-
-* ##### Decision Order Service: 
-Based on the analysis of data from applications, this service determines whether to approve the application or not. Decision on a positive outcome transferred to the Create Agreement service.
-
-* ##### Create Agreement Service:
-After approval, the applications will be concluded contracts which will be transferred to the create credit service.
-
-* ##### Create Credit Service:
-Here loans and payment schedules are formed depending on the annuity or differentiated types of calculation. The loan is considered repaid if all payments are paid or early repayment is possible for some loans.
+Protection is based on technology jwt token. The life cycle leaves 30 minutes.Two levels of protection are available: "Client" level and "Manager" level. Protection is installed on both standard KRUD operations, as well as for special operations. In addition, it is possible to access without authentication for some GET requests
 
 
 ### Technology Stack
 
 The project is developed using modern technologies: 
 
-* Microservices Framework: Spring Boot 
-* Programming Language: Java 
-* Database: MySQL 
-* Validation: Spring Boot Validation
-* Database Migration: Liquibase
-* Site parser: Jsoup
-* Auxiliary Libraries: Lombok
-* Version Control System: Git
-* Development Environment: IntelliJ IDEA
-* Test: JUnit, Mockito
-
-### Maven Dependencies
-```
-spring-boot-starter-data-rest
-spring-boot-starter-validation
-spring-boot-starter-web
-liquibase-core
-spring-boot-devtools
-mysql-connector-j
-lombok
-spring-boot-starter-test
-spring-boot-starter-data-jpa
-jsoup
-```
+* Spring BOOT 
+* JAVA
+* SPRING SECURITY
+* JWT-token AUTHORIZATION
+* SPRING MVC
+* MySQL 
+* Spring Boot Validation
+* Liquibase
+* Jsoup
+* LOMBOK
+* GitHub
+* JUnit 5 JUPITER
+* MOCKITO
+* MAVEN
+* SWAGGER
+* JACOCO
 
 ### Database
 
@@ -86,6 +66,8 @@ I use MySQL to store data about clients, their applications, decisions, and so o
 ```
 jdbc:mysql://localhost:3306/credit_service_database
 ```
+#### Database stucture
+![erd](https://github.com/Latifsai/credit_service/blob/main/database.png)
 
 ### Links and Project Description
 
