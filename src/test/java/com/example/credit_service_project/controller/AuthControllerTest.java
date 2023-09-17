@@ -4,6 +4,7 @@ import com.example.credit_service_project.dto.auth.LoginRequest;
 import com.example.credit_service_project.dto.auth.LoginResponse;
 import com.example.credit_service_project.service.auth.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,6 +34,7 @@ class AuthControllerTest {
 
 
     @Test
+    @DisplayName("Test authenticateUser method")
     void authenticateUser() throws Exception {
         LoginRequest request = new LoginRequest("Oleg", "2122");
         LoginResponse response = new LoginResponse("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");

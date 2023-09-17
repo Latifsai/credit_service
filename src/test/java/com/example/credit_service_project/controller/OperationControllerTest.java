@@ -9,6 +9,7 @@ import com.example.credit_service_project.service.operation.OperationUpdateServi
 import com.example.credit_service_project.service.operation.PaymentProcessingService;
 import com.example.credit_service_project.service.operation.ReplenishmentAndEarlyPaymentOperationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -49,6 +50,7 @@ class OperationControllerTest {
     private final OperationResponseDTO updateResponse = OperationDTOGenerator.getUpdateOperationResponseDTO();
 
     @Test
+    @DisplayName("Test handlePayments method")
     @WithMockUser(value = "Oleg", roles = "MANAGER")
     void handlePayments() throws Exception {
 
@@ -61,6 +63,7 @@ class OperationControllerTest {
     }
 
     @Test
+    @DisplayName("Test handlePaymentsForbidden method")
     void handlePaymentsForbidden() throws Exception {
 
         when(createPaymentOperation.handlePayments()).thenReturn(Collections.singletonList(response));
@@ -70,6 +73,7 @@ class OperationControllerTest {
     }
 
     @Test
+    @DisplayName("Test addNewOperation method")
     @WithMockUser(value = "Oleg", roles = "MANAGER")
     void addNewOperation() throws Exception {
         PaymentsOperationRequest request = new PaymentsOperationRequest(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
@@ -86,6 +90,7 @@ class OperationControllerTest {
     }
 
     @Test
+    @DisplayName("Test addNewOperationForbidden method")
     void addNewOperationForbidden() throws Exception {
         PaymentsOperationRequest request = new PaymentsOperationRequest(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 null, BigDecimal.valueOf(1000), OperationType.REPLENISHMENT, "REPLENISHMENT");
@@ -99,6 +104,7 @@ class OperationControllerTest {
     }
 
     @Test
+    @DisplayName("Test update method")
     @WithMockUser(value = "Oleg", roles = "MANAGER")
     void update() throws Exception {
         UpdateOperationsRequest request = new UpdateOperationsRequest(
@@ -117,6 +123,7 @@ class OperationControllerTest {
     }
 
     @Test
+    @DisplayName("Test updateForbidden method")
     void updateForbidden() throws Exception {
         UpdateOperationsRequest request = new UpdateOperationsRequest(
                 UUID.fromString("11117777-9999-1111-b491-426655440000"), EARLY_REPAYMENT, "EARLY_REPAYMENT");

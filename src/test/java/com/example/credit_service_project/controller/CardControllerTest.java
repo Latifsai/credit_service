@@ -8,6 +8,7 @@ import com.example.credit_service_project.service.card.CardCreateService;
 import com.example.credit_service_project.service.card.CardUpdateService;
 import com.example.credit_service_project.service.card.GetAllCardsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -47,6 +48,7 @@ class CardControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test createCard method")
     void createCard() throws Exception {
         CreateCardRequestDTO request = new CreateCardRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 "A10B3U3OI9", 4, true, VISA);
@@ -60,6 +62,7 @@ class CardControllerTest {
     }
 
     @Test
+    @DisplayName("Test createCardForbidden method")
     void createCardForbidden() throws Exception {
         CreateCardRequestDTO request = new CreateCardRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 "A10B3U3OI9", 4, true, VISA);
@@ -74,6 +77,7 @@ class CardControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test getCards method")
     void getCards() throws Exception {
 
         when(get.getAllCards()).thenReturn(Collections.singletonList(response));
@@ -84,6 +88,7 @@ class CardControllerTest {
     }
 
     @Test
+    @DisplayName("Test getCardsForbidden method")
     void getCardsForbidden() throws Exception {
 
         when(get.getAllCards()).thenReturn(Collections.singletonList(response));
@@ -93,6 +98,7 @@ class CardControllerTest {
     }
 
     @Test
+    @DisplayName("Test updateCard method")
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
     void updateCard() throws Exception {
         UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"), "", null);
@@ -109,6 +115,7 @@ class CardControllerTest {
     }
 
     @Test
+    @DisplayName("Test updateCardForbidden method")
     void updateCardForbidden() throws Exception {
         UpdateCardRequest request = new UpdateCardRequest(UUID.randomUUID(), new BigDecimal("5000"), "", null);
 

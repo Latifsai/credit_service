@@ -9,6 +9,7 @@ import com.example.credit_service_project.service.product.ProductCreateService;
 import com.example.credit_service_project.service.product.ProductDeleteService;
 import com.example.credit_service_project.service.product.ProductUpdateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -42,6 +43,7 @@ class ProductControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
+    @DisplayName("Test add method")
     @WithMockUser(value = "Oleg", roles = "MANAGER")
     void add() throws Exception {
         CreateProductDTORequest request = new CreateProductDTORequest("BMW", BigDecimal.valueOf(14500), "BMW",
@@ -60,6 +62,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @DisplayName("Test addForbidden method")
     void addForbidden() throws Exception {
         CreateProductDTORequest request = new CreateProductDTORequest("BMW", BigDecimal.valueOf(14500), "BMW",
                 "USD", CalculationType.DIFFERENTIATED);
@@ -73,6 +76,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @DisplayName("Test updateProduct method")
     @WithMockUser(value = "Oleg", roles = "MANAGER")
     void updateProduct() throws Exception {
         UpdateProductDTORequest request = new UpdateProductDTORequest(1L, null, null,null,
@@ -90,6 +94,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @DisplayName("Test updateProductForbidden method")
     void updateProductForbidden() throws Exception {
         UpdateProductDTORequest request = new UpdateProductDTORequest(1L, null, null,null,
                 null,null, CalculationType.ANNUITY);
@@ -102,6 +107,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @DisplayName("Test testDelete method")
     @WithMockUser(value = "Oleg", roles = "MANAGER")
     void testDelete() throws Exception {
 
@@ -116,6 +122,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @DisplayName("Test testDeleteForbidden method")
     void testDeleteForbidden() throws Exception {
 
         when(delete.deleteProduct(1L)).thenReturn(response);

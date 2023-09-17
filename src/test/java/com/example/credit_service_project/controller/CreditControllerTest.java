@@ -5,6 +5,7 @@ import com.example.credit_service_project.generators.CreditDTOGenerator;
 import com.example.credit_service_project.service.credit.CreditCreateService;
 import com.example.credit_service_project.service.credit.GetAllCreditsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -36,8 +37,9 @@ class CreditControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
+    @DisplayName("Test getAllCredits method ")
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
-    void testGetAllCredits() throws Exception {
+    void getAllCredits() throws Exception {
         var response = CreditDTOGenerator.getResponse();
         when(getAllCredits.getAllCredits()).thenReturn(Collections.singletonList(response));
 
@@ -48,7 +50,8 @@ class CreditControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"Client"})
-    void testGetAllCreditsForbidden() throws Exception {
+    @DisplayName("Test getAllCreditsForbidden method ")
+    void getAllCreditsForbidden() throws Exception {
         var response = CreditDTOGenerator.getResponse();
         when(getAllCredits.getAllCredits()).thenReturn(Collections.singletonList(response));
 
@@ -58,6 +61,7 @@ class CreditControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test create method ")
     void create() throws Exception {
 
         CreateCreditRequestDTO request = new CreateCreditRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
@@ -80,6 +84,7 @@ class CreditControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
+    @DisplayName("Test createForbidden method ")
     void createForbidden() throws Exception {
 
         CreateCreditRequestDTO request = new CreateCreditRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),

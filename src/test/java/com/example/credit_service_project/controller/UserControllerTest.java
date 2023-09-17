@@ -6,6 +6,7 @@ import com.example.credit_service_project.dto.user.UserResponseDTO;
 import com.example.credit_service_project.generators.UserDTOGenerator;
 import com.example.credit_service_project.service.user.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -48,6 +49,7 @@ class UserControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
+    @DisplayName("Test getAllClients method")
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
     void getAllClients() throws Exception {
         when(get.getAllClients()).thenReturn(Collections.singletonList(response));
@@ -58,6 +60,7 @@ class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test getAllClientsForbidden method")
     void getAllClientsForbidden() throws Exception {
         when(get.getAllClients()).thenReturn(Collections.singletonList(response));
 
@@ -67,6 +70,7 @@ class UserControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test searchClient method")
     void searchClient() throws Exception {
         UUID id = UUID.randomUUID();
 
@@ -77,6 +81,7 @@ class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test searchClientForbidden method")
     void searchClientForbidden() throws Exception {
         UUID id = UUID.randomUUID();
 
@@ -89,6 +94,7 @@ class UserControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test createClient method")
     void createClient() throws Exception {
         CreateUserRequest request = new CreateUserRequest("Aziz", "Snow", BigDecimal.valueOf(2500),
                 BigDecimal.ZERO, new BigDecimal("1500"), "Johan's Str 34", "john_manager@loewen.de",
@@ -106,6 +112,7 @@ class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test createClientForbidden method")
     void createClientForbidden() throws Exception {
         CreateUserRequest request = new CreateUserRequest("Aziz", "Snow", BigDecimal.valueOf(2500),
                 BigDecimal.ZERO, new BigDecimal("1500"), "Johan's Str 34", "john_manager@loewen.de",
@@ -121,6 +128,7 @@ class UserControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test updateClient method")
     void updateClient() throws Exception {
         UpdateClientRequest request = new UpdateClientRequest(UUID.randomUUID(), new BigDecimal("3500"),
                 null, new BigDecimal("2000"), null, null, null, null, null);
@@ -139,6 +147,7 @@ class UserControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test deleteUser method")
     void deleteUser() throws Exception {
         UUID id = UUID.randomUUID();
 
@@ -149,6 +158,7 @@ class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test deleteUserForbidden method")
     void deleteUserForbidden() throws Exception {
         UUID id = UUID.randomUUID();
 

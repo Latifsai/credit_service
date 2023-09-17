@@ -10,6 +10,7 @@ import com.example.credit_service_project.service.account.GetAllAccountsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -58,6 +59,7 @@ class AccountControllerTest {
     }
 
     @Test
+    @DisplayName("Test createNewAccount method")
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
     void createNewAccount() throws Exception {
 
@@ -73,6 +75,7 @@ class AccountControllerTest {
     }
 
     @Test
+    @DisplayName("Test createNewAccountUnauthorized method")
     @WithMockUser(value = "Alisa", roles = {"CLIENT"})
     void createNewAccountUnauthorized() throws Exception {
 
@@ -86,6 +89,7 @@ class AccountControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test getAccountList method")
     void getAccountList() throws Exception {
 
         when(get.getAllAccounts()).thenReturn(Collections.singletonList(response));
@@ -98,6 +102,7 @@ class AccountControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test updateAccount method")
     void updateAccount() throws Exception {
 
         var updatedResponse = AccountDTOGenerator.getUpdatedDTOResponse();
@@ -113,6 +118,7 @@ class AccountControllerTest {
 
     @Test
     @WithMockUser(value = "Alisa", roles = {"CLIENT"})
+    @DisplayName("Test updateAccountUnauthorized method")
     void updateAccountUnauthorized() throws Exception {
         var updatedResponse = AccountDTOGenerator.getUpdatedDTOResponse();
         when(update.updateAccount(updateRequest)).thenReturn(updatedResponse);

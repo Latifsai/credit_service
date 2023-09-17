@@ -26,6 +26,7 @@ import com.example.credit_service_project.service.operation.GetOperationsService
 import com.example.credit_service_project.service.operation.OperationSearchService;
 import com.example.credit_service_project.service.product.GetPreliminaryCalculationOfProduct;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -80,6 +81,7 @@ class SearchControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
+    @DisplayName("Test searchAccount method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void searchAccount() throws Exception {
 
@@ -99,6 +101,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test searchAccountForbidden method")
     void searchAccountForbidden() throws Exception {
 
         AccountResponseDTO response = AccountDTOGenerator.getResponse();
@@ -113,6 +116,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test searchCard method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void searchCard() throws Exception {
 
@@ -131,6 +135,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test searchCardForbidden method")
     void searchCardForbidden() throws Exception {
 
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
@@ -141,6 +146,7 @@ class SearchControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
+    @DisplayName("Test getBelongsAccountOperations method")
     void getBelongsAccountOperations() throws Exception {
         List<OperationResponseDTO> response = Collections.singletonList(OperationDTOGenerator.getOperationResponseDTO());
         GetBelongsAccountOperationsRequest request = new GetBelongsAccountOperationsRequest(
@@ -156,6 +162,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test getBelongsAccountOperationsForbidden method")
     void getBelongsAccountOperationsForbidden() throws Exception {
         List<OperationResponseDTO> response = Collections.singletonList(OperationDTOGenerator.getOperationResponseDTO());
         GetBelongsAccountOperationsRequest request = new GetBelongsAccountOperationsRequest(
@@ -170,6 +177,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test search method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void search() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
@@ -181,6 +189,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test searchForbidden method")
     void searchForbidden() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
         OperationResponseDTO response = OperationDTOGenerator.getOperationResponseDTO();
@@ -192,6 +201,7 @@ class SearchControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
+    @DisplayName("Test getUnpaidPayments method")
     void getUnpaidPayments() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
         List<PaymentResponseDTO> response = Collections.singletonList(PaymentDTOGenerator.getPaymentResponseDTO());
@@ -203,6 +213,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test getUnpaidPaymentsForbidden method")
     void getUnpaidPaymentsForbidden() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
         List<PaymentResponseDTO> response = Collections.singletonList(PaymentDTOGenerator.getPaymentResponseDTO());
@@ -215,6 +226,7 @@ class SearchControllerTest {
 
 
     @Test
+    @DisplayName("Test findCreditOrder method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void findCreditOrder() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
@@ -226,6 +238,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test findCreditOrderForBidden method")
     void findCreditOrderForBidden() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
 
@@ -236,6 +249,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test checkStatus method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void checkStatus() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
@@ -248,6 +262,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test checkStatusForbidden method")
     void checkStatusForbidden() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
         CheckCreditOrderStatusResponse response = new CheckCreditOrderStatusResponse(UUID.randomUUID(), CreditOrderStatus.IN_REVIEW, LocalDate.now(), 3);
@@ -259,6 +274,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test findAgreement method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void findAgreement() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
@@ -271,6 +287,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test findAgreementForbidden method")
     void findAgreementForbidden() throws Exception {
         UUID id = UUID.fromString("38859752-e264-43e0-ae34-02acef9e6061");
         AgreementResponse response = AgreementDTOGenerator.getResponse();
@@ -282,6 +299,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test showPreliminary method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void showPreliminary() throws Exception {
         PreliminaryCalculationRequest request = new PreliminaryCalculationRequest(UUID.randomUUID(), "FG43874G",
@@ -299,6 +317,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test showPreliminaryForBidden method")
     void showPreliminaryForBidden() throws Exception {
         PreliminaryCalculationRequest request = new PreliminaryCalculationRequest(UUID.randomUUID(), "FG43874G",
                 1L, 1, new BigDecimal("5.33"));
@@ -313,6 +332,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test findCreditHistoryByID method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void findCreditHistoryByID() throws Exception {
         UUID id = UUID.fromString("c076896f-f0da-43ca-a10d-a9287fd95d5f");
@@ -326,6 +346,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test findCreditHistoryByIDForBidden method")
     void findCreditHistoryByIDForBidden() throws Exception {
         UUID id = UUID.fromString("c076896f-f0da-43ca-a10d-a9287fd95d5f");
         CreditHistoryResponse response = CreditHistoryDTOGenerator.getResponse();
@@ -338,6 +359,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test findAllDelaysBelongsCreditHistory method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void findAllDelaysBelongsCreditHistory() throws Exception {
         UUID id = UUID.fromString("c076896f-f0da-43ca-a10d-a9287fd95d5f");
@@ -351,6 +373,7 @@ class SearchControllerTest {
     }
 
     @Test
+    @DisplayName("Test findAllDelaysBelongsCreditHistoryForBidden method")
     void findAllDelaysBelongsCreditHistoryForBidden() throws Exception {
         UUID id = UUID.fromString("c076896f-f0da-43ca-a10d-a9287fd95d5f");
         List<DelayResponse> response = Collections.singletonList(DelayDTOGenerator.getResponse());

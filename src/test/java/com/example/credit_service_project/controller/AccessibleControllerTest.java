@@ -33,8 +33,8 @@ class AccessibleControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @DisplayName(value = "Test get all products")
     @Test
+    @DisplayName(value = "Test get all products method")
     public void getAllProducts() throws Exception {
         ProductResponseDTO response = ProductCreatorDTO.getResponse();
         List<ProductResponseDTO> productsList = Collections.singletonList(response);
@@ -47,8 +47,8 @@ class AccessibleControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)));
     }
 
-    @DisplayName(value = "test search product")
     @Test
+    @DisplayName(value = "test search product method")
     void searchProduct() throws Exception {
         ProductResponseDTO response = ProductCreatorDTO.getResponse();
 

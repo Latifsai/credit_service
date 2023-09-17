@@ -11,6 +11,7 @@ import com.example.credit_service_project.service.creditOrder.CreditOrderUpdateS
 import com.example.credit_service_project.service.creditOrder.DecisionOrderService;
 import com.example.credit_service_project.service.creditOrder.GetAllCreditOrdersService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -49,6 +50,7 @@ class CreditOrderControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
+    @DisplayName("Test create method")
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
     void create() throws Exception {
         CreateCreditOrderRequestDTO request = new CreateCreditOrderRequestDTO(1L, UUID.randomUUID(),
@@ -66,6 +68,7 @@ class CreditOrderControllerTest {
     }
 
     @Test
+    @DisplayName("Test createForbidden method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void createForbidden() throws Exception {
         CreateCreditOrderRequestDTO request = new CreateCreditOrderRequestDTO(1L, UUID.randomUUID(),
@@ -80,6 +83,7 @@ class CreditOrderControllerTest {
     }
 
     @Test
+    @DisplayName("Test getAll method")
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
     void getAll() throws Exception {
 
@@ -92,6 +96,7 @@ class CreditOrderControllerTest {
     }
 
     @Test
+    @DisplayName("Test getAllForbidden method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void getAllForbidden() throws Exception {
 
@@ -102,6 +107,7 @@ class CreditOrderControllerTest {
     }
 
     @Test
+    @DisplayName("Test update method")
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
     void update() throws Exception {
         UpdateCreditOrderRequestDTO request = new UpdateCreditOrderRequestDTO(UUID.fromString("c3009377-3b57-4965-8540-69d56fce34f4"), null,
@@ -119,6 +125,7 @@ class CreditOrderControllerTest {
     }
 
     @Test
+    @DisplayName("Test updateForbidden method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void updateForbidden() throws Exception {
         UpdateCreditOrderRequestDTO request = new UpdateCreditOrderRequestDTO(UUID.fromString("c3009377-3b57-4965-8540-69d56fce34f4"), null,
@@ -134,6 +141,7 @@ class CreditOrderControllerTest {
 
 
     @Test
+    @DisplayName("Test decision method")
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
     void decision() throws Exception {
 
@@ -146,6 +154,7 @@ class CreditOrderControllerTest {
     }
 
     @Test
+    @DisplayName("Test decisionForbidden method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
     void decisionForbidden() throws Exception {
 

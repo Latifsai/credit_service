@@ -7,6 +7,7 @@ import com.example.credit_service_project.generators.PaymentDTOGenerator;
 import com.example.credit_service_project.service.paymentSchedule.GetBelongsToAccountPaymentsService;
 import com.example.credit_service_project.service.paymentSchedule.GetNearestPaymentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -43,8 +44,9 @@ class PaymentScheduleControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
+    @DisplayName("Test getNearestPayment method")
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
-    void testGetNearestPayment() throws Exception {
+    void getNearestPayment() throws Exception {
         PaymentsBelongsToAccountRequest request = new PaymentsBelongsToAccountRequest(UUID.randomUUID(), "A43A1A13A5A");
 
         when(getNearestPayment.getNearestPayment(request)).thenReturn(response);
@@ -59,7 +61,8 @@ class PaymentScheduleControllerTest {
     }
 
     @Test
-    void testGetNearestPaymentForbidden() throws Exception {
+    @DisplayName("Test getNearestPaymentForbidden method")
+    void getNearestPaymentForbidden() throws Exception {
         PaymentsBelongsToAccountRequest request = new PaymentsBelongsToAccountRequest(UUID.randomUUID(), "A43A1A13A5A");
 
         when(getNearestPayment.getNearestPayment(request)).thenReturn(response);
@@ -72,6 +75,7 @@ class PaymentScheduleControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"CLIENT"})
+    @DisplayName("Test getBelongsPaymentsResponse method")
     void getBelongsPaymentsResponse() throws Exception {
         PaymentsBelongsToAccountRequest request = new PaymentsBelongsToAccountRequest(UUID.randomUUID(), null);
 
@@ -87,6 +91,7 @@ class PaymentScheduleControllerTest {
     }
 
     @Test
+    @DisplayName("Test getBelongsPaymentsResponseForbidden method")
     void getBelongsPaymentsResponseForbidden() throws Exception {
         PaymentsBelongsToAccountRequest request = new PaymentsBelongsToAccountRequest(UUID.randomUUID(), null);
 

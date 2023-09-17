@@ -2,6 +2,7 @@ package com.example.credit_service_project.controller;
 
 import com.example.credit_service_project.generators.CreditHistoryDTOGenerator;
 import com.example.credit_service_project.service.creditHistory.CreditHistoryService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -29,6 +30,7 @@ class CreditHistoryControllerTest {
 
     @Test
     @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test findAll method")
     void findAll() throws Exception {
         var list = Collections.singletonList(CreditHistoryDTOGenerator.getResponse());
         when(creditHistoryService.findAllHistories()).thenReturn(list);
@@ -39,6 +41,18 @@ class CreditHistoryControllerTest {
     }
 
     @Test
+    @WithMockUser(value = "Oleg", roles = {"MANAGER"})
+    @DisplayName("Test findAll method if empty")
+    void findAllIfEmpty() throws Exception {
+        when(creditHistoryService.findAllHistories()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/credit_history"))
+                .andExpect(status().isFound())
+                .andExpect(jsonPath("$", hasSize(0)));
+    }
+
+    @Test
+    @DisplayName("Test findAllForbidden method")
     void findAllForbidden() throws Exception {
         var list = Collections.singletonList(CreditHistoryDTOGenerator.getResponse());
         when(creditHistoryService.findAllHistories()).thenReturn(list);
