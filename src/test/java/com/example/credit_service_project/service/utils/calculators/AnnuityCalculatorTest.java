@@ -1,5 +1,6 @@
 package com.example.credit_service_project.service.utils.calculators;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 class AnnuityCalculatorTest {
 
     @Test
+    @DisplayName("Test calculate annuity method")
     void calculate() {
         BigDecimal[] expected = new BigDecimal[12];
         BigDecimal[] payments = new BigDecimal[12];
@@ -22,6 +24,5 @@ class AnnuityCalculatorTest {
         }
 
         assertArrayEquals(expected, payments);
-
     }
 }
