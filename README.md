@@ -6,9 +6,16 @@ Welcome to the Loan Service README! This project aims to tell about how the cred
 ---------------------------------
 
 ## Requirements
-* CRUD operations for customers and accounts.
-* Support for payments, top-ups and early repayments
-* Loan payment preview
+* CRUD operations for all entities.
+* Possibility of opening a loan for a given product in the database.
+* Current conversion of product currency into account currency.
+* Opening bank cards.
+* Taking out loans.
+* Preliminary review of loan payments.
+* Automatic write-off of credit payments on time, taking into account credit holidays.
+* Penalties will be charged in case of non-payment.
+* Possibility of early repayment.
+* Balance replenishment.
 ------------------------------------
 
 ## Getting Started
@@ -52,30 +59,22 @@ Here loans and payment schedules are formed depending on the annuity or differen
 
 The project is developed using modern technologies: 
 
-* Microservices Framework: Spring Boot 
-* Programming Language: Java 
-* Database: MySQL 
-* Validation: Spring Boot Validation
-* Database Migration: Liquibase
-* Site parser: Jsoup
-* Auxiliary Libraries: Lombok
-* Version Control System: Git
-* Development Environment: IntelliJ IDEA
-* Test: JUnit, Mockito
-
-### Maven Dependencies
-```
-spring-boot-starter-data-rest
-spring-boot-starter-validation
-spring-boot-starter-web
-liquibase-core
-spring-boot-devtools
-mysql-connector-j
-lombok
-spring-boot-starter-test
-spring-boot-starter-data-jpa
-jsoup
-```
+* Spring BOOT 
+* JAVA
+* SPRING SECURITY
+* JWT-token AUTHORIZATION
+* SPRING MVC
+* MySQL 
+* Spring Boot Validation
+* Liquibase
+* Jsoup
+* LOMBOK
+* GitHub
+* JUnit 5 JUPITER
+* MOCKITO
+* MAVEN
+* SWAGGER
+* JACOCO
 
 ### Database
 
