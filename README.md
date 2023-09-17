@@ -31,28 +31,9 @@ git clone https://github.com/Latifsai/credit_service
 - If using STS, Run As Spring Boot App
 ```
 ----------------
-### Microservices Description
+### SECURITY
 
-* ##### Authentication and Authorization Service: 
-This service is responsible for authenticating users and managing their access to the functionality of the credit service.(not ready)!!!
-
-* ##### Create Account Service: 
-Here, managers can create new accounts based on data from clients, an account is a necessary part for all systems to work, a user without an account cannot get credit.
-
-* ##### Create Product Service: 
-Here managers can create and add new products and services to the database for which you can get a loan.
-
-* ##### Create Order Service: 
-Here, authorized users through the account can apply for a loan by providing the necessary information. This service processes applications, conducts preliminary analysis and sends data to the decision service.
-
-* ##### Decision Order Service: 
-Based on the analysis of data from applications, this service determines whether to approve the application or not. Decision on a positive outcome transferred to the Create Agreement service.
-
-* ##### Create Agreement Service:
-After approval, the applications will be concluded contracts which will be transferred to the create credit service.
-
-* ##### Create Credit Service:
-Here loans and payment schedules are formed depending on the annuity or differentiated types of calculation. The loan is considered repaid if all payments are paid or early repayment is possible for some loans.
+Protection is based on technology jwt token. The life cycle leaves 30 minutes.Two levels of protection are available: "Client" level and "Manager" level. Protection is installed on both standard KRUD operations, as well as for special operations. In addition, it is possible to access without authentication for some GET requests
 
 
 ### Technology Stack
