@@ -85,6 +85,8 @@ I use MySQL to store data about clients, their applications, decisions, and so o
 ```
 jdbc:mysql://localhost:3306/credit_service_database
 ```
+#### Database stucture
+![] ()
 
 ### Links and Project Description
 
