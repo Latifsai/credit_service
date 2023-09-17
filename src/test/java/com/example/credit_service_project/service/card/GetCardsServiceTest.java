@@ -30,7 +30,7 @@ class GetCardsServiceTest {
     private GetAllCardsService getAllCardsService;
 
     @Test
-    @DisplayName(value = "Test get cards")
+    @DisplayName(value = "Test get cards method")
     public void getCards() {
         List<Card> cards = List.of(EntityCreator.getCard());
         List<CardResponseDTO> expected = List.of(CardDTOGenerator.getCardResponse());
@@ -46,7 +46,7 @@ class GetCardsServiceTest {
     }
 
     @Test
-    @DisplayName("Test get cards emptyList")
+    @DisplayName("Test get cards emptyList method")
     public void testGetCardsEmptyList() {
         when(repository.findAll()).thenReturn(Collections.emptyList());
 

@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,7 +28,7 @@ public class GetAllAccountsServiceTest {
     private GetAllAccountsService service;
 
     @Test
-    @DisplayName(value = "Get all Accounts test")
+    @DisplayName(value = "Test get all Accounts test")
     public void getAccountsListTest() {
         var accounts = List.of(EntityCreator.getAccount());
         var responses = List.of(AccountDTOGenerator.getResponse());
@@ -42,10 +42,32 @@ public class GetAllAccountsServiceTest {
     }
 
     @Test
-    @DisplayName(value = "Get all Accounts test if empty")
+    @DisplayName(value = "Test Get all Accounts test if empty")
     public void testAccountListEmpty() {
         when(repository.findAll()).thenReturn(Collections.emptyList());
         assertEquals(Collections.emptyList(), service.getAllAccounts());
+        verify(repository, times(1)).findAll();
+    }
+
+    @Test
+    @DisplayName(value = "Test findAllAccounts method")
+    public void findAllAccounts() {
+        var accounts = Collections.singletonList(EntityCreator.getAccount());
+        when(repository.findAll()).thenReturn(accounts);
+
+        var result = service.findAllAccounts();
+
+        assertNotNull(result);
+        assertEquals(accounts.size(), result.size());
+        verify(repository, times(1)).findAll();
+    }
+
+    @Test
+    @DisplayName(value = "Test findAllAccounts test if empty")
+    public void findAllAccountsEmpty() {
+        when(repository.findAll()).thenReturn(Collections.emptyList());
+
+        assertEquals(Collections.emptyList(),service.findAllAccounts());
         verify(repository, times(1)).findAll();
     }
 }

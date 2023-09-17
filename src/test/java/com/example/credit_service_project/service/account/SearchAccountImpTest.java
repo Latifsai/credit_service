@@ -33,8 +33,8 @@ public class SearchAccountImpTest {
     @InjectMocks
     private AccountSearchService service;
 
-    @DisplayName(value = "Test search account")
     @Test
+    @DisplayName(value = "Test search account")
     public void testSearchAccount() {
         SearchAccountRequest request = new SearchAccountRequest(UUID.randomUUID(), "A10B3U3OI9");
         Account account = EntityCreator.getAccount();
@@ -47,8 +47,8 @@ public class SearchAccountImpTest {
         verify(util, times(1)).convertAccountToAddResponse(account);
     }
 
-    @DisplayName(value = "Test search account NotFoundException")
     @Test
+    @DisplayName(value = "Test search account NotFoundException")
     public void testSearchAccountNotFoundException() {
         SearchAccountRequest request = new SearchAccountRequest(UUID.randomUUID(), null);
 

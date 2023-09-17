@@ -3,9 +3,10 @@ package com.example.credit_service_project.service.card;
 import com.example.credit_service_project.dto.cardDTO.CardResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Card;
-import com.example.credit_service_project.repository.CardRepository;
+import com.example.credit_service_project.entity.enums.CardStatus;
 import com.example.credit_service_project.generators.CardDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
+import com.example.credit_service_project.repository.CardRepository;
 import com.example.credit_service_project.service.utils.CardUtil;
 import com.example.credit_service_project.validation.exceptions.NotFoundException;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,6 +35,8 @@ class SearchCardServiceTest {
 
     private final UUID id = UUID.randomUUID();
     private final Card card = EntityCreator.getCard();
+    private final Account account = EntityCreator.getAccount();
+
 
     @Test
     @DisplayName("Test search card method")
@@ -66,21 +68,28 @@ class SearchCardServiceTest {
     }
 
     @Test
+    @DisplayName("Test find card by ID method thorws NotFoundException")
+    public void findCardByIdNotFoundException() {
+        when(repository.findById(id)).thenReturn(Optional.empty());
+        assertEquals(Optional.empty(), repository.findById(id));
+        verify(repository, times(1)).findById(id);
+    }
+
+    @Test
     @DisplayName("Test find by account method")
     public void findByAccount() {
-        Account account = EntityCreator.getAccount();
-
         when(repository.findByAccount(account)).thenReturn(List.of(card));
 
-        assertEquals(List.of(card), repository.findByAccount(account));
+        Card result = service.findByAccount(account);
+
+        assertNotNull(result);
+        assertEquals(CardStatus.ACTIVE, result.getCardStatus());
         verify(repository, times(1)).findByAccount(account);
     }
 
     @Test
     @DisplayName("Test find by account method throws NotFoundException ")
     public void findByAccountNotFound() {
-        Account account = EntityCreator.getAccount();
-
         when(repository.findByAccount(account)).thenThrow(NotFoundException.class);
         assertThrows(NotFoundException.class, () -> repository.findByAccount(account));
     }

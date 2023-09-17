@@ -2,6 +2,7 @@ package com.example.credit_service_project.service.creditOrder;
 
 import com.example.credit_service_project.dto.creditOrderDTO.CreditOrderResponseDTO;
 import com.example.credit_service_project.entity.CreditOrder;
+import com.example.credit_service_project.entity.enums.CreditOrderStatus;
 import com.example.credit_service_project.repository.CreditOrderRepository;
 import com.example.credit_service_project.generators.CreditOrderedGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
@@ -57,4 +58,20 @@ class GetAllCreditOrdersServiceTest {
         assertEquals(creditOrders, result);
         verify(repository, times(1)).findAll();
     }
+
+    @Test
+    @DisplayName("Test getOrdersIn_Review method")
+    void getOrdersIn_Review() {
+        CreditOrder order = EntityCreator.getCreditOrder();
+        order.setCreditOrderStatus(CreditOrderStatus.IN_REVIEW);
+        List<CreditOrder> creditOrders = List.of(order);
+
+        when(repository.findAll()).thenReturn(creditOrders);
+
+        List<CreditOrder> result = getAllCreditOrdersService.getOrdersIn_Review();
+        assertNotNull(result);
+        assertEquals(creditOrders, result);
+        verify(repository, times(1)).findAll();
+    }
+
 }

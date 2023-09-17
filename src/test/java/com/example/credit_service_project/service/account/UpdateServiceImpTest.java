@@ -36,7 +36,7 @@ public class UpdateServiceImpTest {
     private AccountUpdateService service;
 
     @Test
-    @DisplayName(value = "Test update account")
+    @DisplayName(value = "Test update account method")
     public void upgradeAccountService() {
         UpdateAccountRequest request = new UpdateAccountRequest(UUID.randomUUID(), null, null,
                 null, null, BigDecimal.valueOf(5000), null, null);
@@ -57,7 +57,7 @@ public class UpdateServiceImpTest {
     }
 
     @Test
-    @DisplayName(value = "Get NotFoundException by search account")
+    @DisplayName(value = "Test get NotFoundException by search account method")
     public void upgradeTestNotFoundException() {
         UpdateAccountRequest request = new UpdateAccountRequest(UUID.randomUUID(), null, null,
                 null, null, BigDecimal.valueOf(5000), null, null);
@@ -68,7 +68,7 @@ public class UpdateServiceImpTest {
     }
 
     @Test
-    @DisplayName(value = "Get AccountStatusException by update account")
+    @DisplayName(value = "Test get AccountStatusException by update account method")
     public void upgradeTestAccountStatusException() {
         UpdateAccountRequest request = new UpdateAccountRequest(UUID.randomUUID(), null, null,
                 null, null, BigDecimal.valueOf(5000), null, null);
@@ -79,5 +79,14 @@ public class UpdateServiceImpTest {
 
         assertThrows(AccountStatusException.class, () -> service.updateAccount(request));
     }
+
+    @Test
+    @DisplayName(value = "Test saveUpdatedAccount method")
+    public void saveUpdatedAccount() {
+        Account account = EntityCreator.getAccount();
+        when(creationService.saveAccount(account)).thenReturn(account);
+        assertEquals(account, service.saveUpdatedAccount(account));
+    }
+
 
 }

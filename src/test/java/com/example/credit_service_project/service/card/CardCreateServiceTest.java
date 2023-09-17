@@ -36,8 +36,8 @@ class CardCreateServiceTest {
     private CardUtil util;
     @InjectMocks
     private CardCreateService createCardService;
-    @DisplayName(value = "Test card create")
     @Test
+    @DisplayName(value = "Test card create method")
     public void testCreateCard() {
         CreateCardRequestDTO request = new CreateCardRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 "A10B3U3OI9", 4, true, VISA);
@@ -60,8 +60,8 @@ class CardCreateServiceTest {
 
     }
 
-    @DisplayName(value = "Test card create throw NotFoundException")
     @Test
+    @DisplayName(value = "Test card create throw NotFoundException method")
     public void testCreditCardNotFoundException() {
         CreateCardRequestDTO request = new CreateCardRequestDTO(UUID.fromString("22eb47fe-79be-4130-9727-a6c71e2664b6"),
                 "A10B3U3OI9", 4, true, VISA);
@@ -73,8 +73,8 @@ class CardCreateServiceTest {
         assertThrows(NotFoundException.class, () -> createCardService.createCard(request));
     }
 
-    @DisplayName(value = "Test card create CardValidation")
     @Test
+    @DisplayName(value = "Test card create CardValidation method")
     public void testCreditCardValidation() {
         Card card = EntityCreator.getCardForValidation();
 

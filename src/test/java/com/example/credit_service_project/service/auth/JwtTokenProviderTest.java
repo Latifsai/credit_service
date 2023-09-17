@@ -33,7 +33,7 @@ class JwtTokenProviderTest {
     }
 
     @Test
-    @DisplayName(value = "Test generate token")
+    @DisplayName(value = "Test generate token method")
     void generateToken() {
         String username = "Olga";
         String token = provider.generateToken(username);
@@ -51,7 +51,7 @@ class JwtTokenProviderTest {
     }
 
     @Test
-    @DisplayName(value = "Test get username")
+    @DisplayName(value = "Test get username method")
     void testGetUsername() {
         String username = "Olga";
 
@@ -66,7 +66,7 @@ class JwtTokenProviderTest {
     }
 
     @Test
-    @DisplayName(value = "Test validate token")
+    @DisplayName(value = "Test validate token method")
     void validateToken() {
         String username = "Olga";
 
@@ -79,7 +79,7 @@ class JwtTokenProviderTest {
     }
 
     @Test
-    @DisplayName(value = "Test validateTokenException")
+    @DisplayName(value = "Test validateTokenException method")
     void validateTokenException() {
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIiLCJuYW1lIjoiT2xnYSIsImlhdCI6IiJ9.2RDCdv7SK4sOGCr04oN2efITl6sPv0h2SDU0rv0LQgU";
         assertThrows(InvalidJwtException.class, () -> provider.validateToken(token));
