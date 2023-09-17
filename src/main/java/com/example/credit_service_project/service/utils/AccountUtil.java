@@ -7,7 +7,6 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.User;
 import com.example.credit_service_project.entity.enums.AccountStatus;
 import com.example.credit_service_project.service.utils.generator.FieldsGenerator;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -15,7 +14,6 @@ import java.time.LocalDate;
 
 
 @Service
-@RequiredArgsConstructor
 public class AccountUtil {
 
     public Account convertAddRequestToAccount(CreateAccountRequestDTO request, User user) {

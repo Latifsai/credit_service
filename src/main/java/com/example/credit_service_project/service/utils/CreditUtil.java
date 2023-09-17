@@ -9,6 +9,8 @@ import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.CreditOrder;
 import com.example.credit_service_project.service.utils.generator.CreditGenerator;
+import com.example.credit_service_project.validation.ErrorsMessage;
+import com.example.credit_service_project.validation.exceptions.CreditPeriodException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -30,7 +32,7 @@ public class CreditUtil {
         credit.setInterestRate(CreditGenerator.getInterestRateByCountry(account.getCountry()));
         credit.setCreditType(request.getCreditType());
         credit.setCreditSum(getTotalCreditAmount(creditOrder.getAmount(), credit.getInterestRate(), request.getPeriodMonth()));
-        credit.setPeriodMonth(request.getPeriodMonth());
+        credit.setPeriodMonth(checkPeriodMount(request.getPeriodMonth()));
         credit.setNeedDeposit(creditOrder.getProduct().isNeedGuaranty());
         credit.setCreditStatus(ACTIVE);
         credit.setCurrency(account.getCurrency());
@@ -40,6 +42,13 @@ public class CreditUtil {
 
         setDebtToAccount(account, credit);
         return credit;
+    }
+
+    private Integer checkPeriodMount(Integer monthAmount) {
+        if ((monthAmount < 12 || monthAmount > 120) && monthAmount % 12 != 0) {
+            throw new CreditPeriodException(ErrorsMessage.INAPPROPRIATE_NUMBER_OF_MONTHS_MESSAGE);
+        }
+        return monthAmount;
     }
 
     private BigDecimal getTotalCreditAmount(BigDecimal loanAmount, BigDecimal interestRate, int numberOfMonths) {

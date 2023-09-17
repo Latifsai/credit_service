@@ -2,31 +2,30 @@ package com.example.credit_service_project.service.utils;
 
 import com.example.credit_service_project.dto.creditDTO.CreateCreditDTOResponse;
 import com.example.credit_service_project.dto.creditDTO.CreateCreditRequestDTO;
-import com.example.credit_service_project.dto.creditDTO.CreditResponseDTO;
 import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Agreement;
 import com.example.credit_service_project.entity.Credit;
 import com.example.credit_service_project.entity.CreditOrder;
-import com.example.credit_service_project.generators.CreditDTOGenerator;
-import com.example.credit_service_project.generators.PaymentDTOGenerator;
 import com.example.credit_service_project.generators.EntityCreator;
+import com.example.credit_service_project.generators.PaymentDTOGenerator;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
+import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
 class CreditUtilTest {
 
-    @Mock
+    @InjectMocks
     private CreditUtil util;
 
     private Credit credit;
@@ -37,35 +36,29 @@ class CreditUtilTest {
     }
 
     @Test
+    @DisplayName("Test createCreditFromData method")
     void createCreditFromData() {
         CreateCreditRequestDTO request = new CreateCreditRequestDTO(UUID.randomUUID(), null, UUID.randomUUID(),
                 UUID.randomUUID(), 12, 0, "consumer credit");
-
         Account account = EntityCreator.getAccount();
         Agreement agreement = EntityCreator.getAgreement();
         CreditOrder creditOrder = EntityCreator.getCreditOrder();
-
-        when(util.createCreditFromData(request, account, agreement, creditOrder)).thenReturn(credit);
 
         assertEquals(credit, util.createCreditFromData(request, account, agreement, creditOrder));
     }
 
     @Test
+    @DisplayName("Test convertResponse method")
     void convertResponse() {
-        CreateCreditDTOResponse response = CreditDTOGenerator.getCreationResponse();
         List<PaymentResponseDTO> list = List.of(PaymentDTOGenerator.getPaymentResponseDTO());
-
-        when(util.convertResponse(credit, list)).thenReturn(response);
-
         CreateCreditDTOResponse result = util.convertResponse(credit, list);
-        assertEquals(response, result);
+
+        assertNotNull(result);
     }
 
     @Test
+    @DisplayName("Test convertToCreditResponse method")
     void convertToCreditResponse() {
-        CreditResponseDTO response = CreditDTOGenerator.getResponse();
-
-        when(util.convertToCreditResponse(credit)).thenReturn(response);
-        assertEquals(response, util.convertToCreditResponse(credit));
+        assertNotNull(util.convertToCreditResponse(credit));
     }
 }

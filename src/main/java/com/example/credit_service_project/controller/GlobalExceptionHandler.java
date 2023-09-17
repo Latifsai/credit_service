@@ -96,4 +96,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CreditPeriodException.class)
+    public ResponseEntity<?> handleCreditPeriodException(CreditPeriodException e) {
+        List<ErrorException> errorExceptions = List.of(new ErrorException(e.getMessage()));
+        ExceptionResponse response = new ExceptionResponse(errorExceptions);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }

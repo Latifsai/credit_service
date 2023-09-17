@@ -3,20 +3,23 @@ package com.example.credit_service_project.service.utils;
 import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
 import com.example.credit_service_project.dto.operationDTO.PaymentsOperationRequest;
 import com.example.credit_service_project.dto.operationDTO.UpdateOperationsRequest;
-import com.example.credit_service_project.entity.*;
+import com.example.credit_service_project.entity.Account;
+import com.example.credit_service_project.entity.Card;
+import com.example.credit_service_project.entity.Operation;
+import com.example.credit_service_project.entity.PaymentSchedule;
 import com.example.credit_service_project.entity.enums.OperationType;
 import com.example.credit_service_project.validation.ErrorsMessage;
 import com.example.credit_service_project.validation.exceptions.OperationException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.credit_service_project.entity.enums.OperationType.*;
+import static java.math.RoundingMode.HALF_UP;
 
 @Service
 public class OperationUtils {
@@ -75,9 +78,12 @@ public class OperationUtils {
     }
 
     public BigDecimal calculateFine(BigDecimal interestRate, BigDecimal payment, int dayOfDelay) {
-        BigDecimal fine = payment.multiply((interestRate.divide(BigDecimal.valueOf(100), 5, RoundingMode.HALF_UP)))
-                .multiply(BigDecimal.valueOf(dayOfDelay / 365));
-        return fine.setScale(2, RoundingMode.HALF_UP);
+        BigDecimal delayInDays = BigDecimal.valueOf(dayOfDelay);
+
+        BigDecimal interestRateFraction = interestRate.divide(BigDecimal.valueOf(100), 5, HALF_UP);
+        BigDecimal fine = payment.multiply(interestRateFraction).multiply(delayInDays.divide(BigDecimal.valueOf(365), 5, HALF_UP));
+
+        return fine.setScale(2, HALF_UP);
     }
 
 

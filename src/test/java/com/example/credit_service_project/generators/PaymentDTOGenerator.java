@@ -16,7 +16,7 @@ public class PaymentDTOGenerator {
                 LocalDate.of(2023, SEPTEMBER, 18),
                 null,
                 BigDecimal.ZERO,
-                new BigDecimal("300.54"),
+                new BigDecimal("300"),
                 false
         );
     }

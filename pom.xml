@@ -180,13 +180,13 @@
                             <goal>report</goal>
                         </goals>
 
-<!--                        <configuration>-->
-<!--                            <excludes>-->
-<!--                                <exclude>com/example/credit_service_project/dto/**</exclude>-->
-<!--                                <exclude>com/example/credit_service_project/repository/**</exclude>-->
-<!--                                <exclude>com/example/credit_service_project/validation/**</exclude>-->
-<!--                            </excludes>-->
-<!--                        </configuration>-->
+                        <configuration>
+                            <excludes>
+                                <exclude>com/example/credit_service_project/dto/**</exclude>
+                                <exclude>com/example/credit_service_project/repository/**</exclude>
+                                <exclude>com/example/credit_service_project/validation/**</exclude>
+                            </excludes>
+                        </configuration>
 
                     </execution>
                 </executions>

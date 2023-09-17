@@ -4,6 +4,7 @@ import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.Product;
 import com.example.credit_service_project.generators.EntityCreator;
 import com.example.credit_service_project.validation.exceptions.OperationException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -12,40 +13,48 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CurrencyConverterTest {
 
-    @Test
-    void convertCurrencyIfSameCode() {
-        Product product = EntityCreator.getProduct();
-        Account account = EntityCreator.getAccount();
+    private final Product product = EntityCreator.getProduct();
+    private final Account account = EntityCreator.getAccount();
 
+    @Test
+    @DisplayName("Test convertCurrencyIfSameCurrencyCode method")
+    void convertCurrencyIfSameCode() {
         BigDecimal actual = CurrencyConverter.convertCurrency(product, account);
         assertEquals(BigDecimal.valueOf(14580.65), actual);
     }
+
     @Test
+    @DisplayName("Test convertCurrencyIfDifferentCurrencyCode method")
     void convertCurrencyIfDifferentCode() {
-        Product product = EntityCreator.getProduct();
         product.setCurrencyCode("EUR");
-        Account account = EntityCreator.getAccount();
 
         BigDecimal actual = CurrencyConverter.convertCurrency(product, account);
-        assertEquals(BigDecimal.valueOf(15636.29), actual);
+        assertEquals(BigDecimal.valueOf(15540.06), actual);
     }
 
     @Test
+    @DisplayName("Test convertCurrencyIfDifferentCurrencyCode_2 method")
+    void convertCurrencyIfDifferentCode_2() {
+        product.setCurrencyCode("CAD");
+        account.setCurrency("THB");
+
+        BigDecimal actual = CurrencyConverter.convertCurrency(product, account);
+        assertEquals(new BigDecimal("385994.10"), actual);
+    }
+
+
+    @Test
+    @DisplayName("Test convertCurrencyIfDifferentCodeOperationExceptionUNKNOWN_TARGET_CURRENCY method")
     void convertCurrencyIfDifferentCodeOperationExceptionUNKNOWN_TARGET_CURRENCY() {
-        Product product = EntityCreator.getProduct();
-        Account account = EntityCreator.getAccount();
         account.setCurrency("RUB");
-
-        assertThrows(OperationException.class,() -> CurrencyConverter.convertCurrency(product, account));
+        assertThrows(OperationException.class, () -> CurrencyConverter.convertCurrency(product, account));
     }
 
     @Test
+    @DisplayName("Test convertCurrencyIfDifferentCodeOperationExceptionUNKNOWN_SOURCE_CURRENCY method")
     void convertCurrencyIfDifferentCodeOperationExceptionUNKNOWN_SOURCE_CURRENCY() {
-        Product product = EntityCreator.getProduct();
         product.setCurrencyCode("RUB");
-        Account account = EntityCreator.getAccount();
-
-        assertThrows(OperationException.class,() -> CurrencyConverter.convertCurrency(product, account));
+        assertThrows(OperationException.class, () -> CurrencyConverter.convertCurrency(product, account));
     }
 
 }

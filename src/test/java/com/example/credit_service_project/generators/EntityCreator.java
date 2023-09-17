@@ -294,7 +294,7 @@ public class EntityCreator {
         user.setEmail("john_manager@loewen.de");
         user.setPhone("+49 176 28835002");
         user.setRegistrationDate(LocalDate.of(2021, 3, 14));
-        user.setUpdateDate(LocalDate.of(2023, 9, 7));
+        user.setUpdateDate(LocalDate.of(2021, 3, 14));
         return user;
     }
 

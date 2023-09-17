@@ -10,12 +10,12 @@ public class ProductCreatorDTO {
     public static ProductResponseDTO getResponse() {
         return ProductResponseDTO.builder()
                 .id(1L)
-                .name("BMW")
-                .sum(BigDecimal.valueOf(10000))
+                .name("BMW X5")
+                .sum(BigDecimal.valueOf(14580.65))
                 .needGuaranty(false)
                 .earlyRepayment(true)
                 .needIncomeDetails(false)
-                .details("BMW")
+                .details("X5")
                 .currencyCode("USD")
                 .calculationType(CalculationType.DIFFERENTIATED)
                 .build();
