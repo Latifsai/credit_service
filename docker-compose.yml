@@ -1,21 +1,26 @@
-version: '3.5'
+version: '3.8'
 
 services:
   mysql:
-    image: 'mysql:8'
+    image: mysql:8
     container_name: 'java-mysql'
-
     environment:
-      - 'MYSQL_ROOT_PASSWORD=50151832L@tif'
-      - 'MYSQL_DATABASE=credit_service'
+      - MYSQL_ROOT_PASSWORD=50151832l
+      - MYSQL_DATABASE=credit_service
     restart: always
+    ports:
+      - "3307:3306"
 
   app:
     depends_on:
     - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/credit_service
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 50151832l
     restart: always
     build: ./
     container_name: "java-app"
     ports:
       - "8080:8080"
-    command: "mvn clean spring-boot:run"
+
