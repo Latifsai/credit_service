@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -20,7 +21,7 @@ public class GlobalExceptionHandler {
         List<ErrorException> errorExceptions = e.getConstraintViolations().stream()
                 .map(constraintViolation -> constraintViolation.getPropertyPath() + ": " + constraintViolation.getMessage())
                 .map(ErrorException::new)
-                .toList();
+                .collect(Collectors.toList());
         ExceptionResponse response = new ExceptionResponse(errorExceptions);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

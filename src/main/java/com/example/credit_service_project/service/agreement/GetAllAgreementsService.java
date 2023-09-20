@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class GetAllAgreementsService {
         log.info("Get a list of agreements");
         return repository.findAll().stream()
                 .map(util::convertToResponse)
-                .toList();
+                .collect(Collectors.toList());
+
     }
 }

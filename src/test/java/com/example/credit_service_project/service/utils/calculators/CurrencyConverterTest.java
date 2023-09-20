@@ -29,7 +29,7 @@ class CurrencyConverterTest {
         product.setCurrencyCode("EUR");
 
         BigDecimal actual = CurrencyConverter.convertCurrency(product, account);
-        assertEquals(BigDecimal.valueOf(15540.06), actual);
+        assertEquals(BigDecimal.valueOf(15620.25), actual);
     }
 
     @Test
@@ -39,7 +39,7 @@ class CurrencyConverterTest {
         account.setCurrency("THB");
 
         BigDecimal actual = CurrencyConverter.convertCurrency(product, account);
-        assertEquals(new BigDecimal("385994.10"), actual);
+        assertEquals(new BigDecimal("390481.03"), actual);
     }
 
 

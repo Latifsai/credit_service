@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,14 +35,14 @@ public class CheckUnpaidPaymentsBelongsCreditService {
         log.info("Check unpaid payments belongs credit with ID: {}", creditID);
         return unpaid.stream()
                 .map(util::convertEntityToPaymentResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<PaymentSchedule> findUnpaidPaymentByAccount(Account account) {
         List<PaymentSchedule> payments = belongsToTheAccountPaymentsListService.findAllByAccount(account);
         return payments.stream()
                 .filter(paymentSchedule -> !paymentSchedule.isPaid())
-                .toList();
+                .collect(Collectors.toList());
     }
 
 

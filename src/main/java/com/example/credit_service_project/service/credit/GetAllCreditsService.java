@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,6 @@ public class GetAllCreditsService {
         log.info("Get a list of credits");
         return repository.findAll().stream()
                 .map(util::convertToCreditResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

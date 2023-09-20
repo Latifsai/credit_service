@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +25,8 @@ public class GetAllAccountsService {
         log.info("Get a list of accounts");
         return repository.findAll().stream()
                 .map(util::convertAccountToAddResponse)
-                .toList();
+                .collect(Collectors.toList());
+
     }
 
     public List<Account> findAllAccounts() {

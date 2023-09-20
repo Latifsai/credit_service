@@ -28,12 +28,7 @@ public class LoggingConfiguration {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         assert attributes != null;
         HttpServletRequest request = attributes.getRequest();
-        log.info("""
-                        NEW REQUEST:
-                        IP : {}
-                        URL : {}
-                        HTTP_METHOD : {}
-                        CONTROLLER_METHOD : {}.{}""",
+        log.info(" NEW REQUEST:\n IP : {}\n URL : {}\n HTTP_METHOD : {}\n CONTROLLER_METHOD : {}.{}",
                 request.getRemoteAddr(),
                 request.getRequestURL().toString(),
                 request.getMethod(),
@@ -43,19 +38,14 @@ public class LoggingConfiguration {
 
     @Before("serviceLog()")
     public void doBeforeServiceLog(JoinPoint joinPoint) {
-        log.info("""
-                        RUN SERVICE:
-                        SERVICE_METHOD: {}.{}""",
+        log.info(" RUN SERVICE: \n SERVICE_METHOD: {}.{}",
                 joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
     }
 
     @AfterReturning(returning = "returnObject", pointcut = "controllerLog()")
     public void doAfterReturn(Object returnObject) {
         if(log.isInfoEnabled()){
-            log.info("""
-                Return value: {}
-                END OF REQUEST!  
-                """, returnObject);
+            log.info(" Return value: {}\n END OF REQUEST! ", returnObject);
         }
     }
 

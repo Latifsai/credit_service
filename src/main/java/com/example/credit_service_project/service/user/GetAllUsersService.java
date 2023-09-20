@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,6 @@ public class GetAllUsersService {
         log.info("Get a list of users");
         return repository.findAll().stream()
                 .map(util::convertUserToResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

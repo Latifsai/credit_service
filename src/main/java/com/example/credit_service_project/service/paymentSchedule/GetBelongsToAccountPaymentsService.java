@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +32,7 @@ public class GetBelongsToAccountPaymentsService {
 
         List<PaymentResponseDTO> list = listOfBelongsToAccountPayments.stream()
                 .map(util::convertEntityToPaymentResponse)
-                .toList();
+                .collect(Collectors.toList());
 
         log.info("Get belongs to account payments");
         return new GetBelongsPaymentsResponse(account.getId(),

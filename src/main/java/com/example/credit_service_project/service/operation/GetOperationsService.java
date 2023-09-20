@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +29,6 @@ public class GetOperationsService {
         log.info("Get a list of operations");
         return repository.findAllByAccount(account).stream()
                 .map(util::convertOperationToResponseDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

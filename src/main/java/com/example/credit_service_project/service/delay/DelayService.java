@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -35,6 +36,6 @@ public class DelayService {
 
         return repository.findAllByCreditHistory(creditHistory).stream()
                 .map(util::convertToResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

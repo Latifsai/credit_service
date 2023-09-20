@@ -26,7 +26,7 @@ public class GetAllCreditOrdersService {
         log.info("Get a list of credit order");
         return getOrders().stream()
                 .map(util::convertToResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<CreditOrder> getOrders() {

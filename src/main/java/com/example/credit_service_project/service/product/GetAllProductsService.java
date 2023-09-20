@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -23,6 +24,6 @@ public class GetAllProductsService {
         log.info("Get a list of Products");
         return repository.findAll().stream()
                 .map(util::toResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -44,7 +45,7 @@ public class CreditHistoryService {
         log.info("Get all credit histories");
         return repository.findAll().stream()
                 .map(util::convertEntityToResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 
 }

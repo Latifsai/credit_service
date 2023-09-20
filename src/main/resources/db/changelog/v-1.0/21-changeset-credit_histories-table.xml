@@ -83,10 +83,6 @@
 
             INSERT INTO credit_histories
             VALUES (UNHEX(REPLACE('ce84de6f-689b-4c6d-bdf1-d4be229d8597','-', '')), 'WELL', UNHEX(REPLACE('5b6e86c9-7f2e-437e-8a6b-a74b988fe72c', '-', '')));
-
-            INSERT INTO credit_histories
-            VALUES (UNHEX(REPLACE('ff7b6c33-bbfc-4e6f-83c5-68f9a676cfb5','-', '')), 'WELL', UNHEX(REPLACE('63ba5724-4e60-4271-970c-acc2b9e9d18b', '-', '')));
-
         </sql>
     </changeSet>
 
