@@ -16,9 +16,9 @@ public class RoleService {
     private final RoleRepository repository;
 
     /**
-     * This method will be used to find the ROLE
-     * @param roleName that means MANAGER or CLIENT
-     * @return ROLE
+     * This method will be used to find the Role. Parameters or MANAGER either CLIENT
+     * @param roleName String
+     * @return Role
      */
     public Role findByRoleName(String roleName) {
         return repository.findByName(roleName.toUpperCase())

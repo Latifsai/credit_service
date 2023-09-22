@@ -128,7 +128,7 @@ class PaymentProcessingServiceTest {
         when(getAllAccountsService.findAllAccounts()).thenReturn(Collections.singletonList(account));
         when(creditSearchService.searchCreditByAccountAndStatus(account, ACTIVE)).thenReturn(credit);
         when(getUnpaidPaymentsService.findUnpaidPaymentByAccount(account)).thenReturn(Collections.singletonList(paymentSchedule));
-        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 13)).thenReturn(BigDecimal.valueOf(15));
+        when(util.calculateFine(credit.getInterestRate(), paymentSchedule.getMonthlyPayment(), 15)).thenReturn(BigDecimal.valueOf(15));
 
         List<OperationResponseDTO> result = paymentProcessingService.handlePayments();
 
@@ -137,7 +137,7 @@ class PaymentProcessingServiceTest {
         verify(getAllAccountsService, times(1)).findAllAccounts();
         verify(creditSearchService, times(5)).searchCreditByAccountAndStatus(account, ACTIVE);
         verify(util, times(1)).calculateFine(credit.getInterestRate(),
-                paymentSchedule.getMonthlyPayment(), 13);
+                paymentSchedule.getMonthlyPayment(), 15);
     }
 
     @Test

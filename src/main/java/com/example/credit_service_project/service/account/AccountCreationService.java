@@ -26,6 +26,12 @@ public class AccountCreationService {
     private final CreditHistoryService creditHistoryService;
     private final AccountUtil util;
 
+    /**
+     * In this method a request arrives and the account data is created and saved in the database
+     * @param request CreateAccountRequestDTO
+     * @return AccountResponseDTO
+     */
+
     public AccountResponseDTO createAccount(CreateAccountRequestDTO request) {
         User user = searchClientService.findUserById(request.getClientId());
         Account account = util.convertAddRequestToAccount(request, user);

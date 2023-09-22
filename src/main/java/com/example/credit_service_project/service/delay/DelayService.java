@@ -27,10 +27,16 @@ public class DelayService {
     public DelayResponse addNewDelay(BigDecimal fine, Account account) {
         Delay delay = util.createEntity(fine);
         delay.setCreditHistory(account.getCreditHistory());
+
         Delay saved = repository.save(delay);
         return util.convertToResponse(saved);
     }
 
+    /**
+     * In this method will be found all Delays belongs to CreditHistory
+     * @param creditHistoryID UUID
+     * @return List<DelayResponse>
+     */
     public List<DelayResponse> findAllDelaysBelongsToCreditHistory(UUID creditHistoryID) {
         CreditHistory creditHistory = service.findByIDForService(creditHistoryID);
 

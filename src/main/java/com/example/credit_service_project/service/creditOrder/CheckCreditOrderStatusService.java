@@ -16,6 +16,11 @@ import java.util.UUID;
 public class CheckCreditOrderStatusService {
     private final CreditOrderSearchService searchService;
 
+    /**
+     * The method will check the number of days that the Order is being processed
+     * @param id UUID
+     * @return CheckCreditOrderStatusResponse
+     */
     public CheckCreditOrderStatusResponse checkOrderStatus(UUID id) {
         CreditOrder order = searchService.findById(id);
         Integer amountDaysInProcessing = (int) ChronoUnit.DAYS.between(order.getCreationDate(), LocalDate.now());

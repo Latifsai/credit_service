@@ -23,6 +23,11 @@ public class CardSearchService {
     private final CardRepository repository;
     private final CardUtil utils;
 
+    /**
+     * Method upon id will find a Card and convert it to response
+     * @param id UUID
+     * @return CardResponseDTO
+     */
     @Transactional(readOnly = true)
     public CardResponseDTO searchCard(UUID id) {
         Card card = findCardById(id);
@@ -34,6 +39,12 @@ public class CardSearchService {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE));
     }
+
+    /**
+     * Here will be searched the Card by belongs Account
+     * @param account Account
+     * @return Card
+     */
 
     public Card findByAccount(Account account) {
         return repository.findByAccount(account).stream()

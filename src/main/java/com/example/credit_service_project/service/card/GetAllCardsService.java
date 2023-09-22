@@ -19,6 +19,10 @@ public class GetAllCardsService {
     private final CardRepository repository;
     private final CardUtil util;
 
+    /**
+     * Method get all card in database
+     * @return List<CardResponseDTO>
+     */
     @Transactional(readOnly = true)
     public List<CardResponseDTO> getAllCards() {
         log.info("Get a list of cards");

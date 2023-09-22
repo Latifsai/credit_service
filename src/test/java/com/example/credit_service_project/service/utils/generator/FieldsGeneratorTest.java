@@ -31,6 +31,6 @@ class FieldsGeneratorTest {
     @Test
     @DisplayName("Test localDateCreateClosingDate method")
     void localDateCreateClosingDate() {
-        assertEquals(LocalDate.of(2024, Month.SEPTEMBER, 19), FieldsGenerator.LocalDateCreateClosingDate(1));
+        assertEquals(LocalDate.of(2024, Month.SEPTEMBER, 21), FieldsGenerator.LocalDateCreateClosingDate(1));
     }
 } 

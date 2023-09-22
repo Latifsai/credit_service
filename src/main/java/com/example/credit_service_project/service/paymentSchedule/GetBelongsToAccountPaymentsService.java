@@ -25,6 +25,11 @@ public class GetBelongsToAccountPaymentsService {
     private final PaymentScheduleRepository repository;
     private final AccountSearchService accountSearchService;
 
+    /**
+     * In this method will be found all Payments belong to Account
+     * @param request PaymentsBelongsToAccountRequest
+     * @return GetBelongsPaymentsResponse
+     */
     @Transactional(readOnly = true)
     public GetBelongsPaymentsResponse getBelongsToAccountPayments(PaymentsBelongsToAccountRequest request) {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());

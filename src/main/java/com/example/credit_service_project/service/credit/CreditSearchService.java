@@ -15,6 +15,12 @@ public class CreditSearchService {
 
     private final CreditRepository repository;
 
+    /**
+     * The method finds active loans belonging to an account
+     * @param account Account
+     * @param status CreditStatus
+     * @return Credit
+     */
     public Credit searchCreditByAccountAndStatus(Account account, CreditStatus status) {
         return repository.findByAccountAndCreditStatus(account, status).stream()
                 .findFirst()

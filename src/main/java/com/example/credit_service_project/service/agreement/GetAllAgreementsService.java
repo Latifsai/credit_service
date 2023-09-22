@@ -19,6 +19,11 @@ public class GetAllAgreementsService {
     private final AgreementUtil util;
     private final AgreementRepository repository;
 
+    /**
+     * In this method will be found all Agreements in database
+     * @return List<AgreementResponse>
+     */
+
     @Transactional(readOnly = true)
     public List<AgreementResponse> getAllAgreements() {
         log.info("Get a list of agreements");

@@ -20,6 +20,10 @@ public class GetAllAccountsService {
     private final AccountRepository repository;
     private final AccountUtil util;
 
+    /**
+     * Here will be gotten all Accounts in database and convert as response
+     * @return List<AccountResponseDTO>
+     */
     @Transactional(readOnly = true)
     public List<AccountResponseDTO> getAllAccounts() {
         log.info("Get a list of accounts");

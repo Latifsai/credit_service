@@ -22,6 +22,11 @@ public class CreditOrderCreateService {
     private final AccountSearchService accountSearchService;
     private final CreditOrderUtil util;
 
+    /**
+     * Here upon request will be created Order
+     * @param request CreateCreditOrderRequestDTO
+     * @return CreateCreditOrderResponseDTO
+     */
     public CreateCreditOrderResponseDTO createCreditOrder(CreateCreditOrderRequestDTO request) {
         Product product = searchProductService.findById(request.getProductID());
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());

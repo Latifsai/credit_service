@@ -26,6 +26,11 @@ public class CheckUnpaidPaymentsBelongsCreditService {
     private final GetBelongsToAccountPaymentsService belongsToTheAccountPaymentsListService;
     private final PaymentScheduleUtil util;
 
+    /**
+     * In this method will be found a Credit by ID and all unpaid payments belongs the Credit
+     * @param creditID UUID
+     * @return List<PaymentResponseDTO>
+     */
     @Transactional(readOnly = true)
     public List<PaymentResponseDTO> checkUnpaidPaymentsBelongsCredit(UUID creditID) {
         Credit credit = repository.findById(creditID)
@@ -38,6 +43,11 @@ public class CheckUnpaidPaymentsBelongsCreditService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * In this method will find all unpaid payment by Account
+     * @param account Account
+     * @return List<PaymentSchedule>
+     */
     public List<PaymentSchedule> findUnpaidPaymentByAccount(Account account) {
         List<PaymentSchedule> payments = belongsToTheAccountPaymentsListService.findAllByAccount(account);
         return payments.stream()

@@ -20,6 +20,11 @@ public class JwtTokenProvider {
         this.jwtLifetime = jwtLifetime;
     }
 
+    /**
+     * Here will be created a token upon username
+     * @param username String
+     * @return String
+     */
     public String generateToken(String username) {
         Date issudeDate = new Date();
         Date expiredDate = new Date(issudeDate.getTime() + jwtLifetime.toMillis());
@@ -43,6 +48,11 @@ public class JwtTokenProvider {
                 .getBody();
     }
 
+    /**
+     * The method will validate the token. If token is not valid then throws the InvalidJwtException
+     * @param authToken String
+     * @return boolean
+     */
     public boolean validateToken(String authToken) {
         try {
             Jwts.parser()

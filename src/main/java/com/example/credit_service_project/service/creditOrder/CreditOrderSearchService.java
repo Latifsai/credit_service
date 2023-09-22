@@ -21,6 +21,11 @@ public class CreditOrderSearchService {
     private final CreditOrderRepository repository;
     private final CreditOrderUtil util;
 
+    /**
+     * In this method find by ID a CreditOrder
+     * @param id UUID
+     * @return CreditOrderResponseDTO
+     */
     @Transactional(readOnly = true)
     public CreditOrderResponseDTO searchCreditOrder(UUID id) {
         CreditOrder creditOrder = findById(id);

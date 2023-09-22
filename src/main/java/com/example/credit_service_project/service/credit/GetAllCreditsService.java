@@ -19,6 +19,10 @@ public class GetAllCreditsService {
     private final CreditRepository repository;
     private final CreditUtil util;
 
+    /**
+     * In this method will be found all Credits and convert to response
+     * @return List<CreditResponseDTO>
+     */
     @Transactional(readOnly = true)
     public List<CreditResponseDTO> getAllCredits() {
         log.info("Get a list of credits");

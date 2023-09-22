@@ -20,6 +20,12 @@ public class AgreementCreateService {
     private final CreditOrderSearchService searchCreditOrderService;
     private final AgreementUtil util;
 
+
+    /**
+     * The method will get data from the request and create an entity
+     * @param request CreateAgreementRequest
+     * @return AgreementResponse
+     */
     public AgreementResponse createAgreement(CreateAgreementRequest request) {
         CreditOrder creditOrder = searchCreditOrderService.findById(request.getCreditOrderID());
         Agreement agreement = util.convertCreateRequestToEntity(request, creditOrder);

@@ -24,6 +24,11 @@ public class GetPreliminaryCalculationOfProduct {
     private final ProductSearchService searchService;
     private final PaymentScheduleUtil util;
 
+    /**
+     * The method first calculates the cost of credit payments based on the received credit term, amount and interest rate
+     * @param request PreliminaryCalculationRequest
+     * @return List<PreliminaryCalculationResponse>
+     */
     public List<PreliminaryCalculationResponse> getPreliminaryCalculation(PreliminaryCalculationRequest request) {
         List<PreliminaryCalculationResponse> responses = new ArrayList<>();
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());

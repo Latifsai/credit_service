@@ -20,6 +20,12 @@ public class CardCreateService {
     private final AccountSearchService accountSearchService;
     private final CardUtil util;
 
+
+    /**
+     * In this method upon request will be created new Card
+     * @param request CreateCardRequestDTO
+     * @return CardResponseDTO
+     */
     public CardResponseDTO createCard(CreateCardRequestDTO request) {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         Card card = util.convertCreateRequestToEntity(request, account);

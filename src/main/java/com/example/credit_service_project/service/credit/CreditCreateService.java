@@ -39,6 +39,11 @@ public class CreditCreateService {
     private final AgreementCreateService updateAgreementService;
     private final PaymentScheduleGeneratorService paymentScheduleGeneratorService;
 
+    /**
+     * Method creates a new loan based on the data from the request, and also creates a payment schedule for the entire loan term
+     * @param request CreateCreditRequestDTO
+     * @return CreateCreditDTOResponse
+     */
     public CreateCreditDTOResponse createCredit(CreateCreditRequestDTO request) {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
 
@@ -64,7 +69,10 @@ public class CreditCreateService {
         return repository.save(credit);
     }
 
-
+    /**
+     * The method checks whether the account has active loans
+     * @param account Account
+     */
     private void checkActiveCredit(Account account) {
         if (!account.getCredits().isEmpty()) {
             List<Credit> getActiveCreditBelongsAccounts = repository.findByAccountAndCreditStatus(account, ACTIVE);

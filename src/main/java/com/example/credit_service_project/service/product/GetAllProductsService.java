@@ -19,6 +19,10 @@ public class GetAllProductsService {
     private final ProductRepository repository;
     private final ProductUtil util;
 
+    /**
+     * Here will be returned all products in database
+     * @return List<ProductResponseDTO>
+     */
     @Transactional(readOnly = true)
     public List<ProductResponseDTO> getAllProducts() {
         log.info("Get a list of Products");

@@ -22,6 +22,11 @@ public class AccountSearchService {
     private final AccountRepository repository;
     private final AccountUtil util;
 
+    /**
+     * In this method upon request will be found Account
+     * @param request SearchAccountRequest
+     * @return AccountResponseDTO
+     */
     @Transactional(readOnly = true)
     public AccountResponseDTO searchAccount(SearchAccountRequest request) {
         Account account = findAccountByIdOrNumber(request.getId(), request.getAccountNumber());

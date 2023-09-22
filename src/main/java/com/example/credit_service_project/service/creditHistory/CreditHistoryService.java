@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -23,13 +24,24 @@ public class CreditHistoryService {
     private final CreditHistoryRepository repository;
     private final CreditHistoryUtil util;
 
+    /**
+     * Method upon Account will create CreditHistory belongs this Account
+     * @param account Account
+     * @return CreditHistoryResponse
+     */
     public CreditHistoryResponse createHistory(Account account) {
         CreditHistory creditHistory = util.createHistoryFromAccount(account);
+        creditHistory.setDelays(new ArrayList<>());
         CreditHistory saved = repository.save(creditHistory);
         log.info("Create credit history for account: {}", account.getAccountNumber());
         return util.convertEntityToResponse(saved);
     }
 
+    /**
+     * Here will be found CreditHistory by ID
+     * @param id UUID
+     * @return CreditHistoryResponse
+     */
     public CreditHistoryResponse findByID(UUID id) {
         CreditHistory history = findByIDForService(id);
         log.info("Find credit history with status: {}", history.getStatus());

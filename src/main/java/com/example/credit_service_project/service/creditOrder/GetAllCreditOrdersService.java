@@ -21,6 +21,10 @@ public class GetAllCreditOrdersService {
     private final CreditOrderRepository repository;
     private final CreditOrderUtil util;
 
+    /**
+     * Method get all Orders in database and convert to Response
+     * @return List
+     */
     @Transactional(readOnly = true)
     public List<CreditOrderResponseDTO> getAllCreditOrders() {
         log.info("Get a list of credit order");
@@ -32,6 +36,11 @@ public class GetAllCreditOrdersService {
     public List<CreditOrder> getOrders() {
         return repository.findAll();
     }
+
+    /**
+     * Here will be found all Orders with status IN_REVIEW
+     * @return List
+     */
     public List<CreditOrder> getOrdersIn_Review() {
         return repository.findAll().stream()
                 .filter(creditOrder -> creditOrder.getCreditOrderStatus().equals(CreditOrderStatus.IN_REVIEW))

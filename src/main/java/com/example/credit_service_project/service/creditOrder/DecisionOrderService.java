@@ -26,6 +26,11 @@ public class DecisionOrderService {
     private final CreditOrderRepository repository;
     private final CreditOrderUtil util;
 
+    /**
+     *In the method all orders that are under consideration are found and checks that if the number of days is 5 or more,
+     * then a decision is issued to approve the application
+     * @return List<CreditOrderResponseDTO>
+     */
     @Scheduled(cron = "0 0 15 * * *")
     public List<CreditOrderResponseDTO> acceptOrder() {
         List<CreditOrder> orders = getAllOrdersService.getOrdersIn_Review();

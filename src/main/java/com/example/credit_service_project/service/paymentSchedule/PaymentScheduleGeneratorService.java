@@ -21,6 +21,15 @@ public class PaymentScheduleGeneratorService {
     private final PaymentScheduleUtil util;
     private final PaymentScheduleRepository repository;
 
+    /**
+     *In the method, based on data on the loan term, amount, interest rate and amount,
+     *  the full range of payments will be calculated, taking into account currency conversion and interest rates
+     * @param credit Credit
+     * @param product Product
+     * @param account Account
+     * @param agreement Agreement
+     * @return List<PaymentResponseDTO>
+     */
     public List<PaymentResponseDTO> generatePaymentSchedule(Credit credit, Product product, Account account, Agreement agreement) {
 
         List<PaymentResponseDTO> responses = new ArrayList<>();

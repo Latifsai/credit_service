@@ -51,6 +51,14 @@ public class PaymentProcessingService {
     private final CreditSearchService creditSearchService;
     private final DelayService delayService;
 
+    /**
+     * The method implements automatic payment.
+     * It collects data on payments from all accounts and, if the date matches, debits money from the balance,
+     * if the payment does not go through, then a penalty will be charged.
+     * If the payment is not paid, a penalty will be charged and the data will be added to the credit history,
+     * monitoring of late payments will be carried out for one year
+     * @return List<OperationResponseDTO>
+     */
     @Scheduled(cron = "0 0 23 * * *")
     public List<OperationResponseDTO> handlePayments() {
         LocalDate currentDate = LocalDate.now();
@@ -81,14 +89,14 @@ public class PaymentProcessingService {
                     updateAccountService.saveUpdatedAccount(accountAfterOperation);
                     saveService.save(paymentSchedule);
                     createCardService.saveCard(card);
-                }
+                } else if (!paymentSchedule.isPaid() && paymentSchedule.getPaymentDate().equals(currentDate.minusYears(1))) {
 
-                if (!getCredit(account).getFine().equals(BigDecimal.ZERO) && checkIfAccountBalanceLessThanPayment(account, paymentSchedule)) {
-                    handleDelayedFine(paymentSchedule, account);
-                } else if (account.getBalance().compareTo(paymentSchedule.getMonthlyPayment()) >= 0) {
-                    handleSuccessfulPayment(donePaymentsList, account, paymentSchedule);
+                    if (!getCredit(account).getFine().equals(BigDecimal.ZERO) && checkIfAccountBalanceLessThanPayment(account, paymentSchedule)) {
+                        handleDelayedFine(paymentSchedule, account);
+                    } else if (account.getBalance().compareTo(paymentSchedule.getMonthlyPayment()) >= 0) {
+                        handleSuccessfulPayment(donePaymentsList, account, paymentSchedule);
+                    }
                 }
-
             }
 
             if (account.getUnpaidCreditSum().compareTo(BigDecimal.ZERO) == 0) {
@@ -132,6 +140,7 @@ public class PaymentProcessingService {
     }
 
     private void handleSuccessfulPayment(List<OperationResponseDTO> donePaymentsList, Account account, PaymentSchedule paymentSchedule) {
+        paymentSchedule.setPaid(true);
         Operation operation = util.convertDataToOperationForPayment(account, paymentSchedule);
         Operation savedOperation = saveOperation(operation);
         donePaymentsList.add(util.convertOperationToResponseDTO(savedOperation));

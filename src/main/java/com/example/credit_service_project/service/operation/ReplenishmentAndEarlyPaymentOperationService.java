@@ -48,6 +48,12 @@ public class ReplenishmentAndEarlyPaymentOperationService {
     private final AgreementCreateService addAgreementService;
     private final CreditSearchService creditSearchService;
 
+    /**
+     * The method implements operations, if the operation is a replenishment, then the deposited amount is cleared to the bank
+     * Or the operation may be an early repayment of the loan. In this case, if the amount matches the parameter, then the loan is closed
+     * @param request PaymentsOperationRequest
+     * @return OperationResponseDTO
+     */
     public OperationResponseDTO performOperation(PaymentsOperationRequest request) {
         if (request.getSum().intValueExact() < 0) {
             throw new OperationException(ErrorsMessage.NEGATIVE_SUM_EXCEPTION);

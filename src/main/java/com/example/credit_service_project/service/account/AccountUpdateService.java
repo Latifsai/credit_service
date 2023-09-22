@@ -20,6 +20,12 @@ public class AccountUpdateService {
     private final AccountCreationService accountCreationService;
     private final AccountUtil util;
 
+    /**
+     * In this method upon request will be found Account and if its status is active it will be updated
+     * @param request UpdateAccountRequest
+     * @return AccountResponseDTO
+     */
+
     public AccountResponseDTO updateAccount(UpdateAccountRequest request) {
         Account accountToFind = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());
         if (accountToFind.getStatus().equals(AccountStatus.ACTIVE)) {
