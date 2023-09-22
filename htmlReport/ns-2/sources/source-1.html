@@ -1,0 +1,170 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JwtRequestFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.configuration</a>
+</div>
+
+<h1>Coverage Summary for Class: JwtRequestFilter (com.example.credit_service_project.configuration)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JwtRequestFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    19%
+  </span>
+  <span class="absValue">
+    (4/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.configuration;
+&nbsp;
+&nbsp;import com.example.credit_service_project.service.auth.JwtTokenProvider;
+&nbsp;import com.example.credit_service_project.service.user.CustomUserDetailService;
+&nbsp;import jakarta.servlet.FilterChain;
+&nbsp;import jakarta.servlet.ServletException;
+&nbsp;import jakarta.servlet.http.HttpServletRequest;
+&nbsp;import jakarta.servlet.http.HttpServletResponse;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+&nbsp;import org.springframework.security.core.Authentication;
+&nbsp;import org.springframework.security.core.context.SecurityContextHolder;
+&nbsp;import org.springframework.security.core.userdetails.UserDetails;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;import org.springframework.util.StringUtils;
+&nbsp;import org.springframework.web.filter.OncePerRequestFilter;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;@Component
+<b class="fc">&nbsp;@Slf4j</b>
+&nbsp;public class JwtRequestFilter extends OncePerRequestFilter {
+&nbsp;    private final JwtTokenProvider jwtTokenProvider;
+&nbsp;    private final CustomUserDetailService customUserDetailService;
+&nbsp;
+<b class="fc">&nbsp;    public JwtRequestFilter(JwtTokenProvider jwtTokenProvider, CustomUserDetailService customUserDetailService) {</b>
+<b class="fc">&nbsp;        this.jwtTokenProvider = jwtTokenProvider;</b>
+<b class="fc">&nbsp;        this.customUserDetailService = customUserDetailService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+&nbsp;                                    FilterChain filterChain) throws ServletException, IOException {
+&nbsp;
+&nbsp;        try {
+&nbsp;
+<b class="nc">&nbsp;            if (request.getRequestURI().startsWith(&quot;/swagger-ui&quot;) || request.getRequestURI().startsWith(&quot;/v3/api-docs&quot;)) {</b>
+<b class="nc">&nbsp;                filterChain.doFilter(request, response);</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String jwt = getJwtFromRequest(request);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (StringUtils.hasText(jwt) &amp;&amp; jwtTokenProvider.validateToken(jwt)) {</b>
+<b class="nc">&nbsp;                String username = jwtTokenProvider.getUsername(jwt);</b>
+<b class="nc">&nbsp;                UserDetails userDetails = customUserDetailService.loadUserByUsername(username);</b>
+<b class="nc">&nbsp;                Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null,</b>
+<b class="nc">&nbsp;                        userDetails.getAuthorities());</b>
+<b class="nc">&nbsp;                SecurityContextHolder.getContext().setAuthentication(authentication);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        }catch (Exception e) {</b>
+<b class="nc">&nbsp;            log.error(&quot;Could not set user in security context&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;            filterChain.doFilter(request, response);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private String getJwtFromRequest (HttpServletRequest request){
+<b class="nc">&nbsp;            String bearerToken = request.getHeader(&quot;Authorization&quot;);</b>
+<b class="nc">&nbsp;            if (StringUtils.hasText(bearerToken) &amp;&amp; bearerToken.startsWith(&quot;Bearer &quot;)) {</b>
+<b class="nc">&nbsp;                return bearerToken.substring(7);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 14:12</div>
+</div>
+</body>
+</html>

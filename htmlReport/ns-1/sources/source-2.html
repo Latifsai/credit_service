@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AgreementUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.service.utils</a>
+</div>
+
+<h1>Coverage Summary for Class: AgreementUtil (com.example.credit_service_project.service.utils)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AgreementUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.service.utils;
+&nbsp;
+&nbsp;import com.example.credit_service_project.dto.agreementDTO.AgreementResponse;
+&nbsp;import com.example.credit_service_project.dto.agreementDTO.CreateAgreementRequest;
+&nbsp;import com.example.credit_service_project.entity.Agreement;
+&nbsp;import com.example.credit_service_project.entity.CreditOrder;
+&nbsp;import com.example.credit_service_project.entity.enums.CreditOrderStatus;
+&nbsp;import com.example.credit_service_project.service.utils.generator.FieldsGenerator;
+&nbsp;import com.example.credit_service_project.validation.ErrorsMessage;
+&nbsp;import com.example.credit_service_project.validation.exceptions.AgreementException;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class AgreementUtil {</b>
+&nbsp;    public Agreement convertCreateRequestToEntity(CreateAgreementRequest request, CreditOrder order) {
+&nbsp;
+<b class="fc">&nbsp;        if (!order.getCreditOrderStatus().equals(CreditOrderStatus.APPROVED)) {</b>
+<b class="fc">&nbsp;            throw new AgreementException(ErrorsMessage.AGREEMENT_CREATE_MESSAGE);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Agreement agreement = new Agreement();</b>
+<b class="fc">&nbsp;        agreement.setNumber(FieldsGenerator.generateRandomNumber(request.getNumberLength()));</b>
+<b class="fc">&nbsp;        agreement.setAgreementDate(LocalDate.now());</b>
+<b class="fc">&nbsp;        agreement.setActive(true);</b>
+<b class="fc">&nbsp;        agreement.setCreditOrderNumber(order.getNumber());</b>
+<b class="fc">&nbsp;        return agreement;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AgreementResponse convertToResponse(Agreement agreement) {
+<b class="fc">&nbsp;        return new AgreementResponse(</b>
+<b class="fc">&nbsp;                agreement.getId(),</b>
+<b class="fc">&nbsp;                agreement.getNumber(),</b>
+<b class="fc">&nbsp;                agreement.getAgreementDate(),</b>
+<b class="fc">&nbsp;                agreement.getTerminationDate(),</b>
+<b class="fc">&nbsp;                agreement.isActive()</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 11:28</div>
+</div>
+</body>
+</html>

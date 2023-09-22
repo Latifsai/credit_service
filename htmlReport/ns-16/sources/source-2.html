@@ -1,0 +1,180 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CreditCreateService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.service.credit</a>
+</div>
+
+<h1>Coverage Summary for Class: CreditCreateService (com.example.credit_service_project.service.credit)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreditCreateService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    10,5%
+  </span>
+  <span class="absValue">
+    (2/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.service.credit;
+&nbsp;
+&nbsp;import com.example.credit_service_project.dto.creditDTO.CreateCreditDTOResponse;
+&nbsp;import com.example.credit_service_project.dto.creditDTO.CreateCreditRequestDTO;
+&nbsp;import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
+&nbsp;import com.example.credit_service_project.entity.Account;
+&nbsp;import com.example.credit_service_project.entity.Agreement;
+&nbsp;import com.example.credit_service_project.entity.Credit;
+&nbsp;import com.example.credit_service_project.entity.CreditOrder;
+&nbsp;import com.example.credit_service_project.repository.CreditRepository;
+&nbsp;import com.example.credit_service_project.service.account.AccountSearchService;
+&nbsp;import com.example.credit_service_project.service.account.AccountUpdateService;
+&nbsp;import com.example.credit_service_project.service.agreement.AgreementCreateService;
+&nbsp;import com.example.credit_service_project.service.agreement.SearchAgreementService;
+&nbsp;import com.example.credit_service_project.service.creditOrder.CreditOrderSearchService;
+&nbsp;import com.example.credit_service_project.service.paymentSchedule.PaymentScheduleGeneratorService;
+&nbsp;import com.example.credit_service_project.service.utils.CreditUtil;
+&nbsp;import com.example.credit_service_project.validation.ErrorsMessage;
+&nbsp;import com.example.credit_service_project.validation.exceptions.IsAlreadyExistException;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static com.example.credit_service_project.entity.enums.CreditStatus.ACTIVE;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+<b class="fc">&nbsp;@Slf4j</b>
+&nbsp;public class CreditCreateService {
+&nbsp;
+&nbsp;    private final CreditRepository repository;
+&nbsp;    private final CreditUtil util;
+&nbsp;    private final AccountSearchService accountSearchService;
+&nbsp;    private final SearchAgreementService searchAgreementService;
+&nbsp;    private final CreditOrderSearchService searchCreditOrderService;
+&nbsp;    private final AccountUpdateService updateAccountService;
+&nbsp;    private final AgreementCreateService updateAgreementService;
+&nbsp;    private final PaymentScheduleGeneratorService paymentScheduleGeneratorService;
+&nbsp;
+&nbsp;    public CreateCreditDTOResponse createCredit(CreateCreditRequestDTO request) {
+<b class="nc">&nbsp;        Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());</b>
+&nbsp;
+<b class="nc">&nbsp;        checkActiveCredit(account);</b>
+&nbsp;
+<b class="nc">&nbsp;        Agreement agreement = searchAgreementService.findById(request.getAgreementID());</b>
+<b class="nc">&nbsp;        CreditOrder creditOrder = searchCreditOrderService.findById(request.getCreditOrderID());</b>
+&nbsp;
+<b class="nc">&nbsp;        Credit credit = util.createCreditFromData(request, account, agreement, creditOrder);</b>
+&nbsp;
+<b class="nc">&nbsp;        updateAccountService.saveUpdatedAccount(account);</b>
+<b class="nc">&nbsp;        updateAgreementService.saveAgreement(agreement);</b>
+<b class="nc">&nbsp;        Credit savedCredit = saveCredit(credit);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;PaymentResponseDTO&gt; list = paymentScheduleGeneratorService.generatePaymentSchedule(credit,</b>
+<b class="nc">&nbsp;                credit.getCreditOrder().getProduct(), account, agreement);</b>
+&nbsp;
+<b class="nc">&nbsp;        log.info(&quot;Create and save credit with ID: {}&quot;, credit.getId());</b>
+<b class="nc">&nbsp;        return util.convertResponse(savedCredit, list);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Credit saveCredit(Credit credit) {
+<b class="nc">&nbsp;        return repository.save(credit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private void checkActiveCredit(Account account) {
+<b class="nc">&nbsp;        if (!account.getCredits().isEmpty()) {</b>
+<b class="nc">&nbsp;            List&lt;Credit&gt; getActiveCreditBelongsAccounts = repository.findByAccountAndCreditStatus(account, ACTIVE);</b>
+<b class="nc">&nbsp;            if (getActiveCreditBelongsAccounts.size() == 1) {</b>
+<b class="nc">&nbsp;                throw new IsAlreadyExistException(ErrorsMessage.CREDIT_IS_ALREADY_EXIST_EXCEPTION_MESSAGE);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 14:12</div>
+</div>
+</body>
+</html>

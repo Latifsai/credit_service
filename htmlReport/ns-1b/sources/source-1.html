@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GetBelongsToAccountPaymentsService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.service.paymentSchedule</a>
+</div>
+
+<h1>Coverage Summary for Class: GetBelongsToAccountPaymentsService (com.example.credit_service_project.service.paymentSchedule)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GetBelongsToAccountPaymentsService</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18,2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GetBelongsToAccountPaymentsService$$SpringCGLIB$$0</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18,2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.service.paymentSchedule;
+&nbsp;
+&nbsp;import com.example.credit_service_project.dto.paymentDTO.GetBelongsPaymentsResponse;
+&nbsp;import com.example.credit_service_project.dto.paymentDTO.PaymentResponseDTO;
+&nbsp;import com.example.credit_service_project.dto.paymentDTO.PaymentsBelongsToAccountRequest;
+&nbsp;import com.example.credit_service_project.entity.Account;
+&nbsp;import com.example.credit_service_project.entity.PaymentSchedule;
+&nbsp;import com.example.credit_service_project.repository.PaymentScheduleRepository;
+&nbsp;import com.example.credit_service_project.service.account.AccountSearchService;
+&nbsp;import com.example.credit_service_project.service.utils.PaymentScheduleUtil;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import org.springframework.transaction.annotation.Transactional;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+<b class="fc">&nbsp;@Slf4j</b>
+&nbsp;public class GetBelongsToAccountPaymentsService {
+&nbsp;
+&nbsp;    private final PaymentScheduleUtil util;
+&nbsp;    private final PaymentScheduleRepository repository;
+&nbsp;    private final AccountSearchService accountSearchService;
+&nbsp;
+&nbsp;    @Transactional(readOnly = true)
+&nbsp;    public GetBelongsPaymentsResponse getBelongsToAccountPayments(PaymentsBelongsToAccountRequest request) {
+<b class="nc">&nbsp;        Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());</b>
+<b class="nc">&nbsp;        List&lt;PaymentSchedule&gt; listOfBelongsToAccountPayments = findAllByAccount(account);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;PaymentResponseDTO&gt; list = listOfBelongsToAccountPayments.stream()</b>
+<b class="nc">&nbsp;                .map(util::convertEntityToPaymentResponse)</b>
+<b class="nc">&nbsp;                .toList();</b>
+&nbsp;
+<b class="nc">&nbsp;        log.info(&quot;Get belongs to account payments&quot;);</b>
+<b class="nc">&nbsp;        return new GetBelongsPaymentsResponse(account.getId(),</b>
+<b class="nc">&nbsp;                account.getAccountNumber(), list);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;PaymentSchedule&gt; findAllByAccount(Account account) {
+<b class="nc">&nbsp;        return repository.findAllByAccount(account);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 14:12</div>
+</div>
+</body>
+</html>

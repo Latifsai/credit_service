@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EURToAnyGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.service.utils.generator</a>
+</div>
+
+<h1>Coverage Summary for Class: EURToAnyGenerator (com.example.credit_service_project.service.utils.generator)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EURToAnyGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82,4%
+  </span>
+  <span class="absValue">
+    (14/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.service.utils.generator;
+&nbsp;
+&nbsp;import org.jsoup.Jsoup;
+&nbsp;import org.jsoup.nodes.Document;
+&nbsp;import org.jsoup.nodes.Element;
+&nbsp;import org.jsoup.select.Elements;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+<b class="nc">&nbsp;public class EURToAnyGenerator {</b>
+&nbsp;
+&nbsp;    public static Map&lt;String, Double&gt; generateCurrencyMap() {
+<b class="fc">&nbsp;        Map&lt;String, Double&gt; currencyMap = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        String url = &quot;https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html&quot;;</b>
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            Document document = Jsoup.connect(url).get();</b>
+&nbsp;
+<b class="fc">&nbsp;            Elements rows = document.select(&quot;tbody tr&quot;);</b>
+<b class="fc">&nbsp;            for (Element row : rows) {</b>
+<b class="fc">&nbsp;                Elements columns = row.select(&quot;td&quot;);</b>
+<b class="fc">&nbsp;                if (columns.size() &gt;= 3) {</b>
+<b class="fc">&nbsp;                    String currencyCode = columns.get(0).text();</b>
+<b class="fc">&nbsp;                    double exchangeRate = Double.parseDouble(columns.get(2).text().replace(&quot;,&quot;, &quot;.&quot;));</b>
+<b class="fc">&nbsp;                    currencyMap.put(currencyCode, exchangeRate);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e.getMessage());</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        currencyMap.put(&quot;EUR&quot;, 1.0);</b>
+&nbsp;
+<b class="fc">&nbsp;        return currencyMap;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 14:12</div>
+</div>
+</body>
+</html>

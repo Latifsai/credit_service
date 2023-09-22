@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CreditOrderUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.service.utils</a>
+</div>
+
+<h1>Coverage Summary for Class: CreditOrderUtil (com.example.credit_service_project.service.utils)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreditOrderUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12,5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5,5%
+  </span>
+  <span class="absValue">
+    (3/55)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.service.utils;
+&nbsp;
+&nbsp;import com.example.credit_service_project.dto.creditOrderDTO.CreateCreditOrderRequestDTO;
+&nbsp;import com.example.credit_service_project.dto.creditOrderDTO.CreateCreditOrderResponseDTO;
+&nbsp;import com.example.credit_service_project.dto.creditOrderDTO.CreditOrderResponseDTO;
+&nbsp;import com.example.credit_service_project.dto.creditOrderDTO.UpdateCreditOrderRequestDTO;
+&nbsp;import com.example.credit_service_project.entity.Account;
+&nbsp;import com.example.credit_service_project.entity.CreditOrder;
+&nbsp;import com.example.credit_service_project.entity.Product;
+&nbsp;import com.example.credit_service_project.service.utils.calculators.CurrencyConverter;
+&nbsp;import com.example.credit_service_project.service.utils.generator.FieldsGenerator;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;import static com.example.credit_service_project.entity.enums.CreditOrderStatus.*;
+&nbsp;import static java.math.RoundingMode.HALF_EVEN;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class CreditOrderUtil {</b>
+<b class="fc">&nbsp;    private final Integer minPeriod = 12;</b>
+<b class="fc">&nbsp;    private final Integer maxPeriod = 120;</b>
+&nbsp;
+&nbsp;    public CreditOrder convertAddRequestToEntity(CreateCreditOrderRequestDTO request, Product product, Account account) {
+<b class="nc">&nbsp;        CreditOrder creditOrder = new CreditOrder();</b>
+<b class="nc">&nbsp;        creditOrder.setProduct(product);</b>
+<b class="nc">&nbsp;        creditOrder.setNumber(FieldsGenerator.generateRandomNumber(request.getNumberLength()));</b>
+<b class="nc">&nbsp;        creditOrder.setAmount(CurrencyConverter.convertCurrency(product, account));</b>
+<b class="nc">&nbsp;        creditOrder.setCreationDate(LocalDate.now());</b>
+<b class="nc">&nbsp;        creditOrder.setLastUpdateDate(creditOrder.getCreationDate());</b>
+<b class="nc">&nbsp;        creditOrder.setClientSalary(account.getUser().getSalary());</b>
+<b class="nc">&nbsp;        creditOrder.setPassiveIncome(account.getUser().getPassiveIncome());</b>
+<b class="nc">&nbsp;        creditOrder.setClientMonthlyExpenditure(account.getUser().getExpenses());</b>
+<b class="nc">&nbsp;        creditOrder.setMaxPeriodMonths(maxPeriod);</b>
+<b class="nc">&nbsp;        creditOrder.setMinPeriodMonths(minPeriod);</b>
+<b class="nc">&nbsp;        creditOrder.setCreditOrderStatus(IN_REVIEW);</b>
+<b class="nc">&nbsp;        creditOrder.setClientEmail(account.getUser().getEmail());</b>
+<b class="nc">&nbsp;        return creditOrder;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public CreateCreditOrderResponseDTO convertToAddResponse(CreditOrder order, Product product, Account account) {
+<b class="nc">&nbsp;        return CreateCreditOrderResponseDTO.builder()</b>
+<b class="nc">&nbsp;                .productID(product.getId())</b>
+<b class="nc">&nbsp;                .productName(product.getName())</b>
+<b class="nc">&nbsp;                .id(order.getId())</b>
+<b class="nc">&nbsp;                .number(order.getNumber())</b>
+<b class="nc">&nbsp;                .amount(order.getAmount())</b>
+<b class="nc">&nbsp;                .creationDate(order.getCreationDate())</b>
+<b class="nc">&nbsp;                .maxPeriodMonths(order.getMaxPeriodMonths())</b>
+<b class="nc">&nbsp;                .minPeriodMonths(order.getMinPeriodMonths())</b>
+<b class="nc">&nbsp;                .creditOrderStatus(order.getCreditOrderStatus())</b>
+<b class="nc">&nbsp;                .currency(account.getCurrency())</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public CreditOrderResponseDTO convertToResponse(CreditOrder order) {
+<b class="nc">&nbsp;        return new CreditOrderResponseDTO(</b>
+<b class="nc">&nbsp;                order.getId(),</b>
+<b class="nc">&nbsp;                order.getNumber(),</b>
+<b class="nc">&nbsp;                order.getAmount(),</b>
+<b class="nc">&nbsp;                order.getCreationDate(),</b>
+<b class="nc">&nbsp;                order.getMaxPeriodMonths(),</b>
+<b class="nc">&nbsp;                order.getMinPeriodMonths(),</b>
+<b class="nc">&nbsp;                order.getCreditOrderStatus()</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    public CreditOrder update(UpdateCreditOrderRequestDTO request, CreditOrder creditOrder) {
+&nbsp;
+<b class="nc">&nbsp;        if (request.getStatus() != null) creditOrder.setCreditOrderStatus(request.getStatus());</b>
+<b class="nc">&nbsp;        if (request.getClientSalary() != null) creditOrder.setClientSalary(request.getClientSalary());</b>
+<b class="nc">&nbsp;        if (request.getPassiveIncome() != null) creditOrder.setPassiveIncome(request.getPassiveIncome());</b>
+<b class="nc">&nbsp;        if (request.getClientMonthlyExpenditure() != null) {</b>
+<b class="nc">&nbsp;            creditOrder.setClientMonthlyExpenditure(request.getClientMonthlyExpenditure());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        creditOrder.setLastUpdateDate(LocalDate.now());</b>
+<b class="nc">&nbsp;        return creditOrder;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public CreditOrder considerationOfApplication(CreditOrder order) {
+<b class="nc">&nbsp;        if ((getMountPayment(order).compareTo(get30PercentFromIncome(order)) &gt;= 0</b>
+<b class="nc">&nbsp;                || order.getPassiveIncome().compareTo(new BigDecimal(&quot;1000&quot;)) &gt;= 0)) {</b>
+<b class="nc">&nbsp;            order.setCreditOrderStatus(APPROVED);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            order.setCreditOrderStatus(DECLINED);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        order.setLastUpdateDate(LocalDate.now());</b>
+<b class="nc">&nbsp;        return order;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private BigDecimal get30PercentFromIncome(CreditOrder order) {
+<b class="nc">&nbsp;        return ((order.getClientSalary().subtract(order.getClientMonthlyExpenditure()).add(order.getPassiveIncome()))</b>
+<b class="nc">&nbsp;                .multiply(new BigDecimal(&quot;30&quot;)))</b>
+<b class="nc">&nbsp;                .divide(new BigDecimal(&quot;100&quot;), 2, HALF_EVEN);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private BigDecimal getMountPayment(CreditOrder order) {
+<b class="nc">&nbsp;        return order.getAmount().divide(</b>
+<b class="nc">&nbsp;                (BigDecimal.valueOf(order.getMaxPeriodMonths()).divide(BigDecimal.valueOf(2), 0, HALF_EVEN)),</b>
+&nbsp;                2, HALF_EVEN);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 14:12</div>
+</div>
+</body>
+</html>

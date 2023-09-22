@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OperationSearchService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.service.operation</a>
+</div>
+
+<h1>Coverage Summary for Class: OperationSearchService (com.example.credit_service_project.service.operation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OperationSearchService</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28,6%
+  </span>
+  <span class="absValue">
+    (2/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">OperationSearchService$$SpringCGLIB$$0</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28,6%
+  </span>
+  <span class="absValue">
+    (2/7)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.service.operation;
+&nbsp;
+&nbsp;import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
+&nbsp;import com.example.credit_service_project.entity.Operation;
+&nbsp;import com.example.credit_service_project.repository.OperationRepository;
+&nbsp;import com.example.credit_service_project.service.utils.OperationUtils;
+&nbsp;import com.example.credit_service_project.validation.ErrorsMessage;
+&nbsp;import com.example.credit_service_project.validation.exceptions.NotFoundException;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import org.springframework.transaction.annotation.Transactional;
+&nbsp;
+&nbsp;import java.util.UUID;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+<b class="fc">&nbsp;@Slf4j</b>
+&nbsp;public class OperationSearchService {
+&nbsp;
+&nbsp;    private final OperationRepository repository;
+&nbsp;    private final OperationUtils util;
+&nbsp;
+&nbsp;    @Transactional(readOnly = true)
+&nbsp;    public OperationResponseDTO searchOperation(UUID id) {
+<b class="nc">&nbsp;        Operation operation = findById(id);</b>
+<b class="nc">&nbsp;        log.info(&quot;Search operation with ID: {}&quot;, id);</b>
+<b class="nc">&nbsp;        return util.convertOperationToResponseDTO(operation);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Operation findById(UUID id) {
+<b class="nc">&nbsp;        return repository.findById(id)</b>
+<b class="nc">&nbsp;                .orElseThrow(() -&gt; new NotFoundException(ErrorsMessage.NOT_FOUND_OPERATION_MESSAGE));</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 14:12</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GlobalExceptionHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: GlobalExceptionHandler (com.example.credit_service_project.controller)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GlobalExceptionHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    7,7%
+  </span>
+  <span class="absValue">
+    (1/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2,5%
+  </span>
+  <span class="absValue">
+    (1/40)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GlobalExceptionHandler$$SpringCGLIB$$0</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    7,7%
+  </span>
+  <span class="absValue">
+    (1/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2,5%
+  </span>
+  <span class="absValue">
+    (1/40)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.controller;
+&nbsp;
+&nbsp;import com.example.credit_service_project.validation.ErrorException;
+&nbsp;import com.example.credit_service_project.validation.ExceptionResponse;
+&nbsp;import com.example.credit_service_project.validation.exceptions.*;
+&nbsp;import jakarta.validation.ConstraintViolationException;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.security.core.userdetails.UsernameNotFoundException;
+&nbsp;import org.springframework.web.bind.annotation.ExceptionHandler;
+&nbsp;import org.springframework.web.bind.annotation.RestControllerAdvice;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@RestControllerAdvice
+<b class="fc">&nbsp;public class GlobalExceptionHandler {</b>
+&nbsp;
+&nbsp;    @ExceptionHandler(ConstraintViolationException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleViolationException(ConstraintViolationException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = e.getConstraintViolations().stream()</b>
+<b class="nc">&nbsp;                .map(constraintViolation -&gt; constraintViolation.getPropertyPath() + &quot;: &quot; + constraintViolation.getMessage())</b>
+<b class="nc">&nbsp;                .map(ErrorException::new)</b>
+<b class="nc">&nbsp;                .toList();</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(OperationException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleOperationException(OperationException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(NotFoundException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleNotFoundException(NotFoundException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @ExceptionHandler(CurrencyException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleCurrencyException(CurrencyException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @ExceptionHandler(AgreementException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleAgreementException(AgreementException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(AccountStatusException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleProductNotFoundException(AccountStatusException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(EarlyPaymentException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleEarlyPaymentException(EarlyPaymentException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(PaymentException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handlePaymentException(PaymentException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;    @ExceptionHandler(IsAlreadyExistException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleIsAlreadyExistException(IsAlreadyExistException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(InvalidJwtException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleInvalidJetException(InvalidJwtException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(UsernameNotFoundException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleUsernameNotFoundException(UsernameNotFoundException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(CreditPeriodException.class)
+&nbsp;    public ResponseEntity&lt;?&gt; handleCreditPeriodException(CreditPeriodException e) {
+<b class="nc">&nbsp;        List&lt;ErrorException&gt; errorExceptions = List.of(new ErrorException(e.getMessage()));</b>
+<b class="nc">&nbsp;        ExceptionResponse response = new ExceptionResponse(errorExceptions);</b>
+<b class="nc">&nbsp;        return new ResponseEntity&lt;&gt;(response, HttpStatus.BAD_REQUEST);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 14:12</div>
+</div>
+</body>
+</html>

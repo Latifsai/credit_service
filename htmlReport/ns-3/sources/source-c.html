@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ProductController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: ProductController (com.example.credit_service_project.controller)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProductController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ProductController$$SpringCGLIB$$0</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.controller;
+&nbsp;
+&nbsp;import com.example.credit_service_project.dto.ProductDTO.CreateProductDTORequest;
+&nbsp;import com.example.credit_service_project.dto.ProductDTO.ProductResponseDTO;
+&nbsp;import com.example.credit_service_project.dto.ProductDTO.UpdateProductDTORequest;
+&nbsp;import com.example.credit_service_project.service.product.ProductCreateService;
+&nbsp;import com.example.credit_service_project.service.product.ProductDeleteService;
+&nbsp;import com.example.credit_service_project.service.product.ProductUpdateService;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/product&quot;)
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+&nbsp;public class ProductController {
+&nbsp;    private final ProductCreateService create;
+&nbsp;    private final ProductDeleteService delete;
+&nbsp;    private final ProductUpdateService update;
+&nbsp;
+&nbsp;    @PostMapping
+&nbsp;    @ResponseStatus(HttpStatus.CREATED)
+&nbsp;    public ProductResponseDTO add(@RequestBody CreateProductDTORequest request) {
+<b class="fc">&nbsp;        return create.createProduct(request);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PutMapping
+&nbsp;    @ResponseStatus(HttpStatus.OK)
+&nbsp;    public ProductResponseDTO updateProduct(@RequestBody UpdateProductDTORequest request) {
+<b class="fc">&nbsp;        return update.updateProduct(request);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @DeleteMapping(&quot;/{id}&quot;)
+&nbsp;    @ResponseStatus(HttpStatus.NO_CONTENT)
+&nbsp;    public ProductResponseDTO delete(@PathVariable Long id) {
+<b class="fc">&nbsp;        return delete.deleteProduct(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 14:12</div>
+</div>
+</body>
+</html>

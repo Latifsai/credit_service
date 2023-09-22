@@ -1,0 +1,282 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OperationUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.credit_service_project.service.utils</a>
+</div>
+
+<h1>Coverage Summary for Class: OperationUtils (com.example.credit_service_project.service.utils)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OperationUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    26,7%
+  </span>
+  <span class="absValue">
+    (4/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6,8%
+  </span>
+  <span class="absValue">
+    (8/118)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.credit_service_project.service.utils;
+&nbsp;
+&nbsp;import com.example.credit_service_project.dto.operationDTO.OperationResponseDTO;
+&nbsp;import com.example.credit_service_project.dto.operationDTO.PaymentsOperationRequest;
+&nbsp;import com.example.credit_service_project.dto.operationDTO.UpdateOperationsRequest;
+&nbsp;import com.example.credit_service_project.entity.Account;
+&nbsp;import com.example.credit_service_project.entity.Card;
+&nbsp;import com.example.credit_service_project.entity.Operation;
+&nbsp;import com.example.credit_service_project.entity.PaymentSchedule;
+&nbsp;import com.example.credit_service_project.entity.enums.OperationType;
+&nbsp;import com.example.credit_service_project.validation.ErrorsMessage;
+&nbsp;import com.example.credit_service_project.validation.exceptions.OperationException;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import static com.example.credit_service_project.entity.enums.OperationType.*;
+&nbsp;import static java.math.RoundingMode.HALF_UP;
+<b class="fc">&nbsp;</b>
+&nbsp;@Service
+<b class="fc">&nbsp;public class OperationUtils {</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public Card changerCardBalance(Account account, Card card) {</b>
+<b class="fc">&nbsp;        if (!account.getBalance().equals(card.getBalance())) {</b>
+<b class="fc">&nbsp;            card.setBalance(account.getBalance());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return card;</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    private boolean handleDebit(OperationType type) {
+<b class="nc">&nbsp;        return !type.equals(REPLENISHMENT);</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public Operation updateOperation(Operation operation, UpdateOperationsRequest request) {</b>
+<b class="nc">&nbsp;        if (request.getOperationDetails() != null &amp;&amp; !request.getOperationDetails().trim().isEmpty()) {</b>
+<b class="nc">&nbsp;            operation.setOperationDetails(request.getOperationDetails());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if (request.getType() != null) {</b>
+<b class="nc">&nbsp;            checkType(operation, request);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return operation;</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    private void checkType(Operation operation, UpdateOperationsRequest request) {</b>
+<b class="nc">&nbsp;        if ((operation.getType().equals(REPLENISHMENT) &amp;&amp; !request.getType().equals(REPLENISHMENT)) ||</b>
+<b class="nc">&nbsp;                ((operation.getType().equals(MONTHLY_PAYMENT)</b>
+<b class="nc">&nbsp;                        || operation.getType().equals(EARLY_REPAYMENT)</b>
+<b class="nc">&nbsp;                        || operation.getType().equals(PAYMENT_WITH_FINE))</b>
+<b class="nc">&nbsp;                        &amp;&amp; request.getType().equals(REPLENISHMENT))) {</b>
+&nbsp;
+<b class="nc">&nbsp;            throw new OperationException(ErrorsMessage.OPERATION_TYPE_CHANGE_MESSAGE);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            operation.setType(request.getType());</b>
+&nbsp;        }
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    public BigDecimal getSumToPayForPayment(PaymentSchedule p) {
+<b class="nc">&nbsp;        return p.getMonthlyPayment().add(p.getSurcharge());</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public Account payBill(Account account, PaymentSchedule paymentSchedule, Card card) {</b>
+<b class="nc">&nbsp;        if (paymentSchedule.getPaymentDate().equals(LocalDate.now())) {</b>
+<b class="nc">&nbsp;            BigDecimal balance = account.getBalance().subtract(getSumToPayForPayment(paymentSchedule));</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            account.setBalance(balance);</b>
+<b class="nc">&nbsp;            account.setUnpaidCreditSum(account.getUnpaidCreditSum().subtract(getSumToPayForPayment(paymentSchedule)));</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;            paymentSchedule.setActualPaymentDate(LocalDate.now());</b>
+<b class="nc">&nbsp;            paymentSchedule.setPaid(true);</b>
+<b class="nc">&nbsp;            paymentSchedule.setSurcharge(BigDecimal.ZERO);</b>
+<b class="nc">&nbsp;            changerCardBalance(account, card);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return account;</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+&nbsp;    public BigDecimal calculateFine(BigDecimal interestRate, BigDecimal payment, int dayOfDelay) {
+<b class="nc">&nbsp;        BigDecimal delayInDays = BigDecimal.valueOf(dayOfDelay);</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        BigDecimal interestRateFraction = interestRate.divide(BigDecimal.valueOf(100), 5, HALF_UP);</b>
+<b class="nc">&nbsp;        BigDecimal fine = payment.multiply(interestRateFraction).multiply(delayInDays.divide(BigDecimal.valueOf(365), 5, HALF_UP));</b>
+&nbsp;
+<b class="nc">&nbsp;        return fine.setScale(2, HALF_UP);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public Operation convertDataToOperationForPayment(Account account, PaymentSchedule p) {</b>
+<b class="nc">&nbsp;        Operation operation = new Operation();</b>
+<b class="nc">&nbsp;        operation.setAccount(account);</b>
+<b class="nc">&nbsp;        operation.setSum(getSumToPayForPayment(p));</b>
+<b class="nc">&nbsp;        operation.setType(fillType(p));</b>
+<b class="nc">&nbsp;        operation.setOperationEndMark(LocalDateTime.now());</b>
+<b class="nc">&nbsp;        operation.setOperationDetails(fillDetails(operation.getType(), account));</b>
+<b class="nc">&nbsp;        operation.setDebit(handleDebit(operation.getType()));</b>
+<b class="nc">&nbsp;        operation.setCurrency(account.getCurrency());</b>
+<b class="nc">&nbsp;        return operation;</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private BigDecimal getAmountForEarlyPayment(Account account) {
+<b class="nc">&nbsp;        return account.getUnpaidCreditSum();</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Account payEarlyPayment(PaymentsOperationRequest request, Account account, Card card) {</b>
+<b class="fc">&nbsp;</b>
+<b class="nc">&nbsp;        if (!request.getSum().equals(getAmountForEarlyPayment(account))) {</b>
+<b class="nc">&nbsp;            throw new OperationException(ErrorsMessage.INSUFFICIENT_AMOUNT_MESSAGE);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (account.getBalance().compareTo(request.getSum()) &lt; 0) {</b>
+<b class="nc">&nbsp;            throw new OperationException(ErrorsMessage.NEGATIVE_BALANCE_EXCEPTION);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        BigDecimal balanceAfterOperation = account.getBalance().subtract(request.getSum());</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        account.setBalance(balanceAfterOperation);</b>
+<b class="nc">&nbsp;        account.setUnpaidCreditSum(BigDecimal.ZERO);</b>
+<b class="nc">&nbsp;        account.setPercentageDebt(BigDecimal.ZERO);</b>
+<b class="nc">&nbsp;        account.setLoanDebt(BigDecimal.ZERO);</b>
+<b class="nc">&nbsp;        changerCardBalance(account, card);</b>
+&nbsp;
+<b class="nc">&nbsp;        return account;</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    public Operation convertPaymentsOperationRequestToOperation(PaymentsOperationRequest request, Account account) {</b>
+<b class="nc">&nbsp;        Operation operation = new Operation();</b>
+<b class="nc">&nbsp;        operation.setAccount(account);</b>
+<b class="nc">&nbsp;        operation.setSum(request.getSum());</b>
+<b class="nc">&nbsp;        operation.setType(request.getType());</b>
+<b class="nc">&nbsp;        operation.setOperationEndMark(LocalDateTime.now());</b>
+<b class="nc">&nbsp;        operation.setOperationDetails(request.getOperationDetails());</b>
+<b class="nc">&nbsp;        operation.setDebit(handleDebit(operation.getType()));</b>
+<b class="nc">&nbsp;        operation.setCurrency(account.getCurrency());</b>
+<b class="nc">&nbsp;        return operation;</b>
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    private OperationType fillType(PaymentSchedule p) {</b>
+<b class="nc">&nbsp;        if (!p.getSurcharge().equals(BigDecimal.ZERO)) {</b>
+<b class="nc">&nbsp;            return PAYMENT_WITH_FINE;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return MONTHLY_PAYMENT;</b>
+&nbsp;        }
+&nbsp;    }
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;    private String fillDetails(OperationType type, Account account) {</b>
+<b class="nc">&nbsp;        Map&lt;OperationType, String&gt; operationMessages = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        operationMessages.put(OperationType.EARLY_REPAYMENT, OperationDetailsMessage.EARLY_REPAYMENT_MESSAGE);</b>
+<b class="nc">&nbsp;        operationMessages.put(OperationType.MONTHLY_PAYMENT, OperationDetailsMessage.MONTHLY_PAYMENT_MESSAGE);</b>
+<b class="nc">&nbsp;        operationMessages.put(OperationType.PAYMENT_WITH_FINE, OperationDetailsMessage.PAYMENT_WITH_FINE_MESSAGE);</b>
+<b class="nc">&nbsp;        operationMessages.put(OperationType.REPLENISHMENT, OperationDetailsMessage.REPLENISHMENT_OPERATION_MESSAGE);</b>
+&nbsp;
+<b class="nc">&nbsp;        String message = operationMessages.getOrDefault(type, &quot;&quot;);</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        if (!message.isEmpty()) {</b>
+<b class="nc">&nbsp;            return message + &quot;Account number: &quot; + account.getAccountNumber();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return &quot;&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public OperationResponseDTO convertOperationToResponseDTO(Operation operation) {</b>
+<b class="nc">&nbsp;        return OperationResponseDTO</b>
+<b class="nc">&nbsp;                .builder()</b>
+<b class="nc">&nbsp;                .accountNumber(operation.getAccount().getAccountNumber())</b>
+<b class="nc">&nbsp;                .balance(operation.getAccount().getBalance())</b>
+<b class="nc">&nbsp;                .id(operation.getId())</b>
+<b class="nc">&nbsp;                .sum(operation.getSum())</b>
+<b class="nc">&nbsp;                .isDebit(operation.isDebit())</b>
+<b class="nc">&nbsp;                .type(operation.getType())</b>
+<b class="nc">&nbsp;                .operationEndMark(operation.getOperationEndMark())</b>
+<b class="nc">&nbsp;                .operationDetails(operation.getOperationDetails())</b>
+<b class="nc">&nbsp;                .currency(operation.getCurrency())</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-17 11:28</div>
+</div>
+</body>
+</html>
