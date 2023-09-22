@@ -56,7 +56,8 @@ The project is developed using modern technologies:
 * MAVEN
 * SWAGGER
 * JACOCO
-
+* DOCKER
+* DOCKER COMPOSE
 ### Database
 
 I use MySQL to store data about clients, their applications, decisions, and so on. The database provides reliable and scalable storage of the necessary information. 
