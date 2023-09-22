@@ -21,6 +21,11 @@ public class UserSearchService {
     private final UserRepository repository;
     private final UserUtil util;
 
+    /**
+     * Search User by ID and convert to response
+     * @param id UUID
+     * @return UserResponseDTO
+     */
     @Transactional(readOnly = true)
     public UserResponseDTO searchUser(UUID id) {
         User user = findUserById(id);
@@ -28,6 +33,11 @@ public class UserSearchService {
         return util.convertUserToResponse(user);
     }
 
+    /**
+     * Find User by ID
+     * @param id UUID
+     * @return User
+     */
     public User findUserById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_USER_MESSAGE));

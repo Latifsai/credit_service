@@ -37,6 +37,11 @@ public class CreditOrderCreateService {
         return util.convertToAddResponse(savedOrder, product, account);
     }
 
+    /**
+     * Save CreditOrder in DB
+     * @param creditOrder CreditOrder
+     * @return CreditOrder
+     */
     public CreditOrder saveOrder(CreditOrder creditOrder) {
         return repository.save(creditOrder);
     }

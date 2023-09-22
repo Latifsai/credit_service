@@ -34,6 +34,11 @@ public class AgreementCreateService {
         return util.convertToResponse(savedAgreement);
     }
 
+    /**
+     * Save Agreement in DB
+     * @param agreement Agreement
+     * @return Agreement
+     */
     public Agreement saveAgreement(Agreement agreement) {
         return repository.save(agreement);
     }

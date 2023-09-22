@@ -19,6 +19,10 @@ public class GetAllUsersService {
     private final UserRepository repository;
     private final UserUtil util;
 
+    /**
+     * Get all Clients in DB
+     * @return List<UserResponseDTO>
+     */
     @Transactional(readOnly = true)
     public List<UserResponseDTO> getAllClients() {
         log.info("Get a list of users");

@@ -22,7 +22,7 @@ public class CreditOrderSearchService {
     private final CreditOrderUtil util;
 
     /**
-     * In this method find by ID a CreditOrder
+     * In this method find by ID a CreditOrder ant convert to response
      * @param id UUID
      * @return CreditOrderResponseDTO
      */
@@ -33,6 +33,11 @@ public class CreditOrderSearchService {
         return util.convertToResponse(creditOrder);
     }
 
+    /**
+     * Find by ID
+     * @param id UUID
+     * @return CreditOrder
+     */
     public CreditOrder findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_ORDER_MESSAGE));

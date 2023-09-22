@@ -44,6 +44,12 @@ public class GetBelongsToAccountPaymentsService {
                 account.getAccountNumber(), list);
     }
 
+    /**
+     * Find all by Account
+     * @param account Account
+     * @return List<PaymentSchedule>
+     */
+    @Transactional(readOnly = true)
     public List<PaymentSchedule> findAllByAccount(Account account) {
         return repository.findAllByAccount(account);
     }

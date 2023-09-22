@@ -1,4 +1,4 @@
-package com.example.credit_service_project.dto;
+package com.example.credit_service_project.dto.creditHistoryDTO;
 
 import com.example.credit_service_project.entity.enums.CreditHistoryStatus;
 import lombok.Builder;

@@ -100,7 +100,7 @@ class UserControllerTest {
                 BigDecimal.ZERO, new BigDecimal("1500"), "Johan's Str 34", "john_manager@loewen.de",
                 "+49 176 28835002", "MANAGER", "2125");
 
-        when(create.createClient(request)).thenReturn(response);
+        when(create.createUser(request)).thenReturn(response);
 
         mockMvc.perform(post("/users")
                         .content(mapper.writeValueAsString(request))
@@ -118,7 +118,7 @@ class UserControllerTest {
                 BigDecimal.ZERO, new BigDecimal("1500"), "Johan's Str 34", "john_manager@loewen.de",
                 "+49 176 28835002", "MANAGER", "2125");
 
-        when(create.createClient(request)).thenReturn(response);
+        when(create.createUser(request)).thenReturn(response);
 
         mockMvc.perform(post("/users")
                         .content(mapper.writeValueAsString(request))

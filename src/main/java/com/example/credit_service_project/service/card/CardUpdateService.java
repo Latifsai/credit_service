@@ -39,6 +39,10 @@ public class CardUpdateService {
         return utils.convertCardToAddDTOResponse(updatedCard);
     }
 
+    /**
+     * Save updated Card
+     * @param updatedCard Card
+     */
     public void saveUpdateCard(Card updatedCard) {
         cardCreateService.saveCard(updatedCard);
     }

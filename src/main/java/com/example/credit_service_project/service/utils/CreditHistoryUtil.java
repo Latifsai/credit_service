@@ -1,6 +1,6 @@
 package com.example.credit_service_project.service.utils;
 
-import com.example.credit_service_project.dto.CreditHistoryResponse;
+import com.example.credit_service_project.dto.creditHistoryDTO.CreditHistoryResponse;
 import com.example.credit_service_project.entity.Account;
 import com.example.credit_service_project.entity.CreditHistory;
 import com.example.credit_service_project.entity.enums.CreditHistoryStatus;

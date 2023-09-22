@@ -15,6 +15,11 @@ public class CustomUserDetailService implements UserDetailsService {
         this.repository = repository;
     }
 
+    /**
+     * Load User by username
+     * @param username String
+     * @return UserDetails
+     */
     @Override
     public UserDetails loadUserByUsername(String username) {
         return repository.findByName(username)

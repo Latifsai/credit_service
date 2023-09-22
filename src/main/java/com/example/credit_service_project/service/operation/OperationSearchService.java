@@ -21,6 +21,11 @@ public class OperationSearchService {
     private final OperationRepository repository;
     private final OperationUtils util;
 
+    /**
+     * Search Operation by ID and convert to reponse
+     * @param id UUID
+     * @return OperationResponseDTO
+     */
     @Transactional(readOnly = true)
     public OperationResponseDTO searchOperation(UUID id) {
         Operation operation = findById(id);
@@ -28,6 +33,11 @@ public class OperationSearchService {
         return util.convertOperationToResponseDTO(operation);
     }
 
+    /**
+     * Find by ID
+     * @param id UUID
+     * @return Operation
+     */
     public Operation findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_OPERATION_MESSAGE));

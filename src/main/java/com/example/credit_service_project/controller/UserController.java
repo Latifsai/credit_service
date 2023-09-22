@@ -39,7 +39,7 @@ public class UserController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDTO createClient (@RequestBody CreateUserRequest request) {
-        return create.createClient(request);
+        return create.createUser(request);
     }
 
     @PutMapping()

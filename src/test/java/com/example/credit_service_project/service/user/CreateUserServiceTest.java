@@ -50,7 +50,7 @@ class CreateUserServiceTest {
         when(passwordEncoder.encode(request.getPassword())).thenReturn("$2a$10$ruSCjhXF8i30nqNtvAeS0OSyzfF3vOR3Oiq6keZN.XLRgRw9ZvPCC");
         when(repository.save(user)).thenReturn(user);
 
-        assertEquals(UserDTOGenerator.getResponse(), service.createClient(request));
+        assertEquals(UserDTOGenerator.getResponse(), service.createUser(request));
         verify(roleService, times(1)).findByRoleName("MANAGER");
         verify(passwordEncoder, times(1)).encode(request.getPassword());
         verify(repository, times(1)).save(user);

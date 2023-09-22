@@ -34,6 +34,11 @@ public class CardCreateService {
         return util.convertCardToAddDTOResponse(savedCard);
     }
 
+    /**
+     * Save Card in DB
+     * @param card Card
+     * @return Card
+     */
     public Card saveCard(Card card) {
         return repository.save(card);
     }

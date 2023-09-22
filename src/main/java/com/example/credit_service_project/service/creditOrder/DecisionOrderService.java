@@ -13,10 +13,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- Here is the process of accepting loan applications. Applications are processed within 5 days.
- */
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -50,4 +46,5 @@ public class DecisionOrderService {
         log.info("Consider the order");
         return responsesList;
     }
+
 }

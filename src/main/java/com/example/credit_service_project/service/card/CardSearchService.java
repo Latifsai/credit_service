@@ -35,6 +35,11 @@ public class CardSearchService {
         return utils.convertCardToAddDTOResponse(card);
     }
 
+    /**
+     * Find Card by ID
+     * @param id UUID
+     * @return Card
+     */
     public Card findCardById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_CARD_MESSAGE));
@@ -45,7 +50,6 @@ public class CardSearchService {
      * @param account Account
      * @return Card
      */
-
     public Card findByAccount(Account account) {
         return repository.findByAccount(account).stream()
                 .filter(card -> card.getCardStatus().equals(CardStatus.ACTIVE))

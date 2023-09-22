@@ -22,7 +22,7 @@ public class GetAllCreditOrdersService {
     private final CreditOrderUtil util;
 
     /**
-     * Method get all Orders in database and convert to Response
+     * Method get all Orders in database and convert to response
      * @return List
      */
     @Transactional(readOnly = true)
@@ -33,6 +33,10 @@ public class GetAllCreditOrdersService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Get all Orders in DB
+     * @return List<CreditOrder>
+     */
     public List<CreditOrder> getOrders() {
         return repository.findAll();
     }

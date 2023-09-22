@@ -50,6 +50,11 @@ public class PaymentScheduleGeneratorService {
         return responses;
     }
 
+    /**
+     * Save Payment to DB
+     * @param paymentSchedule PaymentSchedule
+     * @return PaymentSchedule
+     */
     public PaymentSchedule save(PaymentSchedule paymentSchedule) {
         return repository.save(paymentSchedule);
     }

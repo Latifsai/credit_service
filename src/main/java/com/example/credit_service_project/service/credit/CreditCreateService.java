@@ -65,6 +65,11 @@ public class CreditCreateService {
         return util.convertResponse(savedCredit, list);
     }
 
+    /**
+     * Save Credit in DB
+     * @param credit Credit
+     * @return Credit
+     */
     public Credit saveCredit(Credit credit) {
         return repository.save(credit);
     }
@@ -81,4 +86,5 @@ public class CreditCreateService {
             }
         }
     }
+
 }

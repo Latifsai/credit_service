@@ -37,6 +37,7 @@ public class GetNearestPaymentService {
      * @param account Account
      * @return PaymentSchedule
      */
+    @Transactional(readOnly = true)
     public PaymentSchedule getNearestPaymentForAccount(Account account) {
         return util.getNearestPaymentSchedule(account);
     }

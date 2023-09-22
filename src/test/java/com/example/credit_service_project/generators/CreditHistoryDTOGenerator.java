@@ -1,9 +1,7 @@
 package com.example.credit_service_project.generators;
 
-import com.example.credit_service_project.dto.CreditHistoryResponse;
-import com.example.credit_service_project.entity.CreditHistory;
+import com.example.credit_service_project.dto.creditHistoryDTO.CreditHistoryResponse;
 import com.example.credit_service_project.entity.enums.CreditHistoryStatus;
-import org.springframework.security.core.parameters.P;
 
 import java.util.UUID;
 

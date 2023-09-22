@@ -21,6 +21,11 @@ public class UserUpdateService {
     private final UserUtil util;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Update Client
+     * @param request UpdateClientRequest
+     * @return UserResponseDTO
+     */
     public UserResponseDTO updateClient(UpdateClientRequest request) {
         User user = searchService.findUserById(request.getId());
         User updatedUser = util.updateClient(user, request);
@@ -32,7 +37,7 @@ public class UserUpdateService {
             updatedUser.setPassword(passwordEncoder.encode(request.getPassword()));
         }
 
-        createService.saveClient(updatedUser);
+        createService.saveUser(updatedUser);
         log.info("Update client with id: {}", user.getId());
         return util.convertUserToResponse(updatedUser);
     }

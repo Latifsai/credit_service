@@ -10,6 +10,7 @@ import com.example.credit_service_project.service.utils.calculators.CurrencyConv
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class GetPreliminaryCalculationOfProduct {
      * @param request PreliminaryCalculationRequest
      * @return List<PreliminaryCalculationResponse>
      */
+    @Transactional(readOnly = true)
     public List<PreliminaryCalculationResponse> getPreliminaryCalculation(PreliminaryCalculationRequest request) {
         List<PreliminaryCalculationResponse> responses = new ArrayList<>();
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());

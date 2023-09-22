@@ -23,6 +23,11 @@ public class GetOperationsService {
     private final OperationUtils util;
     private final AccountSearchService accountSearchService;
 
+    /**
+     * Get all Operations in DB
+     * @param request GetBelongsAccountOperationsRequest
+     * @return List<OperationResponseDTO>
+     */
     @Transactional(readOnly = true)
     public List<OperationResponseDTO> getAllOperations(GetBelongsAccountOperationsRequest request) {
         Account account = accountSearchService.findAccountByIdOrNumber(request.getAccountID(), request.getAccountNumber());

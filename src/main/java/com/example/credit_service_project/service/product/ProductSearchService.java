@@ -18,6 +18,11 @@ public class ProductSearchService {
     private final ProductRepository repository;
     private final ProductUtil util;
 
+    /**
+     * Search Product by ID and convert to response
+     * @param id Long
+     * @return ProductResponseDTO
+     */
     @Transactional(readOnly = true)
     public ProductResponseDTO searchProduct(Long id) {
         Product product = findById(id);
@@ -25,6 +30,12 @@ public class ProductSearchService {
         return util.toResponse(product);
     }
 
+    /**
+     * Find Product by ID
+     * @param id Long
+     * @return Product
+     */
+    @Transactional(readOnly = true)
     public Product findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorsMessage.NOT_FOUND_PRODUCT_MESSAGE));

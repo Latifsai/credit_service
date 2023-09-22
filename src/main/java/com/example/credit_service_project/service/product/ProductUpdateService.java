@@ -17,6 +17,11 @@ public class ProductUpdateService {
     private final ProductSearchService searchProductService;
     private final ProductUtil util;
 
+    /**
+     * Update Product
+     * @param request UpdateProductDTORequest
+     * @return ProductResponseDTO
+     */
     public ProductResponseDTO updateProduct(UpdateProductDTORequest request) {
         Product product = searchProductService.findById(request.getId());
         Product updatedProduct = util.update(product, request);

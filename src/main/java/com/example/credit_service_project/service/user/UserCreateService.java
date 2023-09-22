@@ -11,10 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-/**
- * In this service will be created new Users.
- * The service take create request and return data about saved User.
- */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -24,16 +20,26 @@ public class UserCreateService {
     private final UserUtil util;
     private final PasswordEncoder passwordEncoder;
 
-    public UserResponseDTO createClient(CreateUserRequest request) {
+    /**
+     * Create new User upon request
+     * @param request CreateUserRequest
+     * @return UserResponseDTO
+     */
+    public UserResponseDTO createUser(CreateUserRequest request) {
         User user = util.convertAddRequestToEntity(request);
         user.setRole(roleService.findByRoleName(request.getRole().toUpperCase()));
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        User savedUser = saveClient(user);
+        User savedUser = saveUser(user);
         log.info("Create and save client with ID: {}", savedUser.getId());
         return util.convertUserToResponse(savedUser);
     }
 
-    public User saveClient(User user) {
+    /**
+     * Save User in DB
+     * @param user User
+     * @return User
+     */
+    public User saveUser(User user) {
         return repository.save(user);
     }
 }

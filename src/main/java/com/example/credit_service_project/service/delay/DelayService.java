@@ -10,6 +10,7 @@ import com.example.credit_service_project.service.utils.DelayUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,6 +25,12 @@ public class DelayService {
     private final DelayRepository repository;
     private final DelayUtil util;
 
+    /**
+     * Add new Delay
+     * @param fine BigDecimal
+     * @param account Account
+     * @return DelayResponse
+     */
     public DelayResponse addNewDelay(BigDecimal fine, Account account) {
         Delay delay = util.createEntity(fine);
         delay.setCreditHistory(account.getCreditHistory());
@@ -37,9 +44,9 @@ public class DelayService {
      * @param creditHistoryID UUID
      * @return List<DelayResponse>
      */
+    @Transactional(readOnly = true)
     public List<DelayResponse> findAllDelaysBelongsToCreditHistory(UUID creditHistoryID) {
         CreditHistory creditHistory = service.findByIDForService(creditHistoryID);
-
         return repository.findAllByCreditHistory(creditHistory).stream()
                 .map(util::convertToResponse)
                 .collect(Collectors.toList());

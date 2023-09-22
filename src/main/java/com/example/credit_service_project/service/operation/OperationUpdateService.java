@@ -17,6 +17,11 @@ public class OperationUpdateService {
     private final PaymentProcessingService addOperationService;
     private final OperationUtils util;
 
+    /**
+     * Update Operation upon criteria
+     * @param request UpdateOperationsRequest
+     * @return OperationResponseDTO
+     */
     public OperationResponseDTO updateOperation(UpdateOperationsRequest request) {
         Operation operation = searchOperationService.findById(request.getId());
         Operation updatedOperation = util.updateOperation(operation, request);

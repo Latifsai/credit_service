@@ -38,6 +38,11 @@ public class AccountUpdateService {
         }
     }
 
+    /**
+     * Save updated Account
+     * @param updatedAccount Account
+     * @return Account
+     */
     public Account saveUpdatedAccount(Account updatedAccount) {
         return accountCreationService.saveAccount(updatedAccount);
     }

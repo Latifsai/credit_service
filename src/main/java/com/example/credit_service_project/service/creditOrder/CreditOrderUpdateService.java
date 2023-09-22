@@ -17,6 +17,11 @@ public class CreditOrderUpdateService {
     private final CreditOrderSearchService searchCreditOrderService;
     private final CreditOrderUtil util;
 
+    /**
+     * Update CreditOrder
+     * @param request UpdateCreditOrderRequestDTO
+     * @return CreditOrderResponseDTO
+     */
     public CreditOrderResponseDTO updateCreditOrder(UpdateCreditOrderRequestDTO request) {
         CreditOrder creditOrder = searchCreditOrderService.findById(request.getId());
         CreditOrder updated = util.update(request, creditOrder);

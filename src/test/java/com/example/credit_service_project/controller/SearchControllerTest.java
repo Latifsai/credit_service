@@ -1,6 +1,6 @@
 package com.example.credit_service_project.controller;
 
-import com.example.credit_service_project.dto.CreditHistoryResponse;
+import com.example.credit_service_project.dto.creditHistoryDTO.CreditHistoryResponse;
 import com.example.credit_service_project.dto.accountDTO.AccountResponseDTO;
 import com.example.credit_service_project.dto.accountDTO.SearchAccountRequest;
 import com.example.credit_service_project.dto.agreementDTO.AgreementResponse;

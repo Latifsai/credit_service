@@ -47,12 +47,12 @@ class UserUpdateServiceTest {
 
         when(searchService.findUserById(request.getId())).thenReturn(user);
         when(util.updateClient(user, request)).thenReturn(updatedUser);
-        when(createService.saveClient(updatedUser)).thenReturn(updatedUser);
+        when(createService.saveUser(updatedUser)).thenReturn(updatedUser);
         when(util.convertUserToResponse(updatedUser)).thenReturn(UserDTOGenerator.getUpdateResponse());
 
         assertEquals(UserDTOGenerator.getUpdateResponse(), service.updateClient(request));
         verify(searchService, times(1)).findUserById(request.getId());
-        verify(createService, times(1)).saveClient(updatedUser);
+        verify(createService, times(1)).saveUser(updatedUser);
     }
 
     @Test
@@ -66,13 +66,13 @@ class UserUpdateServiceTest {
         when(searchService.findUserById(request.getId())).thenReturn(user);
         when(util.updateClient(user, request)).thenReturn(updatedUser);
         when(roleService.findByRoleName(request.getRoleName())).thenReturn(EntityCreator.getManagerRole());
-        when(createService.saveClient(updatedUser)).thenReturn(updatedUser);
+        when(createService.saveUser(updatedUser)).thenReturn(updatedUser);
         when(util.convertUserToResponse(updatedUser)).thenReturn(UserDTOGenerator.getUpdateResponse());
 
         assertEquals(UserDTOGenerator.getUpdateResponse(), service.updateClient(request));
         verify(searchService, times(1)).findUserById(request.getId());
         verify(roleService, times(1)).findByRoleName(request.getRoleName());
-        verify(createService, times(1)).saveClient(updatedUser);
+        verify(createService, times(1)).saveUser(updatedUser);
     }
 
     @Test

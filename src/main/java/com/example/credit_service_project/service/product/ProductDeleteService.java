@@ -14,6 +14,11 @@ public class ProductDeleteService {
     private final ProductSearchService searchProductService;
     private final ProductUtil util;
 
+    /**
+     * Delete Product by ID
+     * @param id Long
+     * @return ProductResponseDTO
+     */
     public ProductResponseDTO deleteProduct(Long id) {
         Product product = searchProductService.findById(id);
         log.info("Delete product with ID: {}", id);

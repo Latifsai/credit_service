@@ -37,6 +37,11 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    /**
+     * Get username from jwt-Token
+     * @param token String
+     * @return String
+     */
     public String getUsername(String token) {
         return getAllClaimsFromToken(token).getSubject();
     }
@@ -75,8 +80,8 @@ public class JwtTokenProvider {
             // JWT claims string is empty
             throw new InvalidJwtException(e.getMessage());
         }
-
     }
+
 }
 
 

@@ -14,6 +14,10 @@ public class UserDeleteService {
     private final UserRepository repository;
     private final UserSearchService searchService;
 
+    /**
+     * Delete User from DB by ID
+     * @param id UUID
+     */
     public void delete(UUID id) {
         User user = searchService.findUserById(id);
         repository.delete(user);

@@ -21,7 +21,7 @@ public class GetAllAccountsService {
     private final AccountUtil util;
 
     /**
-     * Here will be gotten all Accounts in database and convert as response
+     * Here will be gotten all Accounts in database and convert to response
      * @return List<AccountResponseDTO>
      */
     @Transactional(readOnly = true)
@@ -33,6 +33,10 @@ public class GetAllAccountsService {
 
     }
 
+    /**
+     * Find all Accounts
+     * @return List<Account>
+     */
     public List<Account> findAllAccounts() {
         return repository.findAll();
     }
